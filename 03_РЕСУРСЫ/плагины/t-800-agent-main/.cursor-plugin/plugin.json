@@ -1,0 +1,27 @@
+{
+  "name": "t-800-agent",
+  "displayName": "T-800 Agent",
+  "description": "Цех Skynet для Cursor: /t800-start, /t800-loop, audit, Cloud Hub Automations, factory субагентов и skills.",
+  "version": "1.19.0",
+  "keywords": [
+    "t-800",
+    "terminator",
+    "subagents",
+    "skills",
+    "rules",
+    "hooks",
+    "factory",
+    "skynet",
+    "cloud-hub",
+    "automations",
+    "documentation"
+  ],
+  "author": {
+    "name": "T-800 Agent"
+  },
+  "rules": "./rules/",
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "commands": "./commands/",
+  "hooks": "./hooks.json"
+}

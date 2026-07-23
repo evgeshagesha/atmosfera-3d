@@ -1,0 +1,15 @@
+[Unit]
+Description=EG Community Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=egoshev
+WorkingDirectory=/home/egoshev/eg-community-bot
+Environment=PATH=/home/egoshev/eg-community-bot/venv/bin
+ExecStart=/home/egoshev/eg-community-bot/venv/bin/python bot.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

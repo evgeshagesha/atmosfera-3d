@@ -1,0 +1,6 @@
+# Транскрипция (достаточно одного)
+faster-whisper>=1.0.0
+# openai-whisper  # альтернатива
+
+# Notion API
+notion-client>=2.2.0

@@ -1,0 +1,33 @@
+{
+  "catalog_url": "https://course.egoshev.ru/#modules",
+  "breath": {
+    "title": "Дыхание",
+    "prodamus_url": "https://...",
+    "telegram_invite_url": "https://t.me/+..."
+  },
+  "posture": {
+    "title": "Осанка",
+    "prodamus_url": "https://...",
+    "telegram_invite_url": "https://t.me/+..."
+  },
+  "pelvis": {
+    "title": "Таз",
+    "prodamus_url": "https://...",
+    "telegram_invite_url": "https://t.me/+..."
+  },
+  "knees": {
+    "title": "Колени и стопы",
+    "prodamus_url": "https://...",
+    "telegram_invite_url": "https://t.me/+..."
+  },
+  "walk": {
+    "title": "Ходьба",
+    "prodamus_url": "https://...",
+    "telegram_invite_url": "https://t.me/+..."
+  },
+  "bundle": {
+    "title": "Всё вместе",
+    "prodamus_url": "https://...",
+    "telegram_invite_url": "https://t.me/+..."
+  }
+}
