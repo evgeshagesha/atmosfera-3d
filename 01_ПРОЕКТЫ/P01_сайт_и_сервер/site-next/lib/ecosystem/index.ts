@@ -1,0 +1,17 @@
+export {
+  ECOSYSTEM_DO_NOT_BUILD,
+  ECOSYSTEM_METRICS,
+  ECOSYSTEM_PHASES,
+  ECOSYSTEM_PRODUCTS,
+  ECOSYSTEM_QUICK_LINKS,
+  ECOSYSTEM_RESULT,
+  ECOSYSTEM_SOCIAL_LINKS,
+  ECOSYSTEM_TAGLINE,
+  getLiveProducts,
+  getProductById,
+  type EcosystemPhase,
+  type EcosystemProduct,
+  type EcosystemProductStatus,
+  type EcosystemQuickLink,
+  type EcosystemSocialLink,
+} from "@/lib/ecosystem/config";

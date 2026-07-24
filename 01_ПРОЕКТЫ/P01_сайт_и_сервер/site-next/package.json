@@ -1,0 +1,38 @@
+{
+  "name": "egoshev.ru",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "migrate": "node scripts/migrate.mjs",
+    "extract-blocks": "node lib/tilda/extract-blocks.mjs",
+    "generate-club-registry": "node lib/club/generate-registry.mjs",
+    "generate-baza-registry": "node lib/baza/generate-registry.mjs",
+    "generate-block": "node scripts/generate-legacy-block-component.mjs",
+    "validate:home": "node scripts/validate-home.mjs",
+    "validate:about": "node scripts/validate-about.mjs",
+    "import:blog": "node scripts/import-tilda-blog.mjs"
+  },
+  "dependencies": {
+    "@tiptap/core": "^3.27.3",
+    "@tiptap/extension-image": "^3.27.3",
+    "@tiptap/extension-link": "^3.27.3",
+    "@tiptap/extension-placeholder": "^3.27.3",
+    "@tiptap/react": "^3.27.3",
+    "@tiptap/starter-kit": "^3.27.3",
+    "next": "16.2.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "typescript": "^5"
+  }
+}

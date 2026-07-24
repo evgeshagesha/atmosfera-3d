@@ -1,0 +1,180 @@
+{
+  "css": [
+    "/tilda/css/tilda-grid-3.0.min.css",
+    "/tilda/css/tilda-blocks-page126786736.min.css",
+    "/tilda/css/tilda-animation-2.0.min.css",
+    "/tilda/css/tilda-menusub-1.1.min.css",
+    "/tilda/css/tilda-menu-widgeticons-1.0.min.css",
+    "/tilda/css/tilda-menu-burger-1.0.min.css",
+    "/tilda/css/tilda-cards-1.0.min.css",
+    "/tilda/css/tilda-slds-1.4.min.css",
+    "/tilda/css/tilda-popup-1.1.min.css",
+    "/tilda/css/tilda-feed-1.1.min.css",
+    "/tilda/css/tilda-forms-1.0.min.css",
+    "/tilda/css/tilda-cover-1.0.min.css",
+    "/tilda/css/tilda-zoom-2.0.min.css",
+    "/tilda/css/tilda-contact-method-1.0.min.css",
+    "/tilda/css/tilda-blocks-page127139066.min.css",
+    "/tilda/css/tilda-blocks-page136880646.min.css",
+    "/tilda/css/tilda-blocks-page71773411.min.css",
+    "/tilda/css/tilda-blocks-page129226886.min.css",
+    "/tilda/css/tilda-cart-1.0.min.css",
+    "/tilda/css/katex.min.css",
+    "/tilda/css/tilda-blocks-page140448226.min.css",
+    "/tilda/css/tilda-blocks-page147089246.min.css",
+    "/tilda/css/tilda-blocks-page144125686.min.css",
+    "/tilda/css/tilda-blocks-page143646656.min.css",
+    "/tilda/css/tilda-blocks-page68793415.min.css",
+    "/tilda/css/tilda-blocks-page127893356.min.css",
+    "/tilda/css/tilda-blocks-page68793909.min.css"
+  ],
+  "js": [
+    "/tilda/js/tilda-polyfill-1.0.min.js",
+    "/tilda/js/jquery-1.10.2.min.js",
+    "/tilda/js/tilda-scripts-3.0.min.js",
+    "/tilda/js/tilda-blocks-page126786736.min.js",
+    "/tilda/js/tilda-lazyload-1.0.min.js",
+    "/tilda/js/tilda-animation-2.0.min.js",
+    "/tilda/js/tilda-menusub-1.1.min.js",
+    "/tilda/js/tilda-menu-1.1.min.js",
+    "/tilda/js/tilda-menu-widgeticons-1.0.min.js",
+    "/tilda/js/tilda-menu-burger-1.0.min.js",
+    "/tilda/js/tilda-zero-1.1.min.js",
+    "/tilda/js/tilda-cards-1.0.min.js",
+    "/tilda/js/tilda-feed-1.1.min.js",
+    "/tilda/js/tilda-slds-1.4.min.js",
+    "/tilda/js/hammer.min.js",
+    "/tilda/js/tilda-popup-1.0.min.js",
+    "/tilda/js/tilda-forms-1.0.min.js",
+    "/tilda/js/tilda-cover-1.0.min.js",
+    "/tilda/js/tilda-t994-stories-1.0.min.js",
+    "/tilda/js/tilda-zoom-2.0.min.js",
+    "/tilda/js/tilda-video-1.0.min.js",
+    "/tilda/js/tilda-slider-1.0.min.js",
+    "/tilda/js/tilda-paint-icons.min.js",
+    "/tilda/js/tilda-zero-scale-1.0.min.js",
+    "/tilda/js/tilda-events-1.0.min.js",
+    "/tilda/js/tilda-phone-mask-1.1.min.js",
+    "/tilda/js/tilda-contact-method-1.0.min.js",
+    "/tilda/js/tilda-variant-select-1.0.min.js",
+    "/tilda/js/tilda-blocks-page127139066.min.js",
+    "/tilda/js/tilda-blocks-page136880646.min.js",
+    "/tilda/js/tilda-blocks-page71773411.min.js",
+    "/tilda/js/tilda-menu-1.0.min.js",
+    "/tilda/js/tilda-video-processor-1.0.min.js",
+    "/tilda/js/tilda-animation-sbs-1.0.min.js",
+    "/tilda/js/tilda-zero-fixed-1.0.min.js",
+    "/tilda/js/tilda-skiplink-1.0.min.js",
+    "/tilda/js/tilda-blocks-page129226886.min.js",
+    "/tilda/js/tilda-text-clamp.min.js",
+    "/tilda/js/tilda-cart-1.1.min.js",
+    "/tilda/js/tilda-widget-positions-1.0.min.js",
+    "/tilda/js/tilda-formula.min.js",
+    "/tilda/js/tilda-blocks-page140448226.min.js",
+    "/tilda/js/tilda-blocks-page147089246.min.js",
+    "/tilda/js/tilda-blocks-page144125686.min.js",
+    "/tilda/js/tilda-blocks-page143646656.min.js",
+    "/tilda/js/tilda-blocks-page68793415.min.js",
+    "/tilda/js/tilda-blocks-page127893356.min.js",
+    "/tilda/js/tilda-blocks-page68793909.min.js",
+    "/tilda/js/tilda-stat-1.0.min.js"
+  ],
+  "pages": [
+    {
+      "route": "",
+      "meta": {
+        "title": "Евгений Гошев | EG | Атмосфера 3D",
+        "description": "Системная работа с телом через диагностику, дыхание, телесные практики, корректирующее движение и функциональные тренировки. Онлайн и офлайн в Москве.",
+        "ogImage": "/assets/tild3262-6531-4035-b061-356538643261/IMG_1547_2.PNG"
+      }
+    },
+    {
+      "route": "about",
+      "meta": {
+        "title": "Евгений Гошев — путь к здоровью через движение",
+        "description": "Евгений Гошев — профессиональный спортсмен и специалист по системной работе с телом. Мой путь, философия, травмы, восстановление, движение, дыхание и дисциплина.",
+        "ogImage": "/assets/tild6639-3332-4337-b133-303863303235/EG_atmosfera3D_stick.png"
+      }
+    },
+    {
+      "route": "anketa",
+      "meta": {
+        "title": "Бриф перед началом работы",
+        "description": "",
+        "ogImage": ""
+      }
+    },
+    {
+      "route": "club",
+      "meta": {
+        "title": "Онлайн-клуб Евгения Гошева",
+        "description": "Онлайн-клуб, где ты избавишься от боли, укрепишь осанку, увеличишь мобильность и силу, раскроешь возможности своего тела — всего за 15 минут в день.",
+        "ogImage": "/assets/tild3136-3865-4636-b666-313336373366/_.png"
+      }
+    },
+    {
+      "route": "baza",
+      "meta": {
+        "title": "Базовая настройка тела - ВСЕ МОДУЛИ",
+        "description": "Страница оплаты модуля «Базовая настройка тела — ВСЕ МОДУЛИ». Доступ в личный кабинет на 6 месяцев.",
+        "ogImage": "/assets/tild3464-6661-4738-a336-343939343538/2CFD9330-A26D-4106-9.PNG"
+      }
+    },
+    {
+      "route": "tree",
+      "meta": {
+        "title": "Евгений Гошев | Здоровье и целостность",
+        "description": "Гайд, маршрут Атмосфера 3D, студия, онлайн-форматы и персональная работа.",
+        "ogImage": "/assets/tild3262-6531-4035-b061-356538643261/IMG_1547_2.PNG"
+      }
+    },
+    {
+      "route": "gaid",
+      "meta": {
+        "title": "гайд",
+        "description": "",
+        "ogImage": ""
+      }
+    },
+    {
+      "route": "online",
+      "meta": {
+        "title": "Евгений Гошев | Онлайн работа",
+        "description": "",
+        "ogImage": ""
+      }
+    },
+    {
+      "route": "uslugi",
+      "meta": {
+        "title": "Евгений Гошев | Все услуги",
+        "description": "",
+        "ogImage": ""
+      }
+    },
+    {
+      "route": "oferta",
+      "meta": {
+        "title": "Публичная оферта",
+        "description": "",
+        "ogImage": ""
+      }
+    },
+    {
+      "route": "personal",
+      "meta": {
+        "title": "Согласие на обработку персональных данных",
+        "description": "",
+        "ogImage": ""
+      }
+    },
+    {
+      "route": "policy",
+      "meta": {
+        "title": "Политика конфиденциальности",
+        "description": "",
+        "ogImage": ""
+      }
+    }
+  ]
+}
