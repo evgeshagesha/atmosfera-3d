@@ -16,10 +16,26 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 ORDERS_FILE = Path(__file__).resolve().parent / "orders.json"
 
-# Map Prodamus product name or id to our course_id (breath, posture, pelvis, knees, walk, bundle)
+# Map Prodamus product name or id to our product_id
 PRODUCT_TO_COURSE = {
-    "дыхание": "breath",
-    "дыхания": "breath",
+    "тест": "body_test",
+    "теста": "body_test",
+    "тест тела": "body_test",
+    "body_test": "body_test",
+    "684": "body_test",
+    "дыхание и осанка": "course_breath_posture",
+    "дыхание": "course_breath_posture",
+    "1990": "course_breath_posture",
+    "course_breath_posture": "course_breath_posture",
+    "базовая настройка": "course_baza",
+    "базовая": "course_baza",
+    "курс": "course_baza",
+    "9990": "course_baza",
+    "course_baza": "course_baza",
+    "клуб": "club",
+    "club": "club",
+    "1680": "club",
+    # legacy course funnel ids
     "осанка": "posture",
     "осанку": "posture",
     "таз": "pelvis",
@@ -93,9 +109,10 @@ def webhook():
 
     orders.append({
         "order_id": order_id,
-        "product_id": product_id or "bundle",
+        "product_id": product_id or "body_test",
         "email": email,
         "used": False,
+        "raw_product": str(product_name)[:200],
     })
     save_orders(orders)
 

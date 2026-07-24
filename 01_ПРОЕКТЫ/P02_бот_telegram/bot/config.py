@@ -8,15 +8,26 @@ load_dotenv()
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 KIE_API_KEY = os.getenv("KIE_API_KEY", "")
-COMMUNITY_CHAT_ID = os.getenv("COMMUNITY_CHAT_ID")  # optional: restrict bot to this chat only
+COMMUNITY_CHAT_ID = os.getenv("COMMUNITY_CHAT_ID")  # optional: club group -100...
+CHANNEL_ID = os.getenv("CHANNEL_ID", "@EvgeniiGoshev")  # public channel username or -100...
+# Gate lead/level PDF until user is subscribed to CHANNEL_ID (1=on, 0=off)
+REQUIRE_CHANNEL_SUB = os.getenv("REQUIRE_CHANNEL_SUB", "1")
+ADMIN_TELEGRAM_IDS = [
+    x.strip()
+    for x in os.getenv("ADMIN_TELEGRAM_IDS", "").split(",")
+    if x.strip()
+]
 # For funnel: "Через сутки зайди на сайт"
-SITE_URL = os.getenv("SITE_URL", "https://course.egoshev.ru")
-ONLINE_CLUB_URL = os.getenv("ONLINE_CLUB_URL", "https://egoshev.ru")  # онлайн-клуб
+SITE_URL = os.getenv("SITE_URL", "https://egoshev.ru/baza")
+ONLINE_CLUB_URL = os.getenv("ONLINE_CLUB_URL", "https://egoshev.ru/club")
 
 # Куда слать логи состояния (утренние ответы, новые участники) — URL веб-приложения Google Apps Script
 GOOGLE_SHEETS_WEBHOOK_URL = os.getenv("GOOGLE_SHEETS_WEBHOOK_URL", "")
 # Ссылка на тест для новых участников (по умолчанию — сообщение в группе)
 NEW_MEMBER_TEST_LINK = os.getenv("NEW_MEMBER_TEST_LINK", "https://t.me/c/2348800665/1894")
+
+PRODAMUS_SECRET = os.getenv("PRODAMUS_SECRET", "")
+WEBHOOK_BASE_URL = os.getenv("WEBHOOK_BASE_URL", "https://bot.egoshev.ru")
 
 # Path to knowledge base (instructions for the bot)
 BASE_DIR = Path(__file__).resolve().parent

@@ -9,6 +9,7 @@ from pathlib import Path
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application,
+    CallbackQueryHandler,
     CommandHandler,
     MessageHandler,
     ContextTypes,
@@ -38,6 +39,21 @@ from user_state import (
     S_DIALOGUE_1,
     S_DIALOGUE_2,
     S_PAYMENT_LINK_SENT,
+)
+from handlers_products import (
+    cmd_start_products,
+    cmd_kurs,
+    cmd_club,
+    cmd_test,
+    cmd_breath,
+    cmd_anketa,
+    cmd_menu,
+    cmd_status,
+    cmd_level,
+    cmd_levelscore,
+    on_subscribe_check,
+    try_lead_keyword,
+    try_payment_confirm,
 )
 
 logging.basicConfig(
@@ -171,9 +187,17 @@ async def _funnel_ask_question(course_id: str, course_title: str, step: int, pre
 
 
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Instagram → Start: subscribe check → guide. No bot intro menu."""
+    from handlers_products import flow_telo
+
     user_id = update.effective_user.id
     args = context.args or []
-    # Deep link from site: /start breath (or posture, pelvis, knees, walk, bundle)
+
+    # Deep links: test / kurs / club / menu / … (not the lead guide)
+    if args and await cmd_start_products(update, context):
+        return
+
+    # Legacy course deep links from site
     if args and args[0].lower() in VALID_COURSE_IDS:
         course_id = args[0].lower()
         courses = load_courses()
@@ -187,21 +211,14 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if pay_url:
             buttons.append([InlineKeyboardButton(f"Оплатить курс «{course_title}»", url=pay_url)])
         buttons.append([InlineKeyboardButton("Все курсы — выбрать другой", url=catalog_url)])
-        keyboard = InlineKeyboardMarkup(buttons)
         await update.message.reply_text(
             "Выбери действие:",
-            reply_markup=keyboard,
+            reply_markup=InlineKeyboardMarkup(buttons),
         )
         return
-    # Normal /start
-    await update.message.reply_text(
-        "Привет! Я бот сообщества. Команды:\n"
-        "/zadanie — выдать задание участникам\n"
-        "/analiz — краткий разбор последних сообщений в чате и предложения\n"
-        "/link — ссылки на курсы (на оплату)\n"
-        "/access НОМЕР_ЗАКАЗА — получить доступ в группу после оплаты\n"
-        "Можешь писать мне в чат — отвечу с учётом правил и базы знаний."
-    )
+
+    # Plain /start or /start telo — lead funnel only (ChatPlace entry)
+    await flow_telo(update, context)
 
 
 async def cmd_zadanie(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -341,6 +358,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     # In private chat: funnel (from site button) or "get course link" / "get access"
     if is_private:
+        if await try_lead_keyword(update, context):
+            return
+        if await try_payment_confirm(update):
+            return
+
         funnel = get_funnel_user(user_id)
         if funnel:
             course_id = funnel.get("course_id", "bundle")
@@ -483,6 +505,21 @@ def main() -> None:
             pass
     app = Application.builder().token(config.BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", cmd_start))
+    app.add_handler(CommandHandler("test", cmd_test))
+    app.add_handler(CommandHandler("kurs", cmd_kurs))
+    app.add_handler(CommandHandler("breath", cmd_breath))
+    app.add_handler(CommandHandler("club", cmd_club))
+    app.add_handler(CommandHandler("anketa", cmd_anketa))
+    app.add_handler(CommandHandler("menu", cmd_menu))
+    app.add_handler(CommandHandler("status", cmd_status))
+    app.add_handler(CommandHandler("level", cmd_level))
+    app.add_handler(CommandHandler("level1", cmd_level))
+    app.add_handler(CommandHandler("level2", cmd_level))
+    app.add_handler(CommandHandler("level3", cmd_level))
+    app.add_handler(CommandHandler("levelscore", cmd_levelscore))
+    app.add_handler(
+        CallbackQueryHandler(on_subscribe_check, pattern=r"^subok:")
+    )
     app.add_handler(CommandHandler("zadanie", cmd_zadanie))
     app.add_handler(CommandHandler("link", cmd_link))
     app.add_handler(CommandHandler("access", cmd_access))

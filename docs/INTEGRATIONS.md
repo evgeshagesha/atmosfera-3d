@@ -29,7 +29,7 @@ URL (пример): `https://bot.egoshev.ru/webhook`
 | Бот ↔ пользователь | Deep links: `telo`, `test`, `club`, `kurs`, `anketa` |
 | Бот ↔ канал | Бот — админ `@EvgeniiGoshev`, post + documents |
 | Бот ↔ клуб | Invite link / kick после окончания подписки |
-| Menu Button | `https://egoshev.ru/tree` (Mini App = сайт) |
+| Menu Button | `/menu` в боте или `https://egoshev.ru/tree` (полноценное Mini App — месяц 2–3) |
 
 ---
 

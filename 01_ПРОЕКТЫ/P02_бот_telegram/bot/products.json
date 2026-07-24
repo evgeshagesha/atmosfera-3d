@@ -1,26 +1,97 @@
 {
+  "lead_telo": {
+    "title": "С чего начинать работу с телом",
+    "bonus": "Функциональная зарядка EG 3D",
+    "type": "free",
+    "keyword": "ТЕЛО",
+    "deep_link": "telo",
+    "file_id_or_url": "assets/lead_guide_eg.pdf",
+    "page_url": "https://egoshev.ru/gaid",
+    "description": "Лид-магнит: PDF-гайд + приглашение в канал и на тест тела"
+  },
+  "body_test": {
+    "title": "Онлайн-тест тела",
+    "price_rub": 684,
+    "type": "one_time",
+    "deep_link": "test",
+    "prodamus_url": "https://payform.ru/rkc3sQD/",
+    "page_url": "https://egoshev.ru/testik",
+    "access_url": "https://egoshev.ru/testresult",
+    "access_url_legacy": "https://egoshev.ru/8t64es64t68r64e6s",
+    "description": "20 движений · анкета · персональный план · разбор 24–48 ч"
+  },
+  "course_breath_posture": {
+    "title": "Дыхание и осанка",
+    "price_rub": 1990,
+    "type": "one_time",
+    "deep_link": "breath",
+    "prodamus_url": null,
+    "page_url": "https://egoshev.ru/dyhanieosanka",
+    "access_type": "tilda_members",
+    "description": "Мини-программа после маршрута A · оплата и доступ через Tilda Members"
+  },
   "course_baza": {
     "title": "Базовая настройка тела",
     "price_rub": 9990,
     "type": "one_time",
+    "deep_link": "baza",
     "prodamus_url": "https://egoshev.payform.ru/ЗАМЕНИ_ССЫЛКУ_КУРС",
     "telegram_invite_url": "https://t.me/+ЗАМЕНИ_ИНВАЙТ_КУРС",
-    "description": "65 уроков · флагманский курс"
+    "page_url": "https://egoshev.ru/baza",
+    "description": "Флагманский курс · пошаговая настройка тела"
   },
   "club": {
-    "title": "Онлайн-клуб Атмосфера 3D",
+    "title": "Клуб Атмосфера 3D",
     "price_rub": 1680,
     "type": "subscription",
     "billing_period": "month",
-    "prodamus_url": "https://egoshev.payform.ru/ЗАМЕНИ_ССЫЛКУ_КЛУБ",
+    "deep_link": "club",
+    "prodamus_url": null,
+    "tribute_url": "https://t.me/tribute/app?startapp=s11vY",
+    "tribute_web_url": "https://web.tribute.tg/s/11vY",
     "telegram_invite_url": "https://t.me/+ЗАМЕНИ_ИНВАЙТ_КЛУБ",
-    "prodamus_subscription_id": null,
-    "description": "Подписка 1 680 ₽/мес · закрытая группа"
+    "page_url": "https://egoshev.ru/club",
+    "description": "Подписка 1 680 ₽/мес · регулярность и поддержка"
   },
-  "lead_telo": {
-    "title": "Гайд «Двигательная база»",
-    "type": "free",
-    "file_id_or_url": "ЗАМЕНИ_ФАЙЛ_ИЛИ_ССЫЛКУ_ГАЙД",
-    "keyword": "ТЕЛО"
+  "studio": {
+    "title": "Личная работа в студии",
+    "type": "offline",
+    "deep_link": "anketa",
+    "page_url": "https://egoshev.ru/anketa",
+    "maps_url": "https://yandex.ru/maps/-/CTu240~o",
+    "description": "Анкета → запись в Москву"
+  },
+  "test_levels": {
+    "score_max": 60,
+    "1": {
+      "title": "Уровень 1 — База",
+      "score_min": 0,
+      "score_max": 30,
+      "file": "assets/levels/level_1.pdf",
+      "page_url": "https://egoshev.ru/level1",
+      "deep_link": "level1",
+      "summary": "Сначала возвращаем контроль: дыхание, позиция, опора.",
+      "next_offer": "course_breath_posture"
+    },
+    "2": {
+      "title": "Уровень 2",
+      "score_min": 31,
+      "score_max": 45,
+      "file": "assets/levels/level_2.pdf",
+      "page_url": "https://egoshev.ru/level2",
+      "deep_link": "level2",
+      "summary": "База есть — усиливаем качество движения и устойчивость.",
+      "next_offer": "course_baza"
+    },
+    "3": {
+      "title": "Уровень 3",
+      "score_min": 46,
+      "score_max": 60,
+      "file": "assets/levels/level_3.pdf",
+      "page_url": "https://egoshev.ru/level3",
+      "deep_link": "level3",
+      "summary": "Сильная база — держим систему и регулярность.",
+      "next_offer": "club"
+    }
   }
 }

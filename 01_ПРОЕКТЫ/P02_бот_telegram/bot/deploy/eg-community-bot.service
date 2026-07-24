@@ -1,5 +1,5 @@
 [Unit]
-Description=EG Prodamus webhook
+Description=EG Atmosfera Telegram bot (sales + channel)
 After=network.target
 
 [Service]
@@ -7,7 +7,7 @@ Type=simple
 User=root
 WorkingDirectory=/opt/atmosfera-bot
 EnvironmentFile=/opt/atmosfera-bot/.env
-ExecStart=/opt/atmosfera-bot/venv/bin/gunicorn -b 127.0.0.1:8765 webhook_prodamus:app
+ExecStart=/opt/atmosfera-bot/venv/bin/python bot.py
 Restart=always
 RestartSec=5
 

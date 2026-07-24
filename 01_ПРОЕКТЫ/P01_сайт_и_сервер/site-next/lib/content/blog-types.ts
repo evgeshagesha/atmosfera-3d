@@ -64,10 +64,15 @@ export function slugifyBlogId(title: string): string {
 }
 
 export function resolveBlogSlug(title: string, rawSlug?: string): string {
+  const cleaned = stripTildaSlugPrefix(String(rawSlug ?? "").trim());
+  // Prefer an explicit clean slug when provided (short URLs, stable links).
+  if (cleaned && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(cleaned) && cleaned.length <= 64) {
+    return cleaned;
+  }
+
   const fromTitle = slugifyBlogId(title);
   if (fromTitle && !fromTitle.startsWith("post-")) return fromTitle;
 
-  const cleaned = stripTildaSlugPrefix(String(rawSlug ?? "").trim());
   return cleaned || fromTitle;
 }
 

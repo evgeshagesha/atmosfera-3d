@@ -1,13 +1,15 @@
 # products.yaml — единый источник цен и продуктов
-# Правило: меняй цены ЗДЕСЬ. Не дублируй в коде и на страницах вручную.
+# Правило: меняй цены и ссылки ЗДЕСЬ. Не дублируй в коде и на страницах вручную.
 # Статус: confirmed = публиковать | draft = не публиковать без Евгения | tbd = цена не задана
+# Оплаты: как появятся — впиши URL. Плейсхолдер null = блокер денег.
 
 version: 1
-updated: "2026-07-23"
+updated: "2026-07-24"
 currency: RUB
 brand: "Атмосфера 3D"
 owner: "Евгений Гошев"
 site: "https://egoshev.ru"
+site_test: "https://eg.egoshev.ru"
 
 products:
   lead_guide:
@@ -21,9 +23,11 @@ products:
     keyword: "ТЕЛО"
     deep_link: "telo"
     cta: "Пройдите тест тела и получите персональный план действий"
-    delivery: "telegram_file_or_url"  # заполнить file_id или url
-    file_url: null
+    delivery: "telegram_file_or_url"
+    # PDF из репозитория (локально / на сервере бота). После загрузки в Telegram можно заменить на file_id.
+    file_url: "assets/lead_guide_eg.pdf"
     charge_file_url: null
+    page_url: "https://egoshev.ru/gaid"
 
   body_test:
     code: body_test
@@ -32,6 +36,7 @@ products:
     price_rub: 684
     payment_type: one_time
     status: confirmed
+    deep_link: "test"
     offer: "Проверьте своё тело и получите персональный план действий"
     composition:
       - "20 движений"
@@ -39,10 +44,15 @@ products:
       - "при необходимости фотографии"
       - "оценка подвижности"
       - "персональный план"
-    analysis_mode: manual_v1  # v1: ручной разбор Евгением
-    prodamus_url: null
+    analysis_mode: manual_v1
+    analysis_sla_hours: 48
+    # Оплата: payform Prodamus (кнопка на /testik). page_url — продающая страница.
+    prodamus_url: "https://payform.ru/rkc3sQD/"
     page_url: "https://egoshev.ru/testik"
+    access_url: "https://egoshev.ru/testresult"  # после оплаты Payform → сюда
+    access_url_legacy: "https://egoshev.ru/8t64es64t68r64e6s"  # старый slug, не светить публично
     form_url: null
+    note: "Продажа /testik → Payform → доступ /testresult. Закрыть Members, если ещё открыто без оплаты."
 
   course_breath_posture:
     code: course_breath_posture
@@ -51,10 +61,13 @@ products:
     price_rub: 1990
     payment_type: one_time
     status: confirmed
+    deep_link: "breath"
     offer: "Восстановите свободное дыхание, подвижность грудной клетки и более устойчивое положение тела"
+    # Оплата и доступ — Tilda Members на странице курса
     prodamus_url: null
-    page_url: null
-    access_type: "members_or_files"
+    page_url: "https://egoshev.ru/dyhanieosanka"
+    access_type: "tilda_members"
+    platform: "tilda_members"
 
   course_baza:
     code: course_baza
@@ -63,10 +76,11 @@ products:
     price_rub: 9990
     payment_type: one_time
     status: confirmed
+    deep_link: "baza"
     offer: "Пошаговая программа для восстановления подвижности, дыхания и качества движения"
     sell_via: website
     page_url: "https://egoshev.ru/baza"
-    prodamus_url: null
+    prodamus_url: null  # ← ВПИСАТЬ
     members_url: null
     platform: "tilda_members_kinescope"
 
@@ -78,16 +92,19 @@ products:
     payment_type: subscription
     billing_period: month
     status: confirmed
+    deep_link: "club"
     offer: "Регулярные тренировки, библиотека, поддержка, сообщество"
-    payment_provider: tribute  # клуб — Tribute; курсы/тест — Prodamus
-    tribute_url: null
+    payment_provider: tribute
+    tribute_url: "https://t.me/tribute/app?startapp=s11vY"
+    tribute_web_url: "https://web.tribute.tg/s/11vY"
     prodamus_url: null
     telegram_group_id: null
     telegram_invite_url: null
-    telegram_space_name: "EGcommunity"  # техническое имя группы в Telegram
-    bot_manages_content: false  # контент и ответы — только Евгений
-    bot_manages_access: false   # доступ клуба ведёт Tribute
-    note: "Публичное название клуба: Атмосфера 3D. EGcommunity — только группа в Telegram."
+    telegram_space_name: "EGcommunity"
+    bot_manages_content: false
+    bot_manages_access: false
+    page_url: "https://egoshev.ru/club"
+    note: "Публичное название клуба: Атмосфера 3D. EGcommunity — только группа в Telegram. Оплата: Tribute (TG + web)."
 
   personal_online:
     code: personal_online
@@ -96,6 +113,7 @@ products:
     price_rub: null
     payment_type: service
     status: tbd
+    deep_link: "personal"
     formats:
       - "онлайн-консультация"
       - "разбор теста"
@@ -103,7 +121,7 @@ products:
       - "персональное сопровождение"
       - "онлайн-тренировки"
     requires_form: true
-    form_url: null
+    form_url: "https://egoshev.ru/anketa"
     note: "Не публиковать цену без подтверждения Евгения"
 
   studio:
@@ -113,14 +131,45 @@ products:
     location: "Москва"
     payment_type: offline
     status: draft
+    deep_link: "anketa"
     cta: "Записаться на личный приём"
-    form_url: null
+    form_url: "https://egoshev.ru/anketa"
+    maps_url: "https://yandex.ru/maps/-/CTu240~o"
     services_draft:
       - { name: "Первичный приём", price_rub: 5000, status: draft }
       - { name: "Индивидуальная практика", price_rub: 6000, status: draft }
       - { name: "Очная консультация", price_rub: 10000, status: draft }
       - { name: "Перезагрузка тела", price_rub: 20000, status: draft }
     note: "Черновик цен — не публиковать без подтверждения"
+
+# Гайды после теста (выдача в личку бота, не в группу)
+test_level_guides:
+  score_max: 60
+  levels:
+    1:
+      title: "Уровень 1 — База"
+      score_min: 0
+      score_max: 30
+      file: "assets/levels/level_1.pdf"
+      page_url: "https://egoshev.ru/level1"
+      deep_link: "level1"
+      next_product: course_breath_posture
+    2:
+      title: "Уровень 2"
+      score_min: 31
+      score_max: 45
+      file: "assets/levels/level_2.pdf"
+      page_url: "https://egoshev.ru/level2"
+      deep_link: "level2"
+      next_product: course_baza
+    3:
+      title: "Уровень 3"
+      score_min: 46
+      score_max: 60
+      file: "assets/levels/level_3.pdf"
+      page_url: "https://egoshev.ru/level3"
+      deep_link: "level3"
+      next_product: club
 
 # Правила рекомендаций после теста (редактировать без кода)
 test_recommendations:
@@ -142,13 +191,18 @@ test_recommendations:
 
 channels:
   public_telegram: "@EvgeniiGoshev"
-  club_space: "EGcommunity"  # Telegram-группа; бренд клуба = Атмосфера 3D
+  club_space: "EGcommunity"
   instagram: "@egoshev1"
-  site: "https://egoshev.ru"          # Tilda — продукты / продажи
-  blog: "https://blog.egoshev.ru"     # Timeweb — контент-хаб
+  site: "https://egoshev.ru"
+  site_test: "https://eg.egoshev.ru"
+  blog: "https://eg.egoshev.ru/blog"
   bot_webhook: "https://bot.egoshev.ru"
   tree: "https://egoshev.ru/tree"
   baza: "https://egoshev.ru/baza"
   club_page: "https://egoshev.ru/club"
   test_page: "https://egoshev.ru/testik"
+  test_access: "https://egoshev.ru/testresult"
+  test_access_legacy: "https://egoshev.ru/8t64es64t68r64e6s"
   anketa: "https://egoshev.ru/anketa"
+  gaid: "https://egoshev.ru/gaid"
+  online_block: "https://eg.egoshev.ru/#online"

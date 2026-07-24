@@ -50,10 +50,17 @@ KIE_API_KEY=вставьте_ключ_сюда
 
 ```bash
 cd ~/Projects/atmosfera-3d/01_ПРОЕКТЫ/P02_бот_telegram/bot
+
+# Быстрый smoke (кредиты; с --generate ещё и 4×4K)
+python3 test_kie_smoke.py
+python3 test_kie_smoke.py --generate
+
 python3 kie_images.py credits
 python3 kie_images.py generate --prompt "..." --count 4 --resolution 4K
 python3 kie_images.py wait TASK_ID --output generated/kie
 ```
+
+> Статус 24.07.2026: `KIE_API_KEY` в `.env` пустой → smoke возвращает `BLOCKED`. После `ключ добавлен` — прогон `--generate`.
 
 Из одного референса:
 
