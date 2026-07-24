@@ -1,3 +1,4 @@
+import AudienceSlider from "./AudienceSlider";
 import { AUDIENCE_SECTION_CSS } from "./styles";
 
 function StyleTag({ css }: { css: string }) {
@@ -80,29 +81,54 @@ export default function AudienceIntroSection() {
           </p>
         </header>
 
-        <div className="eg-audience__grid">
-          {AUDIENCE_CARDS.map((card, index) => (
-            <article
-              key={card.id}
-              className="eg-audience__card"
-              style={{
-                backgroundImage: `url('${card.image}')`,
-                ["--reveal-delay" as string]: `${index * 80}ms`,
-              }}
-              data-reveal
+        <div className="eg-audience__track-wrap">
+          <ul
+            id="eg-audience-track"
+            className="eg-audience__grid"
+            aria-label="Для кого — состояния и запросы"
+          >
+            {AUDIENCE_CARDS.map((card, index) => (
+              <li
+                key={card.id}
+                className="eg-audience__card"
+                style={{
+                  backgroundImage: `url('${card.image}')`,
+                  ["--reveal-delay" as string]: `${Math.min(index, 4) * 70}ms`,
+                }}
+                data-reveal
+              >
+                <div className="eg-audience__card-overlay" />
+                <div className="eg-audience__card-body">
+                  <h3 className="eg-audience__card-title">{card.title}</h3>
+                  <p className="eg-audience__card-text">{card.description}</p>
+                  <a href="#online" className="eg-audience__cta">
+                    Выбрать формат
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="eg-audience__nav">
+            <button
+              type="button"
+              className="eg-audience__btn"
+              data-aud-prev
+              aria-label="Предыдущая карточка"
             >
-              <div className="eg-audience__card-overlay" />
-              <div className="eg-audience__card-body">
-                <h3 className="eg-audience__card-title">{card.title}</h3>
-                <p className="eg-audience__card-text">{card.description}</p>
-                <a href="#online" className="eg-audience__cta">
-                  Выбрать формат
-                </a>
-              </div>
-            </article>
-          ))}
+              ‹
+            </button>
+            <button
+              type="button"
+              className="eg-audience__btn"
+              data-aud-next
+              aria-label="Следующая карточка"
+            >
+              ›
+            </button>
+          </div>
         </div>
       </div>
+      <AudienceSlider />
     </div>
   );
 }

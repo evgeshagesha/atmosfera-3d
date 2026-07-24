@@ -195,30 +195,37 @@ export const FORMATS_SECTION_CSS = `
 }
 @media (max-width: 640px) {
   .eg-formats {
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-left: max(14px, env(safe-area-inset-left, 0px));
+    padding-right: max(14px, env(safe-area-inset-right, 0px));
   }
   .eg-formats__grid {
-    gap: 14px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 16px;
   }
   .eg-formats__card {
     flex: 0 0 auto;
-    width: min(320px, calc(100vw - 32px));
-    max-width: min(320px, calc(100vw - 32px));
+    width: min(430px, calc(100vw - 28px));
+    max-width: min(430px, calc(100vw - 28px));
     aspect-ratio: 1 / 1;
-    border-radius: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 22px;
+    margin: 0 auto;
   }
   .eg-formats__card-body {
-    padding: 14px;
-    gap: 7px;
+    padding: 16px 16px 18px;
+    gap: 8px;
   }
   .eg-formats__card-title {
-    font-size: 14.5px;
+    font-size: 16px;
   }
   .eg-formats__card-text {
-    font-size: 12px;
+    font-size: 13px;
+    -webkit-line-clamp: 2;
+  }
+  .eg-formats__cta {
+    font-size: 11px;
+    padding: 10px 14px;
   }
 }
 @media (max-width: 360px) {
@@ -226,11 +233,11 @@ export const FORMATS_SECTION_CSS = `
     font-size: 24px;
   }
   .eg-formats__card {
-    width: calc(100vw - 28px);
-    max-width: calc(100vw - 28px);
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
   }
   .eg-formats__card-title {
-    font-size: 13.5px;
+    font-size: 15px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -92,7 +92,30 @@ export default function StudioSection() {
           </div>
         </div>
       </div>
-      <StyleTag css="#rec2038650181 .t581__title{padding-top:50px;}#rec2038650181 .t581__descr{font-size:14px;max-width:600px;font-family:var(--t-text-font,Arial);font-weight:400;}" />
+      <StyleTag
+        css={`
+#rec2038650181 .t581__title{padding-top:50px;font-family:var(--font-display,Oswald,sans-serif);text-transform:uppercase;}
+#rec2038650181 .t581__descr{font-size:14px;max-width:600px;font-family:var(--font-body,Manrope,sans-serif);font-weight:400;}
+#rec2038650181 .t-btnflex{min-height:0 !important;height:auto !important;padding:12px 24px !important;font-size:13px !important;border-radius:999px !important;}
+#rec2038650181 .t-cover__filter{background-image:linear-gradient(to right,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.5) 55%,rgba(0,0,0,0.25) 100%) !important;}
+@media screen and (max-width:960px){
+  #rec2038650181 .t-cover,
+  #rec2038650181 .t-cover__carrier,
+  #rec2038650181 .t-cover__filter,
+  #rec2038650181 .t-cover__wrapper{height:600px !important;}
+  #rec2038650181 .t-cover__carrier{background-position:center !important;background-size:cover !important;background-attachment:scroll !important;}
+  #rec2038650181 .t-cover__filter{background-image:linear-gradient(to bottom,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.65) 55%,rgba(0,0,0,0.85) 100%) !important;}
+  #rec2038650181 .t581__title{padding-top:0;font-size:26px;}
+}
+@media screen and (max-width:480px){
+  #rec2038650181 .t-cover,
+  #rec2038650181 .t-cover__carrier,
+  #rec2038650181 .t-cover__filter,
+  #rec2038650181 .t-cover__wrapper{height:560px !important;}
+  #rec2038650181 .t581__descr{font-size:13.5px;}
+}
+`}
+      />
     </div>
   );
 }

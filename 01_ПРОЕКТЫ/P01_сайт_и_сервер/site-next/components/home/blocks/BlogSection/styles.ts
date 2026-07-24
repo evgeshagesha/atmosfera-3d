@@ -41,15 +41,40 @@ export const BLOG_SECTION_STYLES = `
   width: calc(100% / 3);
 }
 
+#rec2169195921 #carousel_2169195921 {
+  touch-action: pan-y;
+  cursor: grab;
+}
+
 #rec2169195921 .t-feed__post {
   background-color: #ffffff;
-  border-radius: 24px;
+  border-radius: 22px;
   float: none !important;
   height: 100%;
   margin: 0 !important;
   overflow: hidden;
   width: 100% !important;
-  box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 18px 40px -24px rgba(0, 0, 0, 0.65);
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.28s ease;
+}
+
+#rec2169195921 .t-feed__post:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 26px 52px -22px rgba(0, 0, 0, 0.8);
+}
+
+#rec2169195921 .t-feed__post-image,
+#rec2169195921 .t-feed__post-bgimg {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+#rec2169195921 .t-feed__post:hover .t-feed__post-bgimg {
+  transform: scale(1.05);
 }
 
 #rec2169195921 .t-feed__post-imgwrapper {

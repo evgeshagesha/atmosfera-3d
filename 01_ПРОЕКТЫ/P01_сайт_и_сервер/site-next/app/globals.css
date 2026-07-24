@@ -1,3 +1,19 @@
+:root {
+  /* Brandbook fonts — replace --font-display/-accent with Benzin/Grotesk when files arrive */
+  --font-display: "Oswald", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-accent: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Brandbook palette — premium monochrome */
+  --eg-bg: #000000;
+  --eg-surface: #0e1116;
+  --eg-text: #ffffff;
+  --eg-text-dim: rgba(255, 255, 255, 0.72);
+  --eg-line: rgba(255, 255, 255, 0.14);
+  --eg-btn-bg: #ffffff;
+  --eg-btn-text: #0a0c0f;
+}
+
 *,
 *::before,
 *::after {
@@ -16,13 +32,14 @@ body {
   padding: 0;
   max-width: 100%;
   overflow-x: clip;
-  background: #000;
-  color: #fff;
+  background: var(--eg-bg);
+  color: var(--eg-text);
 }
 
 body {
   min-height: 100vh;
   min-height: 100dvh;
+  font-family: var(--font-body);
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -36,11 +53,21 @@ video {
   height: auto;
 }
 
-/* Telegram Mini App / narrow phones: kill accidental horizontal scroll */
 #allrecords,
 main {
   max-width: 100%;
   overflow-x: clip;
+}
+
+/* Brandbook display font for main headings (Benzin-style) */
+.egmain-title,
+.eg-formats__title,
+.eg-audience__title,
+.eg-reviews-gallery__title,
+.eg-formats__card-title,
+.eg-audience__card-title {
+  font-family: var(--font-display);
+  letter-spacing: 0.005em;
 }
 
 @media (prefers-reduced-motion: reduce) {

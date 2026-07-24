@@ -64,9 +64,9 @@ export const GALLERY_SECTION_CSS = `
   display: none;
 }
 .eg-reviews-gallery__item {
-  flex: 0 0 min(520px, calc(100vw - 48px));
-  scroll-snap-align: start;
-  max-width: 560px;
+  flex: 0 0 min(420px, calc(100vw - 56px));
+  scroll-snap-align: center;
+  max-width: 440px;
 }
 .eg-reviews-gallery__card {
   position: relative;
@@ -90,9 +90,6 @@ export const GALLERY_SECTION_CSS = `
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1320 / 799;
-  object-fit: cover;
-  object-position: center top;
   background: #1a1f25;
 }
 .eg-reviews-gallery__nav {
@@ -135,7 +132,7 @@ export const GALLERY_SECTION_CSS = `
 }
 @media (min-width: 961px) {
   .eg-reviews-gallery__item {
-    flex-basis: min(480px, 42vw);
+    flex-basis: min(400px, 34vw);
   }
   .eg-reviews-gallery__nav {
     display: flex;
@@ -143,11 +140,12 @@ export const GALLERY_SECTION_CSS = `
 }
 @media (max-width: 420px) {
   .eg-reviews-gallery__inner {
-    padding-left: max(12px, env(safe-area-inset-left, 0px));
-    padding-right: max(12px, env(safe-area-inset-right, 0px));
+    padding-left: max(14px, env(safe-area-inset-left, 0px));
+    padding-right: max(14px, env(safe-area-inset-right, 0px));
   }
   .eg-reviews-gallery__item {
-    flex-basis: calc(100vw - 36px);
+    flex-basis: calc(100vw - 40px);
+    max-width: calc(100vw - 40px);
   }
   .eg-reviews-gallery__card {
     border-radius: 18px;

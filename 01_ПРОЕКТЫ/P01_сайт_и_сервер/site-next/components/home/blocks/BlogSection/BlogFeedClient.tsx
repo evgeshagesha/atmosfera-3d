@@ -86,12 +86,35 @@ export default function BlogFeedClient() {
     nextBtn?.addEventListener("click", onNext);
     window.addEventListener("resize", onResize);
 
+    // Swipe / drag to navigate
+    let startX = 0;
+    let dragging = false;
+    const SWIPE = 45;
+    const onPointerDown = (event: PointerEvent) => {
+      dragging = true;
+      startX = event.clientX;
+    };
+    const onPointerUp = (event: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = event.clientX - startX;
+      if (Math.abs(dx) < SWIPE) return;
+      setActive(dx < 0 ? index + 1 : index - 1);
+    };
+    viewport.addEventListener("pointerdown", onPointerDown);
+    viewport.addEventListener("pointerup", onPointerUp);
+    viewport.addEventListener("pointercancel", () => {
+      dragging = false;
+    });
+
     const observer = new ResizeObserver(() => setActive(index));
     observer.observe(viewport);
 
     return () => {
       prevBtn?.removeEventListener("click", onPrev);
       nextBtn?.removeEventListener("click", onNext);
+      viewport.removeEventListener("pointerdown", onPointerDown);
+      viewport.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("resize", onResize);
       observer.disconnect();
       carousel.style.transform = "";
