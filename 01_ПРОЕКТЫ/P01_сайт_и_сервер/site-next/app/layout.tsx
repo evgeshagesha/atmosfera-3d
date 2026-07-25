@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import SiteFonts from "@/components/seo/SiteFonts";
+import TelegramWebAppBoot from "@/components/seo/TelegramWebAppBoot";
 import YandexMetrika from "@/components/seo/YandexMetrika";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
         <SiteFonts />
       </head>
       <body>
+        <TelegramWebAppBoot />
         {children}
         <YandexMetrika />
       </body>

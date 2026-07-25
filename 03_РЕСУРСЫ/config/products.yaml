@@ -88,7 +88,7 @@ products:
     code: club
     level: 5
     name: "Клуб Атмосфера 3D"
-    price_rub: 1680
+    price_rub: 1758
     payment_type: subscription
     billing_period: month
     status: confirmed
@@ -109,20 +109,19 @@ products:
   personal_online:
     code: personal_online
     level: 6
-    name: "Персональная онлайн-работа"
-    price_rub: null
+    name: "Личная онлайн-консультация"
+    price_rub: 20000
+    duration_hours: 2
     payment_type: service
-    status: tbd
+    status: confirmed
     deep_link: "personal"
     formats:
-      - "онлайн-консультация"
-      - "разбор теста"
-      - "индивидуальная программа"
-      - "персональное сопровождение"
-      - "онлайн-тренировки"
+      - "онлайн-консультация 2 часа"
+      - "разбор запроса и план работы"
     requires_form: true
-    form_url: "https://egoshev.ru/anketa"
-    note: "Не публиковать цену без подтверждения Евгения"
+    form_url: "https://egoshev.ru/anketaplan"
+    page_url: "https://egoshev.ru/anketaplan"
+    note: "Публичная цена: 20 000 ₽ / 2 часа"
 
   studio:
     code: studio

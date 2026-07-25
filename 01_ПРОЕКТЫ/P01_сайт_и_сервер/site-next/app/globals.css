@@ -119,3 +119,14 @@ main {
     scroll-behavior: auto;
   }
 }
+
+/* Telegram Mini App: full-height canvas + bottom safe area */
+html.tg-mini-app,
+html.tg-mini-app body {
+  min-height: 100%;
+  min-height: var(--tg-viewport-stable-height, 100dvh);
+}
+
+html.tg-mini-app body {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+}

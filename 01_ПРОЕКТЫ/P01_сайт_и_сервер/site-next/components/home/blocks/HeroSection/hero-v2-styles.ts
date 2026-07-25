@@ -20,7 +20,7 @@ export const HERO_V2_CSS = `
 .egmain-frame {
   position: relative;
   width: min(1440px, 100%);
-  min-height: min(760px, 88vh);
+  min-height: min(720px, 86vh);
   margin: 0 auto;
   overflow: hidden;
   border: 0;
@@ -40,28 +40,29 @@ export const HERO_V2_CSS = `
 .egmain-portrait img {
   object-fit: contain;
   object-position: right center;
-  filter: none;
+  /* Slight lift so silhouette/arms stay readable on black */
+  filter: brightness(1.08) contrast(1.02);
 }
 .egmain-image-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* No gray wash — only a whisper of left shade so white text stays readable */
+  /* Soft left shade only — keep portrait body visible */
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.35) 0%,
-    transparent 38%
+    rgba(0, 0, 0, 0.22) 0%,
+    transparent 42%
   );
 }
 .egmain-container {
   position: relative;
   z-index: 2;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  min-height: min(760px, 88vh);
-  padding: clamp(46px, 6vw, 80px) clamp(28px, 4vw, 58px);
+  min-height: min(720px, 86vh);
+  padding: clamp(28px, 4.5vw, 56px) clamp(28px, 4vw, 58px) clamp(36px, 5vw, 64px);
 }
 .egmain-content {
   display: flex;
@@ -74,15 +75,15 @@ export const HERO_V2_CSS = `
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  margin-bottom: 20px;
+  gap: 3px;
+  margin-bottom: 14px;
   padding: 0;
   border: 0;
   color: rgba(255, 255, 255, 0.68);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  line-height: 1.45;
+  line-height: 1.4;
   text-transform: uppercase;
   text-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
 }
@@ -131,26 +132,29 @@ export const HERO_V2_CSS = `
   white-space: nowrap;
 }
 .egmain-lead {
-  max-width: 600px;
-  margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.86);
-  font-size: clamp(14px, 1.25vw, 17px);
-  font-weight: 500;
-  line-height: 1.45;
+  max-width: 640px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(15px, 1.35vw, 18px);
+  font-weight: 600;
+  line-height: 1.42;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
 }
 .egmain-subtitle {
-  max-width: 570px;
+  max-width: 620px;
   margin: 12px 0 0;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: clamp(12px, 1vw, 14px);
-  font-weight: 400;
-  line-height: 1.52;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(13px, 1.05vw, 15px);
+  font-weight: 500;
+  line-height: 1.55;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 .egmain-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 .egmain-tag {
   display: inline-flex;
@@ -177,39 +181,8 @@ export const HERO_V2_CSS = `
 .egmain-cta-wrap {
   position: relative;
   width: 100%;
-  margin-top: 18px;
-  padding-top: 27px;
-}
-.egmain-start-here {
-  position: absolute;
-  top: 0;
-  left: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.24);
-}
-.egmain-start-here::before {
-  content: "";
-  width: 18px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75));
-}
-.egmain-start-here svg {
-  width: 38px;
-  height: 24px;
-  overflow: visible;
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.82);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.25));
+  margin-top: 16px;
+  padding-top: 0;
 }
 .egmain-cta-row {
   display: flex;
@@ -225,21 +198,36 @@ export const HERO_V2_CSS = `
   justify-content: center !important;
   gap: 10px !important;
   min-width: min(270px, 100%) !important;
-  min-height: 44px !important;
-  padding: 11px 20px !important;
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  min-height: 48px !important;
+  padding: 12px 22px !important;
+  border: 1px solid rgba(210, 218, 228, 0.42) !important;
   border-radius: 999px !important;
-  background: rgba(8, 10, 13, 0.7) !important;
+  background: rgba(18, 20, 24, 0.82) !important;
   color: #fff !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 800 !important;
   line-height: 1.3 !important;
-  letter-spacing: 0.12em !important;
+  letter-spacing: 0.1em !important;
   text-align: center !important;
   text-transform: uppercase !important;
   cursor: pointer;
   backdrop-filter: blur(8px);
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.egmain-btn-neon,
+#egmain-hero a.egmain-btn-neon {
+  border-color: rgba(220, 228, 238, 0.55) !important;
+  box-shadow:
+    0 0 0 1px rgba(200, 210, 222, 0.22),
+    0 0 16px rgba(186, 198, 214, 0.38),
+    0 0 36px rgba(160, 174, 194, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  animation: egNeonPulse 2.8s ease-in-out infinite;
 }
 .egmain-pillars {
   display: grid;
@@ -281,13 +269,34 @@ export const HERO_V2_CSS = `
 }
 .egmain-btn-primary,
 #egmain-hero a.egmain-btn-primary {
-  border-color: #fff !important;
-  background: #fff !important;
+  border-color: rgba(236, 240, 246, 0.95) !important;
+  background: linear-gradient(180deg, #f4f6f9 0%, #d9dee6 100%) !important;
   color: #090b0e !important;
+}
+.egmain-btn-primary.egmain-btn-neon,
+#egmain-hero a.egmain-btn-primary.egmain-btn-neon {
+  box-shadow:
+    0 0 0 1px rgba(230, 236, 244, 0.35),
+    0 0 20px rgba(200, 210, 224, 0.55),
+    0 0 42px rgba(170, 184, 204, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 .egmain-btn:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(230, 236, 244, 0.75) !important;
+  box-shadow:
+    0 0 0 1px rgba(220, 228, 238, 0.4),
+    0 0 24px rgba(196, 208, 224, 0.55),
+    0 0 48px rgba(170, 184, 204, 0.32);
+}
+@keyframes egNeonPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.06);
+  }
 }
 .egmain-btn:focus-visible {
   outline: 2px solid #fff;
@@ -307,62 +316,68 @@ export const HERO_V2_CSS = `
     padding: 0;
   }
   .egmain-frame {
-    min-height: 1030px;
+    min-height: auto;
     border-right: 0;
     border-left: 0;
     border-radius: 0;
   }
   .egmain-portrait {
-    /* Reference mobile: sharp portrait on the right, upper half */
-    inset: 0 -6% 40% 32%;
-    -webkit-mask-image: none;
-    mask-image: none;
+    /* More of the figure visible; soft fade only at the very bottom */
+    inset: 0 -4% 42% 28%;
+    opacity: 1;
+    -webkit-mask-image: linear-gradient(180deg, #000 68%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 68%, transparent 100%);
   }
   .egmain-portrait img {
     object-fit: cover;
-    object-position: 72% 12%;
-    filter: none;
+    object-position: 70% 8%;
+    filter: brightness(1.12) contrast(1.03);
   }
   .egmain-image-overlay {
-    background: none;
+    /* Keep text readable without crushing arms/torso */
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.18) 48%,
+      rgba(0, 0, 0, 0.72) 82%,
+      #000 100%
+    );
   }
   .egmain-cta-wrap {
-    padding-top: 30px;
-  }
-  .egmain-start-here {
-    left: 8px;
+    margin-top: 14px;
+    padding-top: 0;
   }
   .egmain-container {
     align-items: stretch;
-    min-height: 1030px;
-    padding: 28px 20px 26px;
+    min-height: auto;
+    padding: 16px 18px 22px;
   }
   .egmain-content {
     width: 100%;
-    min-height: 100%;
+    min-height: auto;
     justify-content: flex-start;
   }
   .egmain-identity {
-    margin: 8px 0 0;
+    margin: 0;
     padding: 0;
-    font-size: 11.5px;
-    gap: 5px;
+    font-size: 10px;
+    gap: 3px;
   }
   .egmain-identity strong {
-    font-size: 22px;
+    font-size: 18px;
     letter-spacing: 0.035em;
   }
   #egmain-hero .egmain-identity a {
-    min-height: 34px;
-    margin-top: 10px;
-    padding: 8px 14px;
-    font-size: 9.5px;
+    min-height: 30px;
+    margin-top: 6px;
+    padding: 6px 12px;
+    font-size: 8.5px;
   }
   .egmain-title {
     max-width: 100%;
-    margin-top: auto;
-    padding-top: 28px;
-    font-size: clamp(48px, 14vw, 64px);
+    margin-top: 10px;
+    padding-top: 0;
+    font-size: clamp(36px, 10.5vw, 48px);
     line-height: 0.98;
   }
   .egmain-title span {
@@ -375,46 +390,50 @@ export const HERO_V2_CSS = `
     max-width: 8.5ch;
   }
   .egmain-lead {
-    max-width: 31ch;
-    margin-top: 14px;
-    font-size: 13px;
+    max-width: 36ch;
+    margin-top: 12px;
+    font-size: 14.5px;
+    line-height: 1.4;
   }
   .egmain-subtitle {
-    max-width: 38ch;
+    max-width: 42ch;
     margin-top: 10px;
-    font-size: 11.5px;
+    font-size: 12.5px;
     line-height: 1.5;
   }
   .egmain-tags {
     gap: 6px;
-    margin-top: 16px;
+    margin-top: 12px;
   }
   .egmain-tag {
-    padding: 6px 8px;
-    font-size: 8px;
+    padding: 5px 8px;
+    font-size: 7.5px;
   }
   .egmain-cta-row {
     flex-direction: column;
-    margin-top: 18px;
+    gap: 10px;
+    margin-top: 0;
   }
   #egmain-hero a.egmain-btn {
     width: 100% !important;
-    min-height: 44px !important;
-    padding: 10px 14px !important;
-    font-size: 9px !important;
+    min-height: 50px !important;
+    padding: 13px 14px !important;
+    font-size: 10.5px !important;
+    letter-spacing: 0.06em !important;
+    white-space: normal !important;
   }
   .egmain-pillars {
     gap: 6px;
-    margin-top: 16px;
+    margin-top: 14px;
   }
   .egmain-pillar {
-    min-height: 106px;
-    padding: 10px 6px;
+    min-height: 84px;
+    padding: 8px 6px;
     text-align: center;
   }
   .egmain-pillar svg {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     margin: 0 auto 2px;
   }
   .egmain-pillar strong {
@@ -422,12 +441,15 @@ export const HERO_V2_CSS = `
   }
 }
 @media (max-width: 380px) {
-  .egmain-frame,
-  .egmain-container {
-    min-height: 1010px;
-  }
   .egmain-portrait {
-    inset: 0 -8% 42% 28%;
+    inset: 0 -6% 44% 26%;
+  }
+  .egmain-title {
+    font-size: clamp(32px, 10vw, 42px);
+  }
+  #egmain-hero a.egmain-btn {
+    font-size: 10px !important;
+    letter-spacing: 0.05em !important;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -436,8 +458,10 @@ export const HERO_V2_CSS = `
     transform: none;
     animation: none;
   }
-  .egmain-btn {
+  .egmain-btn,
+  .egmain-btn-neon {
     transition: none !important;
+    animation: none !important;
   }
 }
 `;

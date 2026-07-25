@@ -6,7 +6,13 @@ import logging
 from collections import defaultdict
 from pathlib import Path
 
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import (
+    Update,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    MenuButtonWebApp,
+    WebAppInfo,
+)
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
@@ -503,7 +509,23 @@ def main() -> None:
                 logger.info("Loaded %d group messages from history.", len(loaded))
         except (ValueError, TypeError):
             pass
-    app = Application.builder().token(config.BOT_TOKEN).build()
+    async def _post_init(application: Application) -> None:
+        """Menu button opens Mini App (HTTPS catalog)."""
+        url = (getattr(config, "MINI_APP_URL", "") or "").strip()
+        if not url:
+            return
+        try:
+            await application.bot.set_chat_menu_button(
+                menu_button=MenuButtonWebApp(
+                    text="Каталог",
+                    web_app=WebAppInfo(url=url),
+                )
+            )
+            logger.info("Menu button → Mini App %s", url)
+        except Exception as exc:
+            logger.warning("set_chat_menu_button failed: %s", exc)
+
+    app = Application.builder().token(config.BOT_TOKEN).post_init(_post_init).build()
     app.add_handler(CommandHandler("start", cmd_start))
     app.add_handler(CommandHandler("test", cmd_test))
     app.add_handler(CommandHandler("kurs", cmd_kurs))

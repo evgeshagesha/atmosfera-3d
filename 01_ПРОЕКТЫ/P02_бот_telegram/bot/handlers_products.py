@@ -1,7 +1,7 @@
 """Commands: /kurs, /club, /test, /status, lead ТЕЛО, payment confirm, deep links."""
 from __future__ import annotations
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, WebAppInfo
 from telegram.ext import ContextTypes
 
 import config
@@ -289,19 +289,23 @@ async def cmd_anketa(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
 
 async def cmd_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Menu of services — links, not Mini App."""
+    """Menu: Mini App catalog + direct product links."""
     lines = [
-        "Выберите направление:",
+        "Каталог Атмосфера 3D.",
         "",
-        "• Тест тела — точка входа и персональный план",
-        "• Мини-программа «Дыхание и осанка»",
-        "• Курс «Базовая настройка тела»",
-        "• Клуб — регулярность",
-        "• Студия — личный приём в Москве",
+        "Откройте Mini App или выберите ссылку ниже.",
     ]
-    row: list[InlineKeyboardButton] = []
     buttons: list[list[InlineKeyboardButton]] = []
-    # Deep-link style via bot commands as URLs to pages / pay
+    mini = (getattr(config, "MINI_APP_URL", "") or "").strip()
+    if mini:
+        buttons.append(
+            [
+                InlineKeyboardButton(
+                    "Открыть каталог",
+                    web_app=WebAppInfo(url=mini),
+                )
+            ]
+        )
     mapping = {
         "test": "body_test",
         "breath": "course_breath_posture",

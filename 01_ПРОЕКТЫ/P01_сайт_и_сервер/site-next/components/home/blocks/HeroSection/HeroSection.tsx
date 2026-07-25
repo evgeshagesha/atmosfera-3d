@@ -130,36 +130,31 @@ export default function HeroSection() {
                         <span>свободу движения</span>
                       </h1>
                       <p className="egmain-lead">
-                        Сила и долголетие начинаются с качественного движения
+                        Сила и долголетие начинаются с качественного движения и
+                        природы!
                       </p>
                       <p className="egmain-subtitle">
-                        Диагностика, дыхание, биомеханика и естественные практики
-                        помогают убрать боль, вернуть подвижность и сделать тело
-                        сильнее на долгие годы.
+                        Диагностика, дыхание, функциональные тренировки и
+                        естественные практики помогают убрать боль, улучшить
+                        осанку, убрать выпирающий живот, вернуть подвижность и
+                        мобильность и сделать тело здоровым на долгие годы!
                       </p>
+                      <div className="egmain-cta-wrap">
+                        <div className="egmain-cta-row">
+                          <Link href="/anketa" className="egmain-btn egmain-btn-primary egmain-btn-neon">
+                            Записаться на личный приём в Москве{" "}
+                            <span className="egmain-btn-arrow">→</span>
+                          </Link>
+                          <a href="#online" className="egmain-btn egmain-btn-neon">
+                            Пройти тест и получить персональный план · 684 ₽{" "}
+                            <span className="egmain-btn-arrow">→</span>
+                          </a>
+                        </div>
+                      </div>
                       <div className="egmain-tags">
                         <span className="egmain-tag">Личный приём в Москве</span>
                         <span className="egmain-tag egmain-tag-accent">Более 1000 клиентов</span>
                         <span className="egmain-tag">Москва и онлайн</span>
-                      </div>
-                      <div className="egmain-cta-wrap">
-                        <div className="egmain-start-here" aria-hidden="true">
-                          <span>Начни здесь</span>
-                          <svg viewBox="0 0 44 28">
-                            <path d="M2 4c12 0 23 3 31 13" />
-                            <path d="m28 16 7 2-2-7" />
-                          </svg>
-                        </div>
-                        <div className="egmain-cta-row">
-                          <Link href="/anketa" className="egmain-btn egmain-btn-primary">
-                            Записаться на личный приём{" "}
-                            <span className="egmain-btn-arrow">→</span>
-                          </Link>
-                          <a href="#online" className="egmain-btn">
-                            Выбрать онлайн-формат от 684 ₽{" "}
-                            <span className="egmain-btn-arrow">→</span>
-                          </a>
-                        </div>
                       </div>
                       <div className="egmain-pillars">
                         {HERO_PILLARS.map((pillar) => (

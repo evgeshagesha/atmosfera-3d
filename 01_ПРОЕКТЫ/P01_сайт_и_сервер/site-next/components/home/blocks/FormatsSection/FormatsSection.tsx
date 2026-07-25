@@ -58,7 +58,7 @@ const FORMAT_CARDS: FormatCard[] = [
     title: "Онлайн-клуб «Атмосфера 3D»",
     description:
       "Регулярные тренировки, программы и поддержка для системного результата",
-    cta: "Вступить | от 1 680 ₽",
+    cta: "Вступить | от 1 758 ₽/мес",
     href: "https://egoshev.ru/club",
     image: "/assets/eg/method-pravilo.jpg",
   },
