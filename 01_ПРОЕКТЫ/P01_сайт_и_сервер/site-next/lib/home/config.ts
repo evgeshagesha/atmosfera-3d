@@ -7,10 +7,10 @@ export const HOME_ROUTE = "" as const;
  */
 export const HOME_PAGE_STATUS = {
   ready: true,
-  version: "1.3.0",
-  label: "reviews-gallery-mobile",
-  blocksTotal: 23,
-  blocksNamed: 16,
+  version: "1.4.0",
+  label: "hero-about-v2",
+  blocksTotal: 21,
+  blocksNamed: 14,
   blocksDividers: 7,
   updatedAt: "2026-07-24",
 } as const;

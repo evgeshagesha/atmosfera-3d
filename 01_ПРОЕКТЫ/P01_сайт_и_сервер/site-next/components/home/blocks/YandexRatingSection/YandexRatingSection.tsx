@@ -4,8 +4,8 @@ function StyleTag({ css }: { css: string }) {
 
 const YANDEX_RATING_CSS = `
 #rec2191985091.eg-yandex-rating {
-  background: #000;
-  padding: 8px 16px 4px;
+  background: var(--eg-bg, #0c0e12);
+  padding: 4px 16px 28px;
 }
 #rec2191985091 .eg-yandex-rating__wrap {
   display: flex;

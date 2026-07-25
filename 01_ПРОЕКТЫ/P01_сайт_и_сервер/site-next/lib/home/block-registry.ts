@@ -6,7 +6,6 @@ import MarqueeSection from "@/components/home/blocks/MarqueeSection";
 import MoreReviewsButtonSection from "@/components/home/blocks/MoreReviewsButtonSection";
 import SiteFooter from "@/components/home/blocks/SiteFooter";
 import SiteHeader from "@/components/home/blocks/SiteHeader";
-import StudioSection from "@/components/home/blocks/StudioSection";
 import YandexRatingSection from "@/components/home/blocks/YandexRatingSection";
 import BlogSection from "@/components/home/blocks/BlogSection";
 import ContactFormSection from "@/components/home/blocks/ContactFormSection";
@@ -19,19 +18,15 @@ import type { ComponentType } from "react";
 export const HOME_REACT_BLOCKS: Record<string, ComponentType> = {
   rec2034125441: SiteHeader,
   rec2315596141: HeroSection,
-  rec2195097811: LINE_DIVIDER_BLOCKS.rec2195097811,
   rec2034125511: FormatsSection,
   rec2315696391: LINE_DIVIDER_BLOCKS.rec2315696391,
   rec2224175751: GallerySection,
-  rec2191985091: YandexRatingSection,
   rec2097875471: MoreReviewsButtonSection,
+  rec2191985091: YandexRatingSection,
+  rec2040539251: AudienceIntroSection,
   rec2039098741: LINE_DIVIDER_BLOCKS.rec2039098741,
   rec2169195921: BlogSection,
   rec2192006421: LINE_DIVIDER_BLOCKS.rec2192006421,
-  rec2038650181: StudioSection,
-  rec2197350981: LINE_DIVIDER_BLOCKS.rec2197350981,
-  rec2040539251: AudienceIntroSection,
-  rec2097882371: LINE_DIVIDER_BLOCKS.rec2097882371,
   rec2034125521: AboutSection,
   rec2039338091: LINE_DIVIDER_BLOCKS.rec2039338091,
   rec2038979781: AboutCtaSection,

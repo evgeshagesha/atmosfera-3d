@@ -8,7 +8,7 @@ export const MARQUEE_BG_IMAGE =
 export const MARQUEE_STYLES = `
 #rec2191858991 .t1003__content-wrapper {
   opacity: 1;
-  background-color: #000000;
+  background-color: var(--eg-bg, #0c0e12);
   height: 35px;
 }
 #rec2191858991 .t1003__item-txt {

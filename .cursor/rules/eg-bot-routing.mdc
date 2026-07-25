@@ -1,0 +1,14 @@
+---
+description: Деплой бота P02 на Timeweb VPS
+globs:
+alwaysApply: false
+---
+
+# EG Bot · Timeweb
+
+При работе в `01_ПРОЕКТЫ/P02_бот_telegram/**`:
+
+- Сервер: **Timeweb VPS**
+- Не коммитить `.env`, секреты Prodamus
+- Webhook: `https://bot.egoshev.ru/webhook`
+- Док: `docs/ДЕПЛОЙ_TIMEWEB.md`

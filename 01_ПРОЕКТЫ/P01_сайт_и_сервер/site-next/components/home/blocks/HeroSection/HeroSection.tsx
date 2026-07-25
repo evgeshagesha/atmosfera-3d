@@ -1,8 +1,50 @@
-import HeroVideo from "./HeroVideo";
-import { HERO_ARTBOARD_CSS, HERO_INNER_CSS } from "./styles";
+import Image from "next/image";
+import Link from "next/link";
+
+import { HERO_V2_CSS } from "./hero-v2-styles";
+import { HERO_ARTBOARD_CSS } from "./styles";
 
 function StyleTag({ css }: { css: string }) {
   return <style dangerouslySetInnerHTML={{ __html: css }} />;
+}
+
+const HERO_PILLARS = [
+  {
+    title: "Движение",
+    icon: "movement",
+  },
+  {
+    title: "Дыхание",
+    icon: "breath",
+  },
+  {
+    title: "Дисциплина",
+    icon: "discipline",
+  },
+] as const;
+
+function PillarIcon({ type }: { type: (typeof HERO_PILLARS)[number]["icon"] }) {
+  if (type === "breath") {
+    return (
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M15 7v18M17 7v18M15 14c-2-5-7-6-9-1-2 4-1 10 4 12 2 1 4 0 5-2M17 14c2-5 7-6 9-1 2 4 1 10-4 12-2 1-4 0-5-2" />
+      </svg>
+    );
+  }
+  if (type === "discipline") {
+    return (
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="11" />
+        <circle cx="16" cy="16" r="6" />
+        <path d="m12.5 16 2.3 2.4 5-5.2" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M12 5a3 3 0 1 0 6 0 3 3 0 0 0-6 0Zm3 5-4 5-5 2m9-7 5 4 5-1m-11 2-2 6-5 6m7-7 5 2 2 6" />
+    </svg>
+  );
 }
 
 export default function HeroSection() {
@@ -49,59 +91,83 @@ export default function HeroSection() {
             data-field-width-res-320-value="431"
           >
             <div className="tn-atom tn-atom__html">
-              <StyleTag css={HERO_INNER_CSS} />
+              <StyleTag css={HERO_V2_CSS} />
               <section
                 id="egmain-hero"
                 aria-label="Евгений Гошев — терапия движением, Атмосфера 3D"
               >
                 <div className="egmain-frame">
-                  <div className="egmain-video-bg" id="egmainVideoStage">
-                    <video
-                      muted
-                      playsInline
-                      preload="none"
-                      autoPlay
-                      loop
-                      poster="/assets/tild6532-3134-4232-b861-366363656430/IMG_1547_2.PNG"
-                      className="is-active"
-                    >
-                      <source
-                        src="/assets/vide3263-3562-4936-b736-613836383361/video_1_vertical.mp4"
-                        type="video/mp4"
-                      />
-                    </video>
+                  <div className="egmain-portrait" aria-hidden="true">
+                    <Image
+                      src="/assets/eg/hero-evgeny-black.png"
+                      alt=""
+                      fill
+                      preload
+                      sizes="(max-width: 640px) 92vw, (max-width: 1024px) 62vw, 54vw"
+                    />
                   </div>
-                  <div className="egmain-video-overlay" />
+                  <div className="egmain-image-overlay" />
                   <div className="egmain-container">
                     <div className="egmain-content">
-                      <span className="egmain-brandmark">
-                        · Евгений Гошев · Физический терапевт ·
-                      </span>
+                      <div className="egmain-identity">
+                        <strong>Евгений Гошев</strong>
+                        <span>Физический терапевт</span>
+                        <span>Профессиональный спортсмен</span>
+                        <span>15 лет практического опыта</span>
+                        <a href="#rec2034125521">
+                          Подробнее обо мне <i aria-hidden="true">↓</i>
+                        </a>
+                        <a
+                          href="https://yandex.ru/maps/-/CTu240~o"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Моя wellness-студия <i aria-hidden="true">↗</i>
+                        </a>
+                      </div>
                       <h1 className="egmain-title">
-                        Терапия движением —{" "}
-                        <span className="egmain-title-accent">
-                          меньше боли и скованности, больше свободы и силы
-                        </span>
+                        <span>Верните телу</span>
+                        <span>свободу движения</span>
                       </h1>
+                      <p className="egmain-lead">
+                        Сила и долголетие начинаются с качественного движения
+                      </p>
                       <p className="egmain-subtitle">
-                        Помогаю определить, что мешает телу двигаться свободно, восстановить
-                        подвижность и постепенно сделать его сильнее через диагностику, дыхание,
-                        телесные практики и функциональные тренировки.
+                        Диагностика, дыхание, биомеханика и естественные практики
+                        помогают убрать боль, вернуть подвижность и сделать тело
+                        сильнее на долгие годы.
                       </p>
                       <div className="egmain-tags">
                         <span className="egmain-tag">Личный приём в Москве</span>
                         <span className="egmain-tag egmain-tag-accent">Более 1000 клиентов</span>
                         <span className="egmain-tag">Москва и онлайн</span>
                       </div>
-                      <div className="egmain-cta-row">
-                        <a href="/anketa" className="egmain-btn egmain-btn-primary">
-                          Записаться на личный приём{" "}
-                          <span className="egmain-btn-arrow">→</span>
-                        </a>
-                        <a href="#online" className="egmain-btn">
-                          Выбрать онлайн-формат от 684 ₽{" "}
-                          <span className="egmain-btn-arrow">→</span>
-                        </a>
+                      <div className="egmain-cta-wrap">
+                        <div className="egmain-start-here" aria-hidden="true">
+                          <span>Начни здесь</span>
+                          <svg viewBox="0 0 44 28">
+                            <path d="M2 4c12 0 23 3 31 13" />
+                            <path d="m28 16 7 2-2-7" />
+                          </svg>
+                        </div>
+                        <div className="egmain-cta-row">
+                          <Link href="/anketa" className="egmain-btn egmain-btn-primary">
+                            Записаться на личный приём{" "}
+                            <span className="egmain-btn-arrow">→</span>
+                          </Link>
+                          <a href="#online" className="egmain-btn">
+                            Выбрать онлайн-формат от 684 ₽{" "}
+                            <span className="egmain-btn-arrow">→</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="egmain-pillars">
+                        {HERO_PILLARS.map((pillar) => (
+                          <div key={pillar.title} className="egmain-pillar">
+                            <PillarIcon type={pillar.icon} />
+                            <strong>{pillar.title}</strong>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -111,7 +177,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <HeroVideo />
     </div>
   );
 }

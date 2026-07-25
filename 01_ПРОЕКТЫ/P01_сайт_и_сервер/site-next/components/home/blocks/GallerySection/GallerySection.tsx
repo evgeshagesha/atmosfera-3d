@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import GallerySlider from "./GallerySlider";
 import { GALLERY_SECTION_CSS } from "./styles";
 
@@ -5,43 +7,96 @@ function StyleTag({ css }: { css: string }) {
   return <style dangerouslySetInnerHTML={{ __html: css }} />;
 }
 
-/** Screenshots of real Yandex / Maps reviews — proof block. */
-const REVIEW_SHOTS = [
+/** Tall reviews stay full-size; short screenshots are paired vertically. */
+const REVIEW_SLIDES = [
   {
-    src: "/assets/tild3064-6166-4364-a262-383130396564/IMG_3959.jpg",
-    alt: "Отзыв клиента Атмосфера 3D — AA",
+    kind: "large",
+    shots: [
+      {
+        src: "/assets/tild6533-3666-4733-b539-313164303035/IMG_3950.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 1392,
+      },
+    ],
   },
   {
-    src: "/assets/tild6533-3666-4733-b539-313164303035/IMG_3950.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
+    kind: "compact",
+    shots: [
+      {
+        src: "/assets/tild3064-6166-4364-a262-383130396564/IMG_3959.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 799,
+      },
+      {
+        src: "/assets/tild3662-6434-4363-b734-646533346563/IMG_3954.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 872,
+      },
+    ],
   },
   {
-    src: "/assets/tild3133-6432-4136-b337-343139656462/IMG_3951.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
+    kind: "large",
+    shots: [
+      {
+        src: "/assets/tild3133-6432-4136-b337-343139656462/IMG_3951.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 1477,
+      },
+    ],
   },
   {
-    src: "/assets/tild3434-3566-4531-b430-666634656135/IMG_3952.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
+    kind: "compact",
+    shots: [
+      {
+        src: "/assets/tild3962-3366-4334-a465-343135333962/IMG_3955.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 819,
+      },
+      {
+        src: "/assets/tild3664-3834-4638-a135-323366333835/IMG_3957.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 781,
+      },
+    ],
   },
   {
-    src: "/assets/tild6336-3166-4334-a533-653461643037/IMG_3953.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
+    kind: "large",
+    shots: [
+      {
+        src: "/assets/tild3434-3566-4531-b430-666634656135/IMG_3952.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 1584,
+      },
+    ],
   },
   {
-    src: "/assets/tild3662-6434-4363-b734-646533346563/IMG_3954.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
+    kind: "large",
+    shots: [
+      {
+        src: "/assets/tild6336-3166-4334-a533-653461643037/IMG_3953.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 1161,
+      },
+    ],
   },
   {
-    src: "/assets/tild3962-3366-4334-a465-343135333962/IMG_3955.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
-  },
-  {
-    src: "/assets/tild6236-3734-4734-a431-643361643164/IMG_3956.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
-  },
-  {
-    src: "/assets/tild3664-3834-4638-a135-323366333835/IMG_3957.jpg",
-    alt: "Отзыв клиента Атмосфера 3D",
+    kind: "large",
+    shots: [
+      {
+        src: "/assets/tild6236-3734-4734-a431-643361643164/IMG_3956.jpg",
+        alt: "Отзыв клиента Атмосфера 3D",
+        width: 1320,
+        height: 1901,
+      },
+    ],
   },
 ] as const;
 
@@ -74,25 +129,32 @@ export default function GallerySection() {
             className="eg-reviews-gallery__track"
             aria-label="Галерея отзывов"
           >
-            {REVIEW_SHOTS.map((shot, index) => (
+            {REVIEW_SLIDES.map((slide, index) => (
               <li
-                key={shot.src}
-                className="eg-reviews-gallery__item"
+                key={slide.shots[0].src}
+                className={`eg-reviews-gallery__item eg-reviews-gallery__item--${slide.kind}`}
                 style={{
                   ["--reveal-delay" as string]: `${Math.min(index, 4) * 70}ms`,
                 }}
                 data-reveal
               >
-                <figure className="eg-reviews-gallery__card">
-                  <img
-                    className="eg-reviews-gallery__img"
-                    src={shot.src}
-                    alt={shot.alt}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    draggable={false}
-                  />
-                </figure>
+                {slide.shots.map((shot, shotIndex) => (
+                  <figure
+                    key={shot.src}
+                    className="eg-reviews-gallery__card"
+                  >
+                    <Image
+                      className="eg-reviews-gallery__img"
+                      src={shot.src}
+                      alt={shot.alt}
+                      width={shot.width}
+                      height={shot.height}
+                      sizes="(max-width: 420px) calc(100vw - 40px), (max-width: 960px) 420px, 400px"
+                      loading={index === 0 && shotIndex === 0 ? "eager" : "lazy"}
+                      draggable={false}
+                    />
+                  </figure>
+                ))}
               </li>
             ))}
           </ul>

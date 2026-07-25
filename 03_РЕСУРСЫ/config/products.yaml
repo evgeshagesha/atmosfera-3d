@@ -1,0 +1,154 @@
+# products.yaml — единый источник цен и продуктов
+# Правило: меняй цены ЗДЕСЬ. Не дублируй в коде и на страницах вручную.
+# Статус: confirmed = публиковать | draft = не публиковать без Евгения | tbd = цена не задана
+
+version: 1
+updated: "2026-07-23"
+currency: RUB
+brand: "Атмосфера 3D"
+owner: "Евгений Гошев"
+site: "https://egoshev.ru"
+
+products:
+  lead_guide:
+    code: lead_guide
+    level: 1
+    name: "С чего начинать работу с телом"
+    bonus: "Функциональная зарядка EG 3D"
+    price_rub: 0
+    payment_type: free
+    status: confirmed
+    keyword: "ТЕЛО"
+    deep_link: "telo"
+    cta: "Пройдите тест тела и получите персональный план действий"
+    delivery: "telegram_file_or_url"  # заполнить file_id или url
+    file_url: null
+    charge_file_url: null
+
+  body_test:
+    code: body_test
+    level: 2
+    name: "Онлайн-тест тела"
+    price_rub: 684
+    payment_type: one_time
+    status: confirmed
+    offer: "Проверьте своё тело и получите персональный план действий"
+    composition:
+      - "20 движений"
+      - "анкета"
+      - "при необходимости фотографии"
+      - "оценка подвижности"
+      - "персональный план"
+    analysis_mode: manual_v1  # v1: ручной разбор Евгением
+    prodamus_url: null
+    page_url: "https://egoshev.ru/testik"
+    form_url: null
+
+  course_breath_posture:
+    code: course_breath_posture
+    level: 3
+    name: "Дыхание и осанка"
+    price_rub: 1990
+    payment_type: one_time
+    status: confirmed
+    offer: "Восстановите свободное дыхание, подвижность грудной клетки и более устойчивое положение тела"
+    prodamus_url: null
+    page_url: null
+    access_type: "members_or_files"
+
+  course_baza:
+    code: course_baza
+    level: 4
+    name: "Базовая настройка тела"
+    price_rub: 9990
+    payment_type: one_time
+    status: confirmed
+    offer: "Пошаговая программа для восстановления подвижности, дыхания и качества движения"
+    sell_via: website
+    page_url: "https://egoshev.ru/baza"
+    prodamus_url: null
+    members_url: null
+    platform: "tilda_members_kinescope"
+
+  club:
+    code: club
+    level: 5
+    name: "Клуб Атмосфера 3D"
+    price_rub: 1680
+    payment_type: subscription
+    billing_period: month
+    status: confirmed
+    offer: "Регулярные тренировки, библиотека, поддержка, сообщество"
+    payment_provider: tribute  # клуб — Tribute; курсы/тест — Prodamus
+    tribute_url: null
+    prodamus_url: null
+    telegram_group_id: null
+    telegram_invite_url: null
+    telegram_space_name: "EGcommunity"  # техническое имя группы в Telegram
+    bot_manages_content: false  # контент и ответы — только Евгений
+    bot_manages_access: false   # доступ клуба ведёт Tribute
+    note: "Публичное название клуба: Атмосфера 3D. EGcommunity — только группа в Telegram."
+
+  personal_online:
+    code: personal_online
+    level: 6
+    name: "Персональная онлайн-работа"
+    price_rub: null
+    payment_type: service
+    status: tbd
+    formats:
+      - "онлайн-консультация"
+      - "разбор теста"
+      - "индивидуальная программа"
+      - "персональное сопровождение"
+      - "онлайн-тренировки"
+    requires_form: true
+    form_url: null
+    note: "Не публиковать цену без подтверждения Евгения"
+
+  studio:
+    code: studio
+    level: 7
+    name: "Личная работа в студии Атмосфера 3D"
+    location: "Москва"
+    payment_type: offline
+    status: draft
+    cta: "Записаться на личный приём"
+    form_url: null
+    services_draft:
+      - { name: "Первичный приём", price_rub: 5000, status: draft }
+      - { name: "Индивидуальная практика", price_rub: 6000, status: draft }
+      - { name: "Очная консультация", price_rub: 10000, status: draft }
+      - { name: "Перезагрузка тела", price_rub: 20000, status: draft }
+    note: "Черновик цен — не публиковать без подтверждения"
+
+# Правила рекомендаций после теста (редактировать без кода)
+test_recommendations:
+  A:
+    signal: "дыхание и грудная клетка"
+    product_code: course_breath_posture
+  B:
+    signal: "несколько ограниченных зон"
+    product_code: course_baza
+  C:
+    signal: "нужны регулярные занятия"
+    product_code: club
+  D:
+    signal: "сложная или индивидуальная ситуация"
+    product_codes: [personal_online, studio]
+  E:
+    signal: "уже прошёл курс"
+    product_code: club
+
+channels:
+  public_telegram: "@EvgeniiGoshev"
+  club_space: "EGcommunity"  # Telegram-группа; бренд клуба = Атмосфера 3D
+  instagram: "@egoshev1"
+  site: "https://egoshev.ru"          # Tilda — продукты / продажи
+  blog: "https://blog.egoshev.ru"     # Timeweb — контент-хаб
+  bot_webhook: "https://bot.egoshev.ru"
+  tree: "https://egoshev.ru/tree"
+  baza: "https://egoshev.ru/baza"
+  club_page: "https://egoshev.ru/club"
+  test_page: "https://egoshev.ru/testik"
+  anketa: "https://egoshev.ru/anketa"

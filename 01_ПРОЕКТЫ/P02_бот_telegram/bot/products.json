@@ -1,0 +1,26 @@
+{
+  "course_baza": {
+    "title": "Базовая настройка тела",
+    "price_rub": 9990,
+    "type": "one_time",
+    "prodamus_url": "https://egoshev.payform.ru/ЗАМЕНИ_ССЫЛКУ_КУРС",
+    "telegram_invite_url": "https://t.me/+ЗАМЕНИ_ИНВАЙТ_КУРС",
+    "description": "65 уроков · флагманский курс"
+  },
+  "club": {
+    "title": "Онлайн-клуб Атмосфера 3D",
+    "price_rub": 1680,
+    "type": "subscription",
+    "billing_period": "month",
+    "prodamus_url": "https://egoshev.payform.ru/ЗАМЕНИ_ССЫЛКУ_КЛУБ",
+    "telegram_invite_url": "https://t.me/+ЗАМЕНИ_ИНВАЙТ_КЛУБ",
+    "prodamus_subscription_id": null,
+    "description": "Подписка 1 680 ₽/мес · закрытая группа"
+  },
+  "lead_telo": {
+    "title": "Гайд «Двигательная база»",
+    "type": "free",
+    "file_id_or_url": "ЗАМЕНИ_ФАЙЛ_ИЛИ_ССЫЛКУ_ГАЙД",
+    "keyword": "ТЕЛО"
+  }
+}

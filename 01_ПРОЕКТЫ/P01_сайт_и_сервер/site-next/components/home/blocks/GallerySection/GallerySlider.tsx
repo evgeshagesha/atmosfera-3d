@@ -14,6 +14,9 @@ export default function GallerySlider() {
     );
     const prevBtn = root.querySelector<HTMLButtonElement>("[data-gallery-prev]");
     const nextBtn = root.querySelector<HTMLButtonElement>("[data-gallery-next]");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     const scrollByItem = (direction: -1 | 1) => {
       const first = items[0];
@@ -21,7 +24,10 @@ export default function GallerySlider() {
       const styles = getComputedStyle(track);
       const gap = Number.parseFloat(styles.columnGap || styles.gap || "14") || 14;
       const step = first.offsetWidth + gap;
-      track.scrollBy({ left: direction * step, behavior: "smooth" });
+      track.scrollBy({
+        left: direction * step,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
     };
 
     const onPrev = (event: Event) => {
@@ -39,10 +45,6 @@ export default function GallerySlider() {
     const revealTargets = Array.from(
       root.querySelectorAll<HTMLElement>("[data-reveal]"),
     );
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
     let observer: IntersectionObserver | null = null;
     if (reduceMotion || !("IntersectionObserver" in window)) {
       revealTargets.forEach((el) => el.classList.add("is-visible"));

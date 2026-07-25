@@ -3,9 +3,10 @@
 import { useEffect } from "react";
 
 function getItemsInRow(carousel: HTMLElement): number {
+  if (window.matchMedia("(max-width: 960px)").matches) return 1;
   const fromAttr = Number(carousel.getAttribute("data-slider-items-in-row"));
   if (fromAttr > 0) return fromAttr;
-  return window.matchMedia("(max-width: 960px)").matches ? 1 : 3;
+  return 3;
 }
 
 function getSlideStep(
@@ -89,9 +90,11 @@ export default function BlogFeedClient() {
     // Swipe / drag to navigate
     let startX = 0;
     let dragging = false;
+    let swiped = false;
     const SWIPE = 45;
     const onPointerDown = (event: PointerEvent) => {
       dragging = true;
+      swiped = false;
       startX = event.clientX;
     };
     const onPointerUp = (event: PointerEvent) => {
@@ -99,13 +102,22 @@ export default function BlogFeedClient() {
       dragging = false;
       const dx = event.clientX - startX;
       if (Math.abs(dx) < SWIPE) return;
+      swiped = true;
       setActive(dx < 0 ? index + 1 : index - 1);
+    };
+    const onPointerCancel = () => {
+      dragging = false;
+    };
+    const onClickCapture = (event: Event) => {
+      if (!swiped) return;
+      event.preventDefault();
+      event.stopPropagation();
+      swiped = false;
     };
     viewport.addEventListener("pointerdown", onPointerDown);
     viewport.addEventListener("pointerup", onPointerUp);
-    viewport.addEventListener("pointercancel", () => {
-      dragging = false;
-    });
+    viewport.addEventListener("pointercancel", onPointerCancel);
+    viewport.addEventListener("click", onClickCapture, true);
 
     const observer = new ResizeObserver(() => setActive(index));
     observer.observe(viewport);
@@ -115,6 +127,8 @@ export default function BlogFeedClient() {
       nextBtn?.removeEventListener("click", onNext);
       viewport.removeEventListener("pointerdown", onPointerDown);
       viewport.removeEventListener("pointerup", onPointerUp);
+      viewport.removeEventListener("pointercancel", onPointerCancel);
+      viewport.removeEventListener("click", onClickCapture, true);
       window.removeEventListener("resize", onResize);
       observer.disconnect();
       carousel.style.transform = "";

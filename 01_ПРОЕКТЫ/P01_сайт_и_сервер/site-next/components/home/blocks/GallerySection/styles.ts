@@ -1,6 +1,6 @@
 export const GALLERY_SECTION_CSS = `
 #rec2224175751.eg-reviews-gallery {
-  background: #000;
+  background: var(--eg-bg, #0c0e12);
   color: #fff;
   overflow: hidden;
 }
@@ -48,6 +48,7 @@ export const GALLERY_SECTION_CSS = `
 }
 .eg-reviews-gallery__track {
   display: flex;
+  align-items: flex-start;
   gap: 14px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -64,32 +65,43 @@ export const GALLERY_SECTION_CSS = `
   display: none;
 }
 .eg-reviews-gallery__item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   flex: 0 0 min(420px, calc(100vw - 56px));
   scroll-snap-align: center;
   max-width: 440px;
+}
+.eg-reviews-gallery__item--compact .eg-reviews-gallery__card {
+  flex: 0 0 auto;
 }
 .eg-reviews-gallery__card {
   position: relative;
   display: block;
   width: 100%;
+  padding: 7px;
+  border: 1px solid rgba(218, 224, 232, 0.28);
   border-radius: 22px;
   overflow: hidden;
-  background: #14181d;
+  background: linear-gradient(145deg, #171b21, #0b0e12);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 24px rgba(181, 193, 207, 0.05),
     0 18px 40px -28px rgba(0, 0, 0, 0.85);
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease;
 }
 .eg-reviews-gallery__card:hover {
   transform: translateY(-3px);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(218, 224, 232, 0.26),
     0 26px 50px -24px rgba(0, 0, 0, 0.9);
 }
 .eg-reviews-gallery__img {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 15px;
   background: #1a1f25;
 }
 .eg-reviews-gallery__nav {
@@ -118,6 +130,10 @@ export const GALLERY_SECTION_CSS = `
 }
 .eg-reviews-gallery__btn:active {
   transform: scale(0.96);
+}
+.eg-reviews-gallery__btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 .eg-reviews-gallery [data-reveal] {
   opacity: 0;

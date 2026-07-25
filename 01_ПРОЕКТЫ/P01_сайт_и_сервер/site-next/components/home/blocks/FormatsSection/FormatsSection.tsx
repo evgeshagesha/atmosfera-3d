@@ -16,9 +16,8 @@ const FORMAT_CARDS: FormatCard[] = [
   {
     id: "test",
     step: "1",
-    title: "Начни отсюда. Пройди тест для тела",
-    description:
-      "20 простых движений — определите ограничения и получите персональный план",
+    title: "Начни отсюда",
+    description: "Пройди тест и получи персональный план",
     cta: "Пройти тест | 684 ₽",
     href: "https://egoshev.ru/testik",
     image: "/assets/eg/method-deep.jpg",
@@ -40,7 +39,7 @@ const FORMAT_CARDS: FormatCard[] = [
     description:
       "Мини-курс для свободного дыхания, грудной клетки и устойчивой осанки",
     cta: "Начать | 1 990 ₽",
-    href: "/anketa",
+    href: "https://egoshev.ru/dyhanieosanka",
     image: "/assets/eg/method-posture.jpg",
   },
   {
@@ -62,6 +61,16 @@ const FORMAT_CARDS: FormatCard[] = [
     cta: "Вступить | от 1 680 ₽",
     href: "https://egoshev.ru/club",
     image: "/assets/eg/method-pravilo.jpg",
+  },
+  {
+    id: "consultation",
+    step: "6",
+    title: "Онлайн-консультация",
+    description:
+      "Разберём ваш запрос и определим оптимальный маршрут работы",
+    cta: "Получить консультацию",
+    href: "https://egoshev.ru/anketaplan",
+    image: "/assets/eg/online-consultation.png",
   },
 ];
 

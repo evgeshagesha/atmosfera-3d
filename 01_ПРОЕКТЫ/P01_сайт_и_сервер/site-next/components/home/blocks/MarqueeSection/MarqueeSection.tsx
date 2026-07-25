@@ -25,7 +25,7 @@ export default function MarqueeSection() {
           >
             <div
               className="t1003__content-wrapper"
-              style={{ backgroundColor: "#000000", height: "35px" }}
+              style={{ backgroundColor: "var(--eg-bg, #0c0e12)", height: "35px" }}
               data-auto-correct-mobile-width="false"
             >
               <div className="t1003__content" data-auto-correct-mobile-width="false">

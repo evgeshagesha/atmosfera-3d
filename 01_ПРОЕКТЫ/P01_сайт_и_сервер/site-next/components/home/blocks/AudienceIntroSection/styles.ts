@@ -1,6 +1,6 @@
 export const AUDIENCE_SECTION_CSS = `
 #rec2040539251.eg-audience {
-  background: #000;
+  background: var(--eg-bg, #0c0e12);
   color: #fff;
   overflow: hidden;
 }

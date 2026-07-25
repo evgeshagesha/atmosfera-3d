@@ -4,14 +4,20 @@
   --font-accent: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Brandbook palette — premium monochrome */
-  --eg-bg: #000000;
-  --eg-surface: #0e1116;
+  /* Unified canvas — one graphite base across the home page */
+  --eg-bg: #0c0e12;
+  --eg-surface: #14181f;
   --eg-text: #ffffff;
   --eg-text-dim: rgba(255, 255, 255, 0.72);
   --eg-line: rgba(255, 255, 255, 0.14);
   --eg-btn-bg: #ffffff;
   --eg-btn-text: #0a0c0f;
+  /* Soft depth without hard section seams */
+  --eg-section-wash: radial-gradient(
+    ellipse 80% 55% at 50% 0%,
+    rgba(58, 66, 78, 0.14),
+    transparent 58%
+  );
 }
 
 *,
@@ -57,6 +63,23 @@ video {
 main {
   max-width: 100%;
   overflow-x: clip;
+  background: var(--eg-bg);
+}
+
+/* Kill hard Tilda / divider black strips between blocks */
+#allrecords > .r.t-rec[data-bg-color="#000000"],
+#allrecords > .r.t-rec[data-bg-color="#000"],
+#allrecords > .r.t-rec[style*="background-color:#000000"],
+#allrecords > .r.t-rec[style*="background-color: #000000"],
+#allrecords > .r.t-rec[style*="background-color:#000"] {
+  background-color: var(--eg-bg) !important;
+  background-image: none;
+}
+
+/* Soft hairline dividers — no color step */
+#allrecords > .r.t-rec[data-record-type="363"] {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* Brandbook display font for main headings (Benzin-style) */
@@ -68,6 +91,27 @@ main {
 .eg-audience__card-title {
   font-family: var(--font-display);
   letter-spacing: 0.005em;
+}
+
+/* Mobile Safari: reduce costly blur/repaint work while preserving the visual hierarchy. */
+@media (max-width: 760px) {
+  .eg-site-header__menu,
+  .eg-site-header__nav,
+  .egmain-identity a,
+  .egmain-tag,
+  .egmain-btn,
+  .egmain-pillar,
+  .eg-audience__cta,
+  .eg-audience__btn,
+  .eg-reviews-gallery__arrow {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .eg-formats [data-reveal],
+  .eg-audience [data-reveal] {
+    will-change: auto !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

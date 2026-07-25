@@ -1,9 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import SiteFonts from "@/components/seo/SiteFonts";
+import YandexMetrika from "@/components/seo/YandexMetrika";
 import "./globals.css";
 
+const yandexVerification =
+  process.env.NEXT_PUBLIC_YANDEX_VERIFICATION?.trim() || "7de87f27e271e778";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://egoshev.ru"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://eg.egoshev.ru"),
+  verification: { yandex: yandexVerification },
 };
 
 /** iPhone + Telegram Mini App: safe-area, no horizontal overflow. */
@@ -44,6 +49,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <YandexMetrika />
       </body>
     </html>
   );

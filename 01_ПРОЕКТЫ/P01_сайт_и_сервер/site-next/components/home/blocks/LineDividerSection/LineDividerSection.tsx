@@ -15,7 +15,7 @@ export default function LineDividerSection({
   className,
   paddingTop,
   paddingBottom,
-  backgroundColor = "#000000",
+  backgroundColor = "transparent",
 }: LineDividerSectionProps) {
   return (
     <div
@@ -27,31 +27,42 @@ export default function LineDividerSection({
         backgroundColor,
       }}
       data-record-type="363"
-      data-bg-color={backgroundColor}
+      data-bg-color="transparent"
       suppressHydrationWarning
     >
       <div className="t029">
         <div className="t029__container t-container">
           <div className="t029__col t-col t-col_8">
-            <div className="t029__linewrapper" style={{ opacity: 0.2 }}>
+            <div className="t029__linewrapper" style={{ opacity: 0.14 }}>
               <div
                 className="t029__opacity t029__opacity_left"
                 style={{
-                  backgroundImage: "linear-gradient(to left, #ffffff, rgba(255,255,255,0))",
+                  backgroundImage:
+                    "linear-gradient(to left, rgba(255,255,255,0.55), rgba(255,255,255,0))",
                 }}
               />
-              <div className="t-divider t029__line" style={{ background: "#ffffff" }} />
+              <div
+                className="t-divider t029__line"
+                style={{ background: "rgba(255,255,255,0.55)" }}
+              />
               <div
                 className="t029__opacity t029__opacity_right"
                 style={{
-                  backgroundImage: "linear-gradient(to right, #ffffff, rgba(255,255,255,0))",
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(255,255,255,0.55), rgba(255,255,255,0))",
                 }}
               />
             </div>
           </div>
         </div>
       </div>
-      <StyleTag css="" />
+      <StyleTag
+        css={`
+          #${id} {
+            background: transparent !important;
+          }
+        `}
+      />
     </div>
   );
 }

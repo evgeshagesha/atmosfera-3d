@@ -1,0 +1,14 @@
+# Секреты бота — не коммитить
+.env
+.env.local
+*.pem
+data/*.json
+!data/.gitkeep
+!data/drafts/.gitkeep
+!data/published/.gitkeep
+output/
+generated/
+__pycache__/
+venv/
+.venv/
+*.pyc

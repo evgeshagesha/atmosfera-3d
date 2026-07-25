@@ -4,8 +4,8 @@ function StyleTag({ css }: { css: string }) {
 
 const MORE_REVIEWS_CSS = `
 #rec2097875471.eg-more-reviews {
-  background: #000;
-  padding: 12px max(16px, env(safe-area-inset-right, 0px)) 28px max(16px, env(safe-area-inset-left, 0px));
+  background: var(--eg-bg, #0c0e12);
+  padding: 8px max(16px, env(safe-area-inset-right, 0px)) 14px max(16px, env(safe-area-inset-left, 0px));
 }
 #rec2097875471 .eg-more-reviews__row {
   display: flex;
@@ -18,30 +18,30 @@ const MORE_REVIEWS_CSS = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 14px 28px;
+  min-height: 40px;
+  padding: 9px 19px;
   border-radius: 999px;
-  background: #fff;
-  color: #111 !important;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff !important;
   font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none !important;
-  border: 1px solid #fff;
-  box-shadow: 0 10px 28px -14px rgba(0, 0, 0, 0.65);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 #rec2097875471 .eg-more-reviews__btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 32px -12px rgba(0, 0, 0, 0.75);
+  background: #fff;
   color: #000 !important;
+  border-color: #fff;
 }
 @media (max-width: 420px) {
   #rec2097875471 .eg-more-reviews__btn {
-    width: 100%;
-    max-width: 360px;
+    width: auto;
+    max-width: calc(100vw - 32px);
   }
 }
 @media (prefers-reduced-motion: reduce) {

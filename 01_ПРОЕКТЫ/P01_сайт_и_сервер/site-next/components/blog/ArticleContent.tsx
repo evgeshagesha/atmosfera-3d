@@ -10,7 +10,25 @@ function renderInline(text: string) {
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={index}>{part.slice(2, -2)}</strong>;
     }
-    return <span key={index}>{part}</span>;
+    const linkedParts = part.split(/(https?:\/\/[^\s]+)/g);
+    return (
+      <span key={index}>
+        {linkedParts.map((linkedPart, linkedIndex) =>
+          linkedPart.startsWith("http") ? (
+            <a
+              key={linkedIndex}
+              href={linkedPart}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {linkedPart}
+            </a>
+          ) : (
+            <span key={linkedIndex}>{linkedPart}</span>
+          ),
+        )}
+      </span>
+    );
   });
 }
 
