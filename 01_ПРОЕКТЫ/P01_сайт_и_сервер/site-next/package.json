@@ -14,7 +14,9 @@
     "generate-block": "node scripts/generate-legacy-block-component.mjs",
     "validate:home": "node scripts/validate-home.mjs",
     "validate:about": "node scripts/validate-about.mjs",
-    "import:blog": "node scripts/import-tilda-blog.mjs"
+    "import:blog": "node scripts/import-tilda-blog.mjs",
+    "kie:image": "node scripts/kie-generate.mjs image",
+    "kie:video": "node scripts/kie-generate.mjs video"
   },
   "dependencies": {
     "@tiptap/core": "^3.27.3",

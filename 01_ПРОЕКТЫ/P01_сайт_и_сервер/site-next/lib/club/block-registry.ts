@@ -1,25 +1,26 @@
 import type { ComponentType } from "react";
 
 import ClubEmptyBlock from "@/components/club/blocks/ClubEmptyBlock";
+import ClubCreatorSection from "@/components/club/blocks/ClubCreatorSection";
+import ClubForYouSection from "@/components/club/blocks/ClubForYouSection";
+import ClubHelpSection from "@/components/club/blocks/ClubHelpSection";
+import ClubHeroSection from "@/components/club/blocks/ClubHeroSection";
 import ClubScrollbarStyles from "@/components/club/blocks/ClubScrollbarStyles";
-import ClubVslSection from "@/components/club/blocks/ClubVslSection";
+import ClubSystemSection from "@/components/club/blocks/ClubSystemSection";
 import { CLUB_ANCHOR_BLOCKS } from "@/lib/club/anchor-blocks";
 import { createLegacyBlockComponent } from "@/lib/site/create-legacy-block";
 import { getPageBlock } from "@/lib/site/blocks";
 
-const ClubHeroSection = createLegacyBlockComponent(getPageBlock("club", "rec1144359426"));
-const ClubMobileMenuSection = createLegacyBlockComponent(getPageBlock("club", "rec1147852396"));
-const ClubIntroSection = createLegacyBlockComponent(getPageBlock("club", "rec1140990496"));
-const ClubAboutSection = createLegacyBlockComponent(getPageBlock("club", "rec1142713381"));
-const ClubVideoPopupSection = createLegacyBlockComponent(getPageBlock("club", "rec1147877316"));
-const ClubFeatureSection1 = createLegacyBlockComponent(getPageBlock("club", "rec1144222061"));
-const ClubBenefitsSection = createLegacyBlockComponent(getPageBlock("club", "rec1144367136"));
-const ClubFeatureSection2 = createLegacyBlockComponent(getPageBlock("club", "rec1144351581"));
-const ClubForWhomSection = createLegacyBlockComponent(getPageBlock("club", "rec1144222031"));
+/**
+ * Club blocks from Tilda export — HTML is read from data/blocks/club/*.json
+ * so the page stays editable block-by-block like the main site.
+ * First viewport (header+hero) is a React block matching EG brand colors.
+ */
+function ClubHiddenBlock() {
+  return null;
+}
+
 const ClubScrollScriptSection1 = createLegacyBlockComponent(getPageBlock("club", "rec1145582781"));
-const ClubProgramSection = createLegacyBlockComponent(getPageBlock("club", "rec1145552311"));
-const ClubFeatureSection3 = createLegacyBlockComponent(getPageBlock("club", "rec1145589341"));
-const ClubModulesSection = createLegacyBlockComponent(getPageBlock("club", "rec1145595476"));
 const ClubFeatureSection4 = createLegacyBlockComponent(getPageBlock("club", "rec1145781956"));
 const ClubTariffsSection = createLegacyBlockComponent(getPageBlock("club", "rec1145742951"));
 const ClubFeatureSection5 = createLegacyBlockComponent(getPageBlock("club", "rec1145727246"));
@@ -44,21 +45,24 @@ const ClubScriptSection3 = createLegacyBlockComponent(getPageBlock("club", "rec1
 
 export const CLUB_REACT_BLOCKS: Record<string, ComponentType> = {
   rec1144359426: ClubHeroSection,
-  rec1147852396: ClubMobileMenuSection,
-  rec1140990496: ClubIntroSection,
-  rec2280559881: ClubVslSection,
+  // Replaced by ClubHeroSection (sticky nav + mobile menu)
+  rec1147852396: ClubHiddenBlock,
+  // Old Tilda intro — content moved into ClubHeroSection
+  rec1140990496: ClubHiddenBlock,
   rec1147865031: CLUB_ANCHOR_BLOCKS.rec1147865031,
-  rec1142713381: ClubAboutSection,
-  rec1147877316: ClubVideoPopupSection,
-  rec1144222061: ClubFeatureSection1,
-  rec1144367136: ClubBenefitsSection,
-  rec1144351581: ClubFeatureSection2,
+  rec1142713381: ClubSystemSection,
+  rec1147877316: ClubHiddenBlock,
+  rec1144222061: ClubHiddenBlock,
+  rec1144367136: ClubCreatorSection,
+  rec1144351581: ClubHiddenBlock,
   rec1147865746: CLUB_ANCHOR_BLOCKS.rec1147865746,
-  rec1144222031: ClubForWhomSection,
+  rec1144222031: ClubForYouSection,
+  // Old Tilda for-whom cards — replaced by ClubForYouSection
+  rec1145552311: ClubHiddenBlock,
   rec1145582781: ClubScrollScriptSection1,
-  rec1145552311: ClubProgramSection,
-  rec1145589341: ClubFeatureSection3,
-  rec1145595476: ClubModulesSection,
+  // Empty legacy spacer — replaced by ClubHelpSection
+  rec1145589341: ClubHiddenBlock,
+  rec1145595476: ClubHelpSection,
   rec1145781956: ClubFeatureSection4,
   rec1145742951: ClubTariffsSection,
   rec1145727246: ClubFeatureSection5,

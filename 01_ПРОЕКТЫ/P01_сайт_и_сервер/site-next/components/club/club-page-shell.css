@@ -1,0 +1,19 @@
+/* Club page shell — align canvas with main site EG colors */
+.club-page-shell {
+  background: var(--eg-bg, #0c0e12);
+  color: var(--eg-text, #fff);
+  min-height: 100vh;
+}
+
+.club-page-shell #allrecords {
+  background: var(--eg-bg, #0c0e12) !important;
+}
+
+/* Soften hard white Tilda strips toward graphite brand canvas */
+.club-page-shell #allrecords > .r.t-rec[data-bg-color="#ffffff"],
+.club-page-shell #allrecords > .r.t-rec[data-bg-color="#fff"],
+.club-page-shell #allrecords > .r.t-rec[style*="background-color:#ffffff"],
+.club-page-shell #allrecords > .r.t-rec[style*="background-color: #ffffff"],
+.club-page-shell #allrecords > .r.t-rec[style*="background-color:#fff"] {
+  background-color: var(--eg-surface, #14181f) !important;
+}

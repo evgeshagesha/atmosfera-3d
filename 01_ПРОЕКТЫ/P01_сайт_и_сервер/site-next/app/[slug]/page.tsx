@@ -14,7 +14,10 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return getAllRoutes().map((slug) => ({ slug }));
+  // /club is served by app/club/page.tsx (Tilda SitePage)
+  return getAllRoutes()
+    .filter((slug) => slug !== "club")
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
