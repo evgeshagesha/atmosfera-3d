@@ -1,0 +1,946 @@
+<!-- ============================================================
+     АНКЕТА · ДЕТСКИЕ ПРОГРАММЫ ЕВГЕНИЯ ГОШЕВА
+     Самодостаточный файл. Вставляется в Tilda блоком T123 целиком.
+     Настройки отправки — в начале блока кода внизу файла:
+     SUBMIT_MODE, TELEGRAM_USERNAME, WEBHOOK_URL
+     ============================================================ -->
+
+<div id="eg-anketa">
+
+<style>
+/* ====== ШРИФТЫ ====== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* ====== ПЕРЕМЕННЫЕ И СБРОС (высокая специфичность против темы Tilda) ====== */
+#eg-anketa {
+  --eg-bg: #060708;
+  --eg-bg2: #14171c;
+  --eg-bg3: #1c2026;
+  --eg-text: #d8dde4;
+  --eg-dim: #8a93a0;
+  --eg-accent: #d8dde4;
+  --eg-accent2: #8a93a0;
+  --eg-green: #8a93a0;
+  --eg-border: rgba(216,221,228,0.13);
+  --eg-error: #c98c8c;
+  --eg-radius: 16px;
+  --eg-ease: cubic-bezier(0.22,1,0.36,1);
+
+  background: var(--eg-bg) !important;
+  color: var(--eg-text) !important;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+  padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 40px) !important;
+  margin: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box !important;
+}
+#eg-anketa *, #eg-anketa *::before, #eg-anketa *::after { box-sizing: border-box !important; }
+#eg-anketa p, #eg-anketa h1, #eg-anketa h2, #eg-anketa h3, #eg-anketa h4,
+#eg-anketa ul, #eg-anketa ol, #eg-anketa li, #eg-anketa label, #eg-anketa fieldset, #eg-anketa legend {
+  margin: 0 !important; padding: 0 !important; border: 0 !important; list-style: none !important;
+  font-family: inherit !important; color: inherit !important;
+}
+#eg-anketa button { font-family: inherit !important; cursor: pointer; border: none; background: none; color: inherit; }
+#eg-anketa ::selection { background: var(--eg-accent); color: #12100b; }
+
+/* ====== КАРКАС ====== */
+#eg-anketa .eg-wrap { max-width: 780px !important; margin: 0 auto !important; }
+
+#eg-anketa .eg-head { margin-bottom: 34px !important; }
+#eg-anketa .eg-over {
+  font-size: 12px !important; letter-spacing: 0.2em !important; text-transform: uppercase !important;
+  font-weight: 600 !important; color: var(--eg-accent2) !important; margin-bottom: 14px !important;
+}
+#eg-anketa .eg-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: clamp(26px, 5vw, 42px) !important; line-height: 1.06 !important;
+  font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: -0.015em !important; margin-bottom: 16px !important;
+}
+#eg-anketa .eg-lead { color: var(--eg-dim) !important; font-size: 16px !important; max-width: 58ch !important; }
+
+/* ====== ПРОГРЕСС ====== */
+#eg-anketa .eg-progress { margin: 30px 0 34px !important; }
+#eg-anketa .eg-progress-track {
+  height: 3px !important; background: rgba(216,221,228,0.10) !important;
+  border-radius: 3px !important; overflow: hidden !important;
+}
+#eg-anketa .eg-progress-fill {
+  height: 100% !important; width: 16.6% !important;
+  background: linear-gradient(90deg, var(--eg-accent), var(--eg-accent2)) !important;
+  transition: width .45s var(--eg-ease) !important;
+}
+#eg-anketa .eg-progress-meta {
+  display: flex !important; justify-content: space-between !important; align-items: baseline !important;
+  margin-top: 12px !important; font-size: 12.5px !important; letter-spacing: 0.06em !important;
+  text-transform: uppercase !important; color: var(--eg-dim) !important;
+}
+#eg-anketa .eg-progress-meta b { color: var(--eg-accent2) !important; font-weight: 600 !important; }
+
+/* ====== ШАГИ ====== */
+#eg-anketa .eg-step { display: none !important; }
+#eg-anketa .eg-step.eg-on { display: block !important; }
+@media (prefers-reduced-motion: no-preference) {
+  #eg-anketa .eg-step.eg-on { animation: egIn .45s var(--eg-ease); }
+  @keyframes egIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+}
+#eg-anketa .eg-step-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: clamp(20px, 3.2vw, 27px) !important; font-weight: 800 !important; text-transform: uppercase !important;
+  line-height: 1.2 !important; margin-bottom: 10px !important;
+}
+#eg-anketa .eg-step-sub { color: var(--eg-dim) !important; font-size: 15px !important; margin-bottom: 30px !important; max-width: 56ch !important; }
+
+/* ====== ПОЛЯ ====== */
+#eg-anketa .eg-field { margin-bottom: 26px !important; }
+#eg-anketa .eg-label {
+  display: block !important; font-size: 15px !important; font-weight: 600 !important;
+  margin-bottom: 10px !important; color: var(--eg-text) !important;
+}
+#eg-anketa .eg-req { color: var(--eg-accent2) !important; margin-left: 3px !important; }
+#eg-anketa .eg-hint { display: block !important; font-size: 13.5px !important; color: var(--eg-dim) !important; margin-top: -4px !important; margin-bottom: 12px !important; font-weight: 400 !important; }
+
+#eg-anketa input[type="text"],
+#eg-anketa input[type="tel"],
+#eg-anketa input[type="email"],
+#eg-anketa input[type="number"],
+#eg-anketa select,
+#eg-anketa textarea {
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 14px 18px !important;
+  background: var(--eg-bg2) !important;
+  border: 1px solid var(--eg-border) !important;
+  border-radius: 12px !important;
+  color: var(--eg-text) !important;
+  font-family: inherit !important;
+  font-size: 16px !important; /* 16px — чтобы iOS не зумил */
+  line-height: 1.5 !important;
+  transition: border-color .25s var(--eg-ease), background .25s var(--eg-ease) !important;
+  -webkit-appearance: none !important; appearance: none !important;
+}
+#eg-anketa textarea { min-height: 110px !important; resize: vertical !important; }
+#eg-anketa select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23d8dde4' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important; background-position: right 18px center !important;
+  padding-right: 46px !important;
+}
+#eg-anketa input::placeholder, #eg-anketa textarea::placeholder { color: rgba(216,221,228,0.30) !important; }
+#eg-anketa input:focus, #eg-anketa select:focus, #eg-anketa textarea:focus {
+  outline: none !important; border-color: var(--eg-accent) !important; background: var(--eg-bg3) !important;
+}
+#eg-anketa .eg-invalid { border-color: var(--eg-error) !important; }
+#eg-anketa .eg-err {
+  display: none; font-size: 13.5px !important; color: var(--eg-error) !important; margin-top: 8px !important;
+}
+#eg-anketa .eg-err.eg-show { display: block; }
+
+/* ====== ВЫБОР: КАРТОЧКИ / ЧЕКБОКСЫ ====== */
+#eg-anketa .eg-opts { display: grid !important; gap: 10px !important; }
+#eg-anketa .eg-opts--2 { grid-template-columns: 1fr !important; }
+@media (min-width: 620px) { #eg-anketa .eg-opts--2 { grid-template-columns: 1fr 1fr !important; } }
+
+#eg-anketa .eg-opt {
+  position: relative !important; display: flex !important; align-items: flex-start !important; gap: 13px !important;
+  padding: 15px 18px !important; background: var(--eg-bg2) !important;
+  border: 1px solid var(--eg-border) !important; border-radius: 12px !important;
+  cursor: pointer !important; transition: border-color .25s var(--eg-ease), background .25s var(--eg-ease) !important;
+}
+#eg-anketa .eg-opt:hover { border-color: rgba(181,140,85,0.55) !important; }
+#eg-anketa .eg-opt input { position: absolute !important; opacity: 0 !important; width: 0 !important; height: 0 !important; }
+#eg-anketa .eg-box {
+  flex-shrink: 0 !important; width: 21px !important; height: 21px !important; margin-top: 2px !important;
+  border: 1.5px solid rgba(216,221,228,0.32) !important; border-radius: 6px !important;
+  display: grid !important; place-items: center !important;
+  transition: border-color .2s var(--eg-ease), background .2s var(--eg-ease) !important;
+}
+#eg-anketa .eg-opt--radio .eg-box { border-radius: 50% !important; }
+#eg-anketa .eg-box::after {
+  content: "" !important; width: 10px !important; height: 6px !important;
+  border-left: 2px solid #060708 !important; border-bottom: 2px solid #060708 !important;
+  transform: rotate(-45deg) translateY(-1px) scale(0) !important; transition: transform .2s var(--eg-ease) !important;
+}
+#eg-anketa .eg-opt--radio .eg-box::after {
+  width: 8px !important; height: 8px !important; border: none !important;
+  background: #060708 !important; border-radius: 50% !important; transform: scale(0) !important;
+}
+#eg-anketa .eg-opt input:checked ~ .eg-box { background: var(--eg-accent) !important; border-color: var(--eg-accent) !important; }
+#eg-anketa .eg-opt input:checked ~ .eg-box::after { transform: rotate(-45deg) translateY(-1px) scale(1) !important; }
+#eg-anketa .eg-opt--radio input:checked ~ .eg-box::after { transform: scale(1) !important; }
+#eg-anketa .eg-opt:has(input:checked) { border-color: var(--eg-accent) !important; background: var(--eg-bg3) !important; }
+#eg-anketa .eg-opt input:focus-visible ~ .eg-box { outline: 2px solid var(--eg-accent2) !important; outline-offset: 3px !important; }
+#eg-anketa .eg-opt-body { flex: 1 !important; }
+#eg-anketa .eg-opt-name { font-size: 15.5px !important; font-weight: 500 !important; line-height: 1.4 !important; }
+#eg-anketa .eg-opt-desc { font-size: 13.5px !important; color: var(--eg-dim) !important; margin-top: 4px !important; }
+#eg-anketa .eg-opt-tag {
+  font-size: 12px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important;
+  color: var(--eg-accent2) !important; font-weight: 600 !important; margin-bottom: 5px !important;
+}
+
+/* ====== УСЛОВНЫЕ БЛОКИ ====== */
+#eg-anketa .eg-cond { display: none !important; margin-top: 14px !important; padding-left: 18px !important; border-left: 2px solid rgba(181,140,85,0.4) !important; }
+#eg-anketa .eg-cond.eg-on { display: block !important; }
+
+/* ====== ЗАМЕТКА ====== */
+#eg-anketa .eg-note {
+  background: var(--eg-bg2) !important; border: 1px solid var(--eg-border) !important;
+  border-radius: 12px !important; padding: 18px 20px !important;
+  font-size: 14px !important; color: var(--eg-dim) !important; line-height: 1.6 !important;
+  margin-bottom: 26px !important;
+}
+#eg-anketa .eg-note b { color: var(--eg-text) !important; font-weight: 600 !important; }
+
+/* ====== КНОПКИ ====== */
+#eg-anketa .eg-nav {
+  display: flex !important; gap: 12px !important; flex-wrap: wrap !important;
+  margin-top: 34px !important; padding-top: 26px !important; border-top: 1px solid var(--eg-border) !important;
+}
+#eg-anketa .eg-btn {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  min-height: 52px !important; padding: 0 30px !important; border-radius: 100px !important;
+  font-size: 15.5px !important; font-weight: 600 !important; line-height: 1.2 !important;
+  transition: transform .25s var(--eg-ease), background .25s var(--eg-ease), color .25s var(--eg-ease) !important;
+  text-decoration: none !important;
+}
+#eg-anketa .eg-btn--go { background: var(--eg-accent) !important; color: #060708 !important; flex: 1 !important; min-width: 200px !important; }
+#eg-anketa .eg-btn--go:hover { background: var(--eg-accent2) !important; transform: translateY(-2px) !important; }
+#eg-anketa .eg-btn--back { background: transparent !important; color: var(--eg-dim) !important; box-shadow: inset 0 0 0 1px var(--eg-border) !important; }
+#eg-anketa .eg-btn--back:hover { color: var(--eg-text) !important; box-shadow: inset 0 0 0 1px var(--eg-accent) !important; }
+#eg-anketa .eg-btn:focus-visible { outline: 2px solid var(--eg-accent2) !important; outline-offset: 3px !important; }
+
+/* ====== ЭКРАН УСПЕХА ====== */
+#eg-anketa .eg-done { display: none !important; text-align: center !important; }
+#eg-anketa .eg-done.eg-on { display: block !important; }
+#eg-anketa .eg-done-mark {
+  width: 64px !important; height: 64px !important; margin: 0 auto 26px !important;
+  border-radius: 50% !important; border: 1.5px solid var(--eg-accent) !important;
+  display: grid !important; place-items: center !important;
+}
+#eg-anketa .eg-done-mark span {
+  width: 20px !important; height: 11px !important;
+  border-left: 2px solid var(--eg-accent) !important; border-bottom: 2px solid var(--eg-accent) !important;
+  transform: rotate(-45deg) translateY(-2px) !important;
+}
+#eg-anketa .eg-summary {
+  text-align: left !important; margin: 30px 0 !important; background: var(--eg-bg2) !important;
+  border: 1px solid var(--eg-border) !important; border-radius: 12px !important;
+  padding: 20px !important; max-height: 300px !important; overflow-y: auto !important;
+  font-size: 13.5px !important; line-height: 1.65 !important; color: var(--eg-dim) !important;
+  white-space: pre-wrap !important; font-family: inherit !important;
+}
+#eg-anketa .eg-done-actions { display: grid !important; gap: 12px !important; max-width: 420px !important; margin: 0 auto !important; }
+
+/* ====== ПОДВАЛ ====== */
+#eg-anketa .eg-foot {
+  margin-top: 44px !important; padding-top: 26px !important; border-top: 1px solid var(--eg-border) !important;
+  font-size: 13px !important; color: var(--eg-dim) !important; line-height: 1.6 !important;
+}
+#eg-anketa .eg-sign {
+  margin-top: 16px !important; font-size: 12px !important; letter-spacing: 0.18em !important;
+  text-transform: uppercase !important; color: var(--eg-accent2) !important;
+}
+
+/* ====== МОБИЛЬНОЕ ====== */
+@media (max-width: 500px) {
+  #eg-anketa .eg-btn--go { width: 100% !important; flex: none !important; }
+  #eg-anketa .eg-btn--back { width: 100% !important; }
+  #eg-anketa .eg-nav { flex-direction: column-reverse !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #eg-anketa *, #eg-anketa *::before, #eg-anketa *::after {
+    animation-duration: 0.001ms !important; transition-duration: 0.001ms !important;
+  }
+}
+</style>
+
+<div class="eg-wrap">
+
+  <!-- ===== ШАПКА ===== -->
+  <div class="eg-head">
+    <p class="eg-over">Атмосфера 3D Kids Camp · Евгений Гошев</p>
+    <h2 class="eg-title">Анкета участника</h2>
+    <p class="eg-lead">Группа до четырёх детей требует внимательного подбора участников. Чем подробнее вы расскажете о ребёнке, тем точнее я подберу формат, группу и нагрузку. Заполнение анкеты не обязывает оплачивать участие.</p>
+  </div>
+
+  <div class="eg-progress">
+    <div class="eg-progress-track"><div class="eg-progress-fill" id="egFill"></div></div>
+    <div class="eg-progress-meta">
+      <span>Шаг <b id="egNum">1</b> из 6</span>
+      <span id="egStepName">Формат и контакт</span>
+    </div>
+  </div>
+
+  <form id="egForm" novalidate>
+
+    <!-- ================= ШАГ 1 ================= -->
+    <section class="eg-step eg-on" data-step="1" data-name="Формат и контакт">
+      <h3 class="eg-step-title">Формат и контакт</h3>
+      <p class="eg-step-sub">Если пока не определились с форматом — это нормально, разберёмся в разговоре.</p>
+
+      <div class="eg-field">
+        <label class="eg-label">Интересующий формат <span class="eg-req">*</span></label>
+        <div class="eg-opts" data-group="format">
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Атмосфера 3D Kids · Будни" required>
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-tag">Будни</span>
+              <span class="eg-opt-name">Атмосфера 3D Kids · Будни</span>
+              <span class="eg-opt-desc">Занятие 1,5–2 часа. Опора, координация, мобильность, физическая подготовка.</span>
+            </span>
+          </label>
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Атмосфера 3D Kids · Выходные">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-tag">Выходные</span>
+              <span class="eg-opt-name">Атмосфера 3D Kids · Выходные</span>
+              <span class="eg-opt-desc">Программа 4–5 часов: движение, прогулка, еда, история, разговор, командные задачи.</span>
+            </span>
+          </label>
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Закрытая группа (своя компания)">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Закрытая группа для своей компании</span>
+              <span class="eg-opt-desc">Свой состав до четырёх детей: друзья, братья, сёстры, одноклассники.</span>
+            </span>
+          </label>
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Пока не определились">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Пока не определились</span>
+              <span class="eg-opt-desc">Подберём формат вместе после короткого разговора.</span>
+            </span>
+          </label>
+        </div>
+        <p class="eg-err" data-err="format">Выберите один из форматов.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egParentName">Ваше имя <span class="eg-req">*</span></label>
+        <input type="text" id="egParentName" name="parentName" placeholder="Как к вам обращаться" required autocomplete="name">
+        <p class="eg-err" data-err="parentName">Пожалуйста, укажите имя.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egPhone">Телефон <span class="eg-req">*</span></label>
+        <input type="tel" id="egPhone" name="phone" placeholder="+7 ___ ___ __ __" required autocomplete="tel">
+        <p class="eg-err" data-err="phone">Укажите телефон для связи.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egTelegram">Telegram</label>
+        <span class="eg-hint">Ник или номер — так удобнее всего согласовывать детали.</span>
+        <input type="text" id="egTelegram" name="telegram" placeholder="@nickname">
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egEmail">Email</label>
+        <input type="email" id="egEmail" name="email" placeholder="necessary@example.com" autocomplete="email">
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Как удобнее связаться</label>
+        <div class="eg-opts eg-opts--2">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="Telegram"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Telegram</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="Звонок"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Звонок</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="WhatsApp"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">WhatsApp</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="Любой способ"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Любой способ</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · о ребёнке</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 2 ================= -->
+    <section class="eg-step" data-step="2" data-name="О ребёнке">
+      <h3 class="eg-step-title">О ребёнке</h3>
+      <p class="eg-step-sub">Возраст важен: в одной группе занимаются дети близкого возраста.</p>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egChildName">Имя ребёнка <span class="eg-req">*</span></label>
+        <input type="text" id="egChildName" name="childName" placeholder="Имя" required>
+        <p class="eg-err" data-err="childName">Пожалуйста, укажите имя ребёнка.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egAge">Возраст <span class="eg-req">*</span></label>
+        <select id="egAge" name="age" required>
+          <option value="">Выберите возраст</option>
+          <option>7 лет</option><option>8 лет</option><option>9 лет</option>
+          <option>10 лет</option><option>11 лет</option><option>12 лет</option>
+          <option>13 лет</option><option>14 лет</option><option>15 лет</option>
+          <option>Другой возраст</option>
+        </select>
+        <p class="eg-err" data-err="age">Выберите возраст ребёнка.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Занимается ли спортом сейчас</label>
+        <div class="eg-opts eg-opts--2" data-toggle="sportYes">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="doesSport" value="Да, занимается"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Да, занимается</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="doesSport" value="Нет, не занимается"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Нет</span></span></label>
+        </div>
+        <div class="eg-cond" id="egSportYes">
+          <div class="eg-field">
+            <label class="eg-label" for="egSport">Какой вид спорта и сколько раз в неделю</label>
+            <input type="text" id="egSport" name="sport" placeholder="Например: футбол, 3 раза в неделю">
+          </div>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Уровень повседневной активности</label>
+        <span class="eg-hint">Оцените в целом, без строгости — это ориентир для подбора нагрузки.</span>
+        <div class="eg-opts">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="activity" value="Высокий — много двигается каждый день"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Высокий</span><span class="eg-opt-desc">Много двигается каждый день, тренировки и активные игры.</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="activity" value="Средний — умеренно активен"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Средний</span><span class="eg-opt-desc">Прогулки, физкультура, время от времени активные игры.</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="activity" value="Невысокий — движения мало"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Невысокий</span><span class="eg-opt-desc">Школа, уроки и дом занимают почти весь день.</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egExperience">Был ли опыт занятий, который не подошёл</label>
+        <span class="eg-hint">Помогает не повторять то, что уже не сработало.</span>
+        <textarea id="egExperience" name="experience" placeholder="Например: ходили в секцию, но ребёнку было скучно / слишком строгий тренер"></textarea>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · движение</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 3 ================= -->
+    <section class="eg-step" data-step="3" data-name="Движение и тело">
+      <h3 class="eg-step-title">Движение и тело</h3>
+      <p class="eg-step-sub">Здесь важны именно ваши наблюдения. Это не диагноз и не оценка — просто то, что вы замечаете в обычной жизни.</p>
+
+      <div class="eg-field">
+        <label class="eg-label">Что вы замечаете в движении ребёнка</label>
+        <span class="eg-hint">Можно выбрать несколько вариантов или не выбирать ни одного.</span>
+        <div class="eg-opts">
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Быстро устаёт"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Быстро устаёт при физической нагрузке</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Сложно удерживать равновесие"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Сложно удерживать равновесие</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Движения кажутся неловкими"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Движения кажутся неловкими, часто спотыкается</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Сутулится за столом"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Сутулится за столом или при ходьбе</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Говорит об усталости в ногах или спине"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Говорит об усталости в ногах или спине</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Избегает подвижных игр"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Избегает подвижных игр и бега</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Сложно даются новые движения"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Новые движения даются с трудом</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Всё в порядке, хотим развития"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Всё в порядке — хотим развития и хорошей базы</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egMovementNote">Расскажите подробнее своими словами</label>
+        <textarea id="egMovementNote" name="movementNote" placeholder="Что вас интересует или беспокоит в том, как ребёнок двигается"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egGoal">Что для вас будет хорошим результатом</label>
+        <span class="eg-hint">Самый важный вопрос анкеты — по нему я строю программу.</span>
+        <textarea id="egGoal" name="goal" placeholder="Например: чтобы ребёнок увереннее двигался, полюбил движение, стал крепче, лучше держался в компании"></textarea>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · здоровье</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 4 ================= -->
+    <section class="eg-step" data-step="4" data-name="Здоровье и безопасность">
+      <h3 class="eg-step-title">Здоровье и безопасность</h3>
+      <p class="eg-step-sub">Эти поля нужны, чтобы адаптировать нагрузку, питание и обеспечить безопасность в течение дня.</p>
+
+      <div class="eg-note">
+        <b>Важно.</b> Программа не является медицинской услугой. Диагноз указывать не нужно — достаточно того, что важно учесть на занятии. При заболеваниях, недавних травмах или противопоказаниях возможность участия обсуждается заранее, при необходимости потребуется консультация лечащего специалиста.
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egHealth">Ограничения по здоровью, которые важно учесть</label>
+        <textarea id="egHealth" name="health" placeholder="Например: ограничение по прыжкам, бережно с шеей, быстро перегревается. Если ограничений нет — напишите «нет»"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egInjuries">Травмы за последний год</label>
+        <textarea id="egInjuries" name="injuries" placeholder="Что и когда, восстановился ли полностью. Если травм не было — напишите «нет»"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egAllergy">Аллергии <span class="eg-req">*</span></label>
+        <span class="eg-hint">Обязательное поле — в программе есть совместный приём пищи. Если аллергий нет, так и напишите.</span>
+        <textarea id="egAllergy" name="allergy" placeholder="Пищевые, сезонные, на препараты. Если нет — напишите «нет»" required></textarea>
+        <p class="eg-err" data-err="allergy">Пожалуйста, заполните это поле — даже если аллергий нет.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Особенности питания</label>
+        <div class="eg-opts eg-opts--2">
+          <label class="eg-opt"><input type="checkbox" name="food" value="Без ограничений"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Без ограничений</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Вегетарианское"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Вегетарианское</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Без глютена"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Без глютена</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Без лактозы"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Без лактозы</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Не ест некоторые продукты"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Не ест некоторые продукты</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Религиозные ограничения"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Религиозные ограничения</span></span></label>
+        </div>
+        <div class="eg-field" style="margin-top:14px !important; margin-bottom:0 !important;">
+          <input type="text" name="foodNote" placeholder="Уточните, если нужно: что именно не ест">
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egMeds">Есть ли что-то, что может понадобиться в течение дня</label>
+        <span class="eg-hint">Например ингалятор или средство от аллергии — чтобы оно было под рукой и я знал, как действовать.</span>
+        <textarea id="egMeds" name="meds" placeholder="Если ничего не требуется — напишите «нет»"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egEmergency">Экстренный контакт <span class="eg-req">*</span></label>
+        <span class="eg-hint">Имя и телефон второго взрослого, если с вами не будет связи.</span>
+        <input type="text" id="egEmergency" name="emergency" placeholder="Имя, кем приходится, телефон" required>
+        <p class="eg-err" data-err="emergency">Укажите экстренный контакт — это обязательное условие участия.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egPickup">Кто заберёт ребёнка после программы</label>
+        <span class="eg-hint">Ребёнок передаётся только родителю или заранее указанному взрослому.</span>
+        <input type="text" id="egPickup" name="pickup" placeholder="Имя и кем приходится ребёнку">
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · характер</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 5 ================= -->
+    <section class="eg-step" data-step="5" data-name="Характер и общение">
+      <h3 class="eg-step-title">Характер и общение</h3>
+      <p class="eg-step-sub">Это помогает собрать комфортную группу и найти подход к ребёнку с первых минут.</p>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egLikes">Что ребёнку нравится</label>
+        <span class="eg-hint">Интересы, увлечения, игры, книги, фильмы — я опираюсь на это в заданиях и разговоре.</span>
+        <textarea id="egLikes" name="likes" placeholder="Например: динозавры, космос, футбол, рисование, приключенческие фильмы"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Что обычно не нравится на занятиях</label>
+        <div class="eg-opts">
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Когда громко командуют"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Когда громко командуют или повышают голос</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Когда сравнивают с другими"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Когда сравнивают с другими детьми</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Однообразные повторения"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Однообразные повторения без смысла</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Соревнования на результат"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Соревнования и борьба за результат</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Публичное внимание"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Публичное внимание, выступать перед всеми</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Когда не объясняют смысл"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Когда не объясняют, зачем это делать</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Как ребёнок чувствует себя в новой компании</label>
+        <div class="eg-opts">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="social" value="Легко знакомится"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Легко знакомится и включается</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="social" value="Нужно время"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Нужно время, чтобы освоиться</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="social" value="Сложно в новой компании"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">В новой компании ему непросто</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egBehaviour">Особенности поведения или общения, которые важно знать</label>
+        <span class="eg-hint">Всё, что поможет мне быть внимательнее: как реагирует на неудачу, на шум, на замечание, нужна ли пауза, что успокаивает.</span>
+        <textarea id="egBehaviour" name="behaviour" placeholder="Пишите свободно — любая деталь полезна"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egMotivate">Что обычно помогает ребёнку включиться</label>
+        <textarea id="egMotivate" name="motivate" placeholder="Например: когда есть понятная цель, когда получается с первого раза, когда рядом друг"></textarea>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · организация</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 6 ================= -->
+    <section class="eg-step" data-step="6" data-name="Организация и согласия">
+      <h3 class="eg-step-title">Организация и согласия</h3>
+      <p class="eg-step-sub">Последний шаг. Дальше я лично изучаю анкету и связываюсь с вами.</p>
+
+      <div class="eg-field">
+        <label class="eg-label">Удобные дни</label>
+        <div class="eg-opts eg-opts--2">
+          <label class="eg-opt"><input type="checkbox" name="days" value="Будни, утро"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Будни, утро</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Будни, день"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Будни, день</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Будни, вечер"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Будни, вечер</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Суббота"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Суббота</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Воскресенье"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Воскресенье</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Гибко, обсудим"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Гибко, обсудим</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Есть ли своя компания детей</label>
+        <div class="eg-opts eg-opts--2" data-toggle="groupYes">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="ownGroup" value="Да, есть своя компания"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Да, есть</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="ownGroup" value="Нет, присоединимся к группе"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Нет, присоединимся</span></span></label>
+        </div>
+        <div class="eg-cond" id="egGroupYes">
+          <div class="eg-field">
+            <label class="eg-label" for="egGroupInfo">Сколько детей и какого возраста</label>
+            <input type="text" id="egGroupInfo" name="groupInfo" placeholder="Например: 3 ребёнка, 9–10 лет, одноклассники">
+          </div>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egSource">Откуда узнали о программе</label>
+        <select id="egSource" name="source">
+          <option value="">Выберите вариант</option>
+          <option>Instagram</option>
+          <option>Telegram-канал</option>
+          <option>YouTube</option>
+          <option>ВКонтакте</option>
+          <option>Яндекс.Карты или поиск</option>
+          <option>Рекомендация знакомых</option>
+          <option>Занимаюсь у Евгения сам</option>
+          <option>Другое</option>
+        </select>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egComment">Комментарий</label>
+        <span class="eg-hint">Всё, что хотите добавить или спросить.</span>
+        <textarea id="egComment" name="comment" placeholder="Свободное поле"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Согласия <span class="eg-req">*</span></label>
+        <div class="eg-opts">
+          <label class="eg-opt">
+            <input type="checkbox" name="consentData" value="Согласие на обработку персональных данных" required>
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Согласен на обработку персональных данных</span>
+              <span class="eg-opt-desc">Данные нужны только для подбора формата, группы и безопасного проведения программы. Третьим лицам не передаются.</span>
+            </span>
+          </label>
+          <label class="eg-opt">
+            <input type="checkbox" name="consentPhoto" value="Согласие на фото и видео">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Разрешаю фото и видео с участием ребёнка</span>
+              <span class="eg-opt-desc">Необязательно. Отказ никак не влияет на возможность участия — просто отправлю вам кадры лично, без публикации.</span>
+            </span>
+          </label>
+          <label class="eg-opt">
+            <input type="checkbox" name="consentTrue" value="Информация достоверна" required>
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Информация о здоровье указана достоверно</span>
+              <span class="eg-opt-desc">Это основа безопасности ребёнка на занятии.</span>
+            </span>
+          </label>
+        </div>
+        <p class="eg-err" data-err="consents">Отметьте обязательные согласия, чтобы отправить анкету.</p>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="submit" class="eg-btn eg-btn--go" id="egSubmit">Отправить анкету</button>
+      </div>
+    </section>
+  </form>
+
+  <!-- ================= ЭКРАН УСПЕХА ================= -->
+  <section class="eg-done" id="egDone">
+    <div class="eg-done-mark"><span></span></div>
+    <h3 class="eg-step-title">Анкета заполнена</h3>
+    <p class="eg-step-sub" style="margin-left:auto !important; margin-right:auto !important;" id="egDoneText">
+      Остался один шаг — отправьте анкету мне в Telegram, и я свяжусь с вами после того, как изучу её.
+    </p>
+
+    <div class="eg-summary" id="egSummary"></div>
+
+    <div class="eg-done-actions">
+      <button type="button" class="eg-btn eg-btn--go" id="egSend">Отправить в Telegram</button>
+      <button type="button" class="eg-btn eg-btn--back" id="egCopy">Скопировать текст анкеты</button>
+    </div>
+  </section>
+
+  <!-- ================= ПОДВАЛ ================= -->
+  <div class="eg-foot">
+    <p>Заполнение анкеты не обязывает оплачивать участие. Программа не является медицинской, психологической или психотерапевтической услугой. Дата и состав группы подтверждаются после разговора с родителем.</p>
+    <p class="eg-sign">Движение. Дыхание. Дисциплина.</p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     НАСТРОЙКИ ОТПРАВКИ — МЕНЯТЬ ЗДЕСЬ
+     ============================================================
+     SUBMIT_MODE:
+       "telegram" — анкета собирается в текст, родитель отправляет
+                    вам в Telegram одной кнопкой (работает сразу, без настройки)
+       "webhook"  — анкета уходит POST-запросом на ваш адрес
+                    (нужен WEBHOOK_URL: Make, n8n, Google-таблица и т.д.)
+     ============================================================ */
+  var SUBMIT_MODE = "telegram";
+  var TELEGRAM_USERNAME = "EGoshev";   // без @
+  var WEBHOOK_URL = "";                 // заполняется при SUBMIT_MODE = "webhook"
+
+  var form = document.getElementById("egForm");
+  if (!form) return;
+
+  var steps = Array.prototype.slice.call(form.querySelectorAll(".eg-step"));
+  var total = steps.length;
+  var current = 0;
+
+  var fill = document.getElementById("egFill");
+  var num = document.getElementById("egNum");
+  var stepName = document.getElementById("egStepName");
+  var done = document.getElementById("egDone");
+  var summary = document.getElementById("egSummary");
+  var root = document.getElementById("eg-anketa");
+
+  /* ---------- Навигация по шагам ---------- */
+  function render() {
+    steps.forEach(function (s, i) { s.classList.toggle("eg-on", i === current); });
+    var pct = ((current + 1) / total) * 100;
+    if (fill) fill.style.width = pct + "%";
+    if (num) num.textContent = current + 1;
+    if (stepName) stepName.textContent = steps[current].dataset.name || "";
+    scrollToTop();
+  }
+
+  function scrollToTop() {
+    if (!root) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var y = root.getBoundingClientRect().top + window.pageYOffset - 24;
+    try { window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" }); }
+    catch (e) { window.scrollTo(0, y); }
+  }
+
+  /* ---------- Валидация текущего шага ---------- */
+  function validateStep(index) {
+    var step = steps[index];
+    var ok = true;
+
+    // Обычные обязательные поля
+    step.querySelectorAll("input[required], select[required], textarea[required]").forEach(function (el) {
+      if (el.type === "checkbox" || el.type === "radio") return;
+      var bad = !el.value.trim();
+      el.classList.toggle("eg-invalid", bad);
+      showError(step, el.name, bad);
+      if (bad) ok = false;
+    });
+
+    // Обязательные группы radio
+    step.querySelectorAll("input[type=radio][required]").forEach(function (el) {
+      var group = step.querySelectorAll('input[name="' + el.name + '"]');
+      var checked = Array.prototype.some.call(group, function (g) { return g.checked; });
+      showError(step, el.name, !checked);
+      if (!checked) ok = false;
+    });
+
+    // Обязательные согласия
+    var consents = step.querySelectorAll("input[type=checkbox][required]");
+    if (consents.length) {
+      var allOk = Array.prototype.every.call(consents, function (c) { return c.checked; });
+      showError(step, "consents", !allOk);
+      if (!allOk) ok = false;
+    }
+
+    if (!ok) {
+      var firstErr = step.querySelector(".eg-err.eg-show");
+      if (firstErr) firstErr.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+    return ok;
+  }
+
+  function showError(step, name, show) {
+    var err = step.querySelector('.eg-err[data-err="' + name + '"]');
+    if (err) err.classList.toggle("eg-show", !!show);
+  }
+
+  /* ---------- Кнопки ---------- */
+  form.querySelectorAll("[data-next]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (!validateStep(current)) return;
+      if (current < total - 1) { current++; render(); }
+    });
+  });
+  form.querySelectorAll("[data-prev]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (current > 0) { current--; render(); }
+    });
+  });
+
+  // Снятие подсветки ошибки при вводе
+  form.addEventListener("input", function (e) {
+    if (e.target.classList) e.target.classList.remove("eg-invalid");
+  });
+
+  /* ---------- Условные блоки ---------- */
+  function bindCond(radioValue, blockId) {
+    form.querySelectorAll("input[type=radio]").forEach(function (r) {
+      r.addEventListener("change", function () {
+        var block = document.getElementById(blockId);
+        if (!block) return;
+        block.classList.toggle("eg-on", r.checked && r.value.indexOf(radioValue) === 0);
+      });
+    });
+  }
+  bindCond("Да, занимается", "egSportYes");
+  bindCond("Да, есть", "egGroupYes");
+
+  /* ---------- Сборка текста анкеты ---------- */
+  function collect() {
+    var d = new FormData(form);
+    var lines = [];
+    var L = function (label, key) {
+      var vals = d.getAll(key).filter(function (v) { return String(v).trim(); });
+      if (vals.length) lines.push(label + ": " + vals.join(", "));
+    };
+
+    lines.push("АНКЕТА · ДЕТСКИЕ ПРОГРАММЫ");
+    lines.push("Дата: " + new Date().toLocaleString("ru-RU"));
+    lines.push("");
+    lines.push("— ФОРМАТ И КОНТАКТ —");
+    L("Формат", "format");
+    L("Родитель", "parentName");
+    L("Телефон", "phone");
+    L("Telegram", "telegram");
+    L("Email", "email");
+    L("Удобная связь", "contactWay");
+    lines.push("");
+    lines.push("— РЕБЁНОК —");
+    L("Имя", "childName");
+    L("Возраст", "age");
+    L("Спорт", "doesSport");
+    L("Какой спорт", "sport");
+    L("Активность", "activity");
+    L("Прошлый опыт", "experience");
+    lines.push("");
+    lines.push("— ДВИЖЕНИЕ —");
+    L("Наблюдения", "movement");
+    L("Подробнее", "movementNote");
+    L("Желаемый результат", "goal");
+    lines.push("");
+    lines.push("— ЗДОРОВЬЕ —");
+    L("Ограничения", "health");
+    L("Травмы", "injuries");
+    L("Аллергии", "allergy");
+    L("Питание", "food");
+    L("Питание, уточнение", "foodNote");
+    L("Может понадобиться", "meds");
+    L("Экстренный контакт", "emergency");
+    L("Кто заберёт", "pickup");
+    lines.push("");
+    lines.push("— ХАРАКТЕР И ОБЩЕНИЕ —");
+    L("Нравится", "likes");
+    L("Не нравится на занятиях", "dislikes");
+    L("В новой компании", "social");
+    L("Особенности", "behaviour");
+    L("Помогает включиться", "motivate");
+    lines.push("");
+    lines.push("— ОРГАНИЗАЦИЯ —");
+    L("Удобные дни", "days");
+    L("Своя компания", "ownGroup");
+    L("Состав компании", "groupInfo");
+    L("Источник", "source");
+    L("Комментарий", "comment");
+    lines.push("");
+    lines.push("— СОГЛАСИЯ —");
+    L("Данные", "consentData");
+    L("Фото и видео", "consentPhoto");
+    L("Достоверность", "consentTrue");
+
+    return lines.join("\n");
+  }
+
+  /* ---------- Отправка ---------- */
+  var text = "";
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!validateStep(current)) return;
+
+    text = collect();
+    if (summary) summary.textContent = text;
+
+    if (SUBMIT_MODE === "webhook" && WEBHOOK_URL) {
+      var payload = {};
+      new FormData(form).forEach(function (v, k) {
+        payload[k] = payload[k] ? payload[k] + ", " + v : v;
+      });
+      payload.text = text;
+      fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(function () { /* даже при ошибке показываем экран с текстом */ });
+
+      var t = document.getElementById("egDoneText");
+      if (t) t.textContent = "Спасибо. Анкета отправлена — я лично изучу её и свяжусь с вами. Ниже копия того, что вы заполнили.";
+    }
+
+    form.style.display = "none";
+    var prog = document.querySelector("#eg-anketa .eg-progress");
+    if (prog) prog.style.display = "none";
+    if (done) done.classList.add("eg-on");
+    scrollToTop();
+  });
+
+  /* ---------- Кнопка Telegram ---------- */
+  var sendBtn = document.getElementById("egSend");
+  if (sendBtn) {
+    sendBtn.addEventListener("click", function () {
+      copyText(text);
+      window.open("https://t.me/" + TELEGRAM_USERNAME, "_blank", "noopener");
+      sendBtn.textContent = "Текст скопирован · вставьте в чат";
+    });
+  }
+
+  /* ---------- Кнопка копирования ---------- */
+  var copyBtn = document.getElementById("egCopy");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      copyText(text);
+      copyBtn.textContent = "Скопировано";
+      setTimeout(function () { copyBtn.textContent = "Скопировать текст анкеты"; }, 2200);
+    });
+  }
+
+  function copyText(str) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(str);
+        return;
+      }
+    } catch (e) {}
+    var ta = document.createElement("textarea");
+    ta.value = str;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  render();
+})();
+</script>
+
+</div>

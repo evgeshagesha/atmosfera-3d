@@ -1,0 +1,427 @@
+<div class="eg-wrap">
+
+  <!-- ===== ШАПКА ===== -->
+  <div class="eg-head">
+    <p class="eg-over">Атмосфера 3D Kids Camp · Евгений Гошев</p>
+    <h2 class="eg-title">Анкета участника</h2>
+    <p class="eg-lead">Группа до четырёх детей требует внимательного подбора участников. Чем подробнее вы расскажете о ребёнке, тем точнее я подберу формат, группу и нагрузку. Заполнение анкеты не обязывает оплачивать участие.</p>
+  </div>
+
+  <div class="eg-progress">
+    <div class="eg-progress-track"><div class="eg-progress-fill" id="egFill"></div></div>
+    <div class="eg-progress-meta">
+      <span>Шаг <b id="egNum">1</b> из 6</span>
+      <span id="egStepName">Формат и контакт</span>
+    </div>
+  </div>
+
+  <form id="egForm" novalidate>
+
+    <!-- ================= ШАГ 1 ================= -->
+    <section class="eg-step eg-on" data-step="1" data-name="Формат и контакт">
+      <h3 class="eg-step-title">Формат и контакт</h3>
+      <p class="eg-step-sub">Если пока не определились с форматом — это нормально, разберёмся в разговоре.</p>
+
+      <div class="eg-field">
+        <label class="eg-label">Интересующий формат <span class="eg-req">*</span></label>
+        <div class="eg-opts" data-group="format">
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Атмосфера 3D Kids · Будни" required>
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-tag">Будни</span>
+              <span class="eg-opt-name">Атмосфера 3D Kids · Будни</span>
+              <span class="eg-opt-desc">Занятие 1,5–2 часа. Опора, координация, мобильность, физическая подготовка.</span>
+            </span>
+          </label>
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Атмосфера 3D Kids · Выходные">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-tag">Выходные</span>
+              <span class="eg-opt-name">Атмосфера 3D Kids · Выходные</span>
+              <span class="eg-opt-desc">Программа 4–5 часов: движение, прогулка, еда, история, разговор, командные задачи.</span>
+            </span>
+          </label>
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Закрытая группа (своя компания)">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Закрытая группа для своей компании</span>
+              <span class="eg-opt-desc">Свой состав до четырёх детей: друзья, братья, сёстры, одноклассники.</span>
+            </span>
+          </label>
+          <label class="eg-opt eg-opt--radio">
+            <input type="radio" name="format" value="Пока не определились">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Пока не определились</span>
+              <span class="eg-opt-desc">Подберём формат вместе после короткого разговора.</span>
+            </span>
+          </label>
+        </div>
+        <p class="eg-err" data-err="format">Выберите один из форматов.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egParentName">Ваше имя <span class="eg-req">*</span></label>
+        <input type="text" id="egParentName" name="parentName" placeholder="Как к вам обращаться" required autocomplete="name">
+        <p class="eg-err" data-err="parentName">Пожалуйста, укажите имя.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egPhone">Телефон <span class="eg-req">*</span></label>
+        <input type="tel" id="egPhone" name="phone" placeholder="+7 ___ ___ __ __" required autocomplete="tel">
+        <p class="eg-err" data-err="phone">Укажите телефон для связи.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egTelegram">Telegram</label>
+        <span class="eg-hint">Ник или номер — так удобнее всего согласовывать детали.</span>
+        <input type="text" id="egTelegram" name="telegram" placeholder="@nickname">
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egEmail">Email</label>
+        <input type="email" id="egEmail" name="email" placeholder="necessary@example.com" autocomplete="email">
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Как удобнее связаться</label>
+        <div class="eg-opts eg-opts--2">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="Telegram"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Telegram</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="Звонок"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Звонок</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="WhatsApp"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">WhatsApp</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="contactWay" value="Любой способ"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Любой способ</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · о ребёнке</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 2 ================= -->
+    <section class="eg-step" data-step="2" data-name="О ребёнке">
+      <h3 class="eg-step-title">О ребёнке</h3>
+      <p class="eg-step-sub">Возраст важен: в одной группе занимаются дети близкого возраста.</p>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egChildName">Имя ребёнка <span class="eg-req">*</span></label>
+        <input type="text" id="egChildName" name="childName" placeholder="Имя" required>
+        <p class="eg-err" data-err="childName">Пожалуйста, укажите имя ребёнка.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egAge">Возраст <span class="eg-req">*</span></label>
+        <select id="egAge" name="age" required>
+          <option value="">Выберите возраст</option>
+          <option>7 лет</option><option>8 лет</option><option>9 лет</option>
+          <option>10 лет</option><option>11 лет</option><option>12 лет</option>
+          <option>13 лет</option><option>14 лет</option><option>15 лет</option>
+          <option>Другой возраст</option>
+        </select>
+        <p class="eg-err" data-err="age">Выберите возраст ребёнка.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Занимается ли спортом сейчас</label>
+        <div class="eg-opts eg-opts--2" data-toggle="sportYes">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="doesSport" value="Да, занимается"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Да, занимается</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="doesSport" value="Нет, не занимается"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Нет</span></span></label>
+        </div>
+        <div class="eg-cond" id="egSportYes">
+          <div class="eg-field">
+            <label class="eg-label" for="egSport">Какой вид спорта и сколько раз в неделю</label>
+            <input type="text" id="egSport" name="sport" placeholder="Например: футбол, 3 раза в неделю">
+          </div>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Уровень повседневной активности</label>
+        <span class="eg-hint">Оцените в целом, без строгости — это ориентир для подбора нагрузки.</span>
+        <div class="eg-opts">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="activity" value="Высокий — много двигается каждый день"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Высокий</span><span class="eg-opt-desc">Много двигается каждый день, тренировки и активные игры.</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="activity" value="Средний — умеренно активен"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Средний</span><span class="eg-opt-desc">Прогулки, физкультура, время от времени активные игры.</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="activity" value="Невысокий — движения мало"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Невысокий</span><span class="eg-opt-desc">Школа, уроки и дом занимают почти весь день.</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egExperience">Был ли опыт занятий, который не подошёл</label>
+        <span class="eg-hint">Помогает не повторять то, что уже не сработало.</span>
+        <textarea id="egExperience" name="experience" placeholder="Например: ходили в секцию, но ребёнку было скучно / слишком строгий тренер"></textarea>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · движение</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 3 ================= -->
+    <section class="eg-step" data-step="3" data-name="Движение и тело">
+      <h3 class="eg-step-title">Движение и тело</h3>
+      <p class="eg-step-sub">Здесь важны именно ваши наблюдения. Это не диагноз и не оценка — просто то, что вы замечаете в обычной жизни.</p>
+
+      <div class="eg-field">
+        <label class="eg-label">Что вы замечаете в движении ребёнка</label>
+        <span class="eg-hint">Можно выбрать несколько вариантов или не выбирать ни одного.</span>
+        <div class="eg-opts">
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Быстро устаёт"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Быстро устаёт при физической нагрузке</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Сложно удерживать равновесие"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Сложно удерживать равновесие</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Движения кажутся неловкими"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Движения кажутся неловкими, часто спотыкается</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Сутулится за столом"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Сутулится за столом или при ходьбе</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Говорит об усталости в ногах или спине"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Говорит об усталости в ногах или спине</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Избегает подвижных игр"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Избегает подвижных игр и бега</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Сложно даются новые движения"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Новые движения даются с трудом</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="movement" value="Всё в порядке, хотим развития"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Всё в порядке — хотим развития и хорошей базы</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egMovementNote">Расскажите подробнее своими словами</label>
+        <textarea id="egMovementNote" name="movementNote" placeholder="Что вас интересует или беспокоит в том, как ребёнок двигается"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egGoal">Что для вас будет хорошим результатом</label>
+        <span class="eg-hint">Самый важный вопрос анкеты — по нему я строю программу.</span>
+        <textarea id="egGoal" name="goal" placeholder="Например: чтобы ребёнок увереннее двигался, полюбил движение, стал крепче, лучше держался в компании"></textarea>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · здоровье</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 4 ================= -->
+    <section class="eg-step" data-step="4" data-name="Здоровье и безопасность">
+      <h3 class="eg-step-title">Здоровье и безопасность</h3>
+      <p class="eg-step-sub">Эти поля нужны, чтобы адаптировать нагрузку, питание и обеспечить безопасность в течение дня.</p>
+
+      <div class="eg-note">
+        <b>Важно.</b> Программа не является медицинской услугой. Диагноз указывать не нужно — достаточно того, что важно учесть на занятии. При заболеваниях, недавних травмах или противопоказаниях возможность участия обсуждается заранее, при необходимости потребуется консультация лечащего специалиста.
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egHealth">Ограничения по здоровью, которые важно учесть</label>
+        <textarea id="egHealth" name="health" placeholder="Например: ограничение по прыжкам, бережно с шеей, быстро перегревается. Если ограничений нет — напишите «нет»"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egInjuries">Травмы за последний год</label>
+        <textarea id="egInjuries" name="injuries" placeholder="Что и когда, восстановился ли полностью. Если травм не было — напишите «нет»"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egAllergy">Аллергии <span class="eg-req">*</span></label>
+        <span class="eg-hint">Обязательное поле — в программе есть совместный приём пищи. Если аллергий нет, так и напишите.</span>
+        <textarea id="egAllergy" name="allergy" placeholder="Пищевые, сезонные, на препараты. Если нет — напишите «нет»" required></textarea>
+        <p class="eg-err" data-err="allergy">Пожалуйста, заполните это поле — даже если аллергий нет.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Особенности питания</label>
+        <div class="eg-opts eg-opts--2">
+          <label class="eg-opt"><input type="checkbox" name="food" value="Без ограничений"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Без ограничений</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Вегетарианское"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Вегетарианское</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Без глютена"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Без глютена</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Без лактозы"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Без лактозы</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Не ест некоторые продукты"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Не ест некоторые продукты</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="food" value="Религиозные ограничения"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Религиозные ограничения</span></span></label>
+        </div>
+        <div class="eg-field" style="margin-top:14px !important; margin-bottom:0 !important;">
+          <input type="text" name="foodNote" placeholder="Уточните, если нужно: что именно не ест">
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egMeds">Есть ли что-то, что может понадобиться в течение дня</label>
+        <span class="eg-hint">Например ингалятор или средство от аллергии — чтобы оно было под рукой и я знал, как действовать.</span>
+        <textarea id="egMeds" name="meds" placeholder="Если ничего не требуется — напишите «нет»"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egEmergency">Экстренный контакт <span class="eg-req">*</span></label>
+        <span class="eg-hint">Имя и телефон второго взрослого, если с вами не будет связи.</span>
+        <input type="text" id="egEmergency" name="emergency" placeholder="Имя, кем приходится, телефон" required>
+        <p class="eg-err" data-err="emergency">Укажите экстренный контакт — это обязательное условие участия.</p>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egPickup">Кто заберёт ребёнка после программы</label>
+        <span class="eg-hint">Ребёнок передаётся только родителю или заранее указанному взрослому.</span>
+        <input type="text" id="egPickup" name="pickup" placeholder="Имя и кем приходится ребёнку">
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · характер</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 5 ================= -->
+    <section class="eg-step" data-step="5" data-name="Характер и общение">
+      <h3 class="eg-step-title">Характер и общение</h3>
+      <p class="eg-step-sub">Это помогает собрать комфортную группу и найти подход к ребёнку с первых минут.</p>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egLikes">Что ребёнку нравится</label>
+        <span class="eg-hint">Интересы, увлечения, игры, книги, фильмы — я опираюсь на это в заданиях и разговоре.</span>
+        <textarea id="egLikes" name="likes" placeholder="Например: динозавры, космос, футбол, рисование, приключенческие фильмы"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Что обычно не нравится на занятиях</label>
+        <div class="eg-opts">
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Когда громко командуют"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Когда громко командуют или повышают голос</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Когда сравнивают с другими"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Когда сравнивают с другими детьми</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Однообразные повторения"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Однообразные повторения без смысла</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Соревнования на результат"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Соревнования и борьба за результат</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Публичное внимание"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Публичное внимание, выступать перед всеми</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="dislikes" value="Когда не объясняют смысл"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Когда не объясняют, зачем это делать</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Как ребёнок чувствует себя в новой компании</label>
+        <div class="eg-opts">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="social" value="Легко знакомится"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Легко знакомится и включается</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="social" value="Нужно время"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Нужно время, чтобы освоиться</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="social" value="Сложно в новой компании"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">В новой компании ему непросто</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egBehaviour">Особенности поведения или общения, которые важно знать</label>
+        <span class="eg-hint">Всё, что поможет мне быть внимательнее: как реагирует на неудачу, на шум, на замечание, нужна ли пауза, что успокаивает.</span>
+        <textarea id="egBehaviour" name="behaviour" placeholder="Пишите свободно — любая деталь полезна"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egMotivate">Что обычно помогает ребёнку включиться</label>
+        <textarea id="egMotivate" name="motivate" placeholder="Например: когда есть понятная цель, когда получается с первого раза, когда рядом друг"></textarea>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="button" class="eg-btn eg-btn--go" data-next>Далее · организация</button>
+      </div>
+    </section>
+
+    <!-- ================= ШАГ 6 ================= -->
+    <section class="eg-step" data-step="6" data-name="Организация и согласия">
+      <h3 class="eg-step-title">Организация и согласия</h3>
+      <p class="eg-step-sub">Последний шаг. Дальше я лично изучаю анкету и связываюсь с вами.</p>
+
+      <div class="eg-field">
+        <label class="eg-label">Удобные дни</label>
+        <div class="eg-opts eg-opts--2">
+          <label class="eg-opt"><input type="checkbox" name="days" value="Будни, утро"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Будни, утро</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Будни, день"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Будни, день</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Будни, вечер"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Будни, вечер</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Суббота"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Суббота</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Воскресенье"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Воскресенье</span></span></label>
+          <label class="eg-opt"><input type="checkbox" name="days" value="Гибко, обсудим"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Гибко, обсудим</span></span></label>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Есть ли своя компания детей</label>
+        <div class="eg-opts eg-opts--2" data-toggle="groupYes">
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="ownGroup" value="Да, есть своя компания"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Да, есть</span></span></label>
+          <label class="eg-opt eg-opt--radio"><input type="radio" name="ownGroup" value="Нет, присоединимся к группе"><span class="eg-box"></span><span class="eg-opt-body"><span class="eg-opt-name">Нет, присоединимся</span></span></label>
+        </div>
+        <div class="eg-cond" id="egGroupYes">
+          <div class="eg-field">
+            <label class="eg-label" for="egGroupInfo">Сколько детей и какого возраста</label>
+            <input type="text" id="egGroupInfo" name="groupInfo" placeholder="Например: 3 ребёнка, 9–10 лет, одноклассники">
+          </div>
+        </div>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egSource">Откуда узнали о программе</label>
+        <select id="egSource" name="source">
+          <option value="">Выберите вариант</option>
+          <option>Instagram</option>
+          <option>Telegram-канал</option>
+          <option>YouTube</option>
+          <option>ВКонтакте</option>
+          <option>Яндекс.Карты или поиск</option>
+          <option>Рекомендация знакомых</option>
+          <option>Занимаюсь у Евгения сам</option>
+          <option>Другое</option>
+        </select>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label" for="egComment">Комментарий</label>
+        <span class="eg-hint">Всё, что хотите добавить или спросить.</span>
+        <textarea id="egComment" name="comment" placeholder="Свободное поле"></textarea>
+      </div>
+
+      <div class="eg-field">
+        <label class="eg-label">Согласия <span class="eg-req">*</span></label>
+        <div class="eg-opts">
+          <label class="eg-opt">
+            <input type="checkbox" name="consentData" value="Согласие на обработку персональных данных" required>
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Согласен на обработку персональных данных</span>
+              <span class="eg-opt-desc">Данные нужны только для подбора формата, группы и безопасного проведения программы. Третьим лицам не передаются.</span>
+            </span>
+          </label>
+          <label class="eg-opt">
+            <input type="checkbox" name="consentPhoto" value="Согласие на фото и видео">
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Разрешаю фото и видео с участием ребёнка</span>
+              <span class="eg-opt-desc">Необязательно. Отказ никак не влияет на возможность участия — просто отправлю вам кадры лично, без публикации.</span>
+            </span>
+          </label>
+          <label class="eg-opt">
+            <input type="checkbox" name="consentTrue" value="Информация достоверна" required>
+            <span class="eg-box"></span>
+            <span class="eg-opt-body">
+              <span class="eg-opt-name">Информация о здоровье указана достоверно</span>
+              <span class="eg-opt-desc">Это основа безопасности ребёнка на занятии.</span>
+            </span>
+          </label>
+        </div>
+        <p class="eg-err" data-err="consents">Отметьте обязательные согласия, чтобы отправить анкету.</p>
+      </div>
+
+      <div class="eg-nav">
+        <button type="button" class="eg-btn eg-btn--back" data-prev>Назад</button>
+        <button type="submit" class="eg-btn eg-btn--go" id="egSubmit">Отправить анкету</button>
+      </div>
+    </section>
+  </form>
+
+  <!-- ================= ЭКРАН УСПЕХА ================= -->
+  <section class="eg-done" id="egDone">
+    <div class="eg-done-mark"><span></span></div>
+    <h3 class="eg-step-title">Анкета заполнена</h3>
+    <p class="eg-step-sub" style="margin-left:auto !important; margin-right:auto !important;" id="egDoneText">
+      Остался один шаг — отправьте анкету мне в Telegram, и я свяжусь с вами после того, как изучу её.
+    </p>
+
+    <div class="eg-summary" id="egSummary"></div>
+
+    <div class="eg-done-actions">
+      <button type="button" class="eg-btn eg-btn--go" id="egSend">Отправить в Telegram</button>
+      <button type="button" class="eg-btn eg-btn--back" id="egCopy">Скопировать текст анкеты</button>
+    </div>
+  </section>
+
+  <!-- ================= ПОДВАЛ ================= -->
+  <div class="eg-foot">
+    <p>Заполнение анкеты не обязывает оплачивать участие. Программа не является медицинской, психологической или психотерапевтической услугой. Дата и состав группы подтверждаются после разговора с родителем.</p>
+    <p class="eg-sign">Движение. Дыхание. Дисциплина.</p>
+  </div>
+
+</div>

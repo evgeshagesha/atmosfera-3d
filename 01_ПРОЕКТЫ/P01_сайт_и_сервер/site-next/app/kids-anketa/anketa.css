@@ -1,0 +1,252 @@
+/* ====== ШРИФТЫ ====== */
+/* ====== ПЕРЕМЕННЫЕ И СБРОС (высокая специфичность против темы Tilda) ====== */
+#eg-anketa {
+  --eg-bg: #060708;
+  --eg-bg2: #14171c;
+  --eg-bg3: #1c2026;
+  --eg-text: #d8dde4;
+  --eg-dim: #8a93a0;
+  --eg-accent: #d8dde4;
+  --eg-accent2: #8a93a0;
+  --eg-green: #8a93a0;
+  --eg-border: rgba(216,221,228,0.13);
+  --eg-error: #c98c8c;
+  --eg-radius: 16px;
+  --eg-ease: cubic-bezier(0.22,1,0.36,1);
+
+  background: var(--eg-bg) !important;
+  color: var(--eg-text) !important;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+  padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 40px) !important;
+  margin: 0 !important;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box !important;
+}
+#eg-anketa *, #eg-anketa *::before, #eg-anketa *::after { box-sizing: border-box !important; }
+#eg-anketa p, #eg-anketa h1, #eg-anketa h2, #eg-anketa h3, #eg-anketa h4,
+#eg-anketa ul, #eg-anketa ol, #eg-anketa li, #eg-anketa label, #eg-anketa fieldset, #eg-anketa legend {
+  margin: 0 !important; padding: 0 !important; border: 0 !important; list-style: none !important;
+  font-family: inherit !important; color: inherit !important;
+}
+#eg-anketa button { font-family: inherit !important; cursor: pointer; border: none; background: none; color: inherit; }
+#eg-anketa ::selection { background: var(--eg-accent); color: #12100b; }
+
+/* ====== КАРКАС ====== */
+#eg-anketa .eg-wrap { max-width: 780px !important; margin: 0 auto !important; }
+
+#eg-anketa .eg-head { margin-bottom: 34px !important; }
+#eg-anketa .eg-over {
+  font-size: 12px !important; letter-spacing: 0.2em !important; text-transform: uppercase !important;
+  font-weight: 600 !important; color: var(--eg-accent2) !important; margin-bottom: 14px !important;
+}
+#eg-anketa .eg-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: clamp(26px, 5vw, 42px) !important; line-height: 1.06 !important;
+  font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: -0.015em !important; margin-bottom: 16px !important;
+}
+#eg-anketa .eg-lead { color: var(--eg-dim) !important; font-size: 16px !important; max-width: 58ch !important; }
+
+/* ====== ПРОГРЕСС ====== */
+#eg-anketa .eg-progress { margin: 30px 0 34px !important; }
+#eg-anketa .eg-progress-track {
+  height: 3px !important; background: rgba(216,221,228,0.10) !important;
+  border-radius: 3px !important; overflow: hidden !important;
+}
+#eg-anketa .eg-progress-fill {
+  height: 100% !important; width: 16.6% !important;
+  background: linear-gradient(90deg, var(--eg-accent), var(--eg-accent2)) !important;
+  transition: width .45s var(--eg-ease) !important;
+}
+#eg-anketa .eg-progress-meta {
+  display: flex !important; justify-content: space-between !important; align-items: baseline !important;
+  margin-top: 12px !important; font-size: 12.5px !important; letter-spacing: 0.06em !important;
+  text-transform: uppercase !important; color: var(--eg-dim) !important;
+}
+#eg-anketa .eg-progress-meta b { color: var(--eg-accent2) !important; font-weight: 600 !important; }
+
+/* ====== ШАГИ ====== */
+#eg-anketa .eg-step { display: none !important; }
+#eg-anketa .eg-step.eg-on { display: block !important; }
+@media (prefers-reduced-motion: no-preference) {
+  #eg-anketa .eg-step.eg-on { animation: egIn .45s var(--eg-ease); }
+  @keyframes egIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+}
+#eg-anketa .eg-step-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: clamp(20px, 3.2vw, 27px) !important; font-weight: 800 !important; text-transform: uppercase !important;
+  line-height: 1.2 !important; margin-bottom: 10px !important;
+}
+#eg-anketa .eg-step-sub { color: var(--eg-dim) !important; font-size: 15px !important; margin-bottom: 30px !important; max-width: 56ch !important; }
+
+/* ====== ПОЛЯ ====== */
+#eg-anketa .eg-field { margin-bottom: 26px !important; }
+#eg-anketa .eg-label {
+  display: block !important; font-size: 15px !important; font-weight: 600 !important;
+  margin-bottom: 10px !important; color: var(--eg-text) !important;
+}
+#eg-anketa .eg-req { color: var(--eg-accent2) !important; margin-left: 3px !important; }
+#eg-anketa .eg-hint { display: block !important; font-size: 13.5px !important; color: var(--eg-dim) !important; margin-top: -4px !important; margin-bottom: 12px !important; font-weight: 400 !important; }
+
+#eg-anketa input[type="text"],
+#eg-anketa input[type="tel"],
+#eg-anketa input[type="email"],
+#eg-anketa input[type="number"],
+#eg-anketa select,
+#eg-anketa textarea {
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 14px 18px !important;
+  background: var(--eg-bg2) !important;
+  border: 1px solid var(--eg-border) !important;
+  border-radius: 12px !important;
+  color: var(--eg-text) !important;
+  font-family: inherit !important;
+  font-size: 16px !important; /* 16px — чтобы iOS не зумил */
+  line-height: 1.5 !important;
+  transition: border-color .25s var(--eg-ease), background .25s var(--eg-ease) !important;
+  -webkit-appearance: none !important; appearance: none !important;
+}
+#eg-anketa textarea { min-height: 110px !important; resize: vertical !important; }
+#eg-anketa select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23d8dde4' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important; background-position: right 18px center !important;
+  padding-right: 46px !important;
+}
+#eg-anketa input::placeholder, #eg-anketa textarea::placeholder { color: rgba(216,221,228,0.30) !important; }
+#eg-anketa input:focus, #eg-anketa select:focus, #eg-anketa textarea:focus {
+  outline: none !important; border-color: var(--eg-accent) !important; background: var(--eg-bg3) !important;
+}
+#eg-anketa .eg-invalid { border-color: var(--eg-error) !important; }
+#eg-anketa .eg-err {
+  display: none; font-size: 13.5px !important; color: var(--eg-error) !important; margin-top: 8px !important;
+}
+#eg-anketa .eg-err.eg-show { display: block; }
+
+/* ====== ВЫБОР: КАРТОЧКИ / ЧЕКБОКСЫ ====== */
+#eg-anketa .eg-opts { display: grid !important; gap: 10px !important; }
+#eg-anketa .eg-opts--2 { grid-template-columns: 1fr !important; }
+@media (min-width: 620px) { #eg-anketa .eg-opts--2 { grid-template-columns: 1fr 1fr !important; } }
+
+#eg-anketa .eg-opt {
+  position: relative !important; display: flex !important; align-items: flex-start !important; gap: 13px !important;
+  padding: 15px 18px !important; background: var(--eg-bg2) !important;
+  border: 1px solid var(--eg-border) !important; border-radius: 12px !important;
+  cursor: pointer !important; transition: border-color .25s var(--eg-ease), background .25s var(--eg-ease) !important;
+}
+#eg-anketa .eg-opt:hover { border-color: rgba(181,140,85,0.55) !important; }
+#eg-anketa .eg-opt input { position: absolute !important; opacity: 0 !important; width: 0 !important; height: 0 !important; }
+#eg-anketa .eg-box {
+  flex-shrink: 0 !important; width: 21px !important; height: 21px !important; margin-top: 2px !important;
+  border: 1.5px solid rgba(216,221,228,0.32) !important; border-radius: 6px !important;
+  display: grid !important; place-items: center !important;
+  transition: border-color .2s var(--eg-ease), background .2s var(--eg-ease) !important;
+}
+#eg-anketa .eg-opt--radio .eg-box { border-radius: 50% !important; }
+#eg-anketa .eg-box::after {
+  content: "" !important; width: 10px !important; height: 6px !important;
+  border-left: 2px solid #060708 !important; border-bottom: 2px solid #060708 !important;
+  transform: rotate(-45deg) translateY(-1px) scale(0) !important; transition: transform .2s var(--eg-ease) !important;
+}
+#eg-anketa .eg-opt--radio .eg-box::after {
+  width: 8px !important; height: 8px !important; border: none !important;
+  background: #060708 !important; border-radius: 50% !important; transform: scale(0) !important;
+}
+#eg-anketa .eg-opt input:checked ~ .eg-box { background: var(--eg-accent) !important; border-color: var(--eg-accent) !important; }
+#eg-anketa .eg-opt input:checked ~ .eg-box::after { transform: rotate(-45deg) translateY(-1px) scale(1) !important; }
+#eg-anketa .eg-opt--radio input:checked ~ .eg-box::after { transform: scale(1) !important; }
+#eg-anketa .eg-opt:has(input:checked) { border-color: var(--eg-accent) !important; background: var(--eg-bg3) !important; }
+#eg-anketa .eg-opt input:focus-visible ~ .eg-box { outline: 2px solid var(--eg-accent2) !important; outline-offset: 3px !important; }
+#eg-anketa .eg-opt-body { flex: 1 !important; }
+#eg-anketa .eg-opt-name { font-size: 15.5px !important; font-weight: 500 !important; line-height: 1.4 !important; }
+#eg-anketa .eg-opt-desc { font-size: 13.5px !important; color: var(--eg-dim) !important; margin-top: 4px !important; }
+#eg-anketa .eg-opt-tag {
+  font-size: 12px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important;
+  color: var(--eg-accent2) !important; font-weight: 600 !important; margin-bottom: 5px !important;
+}
+
+/* ====== УСЛОВНЫЕ БЛОКИ ====== */
+#eg-anketa .eg-cond { display: none !important; margin-top: 14px !important; padding-left: 18px !important; border-left: 2px solid rgba(181,140,85,0.4) !important; }
+#eg-anketa .eg-cond.eg-on { display: block !important; }
+
+/* ====== ЗАМЕТКА ====== */
+#eg-anketa .eg-note {
+  background: var(--eg-bg2) !important; border: 1px solid var(--eg-border) !important;
+  border-radius: 12px !important; padding: 18px 20px !important;
+  font-size: 14px !important; color: var(--eg-dim) !important; line-height: 1.6 !important;
+  margin-bottom: 26px !important;
+}
+#eg-anketa .eg-note b { color: var(--eg-text) !important; font-weight: 600 !important; }
+
+/* ====== КНОПКИ ====== */
+#eg-anketa .eg-nav {
+  display: flex !important; gap: 12px !important; flex-wrap: wrap !important;
+  margin-top: 34px !important; padding-top: 26px !important; border-top: 1px solid var(--eg-border) !important;
+}
+#eg-anketa .eg-btn {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  min-height: 52px !important; padding: 0 30px !important; border-radius: 100px !important;
+  font-size: 15.5px !important; font-weight: 600 !important; line-height: 1.2 !important;
+  transition: transform .25s var(--eg-ease), background .25s var(--eg-ease), color .25s var(--eg-ease) !important;
+  text-decoration: none !important;
+}
+#eg-anketa .eg-btn--go { background: var(--eg-accent) !important; color: #060708 !important; flex: 1 !important; min-width: 200px !important; }
+#eg-anketa .eg-btn--go:hover { background: var(--eg-accent2) !important; transform: translateY(-2px) !important; }
+#eg-anketa .eg-btn--back { background: transparent !important; color: var(--eg-dim) !important; box-shadow: inset 0 0 0 1px var(--eg-border) !important; }
+#eg-anketa .eg-btn--back:hover { color: var(--eg-text) !important; box-shadow: inset 0 0 0 1px var(--eg-accent) !important; }
+#eg-anketa .eg-btn:focus-visible { outline: 2px solid var(--eg-accent2) !important; outline-offset: 3px !important; }
+
+/* ====== ЭКРАН УСПЕХА ====== */
+#eg-anketa .eg-done { display: none !important; text-align: center !important; }
+#eg-anketa .eg-done.eg-on { display: block !important; }
+#eg-anketa .eg-done-mark {
+  width: 64px !important; height: 64px !important; margin: 0 auto 26px !important;
+  border-radius: 50% !important; border: 1.5px solid var(--eg-accent) !important;
+  display: grid !important; place-items: center !important;
+}
+#eg-anketa .eg-done-mark span {
+  width: 20px !important; height: 11px !important;
+  border-left: 2px solid var(--eg-accent) !important; border-bottom: 2px solid var(--eg-accent) !important;
+  transform: rotate(-45deg) translateY(-2px) !important;
+}
+#eg-anketa .eg-summary {
+  text-align: left !important; margin: 30px 0 !important; background: var(--eg-bg2) !important;
+  border: 1px solid var(--eg-border) !important; border-radius: 12px !important;
+  padding: 20px !important; max-height: 300px !important; overflow-y: auto !important;
+  font-size: 13.5px !important; line-height: 1.65 !important; color: var(--eg-dim) !important;
+  white-space: pre-wrap !important; font-family: inherit !important;
+}
+#eg-anketa .eg-done-actions { display: grid !important; gap: 12px !important; max-width: 420px !important; margin: 0 auto !important; }
+
+/* ====== ПОДВАЛ ====== */
+#eg-anketa .eg-foot {
+  margin-top: 44px !important; padding-top: 26px !important; border-top: 1px solid var(--eg-border) !important;
+  font-size: 13px !important; color: var(--eg-dim) !important; line-height: 1.6 !important;
+}
+#eg-anketa .eg-sign {
+  margin-top: 16px !important; font-size: 12px !important; letter-spacing: 0.18em !important;
+  text-transform: uppercase !important; color: var(--eg-accent2) !important;
+}
+
+/* ====== МОБИЛЬНОЕ ====== */
+@media (max-width: 500px) {
+  #eg-anketa .eg-btn--go { width: 100% !important; flex: none !important; }
+  #eg-anketa .eg-btn--back { width: 100% !important; }
+  #eg-anketa .eg-nav { flex-direction: column-reverse !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #eg-anketa *, #eg-anketa *::before, #eg-anketa *::after {
+    animation-duration: 0.001ms !important; transition-duration: 0.001ms !important;
+  }
+}
+
+html { background: #060708; }
+html body {
+  background: #060708;
+  color: #d8dde4;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+

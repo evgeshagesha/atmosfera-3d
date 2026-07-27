@@ -1,0 +1,415 @@
+/* ================= ПЕРЕМЕННЫЕ И СБРОС ================= */
+#a3d-kids {
+  --k-black:   #060708;
+  --k-graph1:  #14171c;
+  --k-graph2:  #1c2026;
+  --k-silver:  #d8dde4;
+  --k-steel:   #8a93a0;
+  --k-line:    rgba(216,221,228,0.13);
+  --k-line2:   rgba(216,221,228,0.07);
+  --k-glow:    rgba(216,221,228,0.30);
+  --k-r:       14px;
+  --k-ease:    cubic-bezier(0.22,1,0.36,1);
+
+  background: var(--k-black) !important;
+  color: var(--k-silver) !important;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-size: 17px !important;
+  line-height: 1.62 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box !important;
+}
+#a3d-kids *, #a3d-kids *::before, #a3d-kids *::after { box-sizing: border-box !important; }
+#a3d-kids p, #a3d-kids h1, #a3d-kids h2, #a3d-kids h3, #a3d-kids h4,
+#a3d-kids ul, #a3d-kids ol, #a3d-kids li, #a3d-kids dl, #a3d-kids dt, #a3d-kids dd, #a3d-kids figure {
+  margin: 0 !important; padding: 0 !important; border: 0 !important;
+  list-style: none !important; font-family: inherit !important; color: inherit !important;
+}
+#a3d-kids a { color: inherit !important; text-decoration: none !important; }
+#a3d-kids button { font-family: inherit !important; cursor: pointer; border: none; background: none; color: inherit; }
+#a3d-kids img { max-width: 100% !important; display: block !important; }
+#a3d-kids ::selection { background: var(--k-silver); color: var(--k-black); }
+
+#a3d-kids .k-wrap { max-width: 1160px !important; margin: 0 auto !important; padding: 0 clamp(18px,4vw,40px) !important; }
+
+/* ================= ТИПОГРАФИКА ================= */
+#a3d-kids .k-disp {
+  font-family: 'Montserrat', Impact, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.06 !important;
+  text-transform: uppercase !important;
+}
+#a3d-kids .k-over {
+  font-size: 11.5px !important; letter-spacing: 0.24em !important; text-transform: uppercase !important;
+  font-weight: 700 !important; color: var(--k-steel) !important; margin-bottom: 16px !important;
+}
+#a3d-kids .k-h2 {
+  font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; text-transform: uppercase !important;
+  font-size: clamp(26px,4.6vw,46px) !important; line-height: 1.06 !important; letter-spacing: -0.01em !important;
+}
+#a3d-kids .k-h3 {
+  font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important;
+  font-size: clamp(19px,2.6vw,25px) !important; line-height: 1.18 !important; text-transform: uppercase !important;
+  letter-spacing: 0.005em !important;
+}
+#a3d-kids .k-lead { font-size: clamp(16px,2vw,19px) !important; color: var(--k-steel) !important; max-width: 62ch !important; }
+
+/* ================= СЕКЦИИ ================= */
+#a3d-kids .k-sec { padding: clamp(58px,8vw,104px) 0 !important; position: relative !important; }
+#a3d-kids .k-sec--panel { background: var(--k-graph1) !important; }
+#a3d-kids .k-head { max-width: 760px !important; margin-bottom: clamp(32px,5vw,54px) !important; position: relative !important; }
+
+/* Призрачный номер секции */
+#a3d-kids .k-ghost {
+  position: absolute !important; top: -18px !important; right: 0 !important;
+  font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important;
+  font-size: clamp(64px,12vw,132px) !important; line-height: 1 !important;
+  color: rgba(216,221,228,0.035) !important; pointer-events: none !important; z-index: 0 !important;
+  letter-spacing: -0.03em !important;
+}
+#a3d-kids .k-head > * { position: relative !important; z-index: 1 !important; }
+
+/* ================= КНОПКИ ================= */
+#a3d-kids .k-btn {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  min-height: 52px !important; padding: 0 30px !important; border-radius: 100px !important;
+  font-size: 15px !important; font-weight: 700 !important; line-height: 1.2 !important;
+  letter-spacing: 0.02em !important; text-align: center !important;
+  transition: background .28s var(--k-ease), color .28s var(--k-ease), box-shadow .28s var(--k-ease), transform .28s var(--k-ease) !important;
+}
+#a3d-kids .k-btn--main {
+  background: var(--k-silver) !important; color: var(--k-black) !important;
+  box-shadow: 0 0 0 0 var(--k-glow) !important;
+}
+#a3d-kids .k-btn--main:hover { box-shadow: 0 0 34px -6px var(--k-glow) !important; transform: translateY(-2px) !important; }
+#a3d-kids .k-btn--line {
+  background: transparent !important; color: var(--k-silver) !important;
+  box-shadow: inset 0 0 0 1px var(--k-line) !important;
+}
+#a3d-kids .k-btn--line:hover { box-shadow: inset 0 0 0 1px var(--k-silver) !important; }
+#a3d-kids .k-btn--lg { min-height: 58px !important; padding: 0 36px !important; font-size: 16px !important; }
+#a3d-kids .k-btn:focus-visible { outline: 2px solid var(--k-silver) !important; outline-offset: 3px !important; }
+
+/* ================= НАВИГАЦИЯ (в потоке, не фикс — не конфликтует с шапкой Tilda) ================= */
+#a3d-kids .k-nav {
+  border-bottom: 1px solid var(--k-line2) !important;
+  padding: 18px 0 !important;
+}
+#a3d-kids .k-nav-in { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 20px !important; flex-wrap: wrap !important; }
+#a3d-kids .k-logo { display: flex !important; flex-direction: column !important; line-height: 1.15 !important; }
+#a3d-kids .k-logo b { font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; font-size: 15px !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; }
+#a3d-kids .k-logo span { font-size: 10.5px !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; color: var(--k-steel) !important; margin-top: 4px !important; }
+#a3d-kids .k-nav-links { display: none !important; gap: 26px !important; }
+#a3d-kids .k-nav-links a { font-size: 13.5px !important; font-weight: 600 !important; color: var(--k-steel) !important; transition: color .25s var(--k-ease) !important; }
+#a3d-kids .k-nav-links a:hover { color: var(--k-silver) !important; }
+@media (min-width: 940px) { #a3d-kids .k-nav-links { display: flex !important; } }
+
+/* ================= ГЕРОЙ ================= */
+#a3d-kids .k-hero { padding: clamp(48px,7vw,88px) 0 clamp(40px,6vw,72px) !important; position: relative !important; }
+#a3d-kids .k-hero::before {
+  content: "" !important; position: absolute !important; top: -10% !important; right: -10% !important;
+  width: 70% !important; height: 80% !important; pointer-events: none !important;
+  background: radial-gradient(closest-side, rgba(216,221,228,0.055), transparent 70%) !important;
+}
+#a3d-kids .k-hero-in { display: grid !important; grid-template-columns: 1fr !important; gap: clamp(28px,4vw,52px) !important; align-items: center !important; position: relative !important; z-index: 1 !important; }
+#a3d-kids .k-h1 {
+  font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; text-transform: uppercase !important;
+  font-size: clamp(30px,6.6vw,60px) !important; line-height: 1.03 !important; letter-spacing: -0.015em !important;
+  margin-bottom: 20px !important;
+}
+#a3d-kids .k-h1 i { font-style: normal !important; color: var(--k-steel) !important; }
+#a3d-kids .k-hero-lead { font-size: clamp(16px,2.1vw,19px) !important; max-width: 46ch !important; margin-bottom: 16px !important; }
+#a3d-kids .k-hero-desc { color: var(--k-steel) !important; font-size: 15.5px !important; max-width: 50ch !important; }
+#a3d-kids .k-facts {
+  display: grid !important; grid-template-columns: repeat(2,1fr) !important; gap: 16px 12px !important;
+  margin: 30px 0 !important; padding: 22px 0 !important;
+  border-top: 1px solid var(--k-line) !important; border-bottom: 1px solid var(--k-line) !important;
+}
+#a3d-kids .k-facts div { display: flex !important; flex-direction: column !important; gap: 3px !important; }
+#a3d-kids .k-facts b { font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; font-size: 17px !important; text-transform: uppercase !important; }
+#a3d-kids .k-facts span { font-size: 11.5px !important; letter-spacing: 0.05em !important; color: var(--k-steel) !important; }
+#a3d-kids .k-hero-cta { display: flex !important; flex-wrap: wrap !important; gap: 12px !important; }
+#a3d-kids .k-hero-cta .k-btn { width: 100% !important; }
+#a3d-kids .k-statement {
+  margin-top: clamp(38px,6vw,66px) !important; padding-top: clamp(28px,4vw,46px) !important;
+  border-top: 1px solid var(--k-line) !important;
+  font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; text-transform: uppercase !important;
+  font-size: clamp(20px,3.8vw,36px) !important; line-height: 1.14 !important; max-width: 22ch !important;
+}
+#a3d-kids .k-statement em { font-style: normal !important; color: var(--k-steel) !important; }
+#a3d-kids .k-keys { margin-top: 20px !important; font-size: 11.5px !important; letter-spacing: 0.2em !important; text-transform: uppercase !important; color: var(--k-steel) !important; }
+
+/* ================= ФОТО-ЗАГЛУШКИ ================= */
+#a3d-kids .k-photo {
+  position: relative !important; width: 100% !important; border-radius: var(--k-r) !important;
+  overflow: hidden !important; background: var(--k-graph2) !important;
+  border: 1px solid var(--k-line) !important; display: flex !important; align-items: flex-end !important;
+  aspect-ratio: 4/5 !important;
+}
+#a3d-kids .k-photo::before {
+  content: "" !important; position: absolute !important; inset: 0 !important;
+  background-image: linear-gradient(rgba(216,221,228,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(216,221,228,0.045) 1px, transparent 1px) !important;
+  background-size: 36px 36px !important;
+}
+#a3d-kids .k-photo i {
+  position: relative !important; font-style: normal !important; padding: 14px 16px !important;
+  font-size: 11.5px !important; line-height: 1.45 !important; color: var(--k-steel) !important;
+  background: rgba(6,7,8,0.62) !important; width: 100% !important;
+}
+#a3d-kids .k-photo--wide { aspect-ratio: 16/10 !important; }
+#a3d-kids .k-photo--loc { aspect-ratio: 16/11 !important; }
+
+/* ================= ПЕРЕКЛЮЧАТЕЛЬ ФОРМАТОВ ================= */
+#a3d-kids .k-switch {
+  display: inline-flex !important; gap: 5px !important; padding: 5px !important;
+  border-radius: 100px !important; background: var(--k-graph2) !important;
+  border: 1px solid var(--k-line) !important; margin-bottom: 28px !important;
+}
+#a3d-kids .k-tab {
+  min-height: 44px !important; padding: 0 28px !important; border-radius: 100px !important;
+  font-size: 14px !important; font-weight: 700 !important; letter-spacing: 0.04em !important;
+  text-transform: uppercase !important; color: var(--k-steel) !important;
+  transition: background .28s var(--k-ease), color .28s var(--k-ease) !important;
+}
+#a3d-kids .k-tab.k-on { background: var(--k-silver) !important; color: var(--k-black) !important; }
+
+/* ================= КАРТОЧКИ ФОРМАТОВ ================= */
+#a3d-kids .k-formats { display: grid !important; grid-template-columns: 1fr !important; gap: 16px !important; }
+#a3d-kids .k-fcard {
+  position: relative !important; background: var(--k-graph2) !important;
+  border: 1px solid var(--k-line) !important; border-radius: var(--k-r) !important;
+  padding: clamp(24px,3.4vw,38px) !important; display: flex !important; flex-direction: column !important;
+  transition: border-color .3s var(--k-ease), box-shadow .3s var(--k-ease) !important;
+}
+#a3d-kids .k-fcard.k-sel { border-color: rgba(216,221,228,0.45) !important; box-shadow: 0 0 44px -20px var(--k-glow) !important; }
+#a3d-kids .k-ftag { font-size: 11px !important; letter-spacing: 0.2em !important; text-transform: uppercase !important; color: var(--k-steel) !important; font-weight: 700 !important; margin-bottom: 12px !important; }
+#a3d-kids .k-fname { font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; text-transform: uppercase !important; font-size: clamp(20px,3vw,27px) !important; line-height: 1.1 !important; margin-bottom: 12px !important; }
+#a3d-kids .k-fdesc { color: var(--k-steel) !important; font-size: 15px !important; margin-bottom: 22px !important; }
+#a3d-kids .k-fmeta { display: grid !important; gap: 13px !important; margin-bottom: 22px !important; padding: 20px 0 !important; border-top: 1px solid var(--k-line2) !important; border-bottom: 1px solid var(--k-line2) !important; }
+#a3d-kids .k-fmeta div { display: flex !important; flex-direction: column !important; gap: 3px !important; }
+#a3d-kids .k-fmeta dt { font-size: 11px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; color: var(--k-steel) !important; }
+#a3d-kids .k-fmeta dd { font-size: 14.5px !important; }
+#a3d-kids .k-fprice { font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; font-size: clamp(26px,3.6vw,34px) !important; display: flex !important; align-items: baseline !important; gap: 9px !important; margin-bottom: 20px !important; }
+#a3d-kids .k-fprice span { font-family: 'Manrope', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; color: var(--k-steel) !important; }
+#a3d-kids .k-fcard .k-btn { width: 100% !important; }
+#a3d-kids .k-fnote { margin-top: 14px !important; font-size: 13px !important; color: var(--k-steel) !important; line-height: 1.55 !important; }
+#a3d-kids .k-fmore { margin-top: 16px !important; font-size: 13.5px !important; font-weight: 700 !important; letter-spacing: 0.04em !important; text-transform: uppercase !important; }
+#a3d-kids .k-fmore:hover { color: var(--k-steel) !important; }
+
+/* ================= МАРШРУТ ================= */
+#a3d-kids .k-route { margin-top: 30px !important; }
+#a3d-kids .k-rp { display: none !important; }
+#a3d-kids .k-rp.k-on { display: block !important; }
+#a3d-kids .k-rlabel { font-size: 11px !important; letter-spacing: 0.2em !important; text-transform: uppercase !important; color: var(--k-steel) !important; margin-bottom: 14px !important; font-weight: 700 !important; }
+#a3d-kids .k-rsteps { display: flex !important; flex-wrap: wrap !important; gap: 9px !important; align-items: center !important; }
+#a3d-kids .k-rsteps li {
+  padding: 9px 17px !important; border-radius: 100px !important;
+  background: rgba(216,221,228,0.05) !important; border: 1px solid var(--k-line2) !important;
+  font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0.03em !important;
+}
+#a3d-kids .k-rsteps li:not(:last-child)::after { content: "→" !important; margin-left: 13px !important; margin-right: -5px !important; color: var(--k-steel) !important; }
+
+/* ================= СЕТКИ КАРТОЧЕК ================= */
+#a3d-kids .k-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 14px !important; }
+#a3d-kids .k-card {
+  background: var(--k-graph2) !important; border: 1px solid var(--k-line2) !important;
+  border-radius: var(--k-r) !important; padding: clamp(22px,3vw,30px) !important;
+  transition: border-color .3s var(--k-ease) !important;
+}
+#a3d-kids .k-sec--panel .k-card { background: var(--k-black) !important; }
+#a3d-kids .k-card:hover { border-color: var(--k-line) !important; }
+#a3d-kids .k-cnum { display: block !important; font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; font-size: 12px !important; letter-spacing: 0.1em !important; color: var(--k-steel) !important; margin-bottom: 14px !important; }
+#a3d-kids .k-ctitle { font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 16.5px !important; line-height: 1.2 !important; margin-bottom: 10px !important; }
+#a3d-kids .k-ctext { color: var(--k-steel) !important; font-size: 14.5px !important; }
+
+/* ================= СПИСКИ ================= */
+#a3d-kids .k-list { display: grid !important; gap: 12px !important; }
+#a3d-kids .k-list li { position: relative !important; padding-left: 26px !important; font-size: 15.5px !important; }
+#a3d-kids .k-list li::before {
+  content: "" !important; position: absolute !important; left: 0 !important; top: 9px !important;
+  width: 11px !important; height: 7px !important;
+  border-left: 1.6px solid var(--k-silver) !important; border-bottom: 1.6px solid var(--k-silver) !important;
+  transform: rotate(-45deg) !important;
+}
+#a3d-kids .k-numlist { display: grid !important; gap: 13px !important; }
+#a3d-kids .k-numlist li { display: flex !important; gap: 15px !important; align-items: center !important; font-size: 15.5px !important; }
+#a3d-kids .k-numlist b {
+  flex-shrink: 0 !important; width: 32px !important; height: 32px !important; border-radius: 50% !important;
+  display: grid !important; place-items: center !important; font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important; font-size: 13px !important; border: 1px solid var(--k-line) !important; color: var(--k-steel) !important;
+}
+
+/* ================= ТАЙМЛАЙН ================= */
+#a3d-kids .k-tl { max-width: 860px !important; padding-left: 24px !important; position: relative !important; }
+#a3d-kids .k-tl::before { content: "" !important; position: absolute !important; left: 4px !important; top: 10px !important; bottom: 10px !important; width: 1px !important; background: var(--k-line) !important; }
+#a3d-kids .k-tli { position: relative !important; }
+#a3d-kids .k-tli + .k-tli { border-top: 1px solid var(--k-line2) !important; }
+#a3d-kids .k-tli::before {
+  content: "" !important; position: absolute !important; left: -24px !important; top: 25px !important;
+  width: 9px !important; height: 9px !important; border-radius: 50% !important;
+  background: var(--k-black) !important; border: 1px solid var(--k-steel) !important;
+  transition: background .3s var(--k-ease), box-shadow .3s var(--k-ease) !important;
+}
+#a3d-kids .k-tli.k-open::before { background: var(--k-silver) !important; border-color: var(--k-silver) !important; box-shadow: 0 0 14px 0 var(--k-glow) !important; }
+#a3d-kids .k-tlh {
+  width: 100% !important; display: grid !important; grid-template-columns: 1fr auto !important;
+  grid-template-areas: "time tog" "name tog" !important; gap: 3px 14px !important;
+  align-items: center !important; text-align: left !important; padding: 19px 0 !important;
+}
+#a3d-kids .k-tltime { grid-area: time !important; font-size: 12px !important; letter-spacing: 0.1em !important; color: var(--k-steel) !important; font-weight: 700 !important; }
+#a3d-kids .k-tlname { grid-area: name !important; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: clamp(15px,2.2vw,19px) !important; line-height: 1.2 !important; }
+#a3d-kids .k-tltog { grid-area: tog !important; width: 24px !important; height: 24px !important; position: relative !important; flex-shrink: 0 !important; }
+#a3d-kids .k-tltog::before, #a3d-kids .k-tltog::after {
+  content: "" !important; position: absolute !important; top: 50% !important; left: 50% !important;
+  width: 12px !important; height: 1.5px !important; background: var(--k-steel) !important;
+  transform: translate(-50%,-50%) !important; transition: transform .35s var(--k-ease), background .3s var(--k-ease) !important;
+}
+#a3d-kids .k-tltog::after { transform: translate(-50%,-50%) rotate(90deg) !important; }
+#a3d-kids .k-tli.k-open .k-tltog::after { transform: translate(-50%,-50%) rotate(0) !important; }
+#a3d-kids .k-tli.k-open .k-tltog::before, #a3d-kids .k-tli.k-open .k-tltog::after { background: var(--k-silver) !important; }
+#a3d-kids .k-tlb { display: none !important; }
+#a3d-kids .k-tli.k-open .k-tlb { display: block !important; }
+#a3d-kids .k-tlb p { color: var(--k-steel) !important; font-size: 14.5px !important; max-width: 62ch !important; padding-bottom: 20px !important; }
+
+/* ================= ВОЗРАСТ ================= */
+#a3d-kids .k-agepanel { margin-top: 26px !important; background: var(--k-graph2) !important; border: 1px solid var(--k-line) !important; border-radius: var(--k-r) !important; padding: clamp(24px,3.6vw,36px) !important; }
+#a3d-kids .k-sec--panel .k-agepanel { background: var(--k-black) !important; }
+#a3d-kids .k-agelead { font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important; font-size: clamp(16px,2.4vw,21px) !important; line-height: 1.35 !important; margin-bottom: 22px !important; }
+#a3d-kids .k-agelabel { font-size: 11px !important; letter-spacing: 0.2em !important; text-transform: uppercase !important; color: var(--k-steel) !important; margin-bottom: 13px !important; font-weight: 700 !important; }
+#a3d-kids .k-tags { display: flex !important; flex-wrap: wrap !important; gap: 9px !important; }
+#a3d-kids .k-tags span { font-size: 13px !important; padding: 7px 15px !important; border-radius: 100px !important; background: rgba(216,221,228,0.05) !important; border: 1px solid var(--k-line2) !important; }
+
+/* ================= ЦЕНЫ ================= */
+#a3d-kids .k-prices { display: grid !important; grid-template-columns: 1fr !important; gap: 16px !important; align-items: start !important; }
+#a3d-kids .k-pcard { background: var(--k-graph2) !important; border: 1px solid var(--k-line2) !important; border-radius: var(--k-r) !important; padding: clamp(24px,3.4vw,34px) !important; display: flex !important; flex-direction: column !important; }
+#a3d-kids .k-sec--panel .k-pcard { background: var(--k-black) !important; }
+#a3d-kids .k-pcard--hero { border-color: rgba(216,221,228,0.42) !important; box-shadow: 0 0 50px -24px var(--k-glow) !important; }
+#a3d-kids .k-pcard .k-btn { margin-top: auto !important; width: 100% !important; }
+#a3d-kids .k-pprice { font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; font-size: clamp(25px,3.4vw,33px) !important; display: flex !important; align-items: baseline !important; gap: 9px !important; margin: 4px 0 20px !important; }
+#a3d-kids .k-pprice span { font-family: 'Manrope', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; color: var(--k-steel) !important; }
+#a3d-kids .k-pprice--soft { font-size: clamp(19px,2.4vw,23px) !important; color: var(--k-steel) !important; }
+
+/* ================= FAQ ================= */
+#a3d-kids .k-faq { max-width: 830px !important; }
+#a3d-kids .k-faq details { border-bottom: 1px solid var(--k-line2) !important; }
+#a3d-kids .k-faq details:first-child { border-top: 1px solid var(--k-line2) !important; }
+#a3d-kids .k-faq summary {
+  list-style: none !important; cursor: pointer !important; display: flex !important;
+  justify-content: space-between !important; align-items: center !important; gap: 18px !important;
+  padding: 21px 0 !important; font-family: 'Montserrat', sans-serif !important; font-weight: 700 !important;
+  font-size: clamp(14.5px,2vw,17px) !important; line-height: 1.3 !important; text-transform: uppercase !important;
+  transition: color .25s var(--k-ease) !important;
+}
+#a3d-kids .k-faq summary::-webkit-details-marker { display: none !important; }
+#a3d-kids .k-faq summary::after {
+  content: "" !important; flex-shrink: 0 !important; width: 11px !important; height: 11px !important;
+  border-right: 1.6px solid var(--k-steel) !important; border-bottom: 1.6px solid var(--k-steel) !important;
+  transform: rotate(45deg) translateY(-2px) !important; transition: transform .35s var(--k-ease) !important;
+}
+#a3d-kids .k-faq details[open] summary::after { transform: rotate(-135deg) !important; border-color: var(--k-silver) !important; }
+#a3d-kids .k-faq summary:hover { color: var(--k-steel) !important; }
+#a3d-kids .k-faq .k-fa { padding: 0 0 22px !important; }
+#a3d-kids .k-faq .k-fa p { color: var(--k-steel) !important; font-size: 14.5px !important; max-width: 68ch !important; }
+
+/* ================= ФИНАЛ ================= */
+#a3d-kids .k-final { display: grid !important; grid-template-columns: 1fr !important; gap: clamp(26px,4vw,48px) !important; align-items: center !important; }
+#a3d-kids .k-final-cta { display: grid !important; gap: 11px !important; margin-top: 26px !important; }
+#a3d-kids .k-meta { margin-top: 22px !important; padding-top: 20px !important; border-top: 1px solid var(--k-line) !important; font-size: 11.5px !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; color: var(--k-steel) !important; }
+
+/* ================= ПОДВАЛ ================= */
+#a3d-kids .k-foot { border-top: 1px solid var(--k-line) !important; padding: clamp(38px,5vw,58px) 0 clamp(28px,4vw,38px) !important; }
+#a3d-kids .k-foot-in { display: grid !important; grid-template-columns: 1fr !important; gap: 28px !important; }
+#a3d-kids .k-fbrand b { font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; font-size: 18px !important; text-transform: uppercase !important; letter-spacing: 0.04em !important; }
+#a3d-kids .k-fbrand p { color: var(--k-steel) !important; font-size: 13.5px !important; margin-top: 6px !important; }
+#a3d-kids .k-sign { margin-top: 16px !important; font-size: 11px !important; letter-spacing: 0.22em !important; text-transform: uppercase !important; color: var(--k-silver) !important; }
+#a3d-kids .k-flinks { display: grid !important; gap: 10px !important; }
+#a3d-kids .k-flinks a { font-size: 13.5px !important; color: var(--k-steel) !important; width: fit-content !important; }
+#a3d-kids .k-flinks a:hover { color: var(--k-silver) !important; }
+#a3d-kids .k-copy { margin-top: 26px !important; padding-top: 20px !important; border-top: 1px solid var(--k-line2) !important; font-size: 12px !important; color: var(--k-steel) !important; }
+
+/* ================= МОБИЛЬНАЯ КНОПКА ================= */
+#a3d-kids .k-mcta {
+  position: fixed !important; left: 0 !important; right: 0 !important; bottom: 0 !important; z-index: 9990 !important;
+  padding: 10px clamp(14px,4vw,20px) !important;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+  background: rgba(6,7,8,0.97) !important; border-top: 1px solid var(--k-line) !important;
+  transform: translateY(130%) !important; transition: transform .4s var(--k-ease) !important;
+}
+#a3d-kids .k-mcta.k-on { transform: translateY(0) !important; }
+#a3d-kids .k-mcta .k-btn { width: 100% !important; }
+@media (min-width: 900px) { #a3d-kids .k-mcta { display: none !important; } }
+
+/* ================= МОДАЛКА ================= */
+#a3d-kids .k-modal {
+  position: fixed !important; inset: 0 !important; z-index: 9999 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  padding: 20px !important; opacity: 0 !important; visibility: hidden !important;
+  transition: opacity .3s var(--k-ease), visibility .3s var(--k-ease) !important;
+}
+#a3d-kids .k-modal.k-on { opacity: 1 !important; visibility: visible !important; }
+#a3d-kids .k-mbg { position: absolute !important; inset: 0 !important; background: rgba(6,7,8,0.86) !important; }
+#a3d-kids .k-mcard {
+  position: relative !important; background: var(--k-graph1) !important; border: 1px solid var(--k-line) !important;
+  border-radius: var(--k-r) !important; padding: clamp(28px,4vw,38px) !important; max-width: 420px !important;
+  width: 100% !important; text-align: center !important;
+}
+#a3d-kids .k-mclose { position: absolute !important; top: 10px !important; right: 12px !important; width: 40px !important; height: 40px !important; font-size: 24px !important; color: var(--k-steel) !important; }
+#a3d-kids .k-mtitle { font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; text-transform: uppercase !important; font-size: 20px !important; margin-bottom: 12px !important; }
+#a3d-kids .k-mtext { color: var(--k-steel) !important; font-size: 14.5px !important; margin-bottom: 24px !important; }
+
+/* ================= ПОЯВЛЕНИЕ ================= */
+#a3d-kids .k-rev { opacity: 0 !important; transform: translateY(20px) !important; transition: opacity .7s var(--k-ease), transform .7s var(--k-ease) !important; }
+#a3d-kids .k-rev.k-vis { opacity: 1 !important; transform: none !important; }
+
+/* ================= АДАПТИВ ================= */
+@media (min-width: 620px) {
+  #a3d-kids .k-hero-cta .k-btn { width: auto !important; }
+  #a3d-kids .k-facts { grid-template-columns: repeat(4,1fr) !important; }
+  #a3d-kids .k-formats { grid-template-columns: 1fr 1fr !important; }
+  #a3d-kids .k-grid { grid-template-columns: 1fr 1fr !important; }
+  #a3d-kids .k-prices { grid-template-columns: 1fr 1fr !important; }
+  #a3d-kids .k-foot-in { grid-template-columns: 1fr 1fr !important; }
+  #a3d-kids .k-final-cta { grid-template-columns: 1fr 1fr !important; }
+}
+@media (min-width: 900px) {
+  #a3d-kids .k-hero-in { grid-template-columns: 1.08fr 0.92fr !important; }
+  #a3d-kids .k-grid--3 { grid-template-columns: repeat(3,1fr) !important; }
+  #a3d-kids .k-grid--4 { grid-template-columns: repeat(4,1fr) !important; }
+  #a3d-kids .k-prices { grid-template-columns: repeat(3,1fr) !important; }
+  #a3d-kids .k-two { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 54px !important; align-items: start !important; }
+  #a3d-kids .k-final { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* Производительность и доступность */
+@media (max-width: 899px) {
+  #a3d-kids .k-hero::before { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #a3d-kids *, #a3d-kids *::before, #a3d-kids *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  #a3d-kids .k-rev { opacity: 1 !important; transform: none !important; }
+}
+
+/* =========================================================
+   ИНТЕГРАЦИЯ В NEXT (только маршрут /kids)
+   ========================================================= */
+html { background: #060708; }
+html body {
+  background: #060708;
+  color: #d8dde4;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+#a3d-kids main, .kids-page main { background: transparent; max-width: 100%; }
+
+
+/* Пустые слоты под фото — мягкая панель; имена файлов скрыты скриптом на проде */
+#a3d-kids .k-photo--empty .k-photo-hint {
+  font-style: normal;
+  font-size: 12px;
+  opacity: 0.55;
+}

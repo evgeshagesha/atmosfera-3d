@@ -6,7 +6,8 @@ import { getAllRoutes } from "@/lib/pages";
 export default function sitemap(): MetadataRoute.Sitemap {
   // Live Next host until apex DNS cutover. Override via NEXT_PUBLIC_SITE_URL.
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://eg.egoshev.ru";
-  const pageRoutes = ["", "blog", ...getAllRoutes()];
+  // Kids routes are standalone, outside the Tilda manifest.
+  const pageRoutes = ["", "blog", "kids", ...getAllRoutes()];
   const blogSlugs = getAllBlogSlugs();
   const posts = getBlogPosts();
   const postDates = Object.fromEntries(
