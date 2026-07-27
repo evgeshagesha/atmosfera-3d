@@ -9,15 +9,20 @@ import {
 
 import { CLUB_HERO_CSS } from "./styles";
 
-const NAV = [
+const NAV_PRIMARY = [
   { href: "#me", label: "Обо мне" },
   { href: "#about", label: "О клубе" },
   { href: "#for", label: "Для кого" },
   { href: "#program", label: "Программа" },
+] as const;
+
+const NAV_SECONDARY = [
   { href: "#tariff", label: "Тарифы" },
   { href: "#results", label: "Результаты" },
   { href: "#contacts", label: "Контакты" },
 ] as const;
+
+const NAV = [...NAV_PRIMARY, ...NAV_SECONDARY] as const;
 
 const FEATURES = [
   {
@@ -120,8 +125,13 @@ export default function ClubHeroSection() {
             </a>
 
             <nav className="club-hero__nav" aria-label="Навигация клуба">
-              {NAV.map((item) => (
-                <a key={item.href} href={item.href}>
+              {NAV_PRIMARY.map((item) => (
+                <a key={item.href} href={item.href} className="club-hero__nav-primary">
+                  {item.label}
+                </a>
+              ))}
+              {NAV_SECONDARY.map((item) => (
+                <a key={item.href} href={item.href} className="club-hero__nav-secondary">
                   {item.label}
                 </a>
               ))}
@@ -177,22 +187,17 @@ export default function ClubHeroSection() {
           <div className="club-hero__copy">
             <h1 className="club-hero__brand">Атмосфера 3D</h1>
             <p className="club-hero__sub">Онлайн-клуб Евгения Гошева</p>
-            <p className="club-hero__motto">Движение. Дыхание. Дисциплина.</p>
-            <p className="club-hero__lead">
-              Улучши качество жизни через движение —
-              <br />
-              опираясь на человеческую природу.
-              <br />
-              Верни телу баланс и снова получай
-              <br />
-              удовольствие от жизни.
+            <p className="club-hero__motto">
+              <span>Движение</span>
+              <i aria-hidden="true">·</i>
+              <span>Дыхание</span>
+              <i aria-hidden="true">·</i>
+              <span>Дисциплина</span>
             </p>
             <div className="club-hero__actions">
               <a
                 className="club-hero__btn club-hero__btn--primary"
-                href={CLUB_TRIBUTE_TG}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#tariff"
               >
                 Войти в клуб
                 <span aria-hidden="true">→</span>
@@ -214,6 +219,17 @@ export default function ClubHeroSection() {
                 sizes="(max-width: 980px) 92vw, 46vw"
               />
             </div>
+          </div>
+
+          <div className="club-hero__bridge">
+            <p className="club-hero__bridge-lead">
+              Верни телу лёгкость, мобильность и силу — через понятную систему
+              движения, дыхания и восстановления.
+            </p>
+            <p className="club-hero__bridge-sub">
+              Короткие практики, готовые программы и моя поддержка, чтобы ты
+              знал, что делать сегодня и последовательно двигался к результату.
+            </p>
           </div>
 
           <div className="club-hero__features">

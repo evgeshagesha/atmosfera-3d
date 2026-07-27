@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { CLUB_SYSTEM_CSS } from "./styles";
 
 const PILLARS = [
@@ -62,40 +60,27 @@ export default function ClubSystemSection() {
       <style dangerouslySetInnerHTML={{ __html: CLUB_SYSTEM_CSS }} />
       <section className="club-system" aria-labelledby="club-system-title">
         <div className="club-system__inner">
-          <div className="club-system__hero">
-            <div>
-              <p className="club-system__eyebrow">Система 3D</p>
-              <h2 id="club-system-title" className="club-system__title">
-                Всё, что нужно — в системе 3D
-              </h2>
-              <p className="club-system__lead">
-                Не набор разрозненных упражнений, а цельный маршрут: осанка,
-                мобильность, дыхание и сила собираются в одну систему — спокойно
-                и последовательно.
-              </p>
-            </div>
-
-            <div className="club-system__visual" aria-hidden="true">
-              <div className="club-system__glow" />
-              <div className="club-system__photo">
-                <Image
-                  src="/club/source/club-system-coaching.jpg"
-                  alt=""
-                  fill
-                  sizes="(max-width: 980px) 92vw, 46vw"
-                  priority={false}
-                />
-              </div>
-            </div>
-          </div>
+          <header className="club-system__hero">
+            <p className="club-system__eyebrow">Система 3D</p>
+            <h2 id="club-system-title" className="club-system__title">
+              Всё, что нужно — в системе 3D
+            </h2>
+            <p className="club-system__lead">
+              Не набор разрозненных упражнений, а цельный маршрут: осанка,
+              мобильность, дыхание и сила собираются в одну систему — спокойно
+              и последовательно.
+            </p>
+          </header>
 
           <div className="club-system__pillars">
             {PILLARS.map((item) => (
               <article className="club-system__pillar" key={item.title}>
-                <div className="club-system__pillar-icon">
-                  <PillarIcon type={item.icon} />
+                <div className="club-system__pillar-head">
+                  <div className="club-system__pillar-icon">
+                    <PillarIcon type={item.icon} />
+                  </div>
+                  <strong>{item.title}</strong>
                 </div>
-                <strong>{item.title}</strong>
                 <p>{item.text}</p>
               </article>
             ))}

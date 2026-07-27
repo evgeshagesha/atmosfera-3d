@@ -19,7 +19,7 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
 .club-value__shell {
   position: relative;
   z-index: 1;
-  width: min(100% - 24px, 430px);
+  width: min(100% - 20px, 520px);
   margin: 0 auto;
 }
 
@@ -54,7 +54,7 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
   max-width: 22ch;
   margin: 12px 0 0;
   color: var(--cv-dim);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -85,16 +85,16 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
 .club-value__catalog {
   position: relative;
   z-index: 2;
-  padding: 16px 12px 10px;
+  padding: 18px 14px 12px;
   border: 1px solid var(--cv-line);
-  border-radius: 18px;
+  border-radius: 20px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%), var(--cv-card);
 }
 
 .club-value__catalog-label {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   color: rgba(214, 222, 234, 0.55);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -103,7 +103,7 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
 .club-value__columns {
   display: grid;
   grid-template-columns: 1.15fr 0.95fr;
-  gap: 0 10px;
+  gap: 0 12px;
 }
 
 .club-value__columns ul {
@@ -114,24 +114,24 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
 
 .club-value__benefit {
   display: flex;
-  gap: 7px;
+  gap: 8px;
   align-items: flex-start;
-  min-height: 34px;
-  padding: 5px 0;
+  min-height: 38px;
+  padding: 6px 0;
 }
 
 .club-value__check {
   display: grid;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   flex: 0 0 auto;
   margin-top: 1px;
   place-items: center;
 }
 
 .club-value__check svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .club-value__check circle {
@@ -156,15 +156,15 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
 }
 
 .club-value__benefit-title {
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 9.5px;
-  line-height: 1.28;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 .club-value__old-price {
   flex: 0 0 auto;
   color: rgba(180, 190, 205, 0.48);
-  font-size: 8.5px;
+  font-size: 10px;
   line-height: 1.2;
   text-decoration-thickness: 1px;
   white-space: nowrap;
@@ -410,24 +410,24 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
   }
 
   .club-value__catalog {
-    padding: 24px 28px 18px;
-    border-radius: 22px;
+    padding: 28px 32px 22px;
+    border-radius: 24px;
   }
 
   .club-value__catalog-label {
-    margin-bottom: 16px;
-    font-size: 12px;
+    margin-bottom: 18px;
+    font-size: 13px;
   }
 
   .club-value__columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 48px;
+    gap: 0 56px;
   }
 
   .club-value__benefit {
-    gap: 12px;
-    min-height: 42px;
-    padding: 8px 0;
+    gap: 14px;
+    min-height: 48px;
+    padding: 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
@@ -437,8 +437,8 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
 
   .club-value__check,
   .club-value__check svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
 
   .club-value__benefit-copy {
@@ -446,11 +446,12 @@ export const CLUB_MEMBERSHIP_VALUE_CSS = `
   }
 
   .club-value__benefit-title {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.35;
   }
 
   .club-value__old-price {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .club-value__offer {

@@ -18,6 +18,7 @@ export const CLUB_HERO_CSS = `
 
 .club-hero__copy > *,
 .club-hero__visual,
+.club-hero__bridge,
 .club-hero__features {
   opacity: 0;
   transform: translateY(18px);
@@ -35,6 +36,7 @@ export const CLUB_HERO_CSS = `
 
 .club-hero.is-ready .club-hero__copy > *,
 .club-hero.is-ready .club-hero__visual,
+.club-hero.is-ready .club-hero__bridge,
 .club-hero.is-ready .club-hero__features {
   opacity: 1;
   transform: none;
@@ -44,9 +46,9 @@ export const CLUB_HERO_CSS = `
 .club-hero.is-ready .club-hero__copy > *:nth-child(2) { transition-delay: 0.12s; }
 .club-hero.is-ready .club-hero__copy > *:nth-child(3) { transition-delay: 0.18s; }
 .club-hero.is-ready .club-hero__copy > *:nth-child(4) { transition-delay: 0.24s; }
-.club-hero.is-ready .club-hero__copy > *:nth-child(5) { transition-delay: 0.32s; }
 .club-hero.is-ready .club-hero__visual { transition-delay: 0.18s; }
-.club-hero.is-ready .club-hero__features { transition-delay: 0.42s; }
+.club-hero.is-ready .club-hero__bridge { transition-delay: 0.36s; }
+.club-hero.is-ready .club-hero__features { transition-delay: 0.48s; }
 
 .club-hero__header {
   position: sticky;
@@ -195,12 +197,12 @@ export const CLUB_HERO_CSS = `
   position: relative;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 8px 28px 28px;
+  padding: 8px 28px 36px;
   min-height: calc(100svh - 72px);
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(300px, 1.12fr);
-  grid-template-rows: auto auto;
-  gap: 10px 20px;
+  grid-template-rows: auto auto auto;
+  gap: 18px 20px;
   align-items: start;
   overflow: hidden;
 }
@@ -221,14 +223,17 @@ export const CLUB_HERO_CSS = `
   position: relative;
   z-index: 1;
   grid-column: 2;
-  grid-row: 1;
-  min-height: 520px;
-  height: clamp(480px, 68vh, 640px);
-  align-self: start;
+  grid-row: 1 / -1;
+  min-height: 0;
+  height: 100%;
+  max-height: min(620px, 78vh);
+  align-self: stretch;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   margin-top: -6px;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .club-hero__photo {
@@ -241,9 +246,10 @@ export const CLUB_HERO_CSS = `
   display: block;
   position: absolute;
   inset: 0;
+  overflow: hidden;
   background:
-    radial-gradient(ellipse 58% 52% at 54% 56%, rgba(40, 92, 180, 0.28), transparent 74%),
-    radial-gradient(ellipse 36% 30% at 48% 38%, rgba(255, 255, 255, 0.06), transparent 70%);
+    radial-gradient(ellipse 58% 48% at 54% 42%, rgba(40, 92, 180, 0.28), transparent 74%),
+    radial-gradient(ellipse 36% 30% at 48% 28%, rgba(255, 255, 255, 0.06), transparent 70%);
 }
 
 .club-hero__photo--cut::before {
@@ -251,9 +257,9 @@ export const CLUB_HERO_CSS = `
   position: absolute;
   left: 10%;
   right: 10%;
-  top: 22%;
-  bottom: 0;
-  background: radial-gradient(ellipse at 50% 72%, rgba(24, 48, 88, 0.58), transparent 74%);
+  top: 18%;
+  bottom: 28%;
+  background: radial-gradient(ellipse at 50% 55%, rgba(24, 48, 88, 0.58), transparent 74%);
   filter: blur(34px);
   z-index: 0;
 }
@@ -265,15 +271,15 @@ export const CLUB_HERO_CSS = `
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
-  object-position: 62% top !important;
-  transform: scale(1.16);
+  object-position: 58% 8% !important;
+  transform: scale(1.28);
   transform-origin: center top;
   filter: contrast(1.08) saturate(1.06) brightness(1.02);
   -webkit-mask-image:
-    linear-gradient(180deg, #000 0%, #000 78%, rgba(0, 0, 0, 0.45) 90%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 52%, rgba(0, 0, 0, 0.35) 64%, transparent 76%),
     linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
   mask-image:
-    linear-gradient(180deg, #000 0%, #000 78%, rgba(0, 0, 0, 0.45) 90%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 52%, rgba(0, 0, 0, 0.35) 64%, transparent 76%),
     linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
@@ -282,8 +288,8 @@ export const CLUB_HERO_CSS = `
 }
 
 @keyframes clubHeroPhotoFloat {
-  0%, 100% { transform: scale(1.16) translateY(0); }
-  50% { transform: scale(1.16) translateY(-8px); }
+  0%, 100% { transform: scale(1.28) translateY(0); }
+  50% { transform: scale(1.28) translateY(-8px); }
 }
 
 .club-hero__photo::after {
@@ -298,27 +304,66 @@ export const CLUB_HERO_CSS = `
     linear-gradient(90deg, var(--ch-bg) 0%, transparent 10%, transparent 90%, var(--ch-bg) 100%),
     linear-gradient(
       180deg,
-      transparent 52%,
-      rgba(0, 0, 0, 0.35) 72%,
-      rgba(0, 0, 0, 0.72) 88%,
-      var(--ch-bg) 100%
+      transparent 42%,
+      rgba(0, 0, 0, 0.45) 58%,
+      rgba(0, 0, 0, 0.88) 70%,
+      var(--ch-bg) 82%
     );
   pointer-events: none;
   z-index: 2;
 }
 
-.club-hero__features {
+.club-hero__bridge {
   grid-column: 1 / -1;
   grid-row: 2;
+  position: relative;
+  z-index: 3;
+  max-width: 62ch;
+  margin-top: 8px;
+  padding-top: 4px;
+}
+
+.club-hero__bridge-lead {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(16px, 1.7vw, 20px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.club-hero__bridge-sub {
+  margin: 10px 0 0;
+  max-width: 54ch;
+  color: var(--ch-dim);
+  font-size: clamp(13px, 1.25vw, 15px);
+  line-height: 1.5;
+}
+
+.club-hero__features {
+  grid-column: 1 / -1;
+  grid-row: 3;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px 24px;
-  margin-top: 0;
-  padding: 18px 0 8px;
-  border-top: 1px solid var(--ch-line);
+  gap: 12px;
+  margin-top: 18px;
+  padding: 0;
+  border-top: 0;
   position: relative;
   z-index: 3;
   max-width: none;
+  align-self: end;
+}
+
+@media (min-width: 981px) {
+  .club-hero__features {
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .club-hero__bridge {
+    margin-top: 12px;
+  }
 }
 
 .club-hero__brand {
@@ -343,22 +388,29 @@ export const CLUB_HERO_CSS = `
 }
 
 .club-hero__motto {
-  margin: 14px 0 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 0;
   font-family: var(--font-display, Oswald, sans-serif);
-  font-size: clamp(15px, 1.55vw, 20px);
+  font-size: clamp(14px, 1.4vw, 18px);
   font-weight: 650;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ch-accent);
+  color: #fff;
+  white-space: nowrap;
 }
 
-.club-hero__lead {
-  margin: 18px 0 0;
-  max-width: 34ch;
-  color: var(--ch-dim);
-  font-size: 15px;
-  line-height: 1.55;
-  letter-spacing: 0.01em;
+.club-hero__motto i {
+  color: var(--ch-accent);
+  font-style: normal;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.club-hero__motto span {
+  color: #fff;
 }
 
 .club-hero__actions {
@@ -424,26 +476,36 @@ export const CLUB_HERO_CSS = `
 
 .club-hero__feature {
   display: grid;
-  grid-template-columns: 44px 1fr;
-  gap: 14px;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 12px;
   align-items: start;
+  min-height: 100%;
+  padding: 14px 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 55%),
+    #0d1016;
 }
 
 .club-hero__feature-icon {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(47, 107, 255, 0.4);
+  border-radius: 12px;
   display: grid;
   place-items: center;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(126, 176, 255, 0.22), transparent 70%),
+    rgba(47, 107, 255, 0.12);
 }
 
 .club-hero__feature-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   fill: none;
-  stroke: rgba(255, 255, 255, 0.88);
-  stroke-width: 1.4;
+  stroke: #7eb0ff;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -451,17 +513,18 @@ export const CLUB_HERO_CSS = `
 .club-hero__feature strong {
   display: block;
   font-family: var(--font-display, Oswald, sans-serif);
-  font-size: 14px;
-  font-weight: 650;
-  letter-spacing: 0.08em;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .club-hero__feature p {
   margin: 6px 0 0;
   color: var(--ch-dim);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 12.5px;
+  line-height: 1.4;
 }
 
 .club-hero__scroll {
@@ -512,13 +575,34 @@ export const CLUB_HERO_CSS = `
 }
 
 @media (max-width: 900px) {
-  .club-hero__nav,
+  .club-hero__nav {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 4px 10px;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .club-hero__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .club-hero__nav a {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .club-hero__nav-secondary,
   .club-hero__header-cta {
     display: none;
   }
 
   .club-hero__menu-btn {
     display: inline-block;
+    flex-shrink: 0;
   }
 
   .club-hero__logo span {
@@ -564,7 +648,7 @@ export const CLUB_HERO_CSS = `
 @media (max-width: 980px) {
   .club-hero__stage {
     grid-template-columns: minmax(0, 0.92fr) minmax(168px, 1.12fr);
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     min-height: auto;
     padding: 4px 14px 36px;
     gap: 6px 6px;
@@ -586,12 +670,13 @@ export const CLUB_HERO_CSS = `
     order: 0;
     position: relative;
     width: 100%;
-    min-height: 300px;
-    height: clamp(300px, 72vw, 400px);
+    min-height: 0;
+    height: auto;
     max-height: none;
     margin: -8px -4px 0 0;
-    align-self: start;
+    align-self: stretch;
     justify-content: flex-end;
+    overflow: hidden;
   }
 
   .club-hero__photo,
@@ -601,31 +686,32 @@ export const CLUB_HERO_CSS = `
 
   .club-hero__photo--cut {
     background:
-      radial-gradient(ellipse 72% 58% at 55% 36%, rgba(40, 92, 180, 0.28), transparent 72%),
-      radial-gradient(ellipse 40% 30% at 50% 24%, rgba(255, 255, 255, 0.05), transparent 70%);
+      radial-gradient(ellipse 72% 48% at 55% 28%, rgba(40, 92, 180, 0.28), transparent 72%),
+      radial-gradient(ellipse 40% 30% at 50% 18%, rgba(255, 255, 255, 0.05), transparent 70%);
   }
 
   .club-hero__photo--cut img,
   .club-hero__photo-img {
     object-fit: contain !important;
-    object-position: center top !important;
-    transform: scale(1.34);
+    object-position: center 0% !important;
+    transform: scale(1.42);
     transform-origin: center top;
     animation: none;
     -webkit-mask-image:
-      linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, 0.4) 88%, transparent 100%),
+      linear-gradient(180deg, #000 0%, #000 48%, rgba(0, 0, 0, 0.28) 60%, transparent 72%),
       linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%) !important;
     mask-image:
-      linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, 0.4) 88%, transparent 100%),
+      linear-gradient(180deg, #000 0%, #000 48%, rgba(0, 0, 0, 0.28) 60%, transparent 72%),
       linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%) !important;
   }
 
   .club-hero__photo--cut::after {
     background: linear-gradient(
       180deg,
-      transparent 48%,
-      rgba(0, 0, 0, 0.45) 78%,
-      var(--ch-bg) 100%
+      transparent 38%,
+      rgba(0, 0, 0, 0.55) 55%,
+      rgba(0, 0, 0, 0.92) 68%,
+      var(--ch-bg) 78%
     );
   }
 
@@ -642,14 +728,9 @@ export const CLUB_HERO_CSS = `
 
   .club-hero__motto {
     margin-top: 10px;
-    font-size: 12px;
-  }
-
-  .club-hero__lead {
-    margin-top: 12px;
-    font-size: 13px;
-    line-height: 1.5;
-    max-width: 28ch;
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 0.05em;
   }
 
   .club-hero__actions {
@@ -679,33 +760,88 @@ export const CLUB_HERO_CSS = `
 
   .club-hero__features {
     grid-column: 1 / -1;
-    grid-row: 2;
+    grid-row: 3;
     order: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 16px;
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .club-hero__bridge {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 10px;
+    max-width: none;
+  }
+
+  .club-hero__bridge-lead {
+    font-size: 14px;
+  }
+
+  .club-hero__bridge-sub {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .club-hero__feature {
     grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 2px;
+    justify-items: start;
+    gap: 8px;
+    padding: 10px 10px 12px;
+    border-radius: 14px;
+  }
+
+  .club-hero__feature-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+
+  .club-hero__feature-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .club-hero__feature strong {
+    font-size: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .club-hero__feature p {
+    font-size: 11px;
+    line-height: 1.35;
   }
 }
 
 @media (max-width: 560px) {
   .club-hero__stage {
     grid-template-columns: minmax(0, 0.9fr) minmax(150px, 1.15fr);
-    gap: 4px 4px;
+    gap: 8px 4px;
   }
 
   .club-hero__visual {
-    min-height: 280px;
-    height: clamp(280px, 78vw, 380px);
     margin-right: -6px;
   }
 
   .club-hero__photo--cut img,
   .club-hero__photo-img {
-    transform: scale(1.4);
+    transform: scale(1.48);
   }
 
-  .club-hero__lead {
-    max-width: 24ch;
+  .club-hero__features {
+    margin-top: 14px;
+    gap: 6px;
+  }
+
+  .club-hero__bridge {
+    margin-top: 8px;
+  }
+
+  .club-hero__motto {
+    font-size: 10px;
+    gap: 5px;
   }
 }
 
@@ -716,6 +852,7 @@ export const CLUB_HERO_CSS = `
   .club-hero__photo-img,
   .club-hero__copy > *,
   .club-hero__visual,
+  .club-hero__bridge,
   .club-hero__features {
     animation: none !important;
     transition: none !important;

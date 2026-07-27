@@ -11,6 +11,8 @@ import ClubSystemSection from "@/components/club/blocks/ClubSystemSection";
 import ClubTariffsSection from "@/components/club/blocks/ClubTariffsSection";
 import ClubGuaranteeSupportSection from "@/components/club/blocks/ClubGuaranteeSupportSection";
 import ClubChangesSection from "@/components/club/blocks/ClubChangesSection";
+import ClubFaqSection from "@/components/club/blocks/ClubFaqSection";
+import ClubFooterSection from "@/components/club/blocks/ClubFooterSection";
 import { CLUB_ANCHOR_BLOCKS } from "@/lib/club/anchor-blocks";
 import { createLegacyBlockComponent } from "@/lib/site/create-legacy-block";
 import { getPageBlock } from "@/lib/site/blocks";
@@ -26,14 +28,6 @@ function ClubHiddenBlock() {
 
 const ClubScrollScriptSection1 = createLegacyBlockComponent(getPageBlock("club", "rec1145582781"));
 const ClubEmptyScriptSection = createLegacyBlockComponent(getPageBlock("club", "rec1147911501"));
-const ClubFeatureSection9 = createLegacyBlockComponent(getPageBlock("club", "rec1146332321"));
-const ClubPricingSection = createLegacyBlockComponent(getPageBlock("club", "rec1146425806"));
-const ClubGridScriptSection = createLegacyBlockComponent(getPageBlock("club", "rec1146566096"));
-const ClubFeatureSection10 = createLegacyBlockComponent(getPageBlock("club", "rec1146561446"));
-const ClubFaqSection = createLegacyBlockComponent(getPageBlock("club", "rec1146573076"));
-const ClubFeatureSection11 = createLegacyBlockComponent(getPageBlock("club", "rec1146578701"));
-const ClubContactsSection = createLegacyBlockComponent(getPageBlock("club", "rec1146579081"));
-const ClubCtaSection = createLegacyBlockComponent(getPageBlock("club", "rec1145585201"));
 const ClubScriptSection2 = createLegacyBlockComponent(getPageBlock("club", "rec1147900651"));
 const ClubScriptSection3 = createLegacyBlockComponent(getPageBlock("club", "rec1148453191"));
 
@@ -79,16 +73,20 @@ export const CLUB_REACT_BLOCKS: Record<string, ComponentType> = {
   rec1147868781: CLUB_ANCHOR_BLOCKS.rec1147868781,
   // Old Tilda "Изменения" — replaced by ClubChangesSection
   rec1146332496: ClubChangesSection,
-  rec1146332321: ClubFeatureSection9,
+  // Old gray / leftover Tilda after changes — hide until rebuilt
+  rec1146332321: ClubHiddenBlock,
   rec1148278101: CLUB_ANCHOR_BLOCKS.rec1148278101,
-  rec1146425806: ClubPricingSection,
-  rec1146566096: ClubGridScriptSection,
-  rec1146561446: ClubFeatureSection10,
+  rec1146425806: ClubHiddenBlock,
+  rec1146566096: ClubHiddenBlock,
+  rec1146561446: ClubHiddenBlock,
+  // Old Tilda FAQ — replaced by React accordion
   rec1146573076: ClubFaqSection,
-  rec1146578701: ClubFeatureSection11,
+  rec1146578701: ClubHiddenBlock,
   rec1147869746: CLUB_ANCHOR_BLOCKS.rec1147869746,
-  rec1146579081: ClubContactsSection,
-  rec1145585201: ClubCtaSection,
+  // Old Tilda contacts/footer — replaced by ClubFooterSection
+  rec1146579081: ClubFooterSection,
+  // Old leftover CTA/spacer after footer — hide
+  rec1145585201: ClubHiddenBlock,
   rec1147900651: ClubScriptSection2,
   rec1148453191: ClubScriptSection3,
   rec1147894846: ClubHiddenBlock,
