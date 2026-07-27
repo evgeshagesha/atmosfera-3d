@@ -137,15 +137,20 @@ export default function ClubHeroSection() {
               ))}
             </nav>
 
-            <a
-              className="club-hero__header-cta"
-              href={CLUB_TRIBUTE_TG}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Присоединиться
-              <i aria-hidden="true">→</i>
-            </a>
+            <div className="club-hero__header-actions">
+              <a className="club-hero__site-link" href="/">
+                На главный сайт
+              </a>
+              <a
+                className="club-hero__header-cta"
+                href={CLUB_TRIBUTE_TG}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Присоединиться
+                <i aria-hidden="true">→</i>
+              </a>
+            </div>
 
             <button
               type="button"
@@ -171,6 +176,9 @@ export default function ClubHeroSection() {
                   {item.label}
                 </a>
               ))}
+              <a href="/" onClick={() => setMenuOpen(false)}>
+                На главный сайт
+              </a>
               <a
                 href={CLUB_TRIBUTE_TG}
                 target="_blank"

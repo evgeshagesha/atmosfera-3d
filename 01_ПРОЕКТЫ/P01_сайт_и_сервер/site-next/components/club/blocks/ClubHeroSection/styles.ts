@@ -126,6 +126,39 @@ export const CLUB_HERO_CSS = `
   opacity: 1;
 }
 
+.club-hero__header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.club-hero__site-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.88) !important;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.club-hero__site-link:hover,
+.club-hero__site-link:focus-visible {
+  border-color: rgba(47, 107, 255, 0.55);
+  background: rgba(47, 107, 255, 0.12);
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
 .club-hero__header-cta {
   display: inline-flex;
   align-items: center;
@@ -271,16 +304,16 @@ export const CLUB_HERO_CSS = `
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
-  object-position: 58% 8% !important;
-  transform: scale(1.28);
+  object-position: 56% 4% !important;
+  transform: scale(1.42);
   transform-origin: center top;
-  filter: contrast(1.08) saturate(1.06) brightness(1.02);
+  filter: contrast(1.06) saturate(1.04) brightness(1.05);
   -webkit-mask-image:
-    linear-gradient(180deg, #000 0%, #000 52%, rgba(0, 0, 0, 0.35) 64%, transparent 76%),
-    linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    linear-gradient(180deg, #000 0%, #000 68%, rgba(0, 0, 0, 0.55) 82%, transparent 94%),
+    linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
   mask-image:
-    linear-gradient(180deg, #000 0%, #000 52%, rgba(0, 0, 0, 0.35) 64%, transparent 76%),
-    linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    linear-gradient(180deg, #000 0%, #000 68%, rgba(0, 0, 0, 0.55) 82%, transparent 94%),
+    linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
   z-index: 1;
@@ -288,8 +321,8 @@ export const CLUB_HERO_CSS = `
 }
 
 @keyframes clubHeroPhotoFloat {
-  0%, 100% { transform: scale(1.28) translateY(0); }
-  50% { transform: scale(1.28) translateY(-8px); }
+  0%, 100% { transform: scale(1.42) translateY(0); }
+  50% { transform: scale(1.42) translateY(-8px); }
 }
 
 .club-hero__photo::after {
@@ -301,13 +334,13 @@ export const CLUB_HERO_CSS = `
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, var(--ch-bg) 0%, transparent 10%, transparent 90%, var(--ch-bg) 100%),
+    linear-gradient(90deg, var(--ch-bg) 0%, transparent 8%, transparent 92%, var(--ch-bg) 100%),
     linear-gradient(
       180deg,
-      transparent 42%,
-      rgba(0, 0, 0, 0.45) 58%,
-      rgba(0, 0, 0, 0.88) 70%,
-      var(--ch-bg) 82%
+      transparent 62%,
+      rgba(0, 0, 0, 0.22) 78%,
+      rgba(0, 0, 0, 0.62) 90%,
+      var(--ch-bg) 100%
     );
   pointer-events: none;
   z-index: 2;
@@ -600,6 +633,16 @@ export const CLUB_HERO_CSS = `
     display: none;
   }
 
+  .club-hero__header-actions {
+    display: inline-flex;
+  }
+
+  .club-hero__site-link {
+    min-height: 30px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
   .club-hero__menu-btn {
     display: inline-block;
     flex-shrink: 0;
@@ -694,24 +737,24 @@ export const CLUB_HERO_CSS = `
   .club-hero__photo-img {
     object-fit: contain !important;
     object-position: center 0% !important;
-    transform: scale(1.42);
+    transform: scale(1.55);
     transform-origin: center top;
     animation: none;
     -webkit-mask-image:
-      linear-gradient(180deg, #000 0%, #000 48%, rgba(0, 0, 0, 0.28) 60%, transparent 72%),
-      linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%) !important;
+      linear-gradient(180deg, #000 0%, #000 66%, rgba(0, 0, 0, 0.5) 80%, transparent 92%),
+      linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%) !important;
     mask-image:
-      linear-gradient(180deg, #000 0%, #000 48%, rgba(0, 0, 0, 0.28) 60%, transparent 72%),
-      linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%) !important;
+      linear-gradient(180deg, #000 0%, #000 66%, rgba(0, 0, 0, 0.5) 80%, transparent 92%),
+      linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%) !important;
   }
 
   .club-hero__photo--cut::after {
     background: linear-gradient(
       180deg,
-      transparent 38%,
-      rgba(0, 0, 0, 0.55) 55%,
-      rgba(0, 0, 0, 0.92) 68%,
-      var(--ch-bg) 78%
+      transparent 58%,
+      rgba(0, 0, 0, 0.28) 78%,
+      rgba(0, 0, 0, 0.7) 90%,
+      var(--ch-bg) 100%
     );
   }
 
@@ -827,7 +870,7 @@ export const CLUB_HERO_CSS = `
 
   .club-hero__photo--cut img,
   .club-hero__photo-img {
-    transform: scale(1.48);
+    transform: scale(1.62);
   }
 
   .club-hero__features {
