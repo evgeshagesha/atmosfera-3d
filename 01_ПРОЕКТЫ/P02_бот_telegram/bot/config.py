@@ -19,7 +19,7 @@ ADMIN_TELEGRAM_IDS = [
 ]
 # For funnel: "Через сутки зайди на сайт"
 SITE_URL = os.getenv("SITE_URL", "https://egoshev.ru/baza")
-ONLINE_CLUB_URL = os.getenv("ONLINE_CLUB_URL", "https://egoshev.ru/club")
+ONLINE_CLUB_URL = os.getenv("ONLINE_CLUB_URL", "https://eg.egoshev.ru/club")
 # Telegram Mini App (HTTPS required)
 MINI_APP_URL = os.getenv("MINI_APP_URL", "https://eg.egoshev.ru/app")
 

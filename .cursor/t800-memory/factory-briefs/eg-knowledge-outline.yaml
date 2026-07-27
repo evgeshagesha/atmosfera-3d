@@ -1,0 +1,71 @@
+# Factory brief — eg-knowledge-outline (CREATE)
+# Date: 2026-07-27
+# Command: /t800-start CREATE for atmosfera-3d workspace
+
+brief:
+  goal: >
+    Create project skill eg-knowledge-outline that turns EG empire knowledge vault
+    into structured lesson / webinar / online-module / conference-talk outlines
+    in Notion-ish Russian EG tone. Skill-only MVP; no subagent this run.
+  mode: CREATE
+  target_context:
+    workspace_root: /Users/egoshev/Projects/atmosfera-3d
+    plugin_root: ""
+    memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+    profile: workspace-cursor
+    artifact_surface: cursor-workspace
+    release_handoff: null
+    knowledge_vault_path: null
+    vault_para: 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ
+  artifact_type: skill
+  skill:
+    proposed_name: eg-knowledge-outline
+    skill_path: .cursor/skills/eg-knowledge-outline/SKILL.md
+    disable_model_invocation: false  # auto when user asks урок/вебинар/модуль from vault
+    role_one_liner: >
+      Из базы EG_ИМПЕРИЯ_ЗНАНИЙ собирает структурированный план урока,
+      скелет вебинара или outline онлайн-модуля в тоне Атмосфера 3D.
+  companions:
+    command: false
+    rule: false
+    skill: false
+    references:
+      - references/tone-bans.md
+      - references/outline-template.md
+      - references/vault-map.md
+  constraints:
+    - Write only under atmosfera-3d/.cursor/skills/eg-knowledge-outline/
+    - Knowledge root: 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/
+    - Especially: 08_МАТРИЦЫ_И_КУРСЫ/, 05_МЕТОДИКА_И_ПРАКТИКА/, 06_ПРОДУКТЫ_И_ШКОЛА/, 10_ВЫХОДЫ_ПРОДУКТОВ/
+    - Outputs: lesson plan | webinar script skeleton | online product module outline
+    - Tone RU: calm premium EG / Атмосфера 3D; no medical promises/diagnoses
+    - No Telegram bot scope
+    - Skill-only MVP (no subagent this run)
+    - Do not copy vault corpus into skill body — map paths + how to pull, not dump content
+  behavior:
+    trigger_phrases:
+      - урок
+      - вебинар
+      - онлайн-урок
+      - модуль
+      - конференционный доклад
+      - план занятия
+      - outline из базы знаний
+    steps:
+      - Clarify topic + format + duration + audience (if missing: 1-3 questions OR strong hypothesis)
+      - Pull from vault: matrices (МФР, ПИР, дыхание, тесты, блок1), FP exercises, FT books catalog, Product System
+      - Produce structured outline in Notion-ish Russian style
+      - Map to Product ladder next step (гайд/тест/курс/клуб/консультация)
+      - Suggest save path under 10_ВЫХОДЫ_ПРОДУКТОВ/
+  scout:
+    kb_fresh: true
+    block_factory: false
+    slug_was: eg-knowledge-to-webinar
+    brain_renamed_to: eg-knowledge-outline
+  research_mode: LIGHT  # prior departments done by Director
+  next_pipeline:
+    - t-800-factory-architect
+    - t-800-factory-builder
+    - t-800-factory-integrator
+    - t-800-prompt-auditor
+    - t-800-factory-auditor

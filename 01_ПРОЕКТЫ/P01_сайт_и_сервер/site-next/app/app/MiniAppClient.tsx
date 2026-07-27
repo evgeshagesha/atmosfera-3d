@@ -49,7 +49,7 @@ const PROGRAMS: Program[] = [
     title: "Клуб Атмосфера 3D",
     subtitle: "Страница клуба: формат, условия и как вступить",
     price: "от 1 758 ₽/мес",
-    href: "https://egoshev.ru/club",
+    href: "https://eg.egoshev.ru/club",
   },
   {
     id: "online-consult",

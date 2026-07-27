@@ -2,8 +2,11 @@
 name: eg-bot-knowledge
 description: |
   Куратор knowledge_base бота: приветствие, стиль EG, протоколы, check-in.
-  Use when обновление bot/knowledge_base/, welcome, тон AI-ответов в группе.
-  Do NOT use when Python-код или deploy (→ eg-bot-engineer).
+  Use when обновление bot/knowledge_base/, welcome, тон AI-ответов в группе;
+  готовые FAQ-ответы как KB-файлы после матрицы eg-bot-manager-flow.
+  Do NOT use when Python-код или deploy (→ eg-bot-engineer);
+  дизайн воронки менеджера / state-map / trigger-матрица (→ skill eg-bot-manager-flow);
+  этот агент — только тексты knowledge_base.
 ---
 
 # EG Bot Knowledge

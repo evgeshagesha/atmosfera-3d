@@ -29,7 +29,7 @@ MENU_LINKS = [
     ("Тест тела · 684 ₽", "test"),
     ("Дыхание и осанка · 1 990 ₽", "breath"),
     ("Базовая настройка · 9 990 ₽", "baza"),
-    ("Клуб · 1 680 ₽/мес", "club"),
+    ("Клуб · 1 758 ₽/мес", "club"),
     ("Запись в студию", "anketa"),
 ]
 
@@ -119,7 +119,7 @@ async def send_funnel_next_steps(update: Update) -> None:
         [InlineKeyboardButton("Базовая настройка · 9 990 ₽", url=baza)],
     ]
     if club:
-        buttons.append([InlineKeyboardButton("Клуб · 1 680 ₽/мес", url=club)])
+        buttons.append([InlineKeyboardButton("Клуб · 1 758 ₽/мес", url=club)])
     buttons.append([InlineKeyboardButton("Запись в студию", url=anketa)])
     await message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons))
 
@@ -161,25 +161,46 @@ def _msg(update: Update):
     return update.effective_message
 
 
-async def deliver_lead_guide(update: Update) -> bool:
-    """Send guide as URL button → https://egoshev.ru/gaid."""
+async def deliver_lead_guide(
+    update: Update, context: ContextTypes.DEFAULT_TYPE | None = None
+) -> bool:
+    """Send guide clearly + schedule soft follow-ups."""
+    from followups import schedule_lead_followups
+
     message = _msg(update)
+    user = update.effective_user
     if not message:
         return False
     guide = get_page_url("lead_telo") or GUIDE_URL
-    await message.reply_text(
-        "Ваш гайд — откройте по кнопке:",
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Открыть гайд", url=guide)]]
-        ),
+    text = (
+        "✅ <b>Подписка есть</b> — спасибо!\n\n"
+        "Вот ваш гайд:\n"
+        "<b>«С чего начинать работу с телом»</b>\n\n"
+        "Откройте по кнопке ниже и сохраните себе.\n\n"
+        "Не нужно делать всё сразу.\n"
+        "Один блок сегодня — уже хороший старт.\n\n"
+        "<b>И важный момент:</b>\n"
+        "в конце гайда вас ждёт ещё один <b>сюрприз</b>.\n"
+        "Обязательно дочитайте до конца."
     )
+    await message.reply_text(
+        text,
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Открыть гайд PDF", url=guide)]]
+        ),
+        parse_mode="HTML",
+    )
+    if context and user:
+        schedule_lead_followups(
+            context, chat_id=message.chat_id, user_id=user.id
+        )
     return True
 
 
 async def flow_telo(
     update: Update, context: ContextTypes.DEFAULT_TYPE | None = None
 ) -> None:
-    """After Start from Instagram: ask channel sub → then guide link only."""
+    """After Start from Instagram: ask channel sub → then guide + follow-ups."""
     message = _msg(update)
     user = update.effective_user
     if not message or not user or context is None:
@@ -190,7 +211,7 @@ async def flow_telo(
         await ask_subscribe(message, callback_data="subok:telo", what="гайд")
         return
 
-    await deliver_lead_guide(update)
+    await deliver_lead_guide(update, context)
 
 
 async def cmd_kurs(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -243,19 +264,19 @@ async def cmd_club(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tg_pay = get_prodamus_url("club")  # tribute_url (Telegram)
     web_pay = get_tribute_web_url("club")
     lines = [
-        f"**{title}** — {p.get('price_rub', 1680):,} ₽/мес".replace(",", " "),
+        f"**{title}** — {p.get('price_rub', 1758):,} ₽/мес".replace(",", " "),
         p.get("description", "Закрытая группа · программы · поддержка"),
         "",
         "Оплата через Tribute. После оплаты откроется доступ в клуб.",
+        "Страница клуба: https://eg.egoshev.ru/club",
     ]
     buttons: list[list[InlineKeyboardButton]] = []
     if tg_pay:
         buttons.append([InlineKeyboardButton("Оформить в Telegram", url=tg_pay)])
     if web_pay:
         buttons.append([InlineKeyboardButton("Оплатить в браузере", url=web_pay)])
-    page = get_page_url("club")
-    if page:
-        buttons.append([InlineKeyboardButton("Страница клуба", url=page)])
+    page = get_page_url("club") or "https://eg.egoshev.ru/club"
+    buttons.append([InlineKeyboardButton("Страница клуба", url=page)])
     await update.message.reply_text(
         "\n".join(lines),
         reply_markup=InlineKeyboardMarkup(buttons) if buttons else None,

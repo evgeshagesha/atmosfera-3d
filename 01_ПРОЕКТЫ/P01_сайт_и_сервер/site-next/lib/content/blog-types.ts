@@ -33,8 +33,11 @@ export function blogPostHref(slug: string): string {
   return `/blog/${slug}`;
 }
 
-/** Tilda prefixes slugs with a short uid, e.g. `73mdd06yx1-mif-uglevodizhir`. */
-const TILDA_SLUG_PREFIX = /^[a-z0-9]{6,12}-/i;
+/**
+ * Tilda prefixes slugs with a short uid, e.g. `73mdd06yx1-mif-uglevodizhir`.
+ * Require at least one digit so real words like `molodost-kozhi-…` are not stripped.
+ */
+const TILDA_SLUG_PREFIX = /^(?=[a-z0-9]*\d)[a-z0-9]{6,12}-/i;
 
 export function cleanBlogTitle(title: string): string {
   return title

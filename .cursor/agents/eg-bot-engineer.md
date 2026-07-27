@@ -4,7 +4,8 @@ description: |
   Инженер Telegram-бота P02 (Атмосфера 3D): bot.py, webhook Prodamus,
   products.json, подписка клуб 1680, деплой Timeweb, cron автопостинг.
   Use when правки кода бота, деплой, webhook, Prodamus, /kurs /club /status.
-  Do NOT use when тексты Reels/Stories (→ kontent), knowledge_base без кода (→ eg-bot-knowledge).
+  Do NOT use when тексты Reels/Stories (→ kontent), knowledge_base без кода (→ eg-bot-knowledge);
+  дизайн менеджер-флоу / анкета / FAQ-триггеры / follow-up до приёма (→ skill eg-bot-manager-flow).
 ---
 
 # EG Bot Engineer · P02

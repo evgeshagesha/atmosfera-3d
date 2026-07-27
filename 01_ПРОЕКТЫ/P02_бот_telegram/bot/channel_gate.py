@@ -51,9 +51,15 @@ def subscribe_keyboard(callback_data: str) -> InlineKeyboardMarkup:
 
 async def ask_subscribe(message, *, callback_data: str, what: str = "гайд") -> None:
     text = (
-        "Перед выдачей {what} проверяю подписку на канал.\n\n"
+        "Сейчас выдам <b>{what}</b> — один короткий шаг.\n\n"
         "1) Нажмите «Подписаться на канал»\n"
-        "2) Вернитесь и нажмите «Я подписался — открыть гайд»\n\n"
-        "Без подписки гайд не открою."
+        "2) Подпишитесь\n"
+        "3) Вернитесь сюда и нажмите\n"
+        "<b>«Я подписался — открыть гайд»</b>\n\n"
+        "После этого сразу пришлю ссылку."
     ).format(what=what)
-    await message.reply_text(text, reply_markup=subscribe_keyboard(callback_data))
+    await message.reply_text(
+        text,
+        reply_markup=subscribe_keyboard(callback_data),
+        parse_mode="HTML",
+    )

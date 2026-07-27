@@ -1,0 +1,88 @@
+# Factory brief — eg-bot-manager-flow (CREATE Phase A)
+# Date: 2026-07-27
+# Command: /t800-start CREATE Phase A for atmosfera-3d
+
+brief:
+  goal: >
+    Phase A Cursor skill for Telegram bot manager workflow:
+    leads → анкета → follow-up invite to studio appointment + Trigger FAQ matrix
+    in EG tone. Optional thin slash command. Light PATCH of eg-bot-engineer /
+    eg-bot-knowledge descriptions only. No new subagent. No Phase B posting /
+    Phase C Remotion this run.
+  mode: CREATE
+  phase: A
+  target_context:
+    workspace_root: /Users/egoshev/Projects/atmosfera-3d
+    plugin_root: ""
+    memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+    profile: workspace-cursor
+    artifact_surface: cursor-workspace
+    release_handoff: null
+    knowledge_vault_path: null
+    p02_bot_path: 01_ПРОЕКТЫ/P02_бот_telegram/bot/
+    bot_code_contexts:
+      - Desktop/eg-community-bot
+      - 01_ПРОЕКТЫ/P02_бот_telegram/
+      - _АВТОМАТИЗАЦИИ_СТАРЫЕ/telegram_бот
+  artifact_type: skill
+  skill:
+    proposed_name: eg-bot-manager-flow
+    skill_path: .cursor/skills/eg-bot-manager-flow/SKILL.md
+    disable_model_invocation: false
+    role_one_liner: >
+      Проектирует и уточняет менеджер-флоу Telegram-бота EG: лиды, анкета,
+      follow-up до записи в студию и FAQ-триггеры в тоне Атмосфера 3D.
+  companions:
+    command: true  # optional thin .cursor/commands/eg-bot-manager-flow.md
+    rule: false
+    skill: false
+    references:
+      - references/trigger-matrix.md
+      - references/manager-state-map.md
+      - references/tone-bans.md
+  patch_existing:
+    - path: .cursor/agents/eg-bot-engineer.md
+      change: description routing only — Do NOT manager-flow design → eg-bot-manager-flow
+    - path: .cursor/agents/eg-bot-knowledge.md
+      change: description routing only — boundary vs manager-flow (KB texts vs flow/triggers)
+  do_not_create:
+    - new subagent eg-bot-manager / eg-sales-manager / clones
+    - alwaysApply rule for manager/triggers
+    - Phase B posting skill
+    - Remotion skill / merge remotion into manager skill
+    - PubMed / “10 agents”
+    - rewrite bot.py inside skill
+    - vault dump / secrets
+  constraints:
+    - Write skill under .cursor/skills/eg-bot-manager-flow/
+    - Optional command under .cursor/commands/eg-bot-manager-flow.md
+    - PATCH only descriptions of eg-bot-engineer + eg-bot-knowledge
+    - Cite bot code paths; do not rewrite bot.py in skill
+    - Tone RU: calm premium EG; no medical promises
+    - registry_patch: null (workspace skill; no new agent)
+    - Product note (user-facing, not Cursor artifact): 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/06_ПРОДУКТЫ_И_ШКОЛА/BOT_ROADMAP_MVP.md
+  behavior:
+    trigger_phrases:
+      - менеджер бота
+      - анкета лида
+      - follow-up запись
+      - FAQ триггеры бота
+      - manager flow
+      - приглашение на приём
+    scope:
+      - Manager: leads → анкета → follow-up invite to studio appointment
+      - Trigger FAQ matrix in EG tone
+      - Handoff: code/deploy → eg-bot-engineer; KB text files → eg-bot-knowledge
+      - Note Phase B/C deferred: posting; ffmpeg+Remotion async video (existing remotion-*)
+  handoff_map:
+    code_deploy: eg-bot-engineer
+    kb_texts: eg-bot-knowledge
+    manager_flow_design: eg-bot-manager-flow
+    remotion: remotion-* skills
+  research_mode: SKIP  # Director prior; brain brief ready
+  next_pipeline:
+    - t-800-factory-architect
+    - t-800-factory-builder
+    - t-800-factory-integrator
+    - t-800-prompt-auditor
+    - t-800-factory-auditor

@@ -42,7 +42,7 @@
   },
   "club": {
     "title": "Клуб Атмосфера 3D",
-    "price_rub": 1680,
+    "price_rub": 1758,
     "type": "subscription",
     "billing_period": "month",
     "deep_link": "club",
@@ -50,8 +50,8 @@
     "tribute_url": "https://t.me/tribute/app?startapp=s11vY",
     "tribute_web_url": "https://web.tribute.tg/s/11vY",
     "telegram_invite_url": "https://t.me/+ЗАМЕНИ_ИНВАЙТ_КЛУБ",
-    "page_url": "https://egoshev.ru/club",
-    "description": "Подписка 1 680 ₽/мес · регулярность и поддержка"
+    "page_url": "https://eg.egoshev.ru/club",
+    "description": "Подписка 1 758 ₽/мес · регулярность и поддержка"
   },
   "studio": {
     "title": "Личная работа в студии",

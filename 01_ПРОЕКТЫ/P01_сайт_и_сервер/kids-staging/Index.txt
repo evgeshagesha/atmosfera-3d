@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Детские тренировки и программы выходного дня в Москве — Евгений Гошев</title>
+  <meta name="description" content="Закрытые детские занятия и программы выходного дня в мини-группе до четырёх человек: естественное движение, координация, физическая подготовка, прогулка, общение и развитие характера.">
+
+  <link rel="canonical" href="https://egoshev.ru/kids">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Евгений Гошев">
+  <meta property="og:title" content="Детские программы движения и характера — Евгений Гошев">
+  <meta property="og:description" content="Закрытые будничные занятия и программы выходного дня для детей в мини-группе до четырёх человек. Москва, Савёловская и природные локации.">
+  <meta property="og:url" content="https://egoshev.ru/kids">
+  <meta property="og:image" content="https://egoshev.ru/kids/assets/images/og-image.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Детские программы движения и характера — Евгений Гошев">
+  <meta name="twitter:description" content="Закрытые занятия и программы выходного дня для детей в мини-группе до четырёх человек. Москва.">
+  <meta name="twitter:image" content="https://egoshev.ru/kids/assets/images/og-image.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ВСТАВИТЬ КОД ЯНДЕКС МЕТРИКИ -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Детские программы движения и характера — Евгений Гошев",
+    "serviceType": "Закрытые детские занятия и программы выходного дня",
+    "areaServed": { "@type": "City", "name": "Москва" },
+    "provider": {
+      "@type": "Person",
+      "name": "Евгений Гошев",
+      "jobTitle": "Специалист по движению, физический терапевт, основатель студии «Атмосфера 3D»"
+    },
+    "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 15 },
+    "offers": [
+      { "@type": "Offer", "priceCurrency": "RUB", "price": "15000", "name": "Лаборатория движения — будничное занятие" },
+      { "@type": "Offer", "priceCurrency": "RUB", "price": "17000", "name": "День движения и характера — программа выходного дня" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+  <!-- ============ 1. НАВИГАЦИЯ ============ -->
+  <header class="topbar" id="topbar">
+    <div class="container topbar__inner">
+      <a href="#top" class="brand" aria-label="Евгений Гошев — на главную">
+        <span class="brand__name">Евгений&nbsp;Гошев</span>
+        <span class="brand__sub">Программы для детей</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="#formats" class="nav__link">Форматы</a>
+        <a href="#weekday" class="nav__link">Лаборатория движения</a>
+        <a href="#weekend" class="nav__link">День движения</a>
+        <a href="#author" class="nav__link">О Евгении</a>
+        <a href="#pricing" class="nav__link">Стоимость</a>
+        <a href="#faq" class="nav__link">Вопросы</a>
+      </nav>
+
+      <button type="button" class="btn btn--accent btn--sm topbar__cta js-apply" data-format="general">Заполнить анкету</button>
+
+      <button type="button" class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
+      <a href="#formats" class="mobile-menu__link">Форматы</a>
+      <a href="#weekday" class="mobile-menu__link">Лаборатория движения</a>
+      <a href="#weekend" class="mobile-menu__link">День движения</a>
+      <a href="#author" class="mobile-menu__link">О Евгении</a>
+      <a href="#pricing" class="mobile-menu__link">Стоимость</a>
+      <a href="#faq" class="mobile-menu__link">Вопросы</a>
+      <button type="button" class="btn btn--accent mobile-menu__cta js-apply" data-format="general">Заполнить анкету</button>
+    </nav>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ 2. ПЕРВЫЙ ЭКРАН ============ -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <div class="hero__content reveal">
+          <p class="overline">Детские программы Евгения Гошева&nbsp;· Москва</p>
+          <h1 class="hero__title">Движение, которое развивает тело и&nbsp;формирует характер</h1>
+          <p class="hero__lead">Закрытые занятия и программы выходного дня для детей в мини-группе до&nbsp;четырёх человек.</p>
+          <p class="hero__desc">Ребёнок учится лучше чувствовать своё тело, двигаться увереннее, справляться с новыми задачами, общаться и взаимодействовать с другими детьми рядом со спокойным взрослым наставником.</p>
+
+          <ul class="hero__facts" aria-label="Ключевые параметры">
+            <li><span class="hero__facts-num" data-count="4">до&nbsp;4</span><span>детей в группе</span></li>
+            <li><span>Москва</span><span>Савёловская</span></li>
+            <li><span>Студия&nbsp;и&nbsp;природа</span><span>разные локации</span></li>
+            <li><span>По&nbsp;анкете</span><span>предварительно</span></li>
+          </ul>
+
+          <div class="hero__actions">
+            <a href="#formats" class="btn btn--accent btn--lg">Выбрать формат</a>
+            <button type="button" class="btn btn--ghost btn--lg js-apply" data-format="general">Заполнить анкету</button>
+          </div>
+        </div>
+
+        <div class="hero__media reveal">
+          <div class="photo-placeholder photo-placeholder--hero" data-file="eugene-kids-hero.webp" aria-hidden="true">
+            <span class="photo-placeholder__label">eugene-kids-hero.webp · Евгений в студии или на природе, спокойный взгляд, пространство вокруг</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container hero__statement-wrap reveal">
+        <p class="hero__statement">Не просто дать ребёнку нагрузку.<br><em>Научить его лучше управлять собой.</em></p>
+        <p class="hero__keywords">Движение&nbsp;· Координация&nbsp;· Уверенность&nbsp;· Характер&nbsp;· Общение</p>
+      </div>
+    </section>
+
+    <!-- ============ 3. ДВЕ КАРТОЧКИ ФОРМАТОВ ============ -->
+    <section class="section section--dark" id="formats">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Два формата</p>
+          <h2 class="section__title">Выберите подходящий формат</h2>
+          <p class="section__intro">Будничные занятия для системного физического развития или насыщенная программа выходного дня.</p>
+        </div>
+
+        <div class="fmt-switch reveal" role="tablist" aria-label="Переключатель форматов">
+          <button type="button" class="fmt-tab is-active" role="tab" aria-selected="true" data-format="weekday">Будни</button>
+          <button type="button" class="fmt-tab" role="tab" aria-selected="false" data-format="weekend">Выходные</button>
+        </div>
+
+        <div class="formats">
+          <article class="format-card reveal" data-format-card="weekday" id="card-weekday">
+            <p class="format-card__label">Будни</p>
+            <h3 class="format-card__name">Лаборатория движения</h3>
+            <p class="format-card__desc">Закрытое занятие, посвящённое качеству движения, координации, опоре, мобильности и физической подготовке ребёнка.</p>
+            <dl class="format-card__meta">
+              <div><dt>Продолжительность</dt><dd data-duration="weekday"></dd></div>
+              <div><dt>Участники</dt><dd data-groupsize="weekday"></dd></div>
+              <div><dt>Локация</dt><dd>Студия на Савёловской или согласованная площадка в Москве</dd></div>
+            </dl>
+            <p class="format-card__price"><span data-price="weekday"></span><span class="format-card__per">за ребёнка</span></p>
+            <button type="button" class="btn btn--accent js-apply" data-format="weekday">Записаться на занятие</button>
+            <p class="format-card__note">Дата и состав группы подтверждаются после заполнения анкеты и предварительного разговора с родителем.</p>
+            <a href="#weekday" class="format-card__more">Подробнее о формате →</a>
+          </article>
+
+          <article class="format-card reveal" data-format-card="weekend" id="card-weekend">
+            <p class="format-card__label">Выходные</p>
+            <h3 class="format-card__name">День движения и характера</h3>
+            <p class="format-card__desc">Программа, в которой тренировка соединяется с прогулкой, совместным приёмом пищи, фильмом, обсуждением и командными заданиями.</p>
+            <dl class="format-card__meta">
+              <div><dt>Продолжительность</dt><dd data-duration="weekend"></dd></div>
+              <div><dt>Участники</dt><dd data-groupsize="weekend"></dd></div>
+              <div><dt>Локация</dt><dd>Студия на Савёловской, парк, лес или комбинированный маршрут</dd></div>
+            </dl>
+            <p class="format-card__price"><span data-price="weekend"></span><span class="format-card__per">за ребёнка</span></p>
+            <button type="button" class="btn btn--accent js-apply" data-format="weekend">Подать заявку на программу</button>
+            <p class="format-card__note">Программа проводится после формирования подходящей группы. Можно собрать собственную закрытую группу до четырёх детей.</p>
+            <a href="#weekend" class="format-card__more">Подробнее о формате →</a>
+          </article>
+        </div>
+
+        <p class="formats__note reveal">Специальные локации, билеты, индивидуальная логистика и дополнительные услуги согласуются отдельно.</p>
+
+        <!-- Мини-маршрут формата (обновляется переключателем) -->
+        <div class="route reveal" aria-live="polite">
+          <div class="route__panel is-active" data-route="weekday">
+            <p class="route__label">Маршрут будничного занятия</p>
+            <ol class="route__steps">
+              <li>Опора</li><li>Координация</li><li>Движение</li><li>Сила</li><li>Восстановление</li>
+            </ol>
+          </div>
+          <div class="route__panel" data-route="weekend">
+            <p class="route__label">Маршрут программы выходного дня</p>
+            <ol class="route__steps">
+              <li>Движение</li><li>Прогулка</li><li>Еда</li><li>История</li><li>Разговор</li><li>Командная задача</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. БОЛИ И ЗАПРОСЫ РОДИТЕЛЕЙ ============ -->
+    <section class="section section--light" id="pains">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Зачем это нужно</p>
+          <h2 class="section__title">Когда хочется дать ребёнку больше, чем ещё одну секцию</h2>
+        </div>
+
+        <div class="cards cards--pains">
+          <article class="card reveal">
+            <span class="card__num">01</span>
+            <h3 class="card__title">Ребёнок мало двигается</h3>
+            <p class="card__text">Школа, дорога, домашние задания и экран занимают значительную часть дня, а разнообразного движения становится меньше.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">02</span>
+            <h3 class="card__title">Тело развивается неравномерно</h3>
+            <p class="card__text">Ребёнок может быть активным, но при этом испытывать сложности с балансом, координацией, опорой или управлением телом.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">03</span>
+            <h3 class="card__title">Однообразные занятия быстро надоедают</h3>
+            <p class="card__text">Детям важно не только повторять упражнения, но и исследовать, играть, решать задачи и видеть смысл происходящего.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">04</span>
+            <h3 class="card__title">Не хватает качественного взрослого внимания</h3>
+            <p class="card__text">В группе до четырёх детей Евгений может видеть каждого: объяснять, поддерживать и давать задачи подходящего уровня.</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__num">05</span>
+            <h3 class="card__title">Родителю важно понимать, что происходит</h3>
+            <p class="card__text">После занятия или программы родитель получает конкретные наблюдения, а не формальную фразу «всё прошло хорошо».</p>
+          </article>
+        </div>
+
+        <p class="pains__note reveal">Современному родителю сложно одновременно работать, заботиться о семье и самостоятельно выстраивать ребёнку качественную двигательную среду. Эта программа не заменяет родителя — она становится профессиональным дополнением к семейному развитию.</p>
+      </div>
+    </section>
+
+    <!-- ============ 5. ПОЧЕМУ ДВИЖЕНИЕ ВАЖНО ============ -->
+    <section class="section section--dark" id="why">
+      <div class="container evidence reveal">
+        <div class="evidence__head">
+          <p class="overline overline--accent">Основа</p>
+          <h2 class="section__title">Движение — основа детского развития</h2>
+        </div>
+        <div class="evidence__body">
+          <p>Разнообразная физическая активность поддерживает развитие двигательных навыков, физической формы, координации, когнитивных функций, уверенности и способности взаимодействовать с окружающими.</p>
+          <p>Ребёнок познаёт мир не только через объяснения, но и через действие: движение, равновесие, прикосновение, игру, попытки и повторения.</p>
+          <p>Поэтому задача программы — не заставить ребёнка выполнить как можно больше упражнений, а создать среду, в которой он учится лучше чувствовать и использовать своё тело.</p>
+          <p class="evidence__source">Всемирная организация здравоохранения отмечает связь регулярной физической активности у детей с развитием двигательных навыков, когнитивных функций, физического здоровья и социальной интеграции.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. ЛАБОРАТОРИЯ ДВИЖЕНИЯ ============ -->
+    <section class="section section--light" id="weekday">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Формат · будни</p>
+          <h2 class="section__title">Лаборатория движения</h2>
+          <p class="section__intro">Не просто тренировка, а системное знакомство ребёнка с возможностями собственного тела.</p>
+        </div>
+
+        <div class="product-intro reveal">
+          <p>Многие детские секции хорошо развивают навыки конкретного вида спорта, но не всегда уделяют достаточно внимания фундаменту: качеству опоры, координации, мобильности, дыханию и способности управлять телом в разных положениях.</p>
+          <p>На занятиях Евгений соединяет естественное движение, физическую подготовку и понятные игровые задачи. Ребёнок ползает, висит, прыгает, балансирует, перемещается в разных направлениях, учится чувствовать опору и контролировать своё тело.</p>
+          <p class="product-intro__accent">Программа может дополнять основной вид спорта или стать самостоятельной физической базой ребёнка.</p>
+        </div>
+
+        <h3 class="subhead reveal">Основные направления работы</h3>
+        <div class="directions directions--eight">
+          <article class="direction reveal"><span class="direction__num">01</span><h4 class="direction__title">Функция стопы и опора</h4><p class="direction__text">Упражнения на чувствительность стопы, баланс, устойчивость и взаимодействие с поверхностью.</p></article>
+          <article class="direction reveal"><span class="direction__num">02</span><h4 class="direction__title">Координация</h4><p class="direction__text">Умение согласовывать движения рук, ног, корпуса и взгляда.</p></article>
+          <article class="direction reveal"><span class="direction__num">03</span><h4 class="direction__title">Мобильность</h4><p class="direction__text">Разнообразные движения тазобедренных суставов, грудного отдела, плечевого пояса и голеностопа.</p></article>
+          <article class="direction reveal"><span class="direction__num">04</span><h4 class="direction__title">Контроль корпуса</h4><p class="direction__text">Способность сохранять устойчивость, менять положение тела и управлять движением без лишнего напряжения.</p></article>
+          <article class="direction reveal"><span class="direction__num">05</span><h4 class="direction__title">Сила</h4><p class="direction__text">Безопасная работа с собственным весом, подходящим инвентарём и естественными положениями тела.</p></article>
+          <article class="direction reveal"><span class="direction__num">06</span><h4 class="direction__title">Естественное движение</h4><p class="direction__text">Ползание, висы, лазание, приседания, перекаты, прыжки и перемещения у земли.</p></article>
+          <article class="direction reveal"><span class="direction__num">07</span><h4 class="direction__title">Дыхание</h4><p class="direction__text">Умение не задерживать дыхание, восстанавливаться и сохранять спокойствие во время физической задачи.</p></article>
+          <article class="direction reveal"><span class="direction__num">08</span><h4 class="direction__title">Игра и интерес</h4><p class="direction__text">Упражнения превращаются в понятные задачи, испытания и небольшие игровые сценарии.</p></article>
+        </div>
+
+        <div class="weekday-flow reveal">
+          <div class="weekday-flow__col">
+            <h3 class="subhead">Как проходит занятие</h3>
+            <ol class="flow-list">
+              <li><span class="flow-list__num">1</span><span>Знакомство и оценка состояния</span></li>
+              <li><span class="flow-list__num">2</span><span>Двигательная разминка</span></li>
+              <li><span class="flow-list__num">3</span><span>Работа с опорой, координацией и мобильностью</span></li>
+              <li><span class="flow-list__num">4</span><span>Основной двигательный или силовой блок</span></li>
+              <li><span class="flow-list__num">5</span><span>Работа в парах или небольшая игра</span></li>
+              <li><span class="flow-list__num">6</span><span>Дыхание и восстановление</span></li>
+              <li><span class="flow-list__num">7</span><span>Краткий итог для ребёнка и родителя</span></li>
+            </ol>
+            <p class="flow-note">На первом этапе Евгений наблюдает, как ребёнок двигается, выполняет базовые задания и реагирует на нагрузку.</p>
+          </div>
+          <div class="weekday-flow__col">
+            <h3 class="subhead">Кому подходит</h3>
+            <ul class="suits-list">
+              <li>Ребёнку, который мало двигается в повседневной жизни</li>
+              <li>Ребёнку, которому сложно управлять телом и координировать движения</li>
+              <li>Юному спортсмену, которому нужна дополнительная физическая база</li>
+              <li>Ребёнку, которому скучно на однообразных тренировках</li>
+              <li>Ребёнку, которому важно развивать уверенность через посильные физические задачи</li>
+              <li>Родителям, которые хотят системного, внимательного и не массового подхода</li>
+            </ul>
+            <div class="photo-placeholder photo-placeholder--wide" data-file="weekday-balance.webp" aria-hidden="true">
+              <span class="photo-placeholder__label">weekday-balance.webp · упражнение на баланс и координацию</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. ДЕНЬ ДВИЖЕНИЯ И ХАРАКТЕРА ============ -->
+    <section class="section section--dark" id="weekend">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Формат · выходные</p>
+          <h2 class="section__title">День движения и характера</h2>
+          <p class="section__intro">Четыре–пять часов движения, общения, совместных впечатлений и настоящего взаимодействия.</p>
+        </div>
+
+        <div class="product-intro product-intro--dark reveal">
+          <p>Это не продлённая тренировка и не обычный развлекательный день. Физическая активность чередуется с прогулкой, совместной едой, обсуждением истории или фильма, командными заданиями и спокойным завершением.</p>
+          <p class="product-intro__accent">Ребёнок не просто тратит энергию. Он учится справляться с задачами, договариваться, выражать своё мнение, слушать других и замечать собственные реакции.</p>
+        </div>
+
+        <h3 class="subhead reveal">Пример программы</h3>
+        <p class="timeline-hint reveal">Ориентировочно 4–5 часов. Нажмите на любой этап, чтобы раскрыть подробности.</p>
+        <ol class="timeline" id="timeline">
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">00:00–00:20</span>
+              <span class="timeline__name">Знакомство и настройка</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Знакомимся, обсуждаем правила, настроение и план дня.</p></div>
+          </li>
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">00:20–01:30</span>
+              <span class="timeline__name">Движение и физическая подготовка</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Естественное движение, координация, баланс, работа в парах, небольшие испытания и командные задачи.</p></div>
+          </li>
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">01:30–02:10</span>
+              <span class="timeline__name">Прогулка или двигательный маршрут</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Парк, природная локация, наблюдение, ориентирование и задания на взаимодействие. Если программа полностью проходит в студии, этот блок заменяется двигательным квестом и работой с пространством.</p></div>
+          </li>
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">02:10–02:50</span>
+              <span class="timeline__name">Совместный приём пищи</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Отдых, еда и живое общение без формата школьного урока.</p></div>
+          </li>
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">02:50–03:30</span>
+              <span class="timeline__name">Фильм, история или выбранные сцены</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Смотрим заранее подобранную историю, фильм или отдельные сцены, соответствующие возрасту участников.</p></div>
+          </li>
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">03:30–04:10</span>
+              <span class="timeline__name">Разговор и обсуждение</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Обсуждаем поступки героев: выбор, дружбу, ответственность, отношение к ошибкам, страх, дисциплину, уважение и взаимодействие с другими людьми. Это живой разговор взрослого наставника с детьми, а не психологическое занятие.</p></div>
+          </li>
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">04:10–04:40</span>
+              <span class="timeline__name">Командная задача</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Возвращаемся к движению и применяем внимание, терпение и умение договариваться.</p></div>
+          </li>
+          <li class="timeline__item reveal">
+            <button type="button" class="timeline__head" aria-expanded="false">
+              <span class="timeline__time">04:40–05:00</span>
+              <span class="timeline__name">Завершение</span>
+              <span class="timeline__toggle" aria-hidden="true"></span>
+            </button>
+            <div class="timeline__body"><p>Дыхание, восстановление и короткая рефлексия.</p></div>
+          </li>
+        </ol>
+        <p class="timeline__note reveal">Последовательность может меняться в зависимости от возраста, погоды, локации, интересов и состояния группы.</p>
+      </div>
+    </section>
+
+    <!-- ============ 8. ВЫБОР ВОЗРАСТА ============ -->
+    <section class="section section--light" id="ages">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Возрастные группы</p>
+          <h2 class="section__title">Программа под возраст ребёнка</h2>
+          <p class="section__intro">В одной группе — дети близкого возраста. Мы не смешиваем детей с большой разницей в возрасте. Выберите возраст, чтобы увидеть акцент программы.</p>
+        </div>
+
+        <div class="ages ages--light reveal">
+          <div class="ages__switch" role="tablist" aria-label="Выбор возрастной группы">
+            <button type="button" class="ages__tab is-active" role="tab" aria-selected="true" data-age="7-9">7–9 лет</button>
+            <button type="button" class="ages__tab" role="tab" aria-selected="false" data-age="10-12">10–12 лет</button>
+            <button type="button" class="ages__tab" role="tab" aria-selected="false" data-age="13-15">13–15 лет</button>
+          </div>
+          <div class="ages__panel" id="agePanel" role="tabpanel"></div>
+          <p class="ages__note">Содержание занятий и разговора адаптируется под возраст, состав группы и конкретную ситуацию. Программа одинаково подходит мальчикам и девочкам.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. ЛОКАЦИИ ============ -->
+    <section class="section section--dark" id="locations">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Где проходит</p>
+          <h2 class="section__title">Студия, город и природа</h2>
+          <p class="section__intro">Программы могут проходить в нескольких форматах.</p>
+        </div>
+
+        <div class="locations">
+          <article class="location reveal" data-location="studio">
+            <div class="photo-placeholder photo-placeholder--loc" data-file="studio-savelovskaya.webp" aria-hidden="true">
+              <span class="photo-placeholder__label">studio-savelovskaya.webp · интерьер студии на Савёловской</span>
+            </div>
+            <h3 class="location__title">Студия на Савёловской</h3>
+            <p class="location__text">Закрытое пространство Евгения Гошева с оборудованием для естественного движения, физической подготовки, координации и восстановления.</p>
+          </article>
+          <article class="location reveal" data-location="park">
+            <div class="photo-placeholder photo-placeholder--loc" data-file="weekend-walk.webp" aria-hidden="true">
+              <span class="photo-placeholder__label">weekend-walk.webp · прогулка в парке или лесу</span>
+            </div>
+            <h3 class="location__title">Парк или природная локация</h3>
+            <p class="location__text">Прогулка, движение по разным поверхностям, ориентирование, игровые и командные задачи.</p>
+          </article>
+          <article class="location reveal" data-location="mixed">
+            <div class="photo-placeholder photo-placeholder--loc" data-file="weekend-movement.webp" aria-hidden="true">
+              <span class="photo-placeholder__label">weekend-movement.webp · тренировка в группе до четырёх детей</span>
+            </div>
+            <h3 class="location__title">Комбинированный маршрут</h3>
+            <p class="location__text">Часть программы проходит в студии, часть — на прогулке или в другой заранее согласованной локации.</p>
+          </article>
+        </div>
+        <p class="locations__note reveal">Точное место, маршрут и программа сообщаются родителям заранее. Индивидуальная логистика может обсуждаться отдельно после предварительного согласования с родителями.</p>
+      </div>
+    </section>
+
+    <!-- ============ 10. ОБ ЕВГЕНИИ ============ -->
+    <section class="section section--light" id="author">
+      <div class="container author">
+        <div class="author__media reveal">
+          <div class="photo-placeholder photo-placeholder--portrait" data-file="eugene-portrait.webp" aria-hidden="true">
+            <span class="photo-placeholder__label">eugene-portrait.webp · профессиональный портрет Евгения</span>
+          </div>
+        </div>
+
+        <div class="author__content reveal">
+          <p class="overline overline--accent">Автор программ</p>
+          <h2 class="section__title">Профессиональный спортсмен и специалист по движению рядом с ребёнком</h2>
+          <p class="author__text">Евгений Гошев — профессиональный спортсмен с опытом более 20&nbsp;лет, бывший профессиональный футбольный вратарь, физический терапевт, специалист по биомеханике и естественному движению, основатель собственной студии «Атмосфера&nbsp;3D» в Москве.</p>
+          <p class="author__text">Евгений имеет медицинское образование по специальности «Лечебное дело», но не позиционирует себя как врача. В своей работе он соединяет понимание анатомии и биомеханики, естественное движение, физическую подготовку, дыхание, мобильность, координацию, восстановление, опыт профессионального спорта и спокойное человеческое общение.</p>
+          <p class="author__quote">«Сначала нужно вернуть телу качество движения, а&nbsp;затем делать его сильнее».</p>
+          <p class="author__text">Евгений сам является отцом и понимает, что родителям важно не просто занять ребёнка, а видеть рядом с ним внимательного взрослого, который умеет работать с телом, объяснять без давления и показывать личный пример отношения к движению, дисциплине и развитию.</p>
+
+          <ul class="author__facts">
+            <li>Более 20&nbsp;лет в профессиональном спорте</li>
+            <li>Медицинская и двигательная база</li>
+            <li>Движение, дыхание и физическая подготовка</li>
+            <li>Максимум четыре ребёнка в группе</li>
+          </ul>
+
+          <button type="button" class="btn btn--dark js-about">Подробнее о&nbsp;Евгении</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 11. ПОЧЕМУ ТОЛЬКО ЧЕТЫРЕ ============ -->
+    <section class="section section--dark" id="four">
+      <div class="container quad reveal">
+        <div class="quad__head">
+          <p class="overline overline--accent">Принцип</p>
+          <h2 class="section__title">Четыре ребёнка — это принцип программы</h2>
+        </div>
+        <div class="quad__body">
+          <p class="quad__lead">В большой группе взрослый в первую очередь управляет порядком. В группе до четырёх детей можно видеть каждого: как он двигается, реагирует на задачу, взаимодействует с другими и справляется с трудностями.</p>
+          <ul class="quad__list">
+            <li>Адаптировать нагрузку</li>
+            <li>Вовремя объяснить движение</li>
+            <li>Сохранить безопасность</li>
+            <li>Дать ребёнку пространство проявить себя</li>
+            <li>Избежать ощущения массовой секции</li>
+            <li>Поддерживать спокойную атмосферу</li>
+            <li>Разговаривать, а не только давать команды</li>
+          </ul>
+        </div>
+        <p class="quad__statement">Не поток. Не массовая группа.<br><em>Не случайный набор упражнений.</em></p>
+      </div>
+    </section>
+
+    <!-- ============ 12. ЧТО ПОЛУЧАЮТ РОДИТЕЛИ ============ -->
+    <section class="section section--light" id="parents">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Для родителей</p>
+          <h2 class="section__title">Родители понимают, как прошёл день</h2>
+        </div>
+        <div class="parents reveal">
+          <ul class="parents__list">
+            <li>Предварительная анкета</li>
+            <li>Личное знакомство с запросом семьи</li>
+            <li>Уточнение особенностей здоровья и поведения</li>
+            <li>Понятная программа и небольшая группа</li>
+            <li>Прямая связь с Евгением</li>
+            <li>Фото или короткое сообщение в течение дня — при согласии родителей</li>
+            <li>Персональные наблюдения после занятия или программы</li>
+            <li>Рекомендации по дальнейшей физической активности</li>
+            <li>Возможность продолжить работу онлайн или очно</li>
+          </ul>
+          <p class="parents__note">После программы Евгений делится с родителем наблюдениями о движении, вовлечённости, взаимодействии ребёнка с группой и его реакции на разные задачи. Это не медицинское заключение и не психологический диагноз, а живые наблюдения наставника.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 13. БЕЗОПАСНОСТЬ И АНКЕТА ============ -->
+    <section class="section section--dark" id="safety">
+      <div class="container safety">
+        <div class="safety__col reveal">
+          <p class="overline overline--accent">Забота</p>
+          <h2 class="section__title">Внимание к каждому ребёнку</h2>
+          <ul class="safety__list">
+            <li>Максимум четыре участника</li>
+            <li>Дети подбираются по возрасту</li>
+            <li>Физическая нагрузка адаптируется под уровень подготовки</li>
+            <li>Перед участием родитель сообщает о здоровье, травмах и аллергиях</li>
+            <li>Обязательно указывается экстренный контакт</li>
+            <li>Заранее согласуются питание и возможные ограничения</li>
+            <li>Место и программа сообщаются родителю</li>
+            <li>Фото и видео используются только при отдельном согласии</li>
+            <li>Ребёнок передаётся только родителю или заранее указанному взрослому</li>
+            <li>При необходимости программа корректируется по состоянию группы</li>
+          </ul>
+          <p class="safety__disclaimer">Программа не является медицинской, психологической или психотерапевтической услугой. При наличии заболеваний, недавних травм, аллергий или противопоказаний возможность участия обсуждается заранее. При необходимости родителю может потребоваться консультация лечащего специалиста.</p>
+        </div>
+
+        <div class="safety__col reveal">
+          <div class="steps">
+            <p class="overline overline--accent">Порядок участия</p>
+            <h3 class="steps__title">Сначала знакомство — затем подтверждение участия</h3>
+            <p class="steps__intro">Небольшая группа требует внимательного подбора участников. В анкете вы выбираете формат и рассказываете о ребёнке: возраст, интересы, уровень активности, вид спорта, особенности здоровья и поведения.</p>
+            <ol class="steps__list">
+              <li><span class="steps__num">1</span><span>Родитель заполняет анкету и выбирает формат</span></li>
+              <li><span class="steps__num">2</span><span>Евгений изучает информацию</span></li>
+              <li><span class="steps__num">3</span><span>Проходит короткий разговор с родителем</span></li>
+              <li><span class="steps__num">4</span><span>Согласовываются дата, состав группы и программа</span></li>
+              <li><span class="steps__num">5</span><span>После подтверждения вносится оплата</span></li>
+            </ol>
+            <p class="steps__note">Заполнение анкеты не обязывает оплачивать участие.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 14. СТОИМОСТЬ ============ -->
+    <section class="section section--light" id="pricing">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Форматы участия</p>
+          <h2 class="section__title">Стоимость</h2>
+          <p class="section__intro">Настоящее ограничение — не таймер и не скидка. В одной группе может участвовать не более четырёх детей.</p>
+        </div>
+
+        <div class="pricing">
+          <article class="price-card price-card--light reveal">
+            <p class="price-card__eyebrow">Будни</p>
+            <h3 class="price-card__title">Лаборатория движения</h3>
+            <p class="price-card__lead">Будничное закрытое занятие. <span data-duration="weekday"></span>. До&nbsp;четырёх детей. Студия на Савёловской или согласованная площадка.</p>
+            <p class="price-card__price"><span data-price="weekday"></span><span>за ребёнка</span></p>
+            <ul class="price-card__list">
+              <li>Двигательная программа</li>
+              <li>Использование стандартного инвентаря</li>
+              <li>Работа в мини-группе</li>
+              <li>Краткая обратная связь родителю</li>
+            </ul>
+            <button type="button" class="btn btn--dark js-apply" data-format="weekday">Записаться на занятие</button>
+          </article>
+
+          <article class="price-card price-card--light price-card--feature reveal">
+            <p class="price-card__eyebrow">Выходные</p>
+            <h3 class="price-card__title">День движения и характера</h3>
+            <p class="price-card__lead">Программа выходного дня. <span data-duration="weekend"></span>. До&nbsp;четырёх детей. Студия, парк, природная локация или комбинированный маршрут.</p>
+            <p class="price-card__price"><span data-price="weekend"></span><span>за ребёнка</span></p>
+            <ul class="price-card__list">
+              <li>Тренировка</li>
+              <li>Прогулка или двигательный маршрут</li>
+              <li>Командные задания</li>
+              <li>Стандартный совместный приём пищи</li>
+              <li>Фильм, история или выбранные сцены</li>
+              <li>Обсуждение</li>
+              <li>Сопровождение Евгения</li>
+              <li>Обратная связь родителю</li>
+            </ul>
+            <button type="button" class="btn btn--accent js-apply" data-format="weekend">Подать заявку на программу</button>
+          </article>
+
+          <article class="price-card price-card--light reveal">
+            <p class="price-card__eyebrow">Своя компания</p>
+            <h3 class="price-card__title">Закрытая группа</h3>
+            <p class="price-card__lead">Родитель может собрать до четырёх детей близкого возраста. Стоимость рассчитывается исходя из выбранной программы и количества участников.</p>
+            <p class="price-card__price price-card__price--muted">По&nbsp;согласованию</p>
+            <ul class="price-card__list">
+              <li>Свой состав группы: друзья, братья, сёстры, одноклассники</li>
+              <li>Выбор формата: будни или выходные</li>
+              <li>Программа под возраст и запрос группы</li>
+            </ul>
+            <button type="button" class="btn btn--dark js-apply" data-format="general">Обсудить закрытую группу</button>
+          </article>
+        </div>
+
+        <p class="pricing__note reveal">Дата подтверждается после формирования группы и предварительного разговора с родителями. Дополнительные локации, билеты, специальное меню, трансфер, фотограф и другие индивидуальные опции оплачиваются отдельно.</p>
+      </div>
+    </section>
+
+    <!-- ============ 15. FAQ ============ -->
+    <section class="section section--dark" id="faq">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="overline overline--accent">Вопросы</p>
+          <h2 class="section__title">Частые вопросы</h2>
+        </div>
+
+        <div class="faq reveal" id="faqList">
+          <details class="faq__item"><summary class="faq__q">Чем «Лаборатория движения» отличается от обычной тренировки?</summary><div class="faq__a"><p>Это не тренировка по одному виду спорта. Ребёнок работает с базовыми двигательными навыками: опорой, координацией, мобильностью, дыханием, балансом и управлением телом.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Можно ли совмещать занятия с футбольной, хоккейной, гимнастической или другой секцией?</summary><div class="faq__a"><p>Да. Программа может использоваться как дополнительная двигательная и физическая база. Нагрузка согласуется с родителем и учитывает текущие занятия ребёнка.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Вы исправляете стопы и осанку?</summary><div class="faq__a"><p>Программа не является медицинским лечением. Евгений работает с функцией стопы, качеством опоры, координацией, мобильностью и двигательными привычками. При наличии диагноза или выраженных ограничений требуется консультация профильного медицинского специалиста.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Чем программа выходного дня отличается от лагеря?</summary><div class="faq__a"><p>Это закрытая авторская программа для группы до четырёх детей, а не массовая смена. Евгений лично проводит двигательную, коммуникативную и содержательную части дня.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Нужна ли ребёнку спортивная подготовка?</summary><div class="faq__a"><p>Нет. Задания адаптируются под возраст, состояние и текущий уровень ребёнка. Главная задача — не показать лучший результат, а попробовать разные движения и научиться лучше управлять телом.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Обязательно ли смотреть полный фильм?</summary><div class="faq__a"><p>Нет. В зависимости от возраста и программы могут использоваться короткий фильм, отдельные сцены, документальная история или другой подходящий материал.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Это психологические занятия?</summary><div class="faq__a"><p>Нет. Евгений не проводит психологическую терапию. Обсуждение строится вокруг поступков, выбора, отношений, дисциплины, уважения и реакции на трудности.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Можно ли собрать собственную группу?</summary><div class="faq__a"><p>Да. Родители могут собрать до четырёх детей близкого возраста.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Можно ли организовать трансфер?</summary><div class="faq__a"><p>Индивидуальная логистика может обсуждаться отдельно. Условия, маршрут, транспорт, сопровождающие лица и порядок передачи ребёнка обязательно согласуются с родителями заранее. Трансфер не входит в стандартную стоимость программы.</p></div></details>
+          <!-- Перед публичным запуском трансфера проверить договор, страхование, согласия родителей и действующие требования к перевозке детей -->
+          <details class="faq__item"><summary class="faq__q">Где проходят занятия?</summary><div class="faq__a"><p>В студии Евгения Гошева на Савёловской, на согласованной спортивной площадке, в парке, лесу или в комбинированном формате. Конкретный маршрут сообщается родителям до начала программы.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Что делать, если у ребёнка есть травмы, аллергии или ограничения?</summary><div class="faq__a"><p>Обязательно указать это в анкете. Возможность участия обсуждается до оплаты. При необходимости потребуется консультация лечащего специалиста.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Можно ли отказаться от фото и видео?</summary><div class="faq__a"><p>Да. Съёмка и публикация изображения ребёнка возможны только при отдельном согласии родителя. Отказ не влияет на возможность участия.</p></div></details>
+          <details class="faq__item"><summary class="faq__q">Как забронировать место?</summary><div class="faq__a"><p>Заполнить анкету и выбрать формат. После этого Евгений лично связывается с родителем, обсуждает ребёнка, группу и подходящую дату.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 16. ФИНАЛЬНАЯ ЗАЯВКА ============ -->
+    <section class="section section--cta" id="final">
+      <div class="container final-cta reveal">
+        <div class="photo-placeholder photo-placeholder--final" data-file="weekend-team-task.webp" aria-hidden="true">
+          <span class="photo-placeholder__label">weekend-team-task.webp · командное задание, движение или спокойное завершение дня</span>
+        </div>
+        <div class="final-cta__content">
+          <h2 class="final-cta__title">Подберите формат, который подходит вашему ребёнку</h2>
+          <p class="final-cta__text">Будничные занятия для системного развития движения или насыщенная программа выходного дня в группе до&nbsp;четырёх детей.</p>
+          <p class="final-cta__text">Заполните короткую анкету. Евгений лично изучит информацию, свяжется с вами и поможет подобрать подходящий формат, группу и дату.</p>
+          <div class="final-cta__actions">
+            <button type="button" class="btn btn--accent btn--lg js-apply" data-format="weekday">Записаться на будничное занятие</button>
+            <button type="button" class="btn btn--ghost btn--lg js-apply" data-format="weekend">Подать заявку на программу выходного дня</button>
+          </div>
+          <p class="final-cta__note">Заполнение анкеты не обязывает оплачивать участие.</p>
+          <p class="final-cta__meta">Москва&nbsp;· Савёловская&nbsp;· группа до четырёх детей</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 17. ПОДВАЛ ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <p class="footer__name">Евгений Гошев</p>
+        <p class="footer__tagline">Здоровье через движение</p>
+        <p class="footer__signature">Движение. Дыхание. Дисциплина.</p>
+      </div>
+      <nav class="footer__nav" aria-label="Ссылки подвала">
+        <a href="#top">Главная</a>
+        <!-- Заменить # на реальные адреса страниц (см. README) -->
+        <a href="#">Обо мне</a>
+        <a href="#">Контакты</a>
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Согласие на обработку персональных данных</a>
+        <a href="#">Правила участия</a>
+        <a href="#">Договор-оферта</a>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year"></span> Евгений Гошев · Москва</p>
+    </div>
+  </footer>
+
+  <!-- Фиксированная мобильная кнопка (меняется по формату) -->
+  <div class="mobile-cta" id="mobileCta" aria-hidden="true">
+    <button type="button" class="btn btn--accent js-apply" id="mobileCtaBtn" data-format="weekday">Записаться на занятие</button>
+  </div>
+
+  <!-- Модальное окно -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__card" role="document">
+      <button type="button" class="modal__close" aria-label="Закрыть окно" data-close>&times;</button>
+      <p class="modal__eyebrow">Почти готово</p>
+      <h3 class="modal__title" id="modalTitle">Анкета скоро откроется</h3>
+      <p class="modal__text">Ссылка на анкету будет добавлена перед публикацией страницы.</p>
+      <button type="button" class="btn btn--accent modal__ok" data-close>Понятно</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
