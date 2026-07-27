@@ -96,7 +96,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     subtitle: "Регулярные тренировки, поддержка и сообщество. Оплата: Tribute.",
     price: "1 758 ₽ / мес.",
     priceNote: "Также периоды 3 и 6 месяцев в Tribute",
-    href: "https://egoshev.ru/club",
+    href: "https://eg.egoshev.ru/club",
     cta: "Вступить в клуб",
     status: "live",
     botTag: "club_active",

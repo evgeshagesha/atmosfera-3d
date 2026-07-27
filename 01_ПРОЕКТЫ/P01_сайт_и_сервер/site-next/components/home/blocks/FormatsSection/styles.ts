@@ -173,6 +173,54 @@ export const FORMATS_SECTION_CSS = `
   transform: translateY(-1px);
   color: #000 !important;
 }
+/* Entry card «Начни отсюда» — brighter gray glow on the CTA */
+.eg-formats__card--featured {
+  box-shadow:
+    0 0 0 1px rgba(220, 224, 230, 0.42),
+    0 0 42px rgba(200, 210, 220, 0.22),
+    0 18px 36px -22px rgba(0, 0, 0, 0.85);
+}
+.eg-formats__card--featured:hover {
+  box-shadow:
+    0 0 0 1px rgba(235, 240, 245, 0.55),
+    0 0 56px rgba(210, 220, 230, 0.32),
+    0 22px 44px -20px rgba(0, 0, 0, 0.9);
+}
+.eg-formats__cta--glow {
+  background: linear-gradient(180deg, #f4f6f8 0%, #d8dde4 100%);
+  color: #0a0c0f !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.55),
+    0 0 22px rgba(210, 220, 230, 0.75),
+    0 0 48px rgba(180, 195, 210, 0.45),
+    0 10px 24px -10px rgba(0, 0, 0, 0.75);
+  animation: eg-formats-cta-pulse 2.6s ease-in-out infinite;
+}
+.eg-formats__cta--glow:hover {
+  color: #000 !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.7),
+    0 0 28px rgba(230, 235, 240, 0.9),
+    0 0 60px rgba(200, 210, 220, 0.55),
+    0 12px 28px -10px rgba(0, 0, 0, 0.8);
+}
+@keyframes eg-formats-cta-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.5),
+      0 0 18px rgba(200, 210, 220, 0.55),
+      0 0 40px rgba(170, 185, 200, 0.35),
+      0 10px 24px -10px rgba(0, 0, 0, 0.75);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.75),
+      0 0 28px rgba(230, 235, 240, 0.85),
+      0 0 58px rgba(200, 210, 220, 0.55),
+      0 10px 24px -10px rgba(0, 0, 0, 0.75);
+  }
+}
 @media (min-width: 900px) {
   .eg-formats__card-title {
     font-size: 16px;
@@ -250,6 +298,9 @@ export const FORMATS_SECTION_CSS = `
   .eg-formats__card,
   .eg-formats__cta {
     transition: none !important;
+  }
+  .eg-formats__cta--glow {
+    animation: none !important;
   }
   .eg-formats__card:hover,
   .eg-formats__cta:hover {

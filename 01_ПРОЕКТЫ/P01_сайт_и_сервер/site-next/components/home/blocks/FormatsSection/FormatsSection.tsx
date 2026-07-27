@@ -9,6 +9,8 @@ type FormatCard = {
   cta: string;
   href: string;
   image: string;
+  /** Stronger gray glow on the CTA — entry product. */
+  featured?: boolean;
 };
 
 /** Photos from «для кого» / method set — square cards. */
@@ -21,20 +23,11 @@ const FORMAT_CARDS: FormatCard[] = [
     cta: "Пройти тест | 684 ₽",
     href: "https://egoshev.ru/testik",
     image: "/assets/eg/method-deep.jpg",
-  },
-  {
-    id: "baza",
-    step: "2",
-    title: "Базовая настройка тела",
-    description:
-      "Программа, чтобы снять напряжение, вернуть подвижность и уверенность в движении",
-    cta: "К программе | 9 990 ₽",
-    href: "https://egoshev.ru/baza",
-    image: "/assets/eg/method-training.jpg",
+    featured: true,
   },
   {
     id: "breath",
-    step: "3",
+    step: "2",
     title: "Дыхание и осанка",
     description:
       "Мини-курс для свободного дыхания, грудной клетки и устойчивой осанки",
@@ -43,24 +36,34 @@ const FORMAT_CARDS: FormatCard[] = [
     image: "/assets/eg/method-posture.jpg",
   },
   {
-    id: "mobility",
-    step: "4",
-    title: "От скованности к свободному движению",
+    id: "baza",
+    step: "3",
+    title: "Базовая настройка тела",
     description:
-      "Коррекция, естественные паттерны и мягкий возврат к нагрузке",
-    cta: "Смотреть программу",
+      "Программа, чтобы снять напряжение, вернуть подвижность и уверенность в движении",
+    cta: "К программе | 9 990 ₽",
     href: "https://egoshev.ru/baza",
-    image: "/assets/eg/method-mobility.jpg",
+    image: "/assets/eg/method-training.jpg",
   },
   {
     id: "club",
-    step: "5",
+    step: "4",
     title: "Онлайн-клуб «Атмосфера 3D»",
     description:
       "Регулярные тренировки, программы и поддержка для системного результата",
     cta: "Вступить | от 1 758 ₽/мес",
-    href: "https://egoshev.ru/club",
+    href: "https://eg.egoshev.ru/club",
     image: "/assets/eg/method-pravilo.jpg",
+  },
+  {
+    id: "kids",
+    step: "5",
+    title: "Атмосфера 3D Kids Camp",
+    description:
+      "Закрытые занятия и программы выходного дня для детей в мини-группе до четырёх человек",
+    cta: "О программе",
+    href: "https://eg.egoshev.ru/kids",
+    image: "/assets/eg/method-mobility.jpg",
   },
   {
     id: "consultation",
@@ -68,7 +71,7 @@ const FORMAT_CARDS: FormatCard[] = [
     title: "Онлайн-консультация",
     description:
       "Разберём ваш запрос и определим оптимальный маршрут работы",
-    cta: "Получить консультацию",
+    cta: "2 часа | 20 000 ₽",
     href: "https://egoshev.ru/anketaplan",
     image: "/assets/eg/online-consultation.png",
   },
@@ -98,7 +101,11 @@ export default function FormatsSection() {
           {FORMAT_CARDS.map((card, index) => (
             <article
               key={card.id}
-              className="eg-formats__card"
+              className={
+                card.featured
+                  ? "eg-formats__card eg-formats__card--featured"
+                  : "eg-formats__card"
+              }
               style={{
                 backgroundImage: `url('${card.image}')`,
                 ["--reveal-delay" as string]: `${index * 70}ms`,
@@ -112,7 +119,14 @@ export default function FormatsSection() {
                   {card.title}
                 </h3>
                 <p className="eg-formats__card-text">{card.description}</p>
-                <a href={card.href} className="eg-formats__cta">
+                <a
+                  href={card.href}
+                  className={
+                    card.featured
+                      ? "eg-formats__cta eg-formats__cta--glow"
+                      : "eg-formats__cta"
+                  }
+                >
                   {card.cta}
                 </a>
               </div>
