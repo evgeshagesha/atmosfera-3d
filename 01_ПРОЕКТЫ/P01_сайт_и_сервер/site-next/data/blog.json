@@ -1,8 +1,8 @@
 {
   "posts": [
     {
-      "id": "trenirovki-dlya-zhenshchin",
-      "slug": "trenirovki-dlya-zhenshchin",
+      "id": "pro-trenirovki-dlya-zhenshchin",
+      "slug": "pro-trenirovki-dlya-zhenshchin",
       "title": "Тренировки для женщин: что действительно важно",
       "excerpt": "Можно ли тренироваться натощак, нужно ли подстраивать нагрузку под цикл, отличаются ли силовые рекомендации — и почему женщин в спортивной науке изучали чаще, чем принято думать.",
       "image": "/uploads/blog/trenirovki-dlya-zhenshchin-cover.jpg",
@@ -92,8 +92,8 @@
       ],
       "published": true,
       "publishedAt": "2026-07-27T09:36:07.000Z",
-      "updatedAt": "2026-07-27T09:36:07.000Z",
-      "href": "/blog/trenirovki-dlya-zhenshchin"
+      "updatedAt": "2026-07-27T09:39:00.000Z",
+      "href": "/blog/pro-trenirovki-dlya-zhenshchin"
     },
     {
       "id": "pochemu-bcaa-ne-rastyt-myshtsy",
