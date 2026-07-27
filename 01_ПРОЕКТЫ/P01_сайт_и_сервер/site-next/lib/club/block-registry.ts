@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 
 import ClubEmptyBlock from "@/components/club/blocks/ClubEmptyBlock";
+import ClubCommunitySetupSection from "@/components/club/blocks/ClubCommunitySetupSection";
 import ClubCreatorSection from "@/components/club/blocks/ClubCreatorSection";
 import ClubForYouSection from "@/components/club/blocks/ClubForYouSection";
 import ClubHelpSection from "@/components/club/blocks/ClubHelpSection";
@@ -21,9 +22,6 @@ function ClubHiddenBlock() {
 }
 
 const ClubScrollScriptSection1 = createLegacyBlockComponent(getPageBlock("club", "rec1145582781"));
-const ClubFeatureSection4 = createLegacyBlockComponent(getPageBlock("club", "rec1145781956"));
-const ClubTariffsSection = createLegacyBlockComponent(getPageBlock("club", "rec1145742951"));
-const ClubFeatureSection5 = createLegacyBlockComponent(getPageBlock("club", "rec1145727246"));
 const ClubResultsSection = createLegacyBlockComponent(getPageBlock("club", "rec1145782611"));
 const ClubFeatureSection6 = createLegacyBlockComponent(getPageBlock("club", "rec1145817936"));
 const ClubReviewsSection = createLegacyBlockComponent(getPageBlock("club", "rec1145818246"));
@@ -63,9 +61,11 @@ export const CLUB_REACT_BLOCKS: Record<string, ComponentType> = {
   // Empty legacy spacer — replaced by ClubHelpSection
   rec1145589341: ClubHiddenBlock,
   rec1145595476: ClubHelpSection,
-  rec1145781956: ClubFeatureSection4,
-  rec1145742951: ClubTariffsSection,
-  rec1145727246: ClubFeatureSection5,
+  // Empty legacy spacer
+  rec1145781956: ClubHiddenBlock,
+  rec1145742951: ClubCommunitySetupSection,
+  // Empty legacy spacer
+  rec1145727246: ClubHiddenBlock,
   rec1147866741: CLUB_ANCHOR_BLOCKS.rec1147866741,
   rec1145782611: ClubResultsSection,
   rec1145817936: ClubFeatureSection6,
