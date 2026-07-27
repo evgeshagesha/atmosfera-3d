@@ -10,6 +10,7 @@ import {
 import { CLUB_HERO_CSS } from "./styles";
 
 const NAV = [
+  { href: "#me", label: "Обо мне" },
   { href: "#about", label: "О клубе" },
   { href: "#for", label: "Для кого" },
   { href: "#program", label: "Программа" },
@@ -97,7 +98,7 @@ export default function ClubHeroSection() {
       style={{}}
       data-animationappear="off"
       data-record-type="396"
-      data-bg-color="#0c0e12"
+      data-bg-color="#000000"
       suppressHydrationWarning
     >
       <style dangerouslySetInnerHTML={{ __html: CLUB_HERO_CSS }} />
@@ -178,9 +179,13 @@ export default function ClubHeroSection() {
             <p className="club-hero__sub">Онлайн-клуб Евгения Гошева</p>
             <p className="club-hero__motto">Движение. Дыхание. Дисциплина.</p>
             <p className="club-hero__lead">
-              Улучши качество жизни через движение, опираясь на человеческую
-              природу. Верни телу баланс — и снова получай удовольствие от жизни
-              без боли и таблеток.
+              Улучши качество жизни через движение —
+              <br />
+              опираясь на человеческую природу.
+              <br />
+              Верни телу баланс и снова получай
+              <br />
+              удовольствие от жизни.
             </p>
             <div className="club-hero__actions">
               <a

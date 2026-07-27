@@ -1,7 +1,7 @@
 /** Club System 3D block — EG colors, soft coaching visual */
 export const CLUB_SYSTEM_CSS = `
 .club-system {
-  --cs-bg: var(--eg-bg, #0c0e12);
+  --cs-bg: #000000;
   --cs-surface: var(--eg-surface, #14181f);
   --cs-text: var(--eg-text, #fff);
   --cs-dim: var(--eg-text-dim, rgba(255, 255, 255, 0.72));

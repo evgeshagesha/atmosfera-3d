@@ -1,7 +1,7 @@
 /** Club community setup block — visual + 2x2 cards / mobile list. */
 export const CLUB_COMMUNITY_SETUP_CSS = `
 .club-csetup {
-  --cs-bg: var(--eg-bg, #0c0e12);
+  --cs-bg: #000000;
   --cs-card: #12171f;
   --cs-text: #fff;
   --cs-dim: rgba(220, 228, 238, 0.72);

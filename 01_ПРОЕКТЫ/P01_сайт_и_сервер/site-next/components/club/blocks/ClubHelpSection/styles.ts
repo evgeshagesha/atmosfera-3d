@@ -1,7 +1,7 @@
 /** Club help benefits block — desktop grid + mobile compact list. */
 export const CLUB_HELP_CSS = `
 .club-help {
-  --ch-bg: var(--eg-bg, #0c0e12);
+  --ch-bg: #000000;
   --ch-surface: #151a22;
   --ch-card: #12171f;
   --ch-text: #fff;

@@ -7,6 +7,7 @@ export const CLUB_PRICE_FROM = "1 758";
 export const CLUB_SUPPORT_TG = "https://t.me/EGfaq";
 
 export const CLUB_NAV = [
+  { href: "#me", label: "Обо мне" },
   { href: "#about", label: "О клубе" },
   { href: "#for", label: "Для кого" },
   { href: "#program", label: "Программа" },

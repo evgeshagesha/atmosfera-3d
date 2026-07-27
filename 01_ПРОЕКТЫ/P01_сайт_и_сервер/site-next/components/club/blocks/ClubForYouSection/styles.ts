@@ -1,7 +1,7 @@
 /** Club "for you if" block — desktop mosaic + mobile square carousel. */
 export const CLUB_FOR_YOU_CSS = `
 .club-foryou {
-  --fy-bg: var(--eg-bg, #0c0e12);
+  --fy-bg: #000000;
   --fy-surface: #151a22;
   --fy-text: #fff;
   --fy-dim: rgba(220, 228, 238, 0.72);

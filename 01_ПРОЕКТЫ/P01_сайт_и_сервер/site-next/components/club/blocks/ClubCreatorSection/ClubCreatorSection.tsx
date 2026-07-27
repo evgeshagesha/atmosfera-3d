@@ -112,11 +112,11 @@ export default function ClubCreatorSection() {
       style={{}}
       data-animationappear="off"
       data-record-type="396"
-      data-bg-color="#0c0e12"
+      data-bg-color="#000000"
       suppressHydrationWarning
     >
       <style dangerouslySetInnerHTML={{ __html: CLUB_CREATOR_CSS }} />
-      <section className="club-creator" aria-labelledby="club-creator-title">
+      <section id="me" className="club-creator" aria-labelledby="club-creator-title">
         <div className="club-creator__shell">
           <div className="club-creator__card">
             <header className="club-creator__header">

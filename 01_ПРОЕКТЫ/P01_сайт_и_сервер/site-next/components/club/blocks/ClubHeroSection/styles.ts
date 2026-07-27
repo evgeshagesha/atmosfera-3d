@@ -1,13 +1,13 @@
 /** Club hero — colors from main site globals (--eg-*). */
 export const CLUB_HERO_CSS = `
 .club-hero {
-  --ch-bg: var(--eg-bg, #0c0e12);
-  --ch-surface: var(--eg-surface, #14181f);
-  --ch-text: var(--eg-text, #fff);
-  --ch-dim: var(--eg-text-dim, rgba(255, 255, 255, 0.72));
-  --ch-line: var(--eg-line, rgba(255, 255, 255, 0.14));
-  --ch-btn: var(--eg-btn-bg, #fff);
-  --ch-btn-text: var(--eg-btn-text, #0a0c0f);
+  --ch-bg: #000000;
+  --ch-surface: #0d1016;
+  --ch-text: #fff;
+  --ch-dim: rgba(210, 218, 230, 0.78);
+  --ch-line: rgba(255, 255, 255, 0.12);
+  --ch-accent: #2f6bff;
+  --ch-accent-strong: #1a56ff;
   position: relative;
   isolation: isolate;
   background: var(--ch-bg);
@@ -107,16 +107,21 @@ export const CLUB_HERO_CSS = `
 }
 
 .club-hero__nav a {
-  color: rgba(255, 255, 255, 0.78) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  transition: color 0.2s ease;
+  white-space: nowrap;
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
 }
 
 .club-hero__nav a:hover {
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  opacity: 1;
 }
 
 .club-hero__header-cta {
@@ -261,14 +266,14 @@ export const CLUB_HERO_CSS = `
   height: 100% !important;
   object-fit: contain !important;
   object-position: 62% top !important;
-  transform: scale(1.08);
+  transform: scale(1.16);
   transform-origin: center top;
-  filter: contrast(1.08) saturate(1.06) brightness(1.04);
+  filter: contrast(1.08) saturate(1.06) brightness(1.02);
   -webkit-mask-image:
-    linear-gradient(180deg, #000 0%, #000 92%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 78%, rgba(0, 0, 0, 0.45) 90%, transparent 100%),
     linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
   mask-image:
-    linear-gradient(180deg, #000 0%, #000 92%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 78%, rgba(0, 0, 0, 0.45) 90%, transparent 100%),
     linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
@@ -277,8 +282,8 @@ export const CLUB_HERO_CSS = `
 }
 
 @keyframes clubHeroPhotoFloat {
-  0%, 100% { transform: scale(1.08) translateY(0); }
-  50% { transform: scale(1.08) translateY(-8px); }
+  0%, 100% { transform: scale(1.16) translateY(0); }
+  50% { transform: scale(1.16) translateY(-8px); }
 }
 
 .club-hero__photo::after {
@@ -291,7 +296,13 @@ export const CLUB_HERO_CSS = `
   inset: 0;
   background:
     linear-gradient(90deg, var(--ch-bg) 0%, transparent 10%, transparent 90%, var(--ch-bg) 100%),
-    linear-gradient(180deg, transparent 84%, rgba(12, 14, 18, 0.2) 95%, var(--ch-bg) 100%);
+    linear-gradient(
+      180deg,
+      transparent 52%,
+      rgba(0, 0, 0, 0.35) 72%,
+      rgba(0, 0, 0, 0.72) 88%,
+      var(--ch-bg) 100%
+    );
   pointer-events: none;
   z-index: 2;
 }
@@ -313,46 +324,49 @@ export const CLUB_HERO_CSS = `
 .club-hero__brand {
   margin: 0;
   font-family: var(--font-display, Oswald, sans-serif);
-  font-size: clamp(36px, 5.4vw, 64px);
+  font-size: clamp(34px, 4.8vw, 58px);
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 1;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .club-hero__sub {
-  margin: 12px 0 0;
+  margin: 14px 0 0;
   font-family: var(--font-display, Oswald, sans-serif);
   font-size: clamp(13px, 1.35vw, 16px);
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.78);
 }
 
 .club-hero__motto {
-  margin: 16px 0 0;
+  margin: 14px 0 0;
   font-family: var(--font-display, Oswald, sans-serif);
   font-size: clamp(15px, 1.55vw, 20px);
   font-weight: 650;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--ch-accent);
 }
 
 .club-hero__lead {
-  margin: 12px 0 0;
-  max-width: 38ch;
+  margin: 18px 0 0;
+  max-width: 34ch;
   color: var(--ch-dim);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
 }
 
 .club-hero__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 12px;
+  margin-top: 22px;
 }
 
 .club-hero__btn {
@@ -360,13 +374,13 @@ export const CLUB_HERO_CSS = `
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 40px;
-  padding: 9px 16px;
-  border-radius: 999px;
+  min-height: 46px;
+  padding: 10px 20px;
+  border-radius: 14px;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -376,28 +390,36 @@ export const CLUB_HERO_CSS = `
 }
 
 .club-hero__btn:focus-visible {
-  outline: 2px solid #fff;
+  outline: 3px solid rgba(105, 151, 255, 0.65);
   outline-offset: 3px;
 }
 
 .club-hero__btn--primary {
-  background: linear-gradient(180deg, #f4f6f9 0%, #d9dee6 100%);
-  color: var(--ch-btn-text) !important;
-  border: 1px solid rgba(236, 240, 246, 0.95);
-  box-shadow:
-    0 0 0 1px rgba(230, 236, 244, 0.16),
-    0 6px 16px rgba(0, 0, 0, 0.22);
+  background: linear-gradient(135deg, #1a56ff, #2f6bff);
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 28px rgba(26, 86, 255, 0.28);
+}
+
+.club-hero__btn--primary:hover {
+  background: linear-gradient(135deg, #2a63ff, #3a76ff);
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
 .club-hero__btn--ghost {
   background: transparent;
   color: #fff !important;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  -webkit-text-fill-color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .club-hero__btn--ghost:hover {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(47, 107, 255, 0.55);
+  background: rgba(47, 107, 255, 0.12);
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
 .club-hero__feature {
@@ -449,7 +471,8 @@ export const CLUB_HERO_CSS = `
   transform: translateX(-50%);
   width: 28px;
   height: 28px;
-  color: rgba(255, 255, 255, 0.55);
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
   text-decoration: none;
   display: grid;
   place-items: center;
@@ -460,7 +483,7 @@ export const CLUB_HERO_CSS = `
   width: 18px;
   height: 18px;
   fill: none;
-  stroke: currentColor;
+  stroke: #fff !important;
   stroke-width: 1.6;
 }
 
@@ -473,7 +496,22 @@ export const CLUB_HERO_CSS = `
   display: none;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
+  .club-hero__nav {
+    gap: 6px 14px;
+  }
+
+  .club-hero__nav a {
+    font-size: 12px;
+  }
+
+  .club-hero__header-inner {
+    gap: 12px;
+    padding: 12px 18px;
+  }
+}
+
+@media (max-width: 900px) {
   .club-hero__nav,
   .club-hero__header-cta {
     display: none;
@@ -502,7 +540,8 @@ export const CLUB_HERO_CSS = `
   .club-hero__mobile-panel a {
     display: block;
     padding: 12px 4px;
-    color: rgba(255, 255, 255, 0.86);
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
     text-decoration: none;
     font-size: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -510,16 +549,19 @@ export const CLUB_HERO_CSS = `
 
   .club-hero__mobile-panel a:last-child {
     margin-top: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-radius: 999px;
+    border: 1px solid rgba(47, 107, 255, 0.55);
+    border-radius: 14px;
     text-align: center;
     padding: 12px 16px;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    background: linear-gradient(135deg, #1a56ff, #2f6bff);
   }
+}
 
+@media (max-width: 980px) {
   .club-hero__stage {
     grid-template-columns: minmax(0, 0.92fr) minmax(168px, 1.12fr);
     grid-template-rows: auto auto;
@@ -567,23 +609,29 @@ export const CLUB_HERO_CSS = `
   .club-hero__photo-img {
     object-fit: contain !important;
     object-position: center top !important;
-    transform: scale(1.22);
+    transform: scale(1.34);
     transform-origin: center top;
     animation: none;
     -webkit-mask-image:
-      linear-gradient(180deg, #000 0%, #000 88%, transparent 100%),
+      linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, 0.4) 88%, transparent 100%),
       linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%) !important;
     mask-image:
-      linear-gradient(180deg, #000 0%, #000 88%, transparent 100%),
+      linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, 0.4) 88%, transparent 100%),
       linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%) !important;
   }
 
   .club-hero__photo--cut::after {
-    background: linear-gradient(180deg, transparent 55%, rgba(12, 14, 18, 0.42) 86%, var(--ch-bg) 100%);
+    background: linear-gradient(
+      180deg,
+      transparent 48%,
+      rgba(0, 0, 0, 0.45) 78%,
+      var(--ch-bg) 100%
+    );
   }
 
   .club-hero__brand {
-    font-size: clamp(26px, 7.4vw, 34px);
+    font-size: clamp(22px, 6.2vw, 30px);
+    white-space: nowrap;
   }
 
   .club-hero__sub {
@@ -598,34 +646,35 @@ export const CLUB_HERO_CSS = `
   }
 
   .club-hero__lead {
-    margin-top: 8px;
-    font-size: 12.5px;
-    line-height: 1.45;
-    max-width: 26ch;
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 28ch;
   }
 
   .club-hero__actions {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 14px;
   }
 
   .club-hero__btn {
     width: auto;
     min-width: 0;
-    min-height: 0;
-    height: 34px;
-    padding: 0 14px;
+    min-height: 38px;
+    height: auto;
+    padding: 0 16px;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.04em;
     line-height: 1;
+    border-radius: 12px;
     box-shadow: none;
   }
 
   .club-hero__btn--primary {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 18px rgba(26, 86, 255, 0.28);
   }
 
   .club-hero__features {
@@ -652,11 +701,11 @@ export const CLUB_HERO_CSS = `
 
   .club-hero__photo--cut img,
   .club-hero__photo-img {
-    transform: scale(1.28);
+    transform: scale(1.4);
   }
 
   .club-hero__lead {
-    max-width: 22ch;
+    max-width: 24ch;
   }
 }
 

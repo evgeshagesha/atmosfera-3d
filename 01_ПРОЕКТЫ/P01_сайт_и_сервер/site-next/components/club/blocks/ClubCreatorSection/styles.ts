@@ -1,7 +1,7 @@
 /** Club creator block — photo on top, content below. */
 export const CLUB_CREATOR_CSS = `
 .club-creator {
-  --cc-bg: var(--eg-bg, #0c0e12);
+  --cc-bg: #000000;
   --cc-card: #10141a;
   --cc-surface: #151a22;
   --cc-text: #fff;
