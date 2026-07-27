@@ -79,7 +79,7 @@ export default function ClubCommunitySetupSection() {
       style={{}}
       data-animationappear="off"
       data-record-type="396"
-      data-bg-color="#0c0e12"
+      data-bg-color="#000000"
       suppressHydrationWarning
     >
       <style dangerouslySetInnerHTML={{ __html: CLUB_COMMUNITY_SETUP_CSS }} />
