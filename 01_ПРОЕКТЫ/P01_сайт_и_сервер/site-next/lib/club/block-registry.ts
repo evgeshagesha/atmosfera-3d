@@ -6,8 +6,11 @@ import ClubCreatorSection from "@/components/club/blocks/ClubCreatorSection";
 import ClubForYouSection from "@/components/club/blocks/ClubForYouSection";
 import ClubHelpSection from "@/components/club/blocks/ClubHelpSection";
 import ClubHeroSection from "@/components/club/blocks/ClubHeroSection";
-import ClubScrollbarStyles from "@/components/club/blocks/ClubScrollbarStyles";
+import ClubMembershipValueSection from "@/components/club/blocks/ClubMembershipValueSection";
 import ClubSystemSection from "@/components/club/blocks/ClubSystemSection";
+import ClubTariffsSection from "@/components/club/blocks/ClubTariffsSection";
+import ClubGuaranteeSupportSection from "@/components/club/blocks/ClubGuaranteeSupportSection";
+import ClubChangesSection from "@/components/club/blocks/ClubChangesSection";
 import { CLUB_ANCHOR_BLOCKS } from "@/lib/club/anchor-blocks";
 import { createLegacyBlockComponent } from "@/lib/site/create-legacy-block";
 import { getPageBlock } from "@/lib/site/blocks";
@@ -22,14 +25,7 @@ function ClubHiddenBlock() {
 }
 
 const ClubScrollScriptSection1 = createLegacyBlockComponent(getPageBlock("club", "rec1145582781"));
-const ClubResultsSection = createLegacyBlockComponent(getPageBlock("club", "rec1145782611"));
-const ClubFeatureSection6 = createLegacyBlockComponent(getPageBlock("club", "rec1145817936"));
-const ClubReviewsSection = createLegacyBlockComponent(getPageBlock("club", "rec1145818246"));
 const ClubEmptyScriptSection = createLegacyBlockComponent(getPageBlock("club", "rec1147911501"));
-const ClubFeatureSection7 = createLegacyBlockComponent(getPageBlock("club", "rec1145829776"));
-const ClubTrainerSection = createLegacyBlockComponent(getPageBlock("club", "rec1146281676"));
-const ClubFeatureSection8 = createLegacyBlockComponent(getPageBlock("club", "rec1146281931"));
-const ClubCommunitySection = createLegacyBlockComponent(getPageBlock("club", "rec1146332496"));
 const ClubFeatureSection9 = createLegacyBlockComponent(getPageBlock("club", "rec1146332321"));
 const ClubPricingSection = createLegacyBlockComponent(getPageBlock("club", "rec1146425806"));
 const ClubGridScriptSection = createLegacyBlockComponent(getPageBlock("club", "rec1146566096"));
@@ -67,16 +63,22 @@ export const CLUB_REACT_BLOCKS: Record<string, ComponentType> = {
   // Empty legacy spacer
   rec1145727246: ClubHiddenBlock,
   rec1147866741: CLUB_ANCHOR_BLOCKS.rec1147866741,
-  rec1145782611: ClubResultsSection,
-  rec1145817936: ClubFeatureSection6,
+  rec1145782611: ClubMembershipValueSection,
+  // Old Tilda gray spacer after membership — hide
+  rec1145817936: ClubHiddenBlock,
   rec1147868156: CLUB_ANCHOR_BLOCKS.rec1147868156,
-  rec1145818246: ClubReviewsSection,
+  // Old Tilda tariff cards — replaced by ClubTariffsSection
+  rec1145818246: ClubTariffsSection,
   rec1147911501: ClubEmptyScriptSection,
-  rec1145829776: ClubFeatureSection7,
-  rec1146281676: ClubTrainerSection,
-  rec1146281931: ClubFeatureSection8,
+  // Old gray spacer before guarantee — hide
+  rec1145829776: ClubHiddenBlock,
+  // Old Tilda money-back / support — replaced by React block
+  rec1146281676: ClubGuaranteeSupportSection,
+  // Old gray spacer before changes — hide
+  rec1146281931: ClubHiddenBlock,
   rec1147868781: CLUB_ANCHOR_BLOCKS.rec1147868781,
-  rec1146332496: ClubCommunitySection,
+  // Old Tilda "Изменения" — replaced by ClubChangesSection
+  rec1146332496: ClubChangesSection,
   rec1146332321: ClubFeatureSection9,
   rec1148278101: CLUB_ANCHOR_BLOCKS.rec1148278101,
   rec1146425806: ClubPricingSection,
@@ -89,6 +91,6 @@ export const CLUB_REACT_BLOCKS: Record<string, ComponentType> = {
   rec1145585201: ClubCtaSection,
   rec1147900651: ClubScriptSection2,
   rec1148453191: ClubScriptSection3,
-  rec1147894846: ClubScrollbarStyles,
+  rec1147894846: ClubHiddenBlock,
   rec1147894321: ClubEmptyBlock,
 };

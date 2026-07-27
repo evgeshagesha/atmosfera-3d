@@ -168,7 +168,7 @@ export const CLUB_COMMUNITY_SETUP_CSS = `
 .club-csetup__orb--kettle {
   bottom: 22%;
   right: 6%;
-  background: radial-gradient(circle at 50% 40%, #ff8f6b, #e14a2a 72%);
+  background: radial-gradient(circle at 50% 40%, #7eb6ff, #2f6bff 72%);
 }
 
 .club-csetup__orb--people {
@@ -180,7 +180,7 @@ export const CLUB_COMMUNITY_SETUP_CSS = `
 .club-csetup__orb--dumbbell {
   top: 42%;
   right: -2%;
-  background: radial-gradient(circle at 50% 40%, #ffd27a, #f0a020 70%);
+  background: radial-gradient(circle at 50% 40%, #9ad0ff, #3b82f6 70%);
 }
 
 @keyframes club-csetup-fly-a {

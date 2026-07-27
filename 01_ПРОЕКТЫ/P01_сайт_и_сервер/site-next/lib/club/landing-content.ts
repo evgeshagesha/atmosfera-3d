@@ -4,7 +4,7 @@ export const CLUB_TRIBUTE_TG =
   "https://t.me/tribute/app?startapp=s11vY";
 export const CLUB_TRIBUTE_WEB = "https://web.tribute.tg/s/11vY";
 export const CLUB_PRICE_FROM = "1 758";
-export const CLUB_SUPPORT_TG = "https://t.me/EGoshev";
+export const CLUB_SUPPORT_TG = "https://t.me/EGfaq";
 
 export const CLUB_NAV = [
   { href: "#about", label: "О клубе" },
