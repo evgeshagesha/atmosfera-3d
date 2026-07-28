@@ -10,6 +10,11 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 KIE_API_KEY = os.getenv("KIE_API_KEY", "")
 COMMUNITY_CHAT_ID = os.getenv("COMMUNITY_CHAT_ID")  # optional: club group -100...
 CHANNEL_ID = os.getenv("CHANNEL_ID", "@EvgeniiGoshev")  # public channel username or -100...
+VK_BRIDGE_ENABLED = os.getenv("VK_BRIDGE_ENABLED", "0") == "1"
+VK_ACCESS_TOKEN = os.getenv("VK_ACCESS_TOKEN", "")
+VK_GROUP_ID = os.getenv("VK_GROUP_ID", "")
+VK_API_VERSION = os.getenv("VK_API_VERSION", "5.199")
+VK_ALBUM_SETTLE_SECONDS = float(os.getenv("VK_ALBUM_SETTLE_SECONDS", "3"))
 # Gate lead/level PDF until user is subscribed to CHANNEL_ID (1=on, 0=off)
 REQUIRE_CHANNEL_SUB = os.getenv("REQUIRE_CHANNEL_SUB", "1")
 ADMIN_TELEGRAM_IDS = [
@@ -34,6 +39,9 @@ WEBHOOK_BASE_URL = os.getenv("WEBHOOK_BASE_URL", "https://bot.egoshev.ru")
 # Path to knowledge base (instructions for the bot)
 BASE_DIR = Path(__file__).resolve().parent
 KNOWLEDGE_BASE_DIR = BASE_DIR / "knowledge_base"
+VK_BRIDGE_DB_PATH = Path(
+    os.getenv("VK_BRIDGE_DB_PATH", str(BASE_DIR / "data" / "vk_bridge.sqlite3"))
+)
 
 # Max recent messages to keep for "analyze" context (per chat)
 MAX_RECENT_MESSAGES = 30

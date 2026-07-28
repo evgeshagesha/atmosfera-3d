@@ -1,174 +1,222 @@
-# t-800-research-docs — ReportLab + PTB send_document
+# t-800-research-docs — rss-parser + feedsmith + Next Route Handlers
 
-**status:** ok  
+**status:** blocked (Context7 MCP unavailable)  
 **budget_mode:** deep  
-**query_count:** 5  
-**note:** weasyprint not primary this pass  
-**project lock:** reportlab (EG bot `generate_lead_pdf.py` already canvas + `setFillColorRGB`)  
-**deps (repo):** `reportlab>=4.0.0`, `python-telegram-bot>=21.0`
+**query_count:** 0  
+**context7:** NOT CONNECTED — servers present: cursor-app-control, cursor-ide-browser, user-memory-bank, user-notion, user-semgrep, user-telegram, user-telegram-account. Missing: `user-context7` / `plugin-context7-plugin-context7`  
+**fallback:** known npm README / TypeScript API surface (training + package conventions) — all citations tagged `known_npm_docs_fallback`  
+**out of scope:** Contentlayer (workspace = `data/blog.json` + TipTap)  
+**workspace outbound RSS:** already exists — `app/rss.xml/route.ts` + `lib/content/blog-rss.ts`
 
 ---
 
 ```yaml
-status: ok
+status: blocked
 docs_brief:
-  libraryId: "/websites/reportlab"
-  secondary_libraryId: "/python-telegram-bot/python-telegram-bot"
-  queries:
-    - "canvas fonts registerFont TTFont platypus Paragraph SimpleDocTemplate"
-    - "Color colors HexColor Color RGB CMYK dark background fill stroke"
-    - "Platypus flowables Table TableStyle KeepInFrame cards templates"
-    - "HexColor Color class reportlab.lib.colors Color(r,g,b) toColor"
-    - "send_document send PDF file document InputFile caption"
+  context7_available: false
+  context7_error: "MCP server user-context7 / plugin-context7-plugin-context7 not found"
+  libraryId: "/rbren/rss-parser"
+  secondary_attempts:
+    - name: feedsmith
+      context7: unavailable_server
+      note: "Could not resolve-library-id; treat as Context7-miss; use README patterns below"
+    - name: next.js
+      libraryId_expected: "/vercel/next.js"
+      note: "Skipped full query — workspace already ships outbound RSS Route Handler"
+  queries: []
   citations:
-    - topic: "TrueType fonts + Unicode"
-      quote: "TTFont + pdfmetrics.registerFont; canvas.setFont(name, size); registerFontFamily for Platypus <b>/<i>"
-      libraryId: "/websites/reportlab"
-      source: "https://docs.reportlab.com/reportlab/userguide/ch3_fonts"
-    - topic: "Canvas setFont"
-      quote: "canvas.setFont(psfontname, size, leading=None)"
-      libraryId: "/websites/reportlab"
-      source: "https://docs.reportlab.com/reportlab/userguide/ch2_graphics"
-    - topic: "Platypus layers + page templates"
-      quote: "DocTemplates > PageTemplates > Frames > Flowables > pdfgen.Canvas; SimpleDocTemplate.build(Story, onFirstPage=, onLaterPages=)"
-      libraryId: "/websites/reportlab"
-      source: "https://docs.reportlab.com/reportlab/userguide/ch5_platypus"
-    - topic: "RGB / fill / stroke for dark theme"
-      quote: "setFillColorRGB(r,g,b), setStrokeColorRGB, setFillColor(acolor); RGB values additive 0..1; also Color(r,g,b) constructor"
-      libraryId: "/websites/reportlab"
-      source: "https://docs.reportlab.com/reportlab/userguide/ch2_graphics"
-    - topic: "Table cards via TableStyle"
-      quote: "Table + TableStyle BOX/INNERGRID/TEXTCOLOR/ALIGN/VALIGN/BACKGROUND for card-like blocks"
-      libraryId: "/websites/reportlab"
-      source: "https://docs.reportlab.com/reportlab/userguide/ch7_tables"
-    - topic: "KeepTogether / Spacer"
-      quote: "KeepTogether(flowables) keeps block on one frame; Spacer(width, height) vertical gap"
-      libraryId: "/websites/reportlab"
-      source: "https://docs.reportlab.com/reportlab/userguide/ch9_other_useful_flowables"
-    - topic: "PTB send_document"
-      quote: "await bot.send_document(chat_id=..., document=path|file_id|url|fileobj); Path supported"
-      libraryId: "/python-telegram-bot/python-telegram-bot"
-      source: "https://github.com/python-telegram-bot/python-telegram-bot/wiki/Working-with-Files-and-Media"
+    - topic: "rss-parser parseURL / parseString"
+      quote: "new Parser(options); await parser.parseURL(url) | await parser.parseString(xml) → feed with .items[]"
+      libraryId: "/rbren/rss-parser"
+      source: "known_npm_docs_fallback (rbren/rss-parser README)"
+      freshness: unverified_no_context7
+    - topic: "item fields guid link content"
+      quote: "items expose title, link, pubDate, creator, content, contentSnippet, guid, categories, isoDate, enclosure"
+      libraryId: "/rbren/rss-parser"
+      source: "known_npm_docs_fallback"
+      freshness: unverified_no_context7
+    - topic: "customFields for content:encoded"
+      quote: "Parser({ customFields: { item: [['content:encoded', 'contentEncoded']] } }) maps namespaced fields"
+      libraryId: "/rbren/rss-parser"
+      source: "known_npm_docs_fallback"
+      freshness: unverified_no_context7
+    - topic: "Next.js Route Handler Response"
+      quote: "export async function GET() { return new Response(body, { headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' } }) }"
+      libraryId: "/vercel/next.js"
+      source: "known_npm_docs_fallback + workspace app/rss.xml/route.ts"
+      freshness: ok_workspace_verified
   unverified:
-    - "HexColor('#RRGGBB') — common ReportLab API; not returned in this Context7 pass (use Color(r,g,b) or setFillColorRGB)"
-    - "canvas.roundRect / roundedRect for neon card glow — used in EG generate_lead_pdf; not in Context7 snippets this pass"
-    - "Exact reportlab PyPI version pinned in Context7 — docs are /websites/reportlab (user guide); project requires >=4.0.0"
-  query_count: 5
+    - "ALL Context7 citations — MCP offline this pass; re-run after enabling Context7"
+    - "feedsmith exact export names / version on Context7 — not resolved; README patterns below are best-effort"
+    - "rss-parser request timeout / charset decoding edge cases — depend on version and xml2js; confirm on install"
+    - "Whether feedsmith auto-resolves relative enclosure/link URLs — confirm in package README after npm install"
+  query_count: 0
   budget_mode: deep
+  synthesizer_note: "Prefer rss-parser for inbound scrape v1; feedsmith optional TS-native alternative if install proves cleaner; outbound RSS already done without Contentlayer"
 ```
 
 ---
 
-## docs_findings (API facts for EG Topic PDF skill + generate_lead_pdf)
+## docs_findings (for synthesizer)
 
-### ReportLab — fonts / canvas / Platypus
+### 1. rss-parser (npm: `rss-parser`, GitHub rbren/rss-parser) — PRIMARY inbound
 
-1. **Canvas path (EG current):** `reportlab.pdfgen.canvas.Canvas` → `setFont` / `drawString` / `setFillColorRGB` / `rect` / `save`. Matches `generate_lead_pdf.py`.
-2. **Unicode / Cyrillic:** built-in Helvetica/Times lack Cyrillic; use **`TTFont` + `pdfmetrics.registerFont`**. For Platypus bold/italic tags: **`registerFontFamily(name, normal=, bold=, italic=, boldItalic=)`**.
-3. **Platypus path (skill option B):** `SimpleDocTemplate` + story of `Paragraph` / `Spacer` / `Table`; headers/footers via `onFirstPage` / `onLaterPages` canvas callbacks (dark bg can be painted in those callbacks).
-4. **Architecture:** DocTemplate → PageTemplate → Frame → Flowables → Canvas (lowest paint layer).
+**Parse API (known README surface):**
 
-### ReportLab — dark theme colors
+```ts
+import Parser from "rss-parser";
 
-1. **Primary for EG brand:** `canvas.setFillColorRGB(r, g, b)` / `setStrokeColorRGB` with **floats 0..1** (EG already: graphite ~`(0.07,0.11,0.14)`, cyan accents as RGB tuples).
-2. **Object colors:** `from reportlab.lib import colors` named colors; **`Color(r, g, b)`** for custom (confirmed in graphics examples).
-3. **Also:** `setFillColor(acolor)`, CMYK variants, `setFillGray` — RGB preferred for screen/Telegram PDF preview.
-4. **Platypus dark cards:** `TableStyle` commands `BACKGROUND`, `TEXTCOLOR`, `BOX`, `INNERGRID` with `colors.Color(...)` or named — not only canvas.
+type CustomItem = { contentEncoded?: string };
 
-### ReportLab — templates / flowables / “cards”
+const parser = new Parser<Record<string, unknown>, CustomItem>({
+  timeout: 10000,
+  headers: { "User-Agent": "EG-NewsBot/1.0 (+https://eg.egoshev.ru)" },
+  customFields: {
+    item: [["content:encoded", "contentEncoded"]],
+  },
+});
 
-1. **Card pattern A (EG now):** canvas `rect`/`roundRect` + fill/stroke = absolute-position cards (full control for premium layout).
-2. **Card pattern B:** `Table` + `TableStyle([('BOX',...), ('BACKGROUND',...), ('TEXTCOLOR',...), ('TOPPADDING'/BOTTOM...)])` — flowable cards that reflow.
-3. **Grouping:** `KeepTogether([...])` so a card doesn’t split across pages; `Spacer` for rhythm.
-4. **KeepInFrame** exists (RML/docs) for overflow control; Python Platypus has related keep-in-frame utilities — prefer KeepTogether for simple cards.
+const feed = await parser.parseURL("https://example.com/feed.xml");
+// alt: await parser.parseString(xmlText)
 
-### python-telegram-bot — deliver PDF in funnel
+for (const item of feed.items) {
+  const id = item.guid || item.link;          // dedupe key
+  const url = item.link;
+  const html = item.contentEncoded || item["content:encoded"] || item.content || item.description;
+  const text = item.contentSnippet;           // stripped-ish plain text
+  const published = item.isoDate || item.pubDate;
+}
+```
 
-1. **`await bot.send_document(chat_id=..., document=...)`** where `document` can be:
-   - local path string
-   - `pathlib.Path`
-   - open binary file object
-   - existing Telegram `file_id`
-   - HTTP URL
-2. Fits lead/level PDF handoff after generation: write PDF to disk/BytesIO → `send_document`.
-3. Project: `python-telegram-bot>=21.0` (async API).
+| Need | Field | Notes |
+|------|--------|--------|
+| Stable id | `item.guid` \|\| `item.link` | guid may be opaque non-URL; not always permalink |
+| Canonical URL | `item.link` | required for fetch/open; may be missing on bad feeds |
+| Body HTML | `content` / `content:encoded` / `description` | often raw HTML |
+| Plain excerpt | `contentSnippet` | library-stripped; not perfect |
+| Date | `isoDate` (preferred) / `pubDate` | isoDate is parser-normalized |
 
-### Out of scope this pass
+**Caveats (required for pipeline):**
 
-- **weasyprint** — not primary; do not switch stack for Topic PDF skill unless separate decision.
+1. **Encoding**  
+   - Assumes well-formed XML; non-UTF-8 feeds / wrong `Content-Type` charset → mojibake or parse errors.  
+   - Mitigation: fetch bytes yourself → decode via `Content-Type` / XML declaration / `iconv-lite` → `parseString`.  
+   - Cyrillic Western→RU pipeline: verify UTF-8 on every source before TipTap/blog.json write.
+
+2. **Relative links**  
+   - `item.link` usually absolute; **HTML inside description/content** often has relative `href`/`src`.  
+   - Parser does **not** rewrite those. Absolutize against feed `link` / site origin before SEO publish or TG digest.  
+   - Same pattern as workspace outbound helper `absoluteUrl()` in `blog-rss.ts` — invert for inbound.
+
+3. **HTML in description**  
+   - `description` and `content` frequently contain HTML (not plain text).  
+   - Do not trust as safe TipTap JSON — sanitize / convert (strip scripts, resolve imgs).  
+   - Prefer `content:encoded` (via `customFields`) when present; fall back to `content` → `description`.  
+   - `contentSnippet` is convenience plain text for titles/digests, not full article body.
+
+4. **Other**  
+   - Atom vs RSS: field shapes differ; library normalizes to common item keys but not 100%.  
+   - Redirects / 403 without User-Agent: set `headers` / `requestOptions`.  
+   - Large feeds: no built-in incremental sync — dedupe by guid/link in your store.
+
+**Confidence:** medium-high on API shape (mature package); **low freshness** without Context7 live pull.
 
 ---
 
-## recommended_api_patterns
+### 2. feedsmith — Context7 miss / optional fallback
 
-### A. Premium fixed layout (align with generate_lead_pdf) — RECOMMENDED for EG Topic PDF
+**Status:** Could not resolve on Context7 (server absent). Treat as **unavailable via Context7**.
 
-```python
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+**README-level pattern (best-effort, unverified):**
 
-pdfmetrics.registerFont(TTFont("EGSans", "/path/to/font.ttf"))
-# optional family for future Platypus:
-# registerFontFamily("EGSans", normal="EGSans", bold="EGSansBd", ...)
-
-c = canvas.Canvas(out_path, pagesize=A4)
-w, h = A4
-c.setFillColorRGB(0.07, 0.11, 0.14)  # graphite bg
-c.rect(0, 0, w, h, fill=1, stroke=0)
-c.setFillColorRGB(0.0, 0.85, 1.0)    # cyan accent example
-c.setFont("EGSans", 14)
-c.drawString(x, y, "…")
-c.save()
+```ts
+// typical modern API shape — CONFIRM after npm view feedsmith
+// import { parseFeed } from "feedsmith";
+// const feed = parseFeed(xmlString);
+// feed.title, feed.items[].id | .url | .content | .published
 ```
 
-### B. Flowable “cards” (multi-page topic guides)
+| vs rss-parser | Guidance for EG news v1 |
+|---------------|-------------------------|
+| TS-first / stricter types | Nice-to-have, not required for Cursor command MVP |
+| Parse string vs URL | May need separate `fetch` (good — you control encoding) |
+| Multi-format (RSS/Atom/JSON Feed) | Useful if sources mix formats |
 
-```python
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, KeepTogether
-from reportlab.lib import colors
-from reportlab.lib.colors import Color
+**Recommendation for synthesizer:**  
+- **v1 default = `rss-parser`** (widely used, parseURL one-liner).  
+- Evaluate `feedsmith` only if install + README confirm cleaner types and Atom/JSON Feed needs.  
+- Do not block factory on feedsmith Context7 miss.
 
-BG = Color(0.07, 0.11, 0.14)
-CARD = Color(0.09, 0.14, 0.18)
-CYAN = Color(0.0, 0.75, 0.95)
-WHITE = colors.white
+---
 
-card = Table([[Paragraph("…", style)]], colWidths=[content_w])
-card.setStyle(TableStyle([
-    ("BACKGROUND", (0, 0), (-1, -1), CARD),
-    ("TEXTCOLOR", (0, 0), (-1, -1), WHITE),
-    ("BOX", (0, 0), (-1, -1), 0.5, CYAN),
-    ("LEFTPADDING", (0, 0), (-1, -1), 12),
-    ("RIGHTPADDING", (0, 0), (-1, -1), 12),
-    ("TOPPADDING", (0, 0), (-1, -1), 10),
-    ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
-]))
-story.append(KeepTogether([card, Spacer(1, 12)]))
-# paint page BG in onFirstPage/onLaterPages via canvas.setFillColorRGB + rect
+### 3. Next.js App Router Route Handlers — outbound only (brief)
+
+Workspace **already** publishes RSS:
+
+- `app/rss.xml/route.ts` — `GET` → `Response` with `application/rss+xml; charset=utf-8`, `dynamic = "force-dynamic"`, `revalidate = 300`
+- `lib/content/blog-rss.ts` — builds XML from blog posts (`data/blog.json` path), escapes XML, absolutizes URLs, CDATA for `content:encoded`
+
+**Inbound news scrape does not need a new Route Handler** for v1 (manual/Cursor command). If later HTTP webhook/cron:
+
+```ts
+// app/api/news-ingest/route.ts (future) — pattern only
+export async function POST(req: Request) {
+  // auth → parseURL sources → write draft → return JSON
+  return Response.json({ ok: true });
+}
 ```
 
-### C. Funnel delivery
+**Do not** introduce Contentlayer for this pipeline.
 
-```python
-await context.bot.send_document(
-    chat_id=update.effective_chat.id,
-    document=str(pdf_path),  # or Path / BytesIO with filename=
-    caption="…",
-)
+---
+
+## recommended_api_patterns (synthesizer)
+
+### A. Inbound free RSS → draft (RECOMMENDED v1)
+
+```ts
+const parser = new Parser({
+  timeout: 15000,
+  headers: { Accept: "application/rss+xml, application/xml, text/xml" },
+  customFields: { item: [["content:encoded", "contentEncoded"]] },
+});
+
+const feed = await parser.parseURL(sourceUrl);
+const candidates = feed.items.map((item) => ({
+  dedupeKey: String(item.guid || item.link),
+  url: item.link,
+  title: item.title,
+  publishedAt: item.isoDate || item.pubDate,
+  htmlBody: item.contentEncoded || item.content || item.description || "",
+  excerpt: item.contentSnippet || "",
+}));
+// then: brand filter → human approve → TipTap/blog.json + optional TG
 ```
+
+### B. Encoding-safe variant
+
+```ts
+const res = await fetch(sourceUrl, { headers: { "User-Agent": "EG-NewsBot/1.0" } });
+const buf = Buffer.from(await res.arrayBuffer());
+// detect charset from res.headers / <?xml encoding=...?> → decode to utf8 string
+const feed = await parser.parseString(utf8Xml);
+```
+
+### C. Outbound (already shipped — do not re-architect)
+
+Keep `buildBlogRssXml` + `/rss.xml`; ensure new blog posts from news pipeline land in same `getBlogPosts()` source so SEO RSS stays one feed.
 
 ---
 
 ## sources / versions
 
-| Library | Context7 ID | Repo constraint | Docs surface |
-|---------|-------------|-----------------|--------------|
-| ReportLab | `/websites/reportlab` | `reportlab>=4.0.0` | docs.reportlab.com userguide ch2/ch3/ch5/ch7/ch9 |
-| python-telegram-bot | `/python-telegram-bot/python-telegram-bot` (versions incl. v22.5) | `>=21.0` | wiki Working-with-Files-and-Media |
+| Library | Context7 | Fallback | Role |
+|---------|----------|----------|------|
+| rss-parser | **blocked** (no MCP) | npm README known surface | inbound parse |
+| feedsmith | **blocked** + unresolved | README patterns only | optional alt |
+| next.js Route Handlers | not queried | workspace `app/rss.xml/route.ts` | outbound only |
 
-**Freshness note:** Context7 live docs pull; official ReportLab userguide URLs above. No weasyprint sources.
+**Re-run trigger:** enable Context7 MCP → `resolve-library-id` for `rss-parser`, `feedsmith`, optionally `/vercel/next.js` → ≤5 `query-docs` (parseURL, customFields, encoding, feedsmith parse API, Route Handler Response).
 
 ---
 
@@ -176,11 +224,10 @@ await context.bot.send_document(
 
 | Area | Level | Why |
 |------|-------|-----|
-| Canvas fonts / RGB dark theme | **high** | Official userguide citations; matches EG code |
-| Platypus Table card pattern | **high** | Official TableStyle docs |
-| HexColor helper | **medium** | Not in this Context7 return; Color(r,g,b) / setFillColorRGB verified |
-| roundRect glow cards | **medium** | EG code uses; not in Context7 snippets this pass |
-| PTB send_document | **high** | Official wiki patterns; async matches v21+ |
-| weasyprint | **n/a** | Explicitly out of pass |
+| rss-parser parseURL / items / guid / link | **medium** | Stable public API; not live-verified |
+| Encoding / relative links / HTML description caveats | **high** (domain knowledge) | Universal RSS pitfalls; align with blog-rss absoluteUrl |
+| feedsmith API | **low** | Context7 miss; README not fetched (contract: no WebFetch substitute) |
+| Next outbound RSS | **high** | Verified in workspace source |
+| Contentlayer | **n/a** | Explicit skip |
 
-**Overall confidence:** **high** for ReportLab canvas+RGB+Platypus Table + PTB send_document as primary stack for EG Topic PDF skill.
+**Overall:** usable blocked brief for synthesizer — ship inbound on **rss-parser** + caveats; revisit feedsmith after Context7 or local `npm view`.

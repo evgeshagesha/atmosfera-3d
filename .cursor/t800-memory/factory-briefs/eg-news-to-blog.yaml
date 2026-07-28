@@ -1,0 +1,180 @@
+# Factory brief — eg-news-to-blog (CREATE)
+# Date: 2026-07-28
+# Command: /t800-start CREATE · eg-news-seo-pipeline
+# Brain: t-800-brain-lead · domains: context + agents
+# Research: Family A v1 (synthesizer DEEP RETRY PASS)
+
+brief_for_factory:
+  goal: >
+    Create slash-only skill+command (+ short alwaysApply safety rule) that polls
+    FREE allowlisted Western RSS → digest → RU rewrite in EG / Atmosfera 3D tone
+    with cite → STOP HITL approve → draft into site-next data/blog.json
+    (published: false) + optional Telegram digest text. SEO silos: Moscow studio,
+    online course, «клуб Евгения Гошева». NO new subagent. NO Inoreader. NO auto-publish.
+  mode: CREATE
+  topic: eg-news-seo-pipeline / eg-news-to-blog
+  synthesis_summary: >
+    Winner Family A: Cursor poll + feeds.yaml allowlist + skill/command HITL.
+    Family C (PubMed/journals) as enrichment seeds inside allowlist.
+    Family B (FreshRSS/Automations cron) deferred v2 — Automations have cron/webhook
+    but no native RSS trigger.
+  recommended_artifact: skill  # primary; companions: command + rule
+  domains_called:
+    - t-800-brain-context
+    - t-800-brain-agents
+  # cloud brain skipped: v1 manual slash; Automations/RSS facts from scout+research
+
+  target_context:
+    workspace_root: /Users/egoshev/Projects/atmosfera-3d
+    plugin_root: ""
+    memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+    profile: workspace-cursor
+    artifact_surface: cursor-workspace
+    release_handoff: null
+    knowledge_vault_path: null
+    intake_brief: .cursor/t800-memory/intake-briefs/eg-news-seo-pipeline.md
+    research_fragment: .cursor/t800-memory/fragments/t-800-research-synthesizer.md
+
+  research_brief:
+    family: A
+    approach: >
+      feeds.yaml allowlist → fetch/parse (rss-parser or feedsmith MIT) with
+      ETag/guid|link dedupe → triage digest MD → RU EG rewrite+cite → STOP approve
+      → draft blog.json + optional TG text
+    deferred_v2:
+      - FreshRSS / Miniflux / HTML+XPath for anatolyfit-class no-RSS
+      - Cursor Automations cron (no native RSS — poll-in-skill or webhook export)
+    reject:
+      - paid Inoreader / Feedly Pro
+      - Twitter/FB scrape
+      - auto_publish / auto TG push
+      - new subagent in v1
+      - AGPL FreshRSS/RSSHub code vendoring (patterns only later)
+
+  artifact_type: skill
+  skill:
+    proposed_name: eg-news-to-blog
+    skill_path: .cursor/skills/eg-news-to-blog/SKILL.md
+    disable_model_invocation: true  # command/slash only — CRITICAL
+    role_one_liner: >
+      FREE RSS allowlist → digest → RU rewrite EG tone with cite → HITL STOP →
+      draft blog.json (+ optional TG digest). SEO for studio / course / club.
+    description_must_include:
+      use_when:
+        - "/eg-news-to-blog"
+        - news → blog
+        - RSS digest → SEO article
+        - Western feed → RU EG rewrite
+      do_not_use_when:
+        - Remotion / video
+        - Telegram bot code / Prodamus / Timeweb (→ eg-bot-*)
+        - vault lesson outline (→ eg-knowledge-outline)
+        - auto-publish or production deploy
+        - Inoreader / paid feed SaaS setup
+        - Twitter/FB scrape
+
+  companions:
+    command: true
+    command_path: .cursor/commands/eg-news-to-blog.md
+    command_pattern: >
+      Mirror eg-bot-manager-flow.md: instruct Agent to read SKILL.md + references;
+      route out-of-scope to other skills; no Python/site framework rewrite.
+    rule: true
+    rule_path: .cursor/rules/eg-news-to-blog.mdc
+    rule_always_apply: true
+    rule_scope: >
+      ULTRA SHORT (~15–25 lines). Do NOT duplicate full atmosfera-3d.mdc med bans.
+      Add only: rewrite+cite (no republish); no auto-publish / no prod push;
+      drafts published:false until human OK. Point to existing brand bans.
+    skill_companion: false
+    references:
+      - references/feeds.yaml
+      - references/tone-bans.md
+      - references/blog-draft-schema.md
+      - references/seo-cta-silos.md
+      - references/workflow.md
+    optional_seed:
+      - references/feeds.opml
+
+  blog_target:
+    site_root: 01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next
+    blog_json: 01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/data/blog.json
+    types_ref: lib/content/blog-types.ts + article-blocks.ts
+    admin: /admin/blog
+    outbound_rss: /rss.xml
+    draft_defaults:
+      published: false
+      language: ru
+      cite_source_title_url: required
+
+  behavior:
+    steps:
+      - Load references/feeds.yaml allowlist only (hard cap max_feeds / max_items)
+      - Poll FREE RSS (ETag/hash; guid||link dedupe); skip dead/429 feeds
+      - Produce triage digest MD (title, link, snippet, topic tags)
+      - Pick item(s) with user or strong hypothesis
+      - RU rewrite EG tone: Authority/Utility + Offer Bridge CTA silo; cite source
+      - STOP — show rewrite for human approve; wait explicit approve message
+      - Only after approve: append/update draft post in blog.json (published:false)
+        OR write draft artifact for paste into /admin/blog
+      - Optional second OK: Telegram digest text (draft only — no send unless user asks)
+    seo_silos:
+      - студия Москва / запись
+      - онлайн-курс (Базовая настройка тела / ladder)
+      - клуб Евгения Гошева
+    hitl:
+      soft_gate: skill text STOP + command constraints (no OS hard gate in Cursor)
+      no_plan_as_publish_gate: true
+
+  authoritative_facts:
+    - "Skill path: .cursor/skills/<name>/SKILL.md; frontmatter name + description required"
+    - "disable-model-invocation: true → slash/command only; no ambient auto-invoke"
+    - "Command: .cursor/commands/<slug>.md body → read/follow SKILL + refs (workspace pattern)"
+    - "Rules: .cursor/rules/*.mdc only; alwaysApply keep short; soft WARN ≥10 alwaysApply"
+    - "v1 = skill+command+short rule; NO subagent (agent-vs-skill decision matrix)"
+    - "HITL = skill STOP + human message queue; not Plan Mode as publish gate"
+    - "Outbound site /rss.xml already exists; inbound = feeds.yaml allowlist"
+    - "Automations: cron/webhook exist; no native RSS trigger → v2 only"
+
+  official_urls:
+    - https://cursor.com/docs/skills
+    - https://cursor.com/docs/context/rules
+    - https://cursor.com/ru/docs/context/rules
+    - https://cursor.com/docs/agent/prompting
+    - https://cursor.com/docs/agent/plan-mode
+    - https://cursor.com/ru/docs/subagents
+
+  constraints:
+    - Write only under .cursor/skills/eg-news-to-blog/, .cursor/commands/eg-news-to-blog.md, .cursor/rules/eg-news-to-blog.mdc
+    - FREE RSS allowlist only — no Inoreader/Feedly Pro/paid SaaS
+    - disable-model-invocation: true on skill
+    - NO new agents/*.md
+    - NO auto-publish, NO auto Telegram send, NO prod deploy from skill
+    - Rewrite + cite; never verbatim republish Western full text
+    - No medical promises / diagnoses (align atmosfera-3d.mdc + tone-bans)
+    - anatolyfit HTML-only / Examine 429 — out of v1 allowlist
+    - Do not vendor AGPL FreshRSS/RSSHub code
+    - registry_patch: null (workspace skill; validate-agents n/a)
+    - Do not invent Cursor RSS Automation API
+    - Progressive disclosure: short SKILL.md + references/*
+    - Prefer append draft with published:false; never flip published:true without explicit user OK
+    - Existing alwaysApply atmosfera-3d.mdc remains; new rule must not duplicate its full body
+
+  stale_warnings:
+    - "KB manifest pages last_synced 2026-07-02 (~26d) — near 30d stale threshold; disable-model-invocation missing from 03-kontekst/skills.md card"
+    - "No commands.md card in 03-kontekst — command format from agent-vs-skill + workspace eg-bot-manager-flow pattern"
+    - "No hard OS STOP-before-write in Cursor — HITL is instructional"
+    - "BlogPost JSON schema not in Cursor KB — Factory must lock schema from site-next blog-types/article-blocks"
+
+  scout:
+    kb_fresh: near_stale
+    block_factory: false
+    automations_native_rss: false
+
+  research_mode: DEEP
+  next_pipeline:
+    - t-800-factory-architect
+    - t-800-factory-builder
+    - t-800-factory-integrator
+    - t-800-prompt-auditor
+    - t-800-factory-auditor

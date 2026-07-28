@@ -1,289 +1,281 @@
 # t-800-research-strategist — search_plan
 
-**scanned_at:** 2026-07-24  
-**workspace:** /Users/egoshev/Projects/atmosfera-3d  
-**memory_path:** /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory  
-**mode:** DEEP  
-**artifact_surface:** cursor-workspace  
-**status:** ok
+**Date:** 2026-07-28 (RETRY after connection failure)  
+**Topic:** Free-only Western RSS/news → RU EG adapt → blog (eg.egoshev.ru) + Telegram; SEO: Moscow studio / course / club  
+**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
+**artifact_surface:** cursor-workspace (`.cursor/`)  
+**intent_artifact:** mix (skill + command; optional thin agent if multi-step justified)  
+**mode:** deep
 
-## Probe notes (1–2 searches only)
+## Probe notes (strategist only — 2 WebSearch)
 
-- Cursor skills: official docs + agentskills.io progressive disclosure; HITL via stage gates / `disable-model-invocation` for publish.
-- Strong Cursor precedent: `loganriebel/seo-content-stack` (staged pipeline + human gates).
-- PDF dark theme: `ogclau/ReportLabStyleSuite`, `reportlab-json-renderer` (LLM→JSON→PDF); digest: `sliday/telegram-ai-digest`.
-- SkillMD `hitl-approval` pattern (agent proposes → human approves) — adapt, no verbatim copy.
+1. **Google Alerts RSS (2026):** still offers “Deliver to → RSS feed” (undocumented Atom URL). No Alerts API. Reliability = casual only (lags, misses). Treat as **enrichment**, not backbone.
+2. **Free reader stack:** FreshRSS / Miniflux / TT-RSS consensus self-host; OPML portable. FreshRSS OPML extension includes **HTML+XPath** outlines — candidate for sites without native RSS (e.g. anatolyfit) without Twitter/FB scrape and without paid Inoreader.
+3. **Feed catalogs:** `aiworkflowpro/awesome-rss-feeds-list` (validated OPML by category); CyberSEO Fitness RSS catalogue — seed for wellness OPML, not copy wholesale.
+4. **Paid contrast only:** RSS.app / Feedly Pro / Inoreader Pro — skip as stack dependency.
 
-## Capabilities in scope (factory later — NOT now)
+## Workspace anchors (from prior scout / intake)
 
-1. Channel Content Pipeline (HITL approve before publish)
-2. EG Topic PDF Skill (premium dark + cyan)
-3. Trend Adapter (western trends → EG adaptation)
+- Site: `01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next`
+- Blog CMS: `data/blog.json` + TipTap blocks + `/admin/blog` (not Contentlayer/MDX)
+- Outbound Zen RSS already: `app/rss.xml` + `lib/content/blog-rss.ts`
+- Brand: Atmosfera 3D / EG — rewrite+cite, no medical promises
+- v1: Cursor skill + command, human approve; Automations cron later
 
-## Backlog / optional (mention only)
+## Fan-out intent
 
-- Mini App, SEO site, YouTube — later channels; RE-EXPERT Mini App = anti-example «не сейчас».
-
----
+Specialists must close: free source catalog + OPML, legal rewrite+cite, draft→admin/human gate, RU local SEO skeleton (studio/course/club), Telegram digest pattern, Cursor skill/command shape, optional FreshRSS HTML+XPath vs poll-in-skill.
 
 ```yaml
 status: ok
 search_plan:
-  topic: "Cursor artifacts (skills/commands/rules) + content automation patterns for EG / Atmosfera 3D / Telegram bot — Channel Content Pipeline HITL, EG Topic PDF Skill, Trend Adapter"
+  topic: "FREE-only Western RSS/blogs → RU adapt EG tone → Next.js blog drafts on eg.egoshev.ru + Telegram digest; SEO Moscow studio / online course / club; v1 Cursor skill+command, human approve"
   intent_artifact: mix
   mode: deep
   artifact_surface: cursor-workspace
-  project: /Users/egoshev/Projects/atmosfera-3d
-  product_context:
-    bot: "@EGoshev_bot"
-    channel: "@EvgeniiGoshev"
-    funnel: "guide → test684 → level PDFs → 1990/9990/club/studio"
-    hard_constraint: "auto-publish without explicit OK is forbidden"
-    ux_refs:
-      - "TrueSpace (PDF on /start)"
-      - "digest channels"
-      - "RE-EXPERT Mini App = anti-example (not now)"
-    backlog_optional_later:
-      - Mini App
-      - SEO
-      - YouTube
-  capabilities_focus:
-    - id: channel-content-pipeline
-      summary: "news/digest → draft → approve → publish (HITL)"
-    - id: eg-topic-pdf-skill
-      summary: "premium blog-topic PDF dark minimalism cyan accent"
-    - id: trend-adapter
-      summary: "western trends → EG adaptation (no copypaste)"
+  constraints:
+    no_paid_aggregators: true   # Inoreader Pro / Feedly Pro / RSS.app not stack deps
+    no_social_scrape: true      # Twitter/FB out of scope
+    free_stack_only: true
+    human_approve_before_publish: true
+    copyright: rewrite_plus_cite
+    brand_filter: no_medical_promises
+    schedule_later: true        # Automations cron after skill works
+  workspace_anchors:
+    site: "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next"
+    blog_store: "data/blog.json + TipTap ContentBlock + /admin/blog API"
+    outbound_rss: "app/rss.xml/route.ts + lib/content/blog-rss.ts"
+    brand: "Atmosfera 3D / EG — no medical promises"
+    example_source_site: "anatolyfit.com (strength; may lack native RSS)"
   channels:
-    - id: vendor-docs
-      priority: must
-      why: "Cursor docs = source of truth for skills vs rules vs commands, SKILL.md frontmatter, progressive disclosure, slash invocation; cookbooks seed Trend Adapter prompting patterns (adapt, don't copy)."
-      specialist: t-800-research-vendor-docs
-      freshness: "prefer docs/changelog updated 2025-H2..2026; flag pre-skills Cursor guidance as stale"
-      queries:
-        - "Cursor Agent Skills SKILL.md frontmatter disable-model-invocation"
-        - "Cursor rules vs skills vs commands migrate-to-skills"
-        - "Cursor agent prompting best practices approval gates"
-        - "OpenAI Cookbook structured outputs content pipeline agent"
-        - "Claude prompt engineering brand voice adaptation rewrite"
-        - "Gemini prompting strategies rewrite localize cultural adaptation"
-      sites_or_hubs:
-        - "https://cursor.com/docs/skills"
-        - "https://cursor.com/help/customization/skills"
-        - "https://cursor.com/docs/agent/prompting"
-        - "https://cursor.com/docs (rules, commands, hooks)"
-        - "https://cookbook.openai.com/"
-        - "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
-        - "https://ai.google.dev/gemini-api/docs/prompting-strategies"
-      notes: "DEEP multi-model minimum: Cursor + ≥2 cookbooks (OpenAI + Claude or Gemini) for Trend Adapter idea_seeds. Not always-on Kie."
-
     - id: github
       priority: must
-      why: "Working examples of staged content pipelines, HITL gates in Cursor skills, Telegram digest bots, dark-theme PDF engines — needed for top_repos → miner."
+      why: "Core free stack: OPML feed lists, rss-parser/Node feed tooling, FreshRSS/Miniflux, Telegram RSS digests, awesome feed catalogs — without paid SaaS"
       specialist: t-800-research-github
-      freshness: "prefer repos with commits/releases 2024–2026; stars secondary to fit"
       queries:
-        - "Cursor skills SKILL.md content pipeline human approval"
-        - "seo-content-stack Cursor skills human gates"
-        - "telegram AI digest bot reportlab PDF"
-        - "reportlab dark theme neon PDF generator"
-        - "weasyprint dark mode PDF template"
-        - "content localization adaptation rewrite skill agent"
-        - "HITL approval agent skill SKILL.md"
-        - "telegram channel autopost draft approve workflow"
+        - "awesome-rss OR awesome-feeds OR awesome RSS feeds OPML"
+        - "aiworkflowpro awesome-rss-feeds-list OPML"
+        - "rss-parser typescript OR node feed parser atom guid"
+        - "FreshRSS OR Miniflux self-hosted RSS OPML"
+        - "Next.js RSS ingest OR fetch RSS blog draft"
+        - "Telegram bot RSS digest OR rss to telegram free Bot API"
+        - "longevity OR biomechanics OR strength training OR rehabilitation RSS OPML"
+        - "RSSHub OR feed generator free self-host missing RSS"
       sites_or_hubs:
-        - "github.com"
-        - "github.com/topics/cursor-skills"
-        - "github.com/topics/agent-skills"
-      top_repos_hints:
-        - repo: "loganriebel/seo-content-stack"
-          why: "gstack-style Cursor skills; staged research→publish with human gates — primary pattern mine for Channel Content Pipeline"
-        - repo: "ogclau/ReportLabStyleSuite"
-          why: "Professional + Dark Neon ReportLab themes — visual precedent for EG PDF skill"
-        - repo: "sliday/telegram-ai-digest"
-          why: "Telegram channel digest → LLM JSON → PDF/Telegraph publish — pipeline shape for digest→draft"
-        - repo: "agentskills / anthropic agent skills examples"
-          why: "SKILL.md open standard examples (if discoverable) — structure/frontmatter"
-        - note: "Also score reportlab-json-renderer (PyPI/GitHub) for LLM→JSON→PDF without agent writing layout code"
-      expected_output: "ranked shortlist ≥5 repos with fit scores per capability"
+        - "github.com/FreshRSS/FreshRSS"
+        - "github.com/miniflux/v2"
+        - "github.com/aiworkflowpro/awesome-rss-feeds-list"
+        - "github.com topics: rss opml feed-reader"
+        - "github.com search: awesome-rss"
+        - "npm: rss-parser, feed, fast-xml-parser"
+        - "github.com/DIYgod/RSSHub (optional free feed-gen)"
+      expected_outputs:
+        - "curated repos + stars/license/last commit"
+        - "candidate OPML / YAML feed-list formats"
+        - "2–4 repo-miner candidates with why"
+        - "note RSSHub vs FreshRSS HTML+XPath for no-RSS sites"
 
     - id: repo-miner
       priority: must
-      why: "DEEP minima: ≥2 deep mines when github=must. Extract stage schemas, HITL wording, PDF theme tokens, adaptation prompts — patterns only."
+      why: "DEEP minima ≥2 deep mines; extract poll/ETag/dedupe/OPML/draft-write/Telegram digest/full-text patterns"
       specialist: t-800-research-repo-miner
-      freshness: "mine current default branch; note last commit date"
       queries:
-        - "human gate / approve before publish patterns in skill markdown"
-        - "stage artifact paths draft→review→publish"
-        - "dark theme color tokens PDF layout"
-        - "brand voice / rewrite adaptation prompts"
+        - "mine feed poll + ETag/Last-Modified + guid/link dedupe"
+        - "mine OPML round-trip and subscription folders"
+        - "mine FreshRSS HTML+XPath / cssFullContent for sites without RSS"
+        - "mine RSS→markdown/JSON draft pipeline"
+        - "mine Telegram channel digest from RSS items (Bot API only)"
+        - "mine Readability/full-text when feed is summary-only"
       sites_or_hubs:
-        - "github.com/loganriebel/seo-content-stack"
-        - "github.com/ogclau/ReportLabStyleSuite"
-        - "github.com/sliday/telegram-ai-digest"
-      mine_targets_ordered:
-        - "loganriebel/seo-content-stack (MUST mine #1 — HITL stages)"
-        - "ogclau/ReportLabStyleSuite OR reportlab-json-renderer (MUST mine #2 — PDF theme)"
-        - "sliday/telegram-ai-digest (should if time — digest→publish)"
-      notes: "No clone unless user asks; WebFetch/raw README + key skill files only."
-
-    - id: clawhub
-      priority: must
-      why: "Topic is Cursor-workspace skills marketplace patterns; ClawHub pass required when skills marketplace signal present. Extract patterns + security narrative; rejected_verbatim: true."
-      specialist: t-800-research-clawhub
-      freshness: "scan Top/Trending/New on run day; prefer items dated 2025–2026"
-      queries:
-        - "content pipeline draft approve publish"
-        - "HITL approval human in the loop"
-        - "PDF generator report premium"
-        - "Telegram channel post"
-        - "trend rewrite localization brand voice"
-        - "newsletter digest"
-      sites_or_hubs:
-        - "https://clawhub.ai/"
-        - "clawhub.ai Skills Top / Trending / New"
-      security_scan:
-        - "no secrets in prompts"
-        - "no shell publish without confirm"
-        - "no ignore-previous / jailbreak"
-        - "no scrape PII"
-      notes: "3–8 relevant cards; adapt_for_cursor only — never paste full skill body."
+        - "EXPECTED_AFTER_GITHUB: FreshRSS/FreshRSS AND/OR miniflux/v2"
+        - "EXPECTED: rss-parser consumer OR small Node/TS rss-to-blog / rss-digest CLI"
+        - "EXPECTED_IF_PICKED: RSSHub (only if free self-host pattern beats FreshRSS XPath)"
+      mine_focus:
+        - "subscription SoT = OPML or YAML/JSON feed list (no SaaS)"
+        - "legal: store source URL + title; rewrite not republish"
+        - "human gate: draft status before publish"
+        - "anatolyfit-class: HTML+XPath outline vs skip vs manual URL paste"
+        - "Telegram: message template + rate limits + free Bot API only"
+      note: "Prefer poll-in-skill for v1; self-host FreshRSS = optional later ops"
 
     - id: community
       priority: must
-      why: "Lived experience: HITL content ops, Telegram digest ops pain, PDF-from-LLM failure modes, trend localization ethics (not copypaste)."
+      why: "Lived free-stack consensus, rewrite+cite norms, RU local SEO for wellness studios, RSS→Telegram without paid tools"
       specialist: t-800-research-community
-      freshness: "prefer threads 2024–2026; older OK if classic HITL patterns"
       queries:
-        - "Cursor skills vs rules content workflow Reddit"
-        - "human in the loop AI content approval before post"
-        - "Telegram channel AI digest draft approve"
-        - "LLM generate PDF branding consistency problems"
-        - "localize western fitness trends without copying Habr Reddit"
-        - "agentskills.io Cursor experience"
+        - "Inoreader alternative free OR self-hosted FreshRSS Miniflux Reddit"
+        - "Google Alerts RSS still works 2025 OR 2026 unreliable"
+        - "rewrite article from RSS fair use OR copyright blog SEO cite source"
+        - "content syndication rewrite cite original source SEO"
+        - "локальное SEO блог студия Москва OR Яндекс Дзен RSS"
+        - "RSS Telegram дайджест бесплатно OR бот"
+        - "Habr RSS агрегатор OR лента новостей без Inoreader"
+        - "anatolyfit OR fitness blog discover RSS feed"
+        - "FreshRSS HTML XPath scrape sites without RSS"
       sites_or_hubs:
-        - "reddit.com/r/cursor"
-        - "reddit.com/r/ChatGPTCoding"
+        - "reddit.com/r/rss"
+        - "reddit.com/r/selfhosted"
+        - "reddit.com/r/SEO"
         - "news.ycombinator.com"
         - "habr.com"
-        - "x.com (light — Cursor skills / HITL)"
-      notes: "Capture failure modes: auto-post disasters, brand voice collapse, medical claim risks (EG forbid list)."
+        - "vc.ru (SEO / контент-маркетинг wellness)"
+      expected_outputs:
+        - "consensus free stack vs paid"
+        - "legal norms: rewrite + attribution vs copy"
+        - "RU local SEO angles: Москва студия, курс, клуб Евгения Гошева"
+        - "community take on Google Alerts RSS fragility"
 
-    - id: news
-      priority: should
-      why: "Skills surface moved fast (Cursor 2.4+, agentskills.io, migrate-to-skills). Freshness gate for factory not to ship obsolete rule-only patterns."
-      specialist: t-800-research-news
-      freshness: "must include ≥2 sources from 2025-Q4..2026; older changelogs = context only"
+    - id: clawhub
+      priority: must
+      why: "Cursor skills marketplace patterns for RSS/content/SEO/Telegram; adapt not copy; security narrative for fetch+shell+auto-publish"
+      specialist: t-800-research-clawhub
       queries:
-        - "Cursor Agent Skills 2026 SKILL.md agentskills.io"
-        - "Cursor changelog skills commands rules migration"
-        - "Anthropic Agent Skills open standard"
-        - "AI content human approval gate product news"
+        - "RSS"
+        - "news digest"
+        - "blog draft"
+        - "content rewrite OR translate"
+        - "Telegram"
+        - "SEO article"
+        - "OPML OR feed"
       sites_or_hubs:
-        - "cursor.com/changelog"
-        - "meshlaunch / industry blogs on Cursor skills"
-        - "HN / Product Hunt light scan"
-        - "Anthropic blog Agent Skills"
+        - "clawhub.ai"
+        - "clawhub.ai tabs: Top, Trending, New"
+      expected_outputs:
+        - "3–8 cards with adapt_for_cursor"
+        - "security_flags (unbounded fetch, auto-publish, secrets)"
+        - "rejected_verbatim: true"
+
+    - id: vendor-docs
+      priority: must
+      why: "Cursor skills/commands + Automations (no native RSS trigger); prompting patterns for brand-voice rewrite + structured draft + constraint 'no medical claims'"
+      specialist: t-800-research-vendor-docs
+      queries:
+        - "Cursor Automations cron schedule webhook MCP"
+        - "Cursor skills frontmatter disable-model-invocation commands"
+        - "Cursor agent prompting brand voice structured draft"
+        - "OpenAI cookbook structured outputs OR content rewriting citations"
+        - "Anthropic prompting rewrite with constraints XML no medical claims"
+      sites_or_hubs:
+        - "cursor.com/docs/cloud-agent/automations"
+        - "cursor.com/docs/skills"
+        - "cursor.com/docs/agent/prompting"
+        - "cursor.com/docs/agent/hooks (approve gates if relevant)"
+        - "cookbook.openai.com (structured outputs / rewriting — idea seeds)"
+        - "platform.claude.com docs prompt engineering (constraints, XML)"
+      scope_note: "Cursor docs = primary. Skip Kie. Perplexity only if citation-search pattern emerges for source discovery."
 
     - id: docs
       priority: should
-      why: "Context7 only AFTER github/vendor pick a concrete PDF/Telegram library (reportlab / weasyprint / python-telegram-bot). Not always-on."
+      why: "Library signal only if github picks a concrete parser; workspace already uses Route Handlers for outbound RSS; blog is JSON/TipTap not Contentlayer"
       specialist: t-800-research-docs
-      freshness: "library docs for current major version"
       queries:
-        - "reportlab canvas colors fonts platypus flowables"
-        - "weasyprint CSS print @page dark background"
-        - "python-telegram-bot send_document channel post"
+        - "rss-parser npm usage parse URL items guid link"
+        - "feed npm package Atom RSS generate parse"
+        - "Next.js App Router Route Handlers response headers"
+        - "ONLY IF NEEDED: contentlayer MDX blog — skip if confirm JSON CMS"
       sites_or_hubs:
-        - "Context7 MCP"
-      gate: "SKIP if no library lock after github+miner; then coverage_matrix context7_docs: skip"
+        - "Context7: rss-parser"
+        - "Context7: next.js (App Router only as needed)"
+        - "Context7: feed (jpmonette) optional"
+      skip_unless: "github finds a specific lib skill must wire"
+      expected_outputs:
+        - "parse API + caveats (encoding, relative links, HTML in description)"
+        - "explicit: Contentlayer NOT required for this workspace"
 
-    - id: custom-eg-local
+    - id: news
+      priority: must
+      why: "Dated 2025–2026 free readers/Alerts/PubMed RSS; discover feeds for longevity/biohacking/nutrition/rehab/biomechanics; anatolyfit feed discovery; Zen publisher RSS notes"
+      specialist: t-800-research-news
+      queries:
+        - "best free RSS readers 2025 2026 FreshRSS Miniflux"
+        - "Google Alerts deliver to RSS feed still available undocumented"
+        - "PubMed Create RSS feed longevity exercise biomechanics rehabilitation"
+        - "how to find RSS feed when site has no icon anatolyfit.com"
+        - "FreshRSS HTML XPath OR RSSHub free generate feeds missing sites"
+        - "Yandex Zen RSS requirements for publishers"
+        - "Examine.com OR Stronger by Science OR Barbell Medicine OR JOSPT RSS"
+      sites_or_hubs:
+        - "nlm.nih.gov PubMed Create RSS / pubmed.ncbi.nlm.nih.gov"
+        - "google.com/alerts (verify RSS delivery option)"
+        - "freshrss.github.io FreshRSS OPML HTML+XPath docs"
+        - "anatolyfit.com (/feed, /rss, atom, sitemap, robots)"
+        - "cyberseo.net Fitness RSS catalogue (seed URLs only)"
+        - "docs.rsstodolist OR RSSHub docs (free generate)"
+        - "selfhostwise / AlternativeTo FreshRSS Miniflux comparisons"
+      expected_outputs:
+        - "verified free source patterns table (native RSS | Google Alerts | PubMed | FreshRSS XPath | skip)"
+        - "dated sources for coverage_matrix freshness"
+        - "fallback policy when site has no RSS (no Twitter/FB scrape)"
+
+    - id: custom
       priority: should
-      why: "EG already has PDF premium style, tone, content router, bot funnel — research must ground adaptation_plan in local truth, not invent brand from web."
-      specialist: t-800-research-github
-      # note: same specialist can skim local; lead may assign scout-style read
-      freshness: "repo HEAD"
+      why: "Domain feed seed list + RU SEO article architecture mapped to EG product ladder (studio / course / club) — not covered by generic Cursor docs"
+      specialist: t-800-research-community
+      label: "wellness-feed-catalog + RU SEO structure"
       queries:
-        - "EG_PDF_PREMIUM_STYLE_SYSTEM"
-        - "CONTENT_ROUTER EG_TONE_OF_VOICE"
-        - "bot generate_lead_pdf products funnel"
-        - "КОНТЕНТ_МАШИНА ВОРОНКА_1М"
+        - "Examine.com RSS OR newsletter feed"
+        - "Stronger by Science RSS"
+        - "Barbell Medicine RSS"
+        - "Physio Network OR JOSPT OR Cochrane exercise rehabilitation RSS"
+        - "NIH OR PubMed exercise longevity RSS"
+        - "структура SEO статьи локальный бизнес Москва студия + онлайн курс + клуб"
+        - "внутренние ссылки клуб курс запись студия eg.egoshev.ru"
       sites_or_hubs:
-        - "/Users/egoshev/Projects/atmosfera-3d/00_ПУЛЬТ_УПРАВЛЕНИЯ/"
-        - "EG ecosystem master docs (EG_PDF_PREMIUM_STYLE_SYSTEM, CONTENT_ROUTER, EG_TONE_OF_VOICE)"
-        - "01_ПРОЕКТЫ/P02_бот_telegram/bot/"
-      notes: "Read-only inventory: existing PDF scripts, brand tokens (dark/cyan), HITL gaps today."
-
-  skip_channels:
-    - id: kie-vendor-deep
-      why: "Image/video gen not in the 3 capability MVP; optional later if PDF needs cover art via Kie."
-    - id: miniapp-reexpert-deep
-      why: "Explicit anti-example and backlog; mention in open_questions/synthesis only as 'not now'."
-    - id: youtube-seo-deep
-      why: "Backlog optional/later — out of factory-brief focus for this research pass."
-    - id: context7-always-on
-      why: "No locked SDK until PDF stack chosen; docs channel is gated should→skip."
-    - id: clawhub-verbatim-import
-      why: "Contract forbids verbatim skill copy; channel clawhub is must for patterns only."
-    - id: make-n8n-full-research
-      why: "Surface is Cursor-workspace skills/commands/rules, not Replace-with-Make; external orchestrators only nice if HITL UX comparison needed (optional footnote)."
+        - "topic hubs: longevity, biohacking, nutrition, rehab, biomechanics, functional/strength"
+        - "eg.egoshev.ru/blog (existing IA for internal link targets)"
+        - "intake: anatolyfit.com as discovery test case"
+      expected_outputs:
+        - "seed feed list (URLs) for OPML/YAML v1 (~15–30 curated, not 8k dump)"
+        - "article skeleton: H1, mechanism, EG method map (Диагностика→…), CTA studio/course/club, cite source"
+        - "tone checklist: calm premium, no «вылечим»"
 
   compare_axes:
-    - "hitl_hardness: soft reminder vs hard stop before publish (EG requires hard)"
-    - "cursor_fit: skill vs command vs rule split for pipeline + approve gate"
-    - "pdf_stack: ReportLab theme vs HTML/WeasyPrint vs JSON-renderer agent boundary"
-    - "brand_safety: EG tone + no medical promises + no western copypaste"
-    - "funnel_alignment: digest/PDF/trends → guide→test→levels→paid"
-    - "operability: single operator (Евгений) time — draft quality vs steps count"
-    - "security: no token leak, no autopost, no unsafe shell"
-    - "freshness: pre-skills patterns vs 2026 SKILL.md standard"
-    - "completeness: covers all 3 capabilities without Mini App scope creep"
+    - "free_cost_ceiling"            # $0 runtime; optional self-host on owned VPS only
+    - "cursor_fit"                   # skill+command vs multi-step agent vs Automations-only
+    - "human_approve_gate"           # draft-only, no auto-publish
+    - "legal_rewrite_cite"           # rewrite+attribution vs republish risk
+    - "source_coverage"              # curated OPML + Alerts enrichment + PubMed + XPath fallback
+    - "nextjs_draft_fit"             # data/blog.json + admin API vs review markdown paste
+    - "telegram_digest_simplicity"   # Bot API vs human-copy template from skill output
+    - "seo_local_ru"                 # Moscow studio + course + club internal links
+    - "ops_complexity"               # poll-in-skill vs FreshRSS vs RSSHub
+    - "no_rss_site_handling"         # FreshRSS HTML+XPath vs RSSHub vs manual paste vs skip
+    - "security"                     # unbounded fetch, SSRF, secrets, auto-publish
+    - "freshness"                    # 2025–2026 dated sources
+    - "brand_safety"                 # medical-claim filter + EG tone
 
-  expected_specialist_fan_out_order:
-    - step: 1
-      specialist: t-800-research-vendor-docs
-      parallel: false
-      why: "Ground Cursor surface + cookbook idea_seeds before mining clones of obsolete patterns"
-    - step: 2
-      specialist: t-800-research-github
-      parallel_with: [t-800-research-clawhub, t-800-research-community, custom-eg-local-skim]
-      why: "Shallow map + ClawHub + community + local EG in parallel after vendor baseline"
-    - step: 3
-      specialist: t-800-research-repo-miner
-      parallel: false
-      depends_on: [t-800-research-github]
-      why: "Deep-mine ≥2 repos chosen from github shortlist (hints above)"
-    - step: 4
-      specialist: t-800-research-news
-      parallel_with: [t-800-research-docs]
-      why: "Freshness pass; Context7 only if library locked"
-    - step: 5
-      specialist: t-800-research-synthesizer
-      parallel: false
-      why: "Compare ≥2 families → one recommended_approach + merge_plan + adaptation_plan seeds for 3 capabilities"
-
-  deep_minima_checklist_for_lead:
-    - "search_plan: pass (this fragment)"
-    - "sources with dates: ≥8"
-    - "github deep-mines: ≥2"
-    - "clawhub: pass (must)"
-    - "vendor_docs: pass (Cursor + cookbooks)"
-    - "context7: pass|skip per library lock"
-    - "synthesis compare ≥2 families"
-    - "coverage_matrix verdict"
+  skip_channels:
+    - id: paid_saas_deep_dive
+      why: "Inoreader/Feedly Pro/RSS.app explicitly forbidden as stack dependency; mention only as contrast"
+    - id: social_scrape
+      why: "Twitter/FB scrape out of scope by brief"
+    - id: contentlayer_deep
+      why: "Workspace blog = data/blog.json + TipTap; Contentlayer/MDX not the CMS"
+    - id: kie_grs_image
+      why: "No image/video generation in v1 news→blog pipeline"
+    - id: full_subagent_research
+      why: "Intent = skill+command; agent only if synthesizer proves multi-step needs separate agent"
+    - id: always_on_context7
+      why: "docs channel is should/skip_unless lib chosen — not always-on"
 
   open_questions:
-    - "Publish surface for pipeline v1: only Telegram channel @EvgeniiGoshev, or also bot DMs / site blog.json?"
-    - "Approve UX: Cursor chat OK only, or also Telegram inline button / emoji react as second gate?"
-    - "PDF engine preference: stay on existing bot ReportLab path, or evaluate WeasyPrint/JSON-renderer?"
-    - "Trend Adapter input sources: which western feeds (IG/TikTok/X/newsletters) are in-scope for v1?"
-    - "Should HITL approve gate be a alwaysApply rule, a skill stage, a slash command, or mix (rule forbid autopost + skill stages)?"
-    - "Local EG_PDF_PREMIUM_STYLE_SYSTEM path in this monorepo vs external EG master — which is source of truth for cyan tokens?"
+    - "Google Alerts RSS exists in 2026 but fragile — include as optional enrichment in OPML or exclude from v1?"
+    - "anatolyfit / no-RSS sites: FreshRSS HTML+XPath (ops), free RSSHub self-host, manual URL paste into skill, or skip until native feed?"
+    - "Telegram v1 default: Bot API post to channel draft, or skill outputs digest text for human paste?"
+    - "Blog draft write path: skill patches data/blog.json / admin API, or writes review markdown for human paste into /admin/blog?"
+    - "Is Timeweb VPS acceptable later for FreshRSS/Miniflux, or must v1 stay zero-infra (poll inside Cursor run only)?"
+    - "PubMed abstracts: how aggressive is brand filter when adapting 'механизм/гипотеза' with cite (no medical claims)?"
+    - "Seed OPML size for v1: hand-curated 15–30 feeds vs import lifestyle/sports subset from awesome-rss-feeds-list?"
 
-  out_of_scope_this_pass:
-    - "Writing factory-briefs / SKILL.md / commands / rules"
-    - "Implementing bot autopost"
-    - "Mini App / RE-EXPERT clone"
-    - "YouTube / SEO pipeline build"
+  fan_out_order_hint:
+    - "1 parallel: github + community + clawhub + vendor-docs + news (+ custom SEO/feeds with community)"
+    - "2 after github picks: repo-miner ≥2 (prefer FreshRSS + one Node digest/parser consumer)"
+    - "3 docs/Context7 if lib chosen"
+    - "4 synthesizer compare ≥2 families → recommended_approach + merge_plan"
+
+  synthesis_families_hint:
+    - "A: Cursor skill+command polls curated OPML/YAML → RU EG rewrite draft → human approve → admin/blog + TG digest text"
+    - "B: Self-host FreshRSS/Miniflux (OPML + optional HTML+XPath) + export/webhook → Cursor Automations cron"
+    - "C: Narrow scholarly/news only (PubMed + Google Alerts RSS) + manually curated blog feeds"
+    - "Merge likely: A for v1 + seed OPML from news/custom; B deferred for no-RSS sites; C as source enrichment; never paid SaaS"
 ```

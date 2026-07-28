@@ -11,10 +11,26 @@ import json
 import re
 from pathlib import Path
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 
 app = Flask(__name__)
 ORDERS_FILE = Path(__file__).resolve().parent / "orders.json"
+
+
+@app.after_request
+def add_cors_headers(response):
+    """Prodamus cabinet often validates the URL from the browser (CORS)."""
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, HEAD, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Sign, Authorization"
+    response.headers["Access-Control-Max-Age"] = "86400"
+    return response
+
+
+@app.route("/webhook", methods=["OPTIONS"])
+@app.route("/health", methods=["OPTIONS"])
+def cors_preflight():
+    return make_response("", 204)
 
 # Map Prodamus product name or id to our product_id
 PRODUCT_TO_COURSE = {
@@ -79,9 +95,13 @@ def save_orders(orders: list) -> None:
     ORDERS_FILE.write_text(json.dumps(orders, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-@app.route("/webhook", methods=["POST"])
+@app.route("/webhook", methods=["GET", "HEAD", "POST"])
 def webhook():
-    # Prodamus may send multipart/form-data or application/x-www-form-urlencoded
+    # Prodamus validates the URL on save (often GET/HEAD or empty POST).
+    # Real payment notifications are POST multipart/form-data with order_id.
+    if request.method in ("GET", "HEAD"):
+        return jsonify({"status": "ok"}), 200
+
     data = request.form.to_dict() if request.form else {}
     if not data and request.is_json:
         data = request.get_json() or {}
@@ -89,7 +109,6 @@ def webhook():
     order_id = data.get("order_id") or data.get("orderId") or data.get("id") or ""
     email = data.get("email") or data.get("customer_email") or data.get("client_email") or ""
     product_name = data.get("product_name") or data.get("products") or data.get("product") or ""
-    # Sometimes products come as products[] or product_names[]
     if not product_name and "products[]" in data:
         product_name = data.get("products[]")
     if not product_name:
@@ -98,10 +117,11 @@ def webhook():
                 product_name = v
                 break
 
-    product_id = normalize_product(str(product_name))
-
+    # Empty / probe POST during URL validation in Prodamus cabinet
     if not order_id:
-        return jsonify({"ok": False, "error": "no order_id"}), 400
+        return jsonify({"ok": True, "message": "ready"}), 200
+
+    product_id = normalize_product(str(product_name))
 
     orders = load_orders()
     if any(str(o.get("order_id")) == str(order_id) for o in orders):
@@ -119,7 +139,7 @@ def webhook():
     return jsonify({"ok": True, "order_id": order_id, "product_id": product_id}), 200
 
 
-@app.route("/health", methods=["GET"])
+@app.route("/health", methods=["GET", "HEAD"])
 def health():
     return jsonify({"status": "ok"})
 

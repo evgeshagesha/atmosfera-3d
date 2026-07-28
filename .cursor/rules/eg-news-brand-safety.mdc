@@ -1,0 +1,25 @@
+---
+description: Brand safety editorial EG — content_mode, dual HITL hash, no skill publish
+alwaysApply: true
+---
+
+# eg-news-brand-safety
+
+Когда: статья / news / RSS / social preview EG через `eg-news-to-blog`.
+
+**content_mode:** `author` | `external` | `mixed`  
+- author — preserve голос; не «улучшать» текст  
+- external — rewrite своими словами + cite (title, URL, date)  
+- mixed — provenance на блоки  
+
+**Dual HITL:** `article_hash` → `social_hash` (фразы Gate в workflow). Skill/commands **не** публикуют.
+
+**Draft:** всегда `published: false` явно (omit = true в `normalizeBlogPost`).
+
+**Blocked:** claim без источника · open blocking `evidence_gap` · `status` ≠ ok при approve.
+
+**Social:** один CTA · без 👆 · без хэштег-шума · без auto TG/VK.
+
+**Запрещено:** вылечим · исцеление · избавим навсегда · секретный/революционный метод · тело мечты · диагноз-ярлык · verbatim full-text · auto-publish `blog.json` / TG.
+
+Пайплайн: skill `eg-news-to-blog`. SoT: `01_ПРОЕКТЫ/P01_сайт_и_сервер/СТИЛЬ_СТАТЕЙ_БЛОГА.md`. Бренд: `.cursor/rules/atmosfera-3d.mdc`.

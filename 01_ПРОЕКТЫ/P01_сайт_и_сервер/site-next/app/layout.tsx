@@ -10,6 +10,16 @@ const yandexVerification =
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://eg.egoshev.ru"),
   verification: { yandex: yandexVerification },
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        {
+          url: "/rss.xml",
+          title: "Атмосфера 3D — RSS для Дзена",
+        },
+      ],
+    },
+  },
 };
 
 /** iPhone + Telegram Mini App: safe-area, no horizontal overflow. */

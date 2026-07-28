@@ -1,26 +1,35 @@
-# Fragment — t-800-factory-builder · eg-bot-manager-flow
+# t-800-factory-builder — eg-news-to-blog-human-editorial-handoff
 
-**Когда:** 2026-07-27  
-**Режим:** CREATE Phase A  
-**status:** ok
+| Поле | Значение |
+|------|----------|
+| status | ok |
+| stage | builder |
+| mode | PATCH |
+| date | 2026-07-29 |
+| topic | eg-news-to-blog-human-editorial-handoff |
 
-## Artifacts written
+## files_written
 
-- `.cursor/skills/eg-bot-manager-flow/SKILL.md`
-- `.cursor/skills/eg-bot-manager-flow/references/trigger-matrix.md`
-- `.cursor/skills/eg-bot-manager-flow/references/manager-state-map.md`
-- `.cursor/skills/eg-bot-manager-flow/references/tone-bans.md`
-- `.cursor/commands/eg-bot-manager-flow.md`
+1. `.cursor/skills/eg-news-to-blog/SKILL.md`
+2. `.cursor/skills/eg-news-to-blog/references/brand-voice.md`
+3. `.cursor/skills/eg-news-to-blog/references/draft-schema.md`
+4. `.cursor/skills/eg-news-to-blog/references/workflow.md`
+5. `.cursor/skills/eg-news-to-blog/references/fewshots.md`
+6. `.cursor/skills/eg-news-to-blog/references/seo-clusters.md`
+7. `.cursor/skills/eg-news-to-blog/references/tone-bans.md`
+8. `.cursor/skills/eg-news-to-blog/assets/draft-frontmatter.template.md`
+9. `.cursor/commands/eg-news-to-blog.md`
+10. `.cursor/commands/eg-news-approve.md`
+11. `.cursor/rules/eg-news-brand-safety.mdc`
 
-## Patched (description only)
+## notes
 
-- `.cursor/agents/eg-bot-engineer.md`
-- `.cursor/agents/eg-bot-knowledge.md`
+- SoT cited: `СТИЛЬ_СТАТЕЙ_БЛОГА.md`
+- Dual HITL hash gates; approve does NOT write blog.json (this PATCH)
+- publisher_gap: `publish_blog_social.py` unchanged
+- Untouched: feeds.yaml, agents, hooks, MCP, registry, site code
 
-## registry_patch
+## handoff
 
-null (workspace skill; no new agent)
-
-## Handoff
-
-→ integrator: wire discovery / STATE; no install-plugin registry for new agent
+next: `t-800-factory-integrator`  
+summary: 11 editorial files patched; registry_patch null (workspace .cursor); integrator may skip registry if surface=cursor-workspace.

@@ -1,206 +1,217 @@
-# t-800-research-clawhub — DEEP
+# t-800-research-clawhub — DEEP RETRY
 
-> scanned_at: 2026-07-24  
+> scanned_at: 2026-07-28  
 > hub: https://clawhub.ai/  
-> intent: content pipeline HITL · PDF premium · Telegram channel post · trend rewrite / brand voice · newsletter digest  
+> intent: FREE RSS/news digest → rewrite → blog draft → Telegram (Cursor skills patterns)  
 > rejected_verbatim: true  
-> factory_write: none
+> factory_write: none  
+> note: RETRY — previous fragment (2026-07-24) was HITL/TG pipeline; this run replaces focus with RSS→digest→rewrite→blog→TG
 
 ## Tabs scanned
 
 | Tab | Access | Notes |
 |-----|--------|-------|
-| Featured (home) | OK | Plugins: Lobster, Memory LanceDB, Diffs, Firecrawl, etc. |
-| Top / Trending / New (skills UI) | Partial | SPA lists often empty via fetch; cards resolved via search + direct URLs |
-| Skills categories | Partial | Communication / Creative / Automation inferred from cards |
+| Home | Partial | WebFetch timeout; Featured plugins known from prior + search |
+| Top / Trending | Glance | Marketplace leaders = self-improve / browser / Skill Vetter — **not** RSS niche; niche cards via search API |
+| New | Glance | `/api/newest` route missing on this host; used `/api/search` |
+| Skills search | OK | `GET /api/search?q=RSS` etc. returned live cards |
 
 ## EG constraints applied
 
-- Автопост без явного OK — **запрещён**
-- Trend Adapter = адаптация, не копипаст
-- PDF = dark / cyan premium (не «синий digest с emoji»)
+- Auto-publish без явного OK — **запрещён**
+- Fetch только allowlisted feeds / OPML; без unbounded crawl
+- Secrets (`bot_token`, Ghost keys, LLM keys) — только env / secrets, never SKILL.md
+- Rewrite = brand voice EG (не verbatim чужих статей)
+- FREE path: RSS/OPML + local scripts + Cursor skill/command + Telegram MCP HITL
 
 ---
 
-## clawhub_findings (items)
+## clawhub_findings
 
-### 1. HITL Protocol — @rotorstar/hitl-protocol
-- **url:** https://clawhub.ai/rotorstar/hitl-protocol
-- **category:** skill
-- **tab_signal:** search / intent-match (HITL)
-- **summary:** Протокол human decisions для агентов: approval / selection / confirmation; inline submit через native buttons (Telegram и др.); states pending→completed; opaque tokens.
-- **attribution:** ClawHub / rotorstar
-- **pattern_to_steal:** Review case object + native Approve/Reject buttons; multi-round edit (`previous_case_id`); timeout + `default_action` ≠ silent publish; HTTPS + opaque token.
-- **security_flags:**
-  - low: requires bot platform for buttons — token must stay in env, never in skill text
-  - note: good security narrative (SHA-256 hash storage, timing-safe compare) — adopt spirit, not copy
-- **adapt_for_cursor:** Cursor skill/command: `content-hitl` — draft artifact → AskQuestion/user confirm → only then call Telegram MCP; never self-resume publish.
+```yaml
+status: ok
+clawhub_findings:
+  scanned_at: "2026-07-28"
+  tabs: [top, trending, new]
+  tab_glance:
+    top_trending_signal: "Self-improve / Agent Browser / Skill Vetter dominate downloads — RSS/content cards are niche via search, not Top-25"
+    new_signal: "API /api/newest unavailable; newest niche cards still discoverable via search (RSS, digest, PipePost)"
+  rejected_verbatim: true
+  items:
+    - title: "Rss Ai Reader"
+      url: "https://clawhub.ai/benzema216/rss-ai-reader"
+      category: skill
+      summary: "Subscribe RSS/Atom → LLM Chinese summaries → push Feishu/Telegram/Email; SQLite dedup; cron-capable."
+      attribution: "ClawHub / benzema216 (BENZEMA)"
+      freshness: ok
+      security_flags:
+        - "secrets_in_config: api_key / bot_token / webhook_url via env vars — good pattern; never embed in skill text"
+        - "auto_publish: scheduled multi-channel push without HITL — CRITICAL for EG (disable or gate)"
+        - "unbounded_fetch: feed list can grow; need max_feeds + hours window + allowlist"
+      adapt_for_cursor: >
+        Skill `eg-rss-digest`: frontmatter triggers (RSS, digest, morning brief);
+        command `/eg-rss-digest` reads allowlisted feeds.yaml → fetch script (timeout/max_items)
+        → summarize in Cursor → write digest MD to inbox → OPTIONAL Telegram MCP only after user OK.
+        Map notify.telegram to CallMcpTool(user-telegram), never raw bot_token in repo.
 
-### 2. Lobster (plugin Featured + skill)
-- **url:** https://clawhub.ai/guwidoe/lobster · Featured plugin Lobster @openclaw on home
-- **category:** plugin + skill
-- **tab_signal:** Featured (home)
-- **summary:** Deterministic pipelines with `approve` gate + resume token before side effects.
-- **attribution:** ClawHub / openclaw · guwidoe
-- **pattern_to_steal:** Side-effect steps halt until explicit approve; resume token; typed pipeline vs re-planning each turn.
-- **security_flags:**
-  - medium: `exec --shell` in pipelines — EG: no shell publish without confirm
-  - medium: historical gap — approval identity / channel buttons (openclaw/lobster#44); do not let agent self-approve
-  - reject_for_EG: any default_action=approve on publish timeout
-- **adapt_for_cursor:** YAML step graph in skill: research→draft→**HITL gate**→publish; gate owned by human only.
+    - title: "RSS Daily Digest"
+      url: "https://clawhub.ai/renchengxiang/rss-daily-digest"
+      category: skill
+      summary: "feed-sources.md → python fetch/parse last 24h → one-sentence summaries + relevance score → Markdown digest; offer channel send."
+      attribution: "ClawHub / renchengxiang"
+      freshness: ok
+      security_flags:
+        - "shell_scripts: python3 fetch/format — sandbox paths; no curl|sh pipelines"
+        - "fabrication_guard: skill claims never invent titles/URLs — keep as hard rule in Cursor skill"
+        - "auto_publish: 'offer to send' is safer than auto-send — prefer explicit approve"
+      adapt_for_cursor: >
+        Split into skill (when/why + output schema) + scripts under repo tools/
+        (fetch_feeds.py, format_digest.py). Command returns path to digest-YYYY-MM-DD.md.
+        Cap 50 articles. Next step handoff: `/eg-content-rewrite` not auto-Telegram.
 
-### 3. TG Channel Manager — @axisrow/tg-channel-manager
-- **url:** https://clawhub.ai/axisrow/tg-channel-manager
-- **category:** skill
-- **tab_signal:** intent Telegram channel
-- **summary:** Config-driven TG pipeline: scout → draft → human approves → publisher; statuses draft / pending / published; dedup index; SearXNG scout.
-- **attribution:** ClawHub / axisrow
-- **pattern_to_steal:** Explicit status machine; human approval transitions draft→pending; publisher only reads pending; channel config (rubrics, exclude filters) separate from bot code.
-- **security_flags:**
-  - medium: bot-token in local config — must be secrets/.env only
-  - medium: auto publisher cron — EG must keep publish behind OK (disable cron auto-post or require pending+manual)
-  - low: public channel scrape for dedup — no PII scrape of private chats
-- **adapt_for_cursor:** Skill `tg-channel-hitl`: write draft to queue file; user MCP send only after status=approved; Trend items go through rewrite gate first.
+    - title: "NewsToday"
+      url: "https://clawhub.ai/jiajiaoy/newstoady"
+      category: skill
+      summary: "Morning/evening briefing + breaking alerts; RSS + WebSearch; topic weights; deliver Telegram/Feishu/Slack/Discord."
+      attribution: "ClawHub / jiajiaoy"
+      freshness: ok
+      security_flags:
+        - "unbounded_fetch: WebSearch + multi-RSS + 2h breaking loop — high cost/noise; EG: on-demand only"
+        - "auto_publish: daytime alerts every 2h — reject for brand channel without HITL"
+        - "pii_scrape: hot-board scrape (Weibo/Zhihu) — avoid private/social scrape; public RSS only"
+      adapt_for_cursor: >
+        Pattern only: briefing template (10 items, 2-sentence summary, source URL).
+        Skill modes: `morning` | `evening` | `on_demand`. No cron alerts in v1.
+        Delivery = draft file; Telegram via HITL command `/eg-tg-preview`.
 
-### 4. Content Pipeline — @runesleo/runesleo-content-pipeline
-- **url:** https://clawhub.ai/runesleo/runesleo-content-pipeline
-- **category:** skill
-- **tab_signal:** intent content pipeline
-- **summary:** Research → Ideate → Write → Queue; commands review / approve / adapt / publish; status seed→…→published.
-- **attribution:** ClawHub / runesleo
-- **pattern_to_steal:** File-backed queue + separate `approve` vs `publish`; `/pipeline adapt` for platform variants; voice match + anti-cliché in write stage.
-- **security_flags:**
-  - low: if `publish` is only a status marker — OK; if it posts externally — must require second confirm
-  - reject_verbatim: do not copy prompt hooks/scores
-- **adapt_for_cursor:** Map to EG content machine: draft in inbox → HITL → Telegram/site; `adapt` = Trend Adapter (rewrite+brand), not republish source.
+    - title: "AK RSS 24h Brief"
+      url: "https://clawhub.ai/seandong/ak-rss-24h-brief"
+      category: skill
+      summary: "OPML URL/file → last N hours → categorized Chinese brief; workers/timeouts/max-feeds knobs."
+      attribution: "ClawHub / seandong"
+      freshness: ok
+      security_flags:
+        - "unbounded_fetch: default max_feeds=200 — must lower for FREE/local EG (e.g. 15–40)"
+        - "opml_remote: fetching remote OPML = supply-chain risk; prefer local OPML in vault"
+        - "shell: generate_brief.py — pin timeouts; no follow redirects to file://"
+      adapt_for_cursor: >
+        Command `/eg-rss-opml` with --opml-file path in project, --hours 24, --max-feeds 30,
+        --max-items 12. Output brief MD with original titles+links preserved.
+        OPML lives in `03_РЕСУРСЫ/` or site content config — not remote gist by default.
 
-### 5. Multi-Agent Brand Studio — @kuan0808/multi-agent-brand-studio
-- **url:** https://clawhub.ai/kuan0808/multi-agent-brand-studio
-- **category:** skill
-- **tab_signal:** brand + approval
-- **summary:** Multi-agent social ops; approval-gated publishing; brand isolation; KB with content guidelines.
-- **attribution:** ClawHub / kuan0808
-- **pattern_to_steal:** Brand-isolated guidelines folder; nothing publishes without owner approval; Reviewer on-demand.
-- **security_flags:**
-  - medium: telegram topic scripts / channel-map — side effects need confirm
-  - low: multi-agent self-collusion risk — owner is sole publisher
-- **adapt_for_cursor:** Single brand EG workspace; subagent roles optional; hard rule: owner OK before Telegram MCP.
+    - title: "Topic Monitor"
+      url: "https://clawhub.ai/robbyczgw-cla/topic-monitor"
+      category: skill
+      summary: "RSS/Atom + GitHub releases + OPML import; keyword filters; importance scoring; Telegram channels for alerts/digests."
+      attribution: "ClawHub / robbyczgw-cla"
+      freshness: ok
+      security_flags:
+        - "secrets: openclaw config set channels.telegram.botToken — env only"
+        - "auto_publish: alert_on + hourly frequency can spam channel — EG: digest queue only"
+        - "shell: manage_topics.py import-opml — validate OPML before merge"
+      adapt_for_cursor: >
+        Adapt filters (required_keywords / exclude_keywords / boost_sources) into feeds.yaml schema.
+        Skill does NOT alert live; writes scored candidates to queue for rewrite gate.
+        Command `/eg-topic-score` → ranked JSON for synthesizer/blog draft skill.
 
-### 6. tech-news-digest — @dinstein/tech-news-digest
-- **url:** https://clawhub.ai/dinstein/tech-news-digest
-- **category:** skill
-- **tab_signal:** newsletter digest + PDF
-- **summary:** Multi-source digest; quality scoring; Discord/email/markdown/PDF (weasyprint); explicit ban on interpolating untrusted content into shell.
-- **attribution:** ClawHub / dinstein
-- **pattern_to_steal:** Unified source model + dedupe + template outputs; PDF as render of approved markdown; **shell-safety**: never pass titles/tweets into shell args.
-- **security_flags:**
-  - positive: no shell interpolation of fetched content
-  - low: email send scripts — confirm before send
-  - style_reject: blue emoji A4 digest ≠ EG dark cyan premium — steal pipeline, not visual
-- **adapt_for_cursor:** Digest skill → EG weekly digest draft; PDF via existing EG premium PDF system (dark/cyan); delivery only after HITL.
+    - title: "PipePost"
+      url: "https://clawhub.ai/plugins/openclaw-pipepost"
+      category: plugin
+      summary: "Scout HN/Reddit/RSS/search → AI translate/adapt → publish webhook/Telegram/Markdown; YAML flow with validate step."
+      attribution: "ClawHub / openclaw-pipepost"
+      freshness: ok
+      security_flags:
+        - "CRITICAL auto_publish: destination telegram/webhook after validate — must insert HITL before publish"
+        - "child_process CLI: TypeScript wraps Python CLI — audit shell args; no unsanitized URLs"
+        - "secrets: webhook URLs and bot tokens in flow YAML — use env interpolation only"
+        - "copyright: scout→translate→publish can republish others' work — EG: rewrite+attribution or original commentary only"
+      adapt_for_cursor: >
+        Steal pipeline shape only: scout → filter → score → draft(adapt) → validate → **HITL** → publish.
+        Map destinations: Markdown file (blog draft in site-next) + Telegram MCP.
+        Commands: `/eg-pipe-scout`, `/eg-pipe-draft`, `/eg-pipe-publish` (publish requires explicit confirm arg).
 
-### 7. Brand Voice Style Guide Generator — @gitflopez/brand-voice-style-guide-generator
-- **url:** https://clawhub.ai/gitflopez/brand-voice-style-guide-generator
-- **category:** skill
-- **tab_signal:** brand voice
-- **summary:** Voice audit, tone-by-channel, do/don't, vocabulary use/avoid, before/after rewrites, training kit.
-- **attribution:** ClawHub / gitflopez
-- **pattern_to_steal:** Persistent voice profile as source of truth for rewrite; do/don't tables; channel-specific tone grid.
-- **security_flags:** [] (instructional; low risk if no auto-publish)
-- **adapt_for_cursor:** Point rewrite skill at EG_TONE_OF_VOICE / EG_POSITIONING — not generate competing brand PDF unless asked.
+    - title: "RSS Feeds (openclaw-rss-feeds)"
+      url: "https://clawhub.ai/homeofe/openclaw-rss-feeds"
+      category: plugin
+      summary: "Scheduled RSS/Atom digests; optional Ghost CMS draft + channel notify (telegram/whatsapp/discord); dryRun tool."
+      attribution: "ClawHub / homeofe"
+      freshness: ok
+      security_flags:
+        - "CRITICAL secrets: ghost adminKey (id:secret) + nvdApiKey in config examples — never commit"
+        - "auto_publish: Ghost draft is safer than public post; still gate notify"
+        - "dryRun: true — excellent pattern — require dry-run default in Cursor skill"
+      adapt_for_cursor: >
+        Pattern: `rss_run_digest` with dryRun default true → write draft MD/HTML locally
+        (Next.js blog content or inbox). Ghost adapter optional later; EG site = file draft.
+        Notify Telegram only after dryRun review. Schedule via Cursor Automation / cron outside agent.
 
-### 8. Content Remix Studio — @akhmittra/content-remix-studio
-- **url:** https://clawhub.ai/akhmittra/content-remix-studio
-- **category:** skill
-- **tab_signal:** trend rewrite / localization
-- **summary:** One asset → platform-optimized variants; tone/format/length adaptation.
-- **attribution:** ClawHub / akhmittra
-- **pattern_to_steal:** Structured remix matrix (platform × tone × length); hooks per platform; **adaptation not clone**.
-- **security_flags:**
-  - medium: trend/source rewrite without attribution risk — EG: Trend Adapter must transform + brand voice, no copy-paste viral text
-- **adapt_for_cursor:** Trend Adapter skill: input trend → mechanism/EG frame → CTA; reject if similarity to source is high.
+    - title: "APAG Article Rewriter"
+      url: "https://clawhub.ai/liujuntao123/article-rewriter"
+      category: skill
+      summary: "Rewrite/restructure articles with APAG (Attention/Perspective/Advantage/Gamify); adapt to channels; no fact invention."
+      attribution: "ClawHub / liujuntao123"
+      freshness: ok
+      security_flags:
+        - "low: prompt-only skill — still reject verbatim copy of APAG prose into EG skill"
+        - "misinfo: rewrite can distort news facts — require source URL + 'facts locked' checklist"
+      adapt_for_cursor: >
+        Skill `eg-news-rewrite`: input = digest item (title, url, bullets) → output brand-voice draft
+        for blog OR Telegram. Stages: lock facts → EG tone (calm/premium) → CTA to product ladder.
+        Command `/eg-rewrite-item`. Never publish in same command.
 
-### Bonus (digest / automation — lighter weight)
+    - title: "Content Writer (SEO) / Seo Blog Writer"
+      url: "https://clawhub.ai/aaron-he-zhu/seo-content-writer"
+      related_urls:
+        - "https://clawhub.ai/automatelab/automatelab-seo-blog-writer"
+        - "https://clawhub.ai/kambrosgroup/seo-content-engine"
+      category: skill
+      summary: "SEO draft/refresh pipelines; Seo Blog Writer adds scrub + FAQ schema + pluggable publish (Ghost/WP/static)."
+      attribution: "ClawHub / aaron-he-zhu · automatelab · kambrosgroup"
+      freshness: ok
+      security_flags:
+        - "auto_publish: platform adapters (Ghost Admin / WP REST) — CRITICAL gate for EG"
+        - "secrets: CMS tokens in env only"
+        - "hallucination: SERP/research claims — EG: cite RSS sources; no fake stats/med claims"
+      adapt_for_cursor: >
+        Blog stage skill `eg-seo-blog-draft`: digest pick → outline → MDX/MD for site-next
+        (title, meta, H2, FAQ optional) → save under content path as draft.
+        Publish command separate + HITL. Prefer static file output over live CMS API in v1 FREE stack.
 
-| Title | URL | Pattern |
-|-------|-----|---------|
-| Newsletter Creation & Curation | https://clawhub.ai/shashwatgtm/newsletter-creation-curation | Cadence + approval boundaries for employee/company voice |
-| Business Automation Architect | https://clawhub.ai/1kalin/afrexai-business-automation | `approval_gate` YAML: buttons, deadline, on_timeout escalate ≠ auto-publish |
-| Writing Assistant | https://clawhub.ai/clawdssen/agentledger-writing-assistant | `writing-state.md` voice persistence + quality gates |
-| Style Guide Generator (PDF) | https://clawhub.ai/tomstools11/style-guide-generator | PDF as branded deliverable from structured sections |
-| Content Production | https://clawhub.ai/alirezarezvani/content-production | Read marketing-context.md before draft; publish-ready gates |
+  pipeline_map_for_synthesizer:
+    free_stack:
+      - "OPML/feeds.yaml allowlist (Topic Monitor + AK RSS patterns)"
+      - "fetch+dedup+cap (RSS Daily Digest / Rss Ai Reader)"
+      - "brief MD (NewsToday template)"
+      - "rewrite brand voice (Article Rewriter pattern, not copy)"
+      - "SEO blog draft file (Content Writer / Seo Blog Writer static adapter)"
+      - "Telegram HITL publish (PipePost destination shape + dryRun from rss-feeds)"
+    security_baseline:
+      - "allowlisted feeds only; max_feeds + timeout + hours window"
+      - "dryRun default; no cron auto-post to TG"
+      - "secrets in env; never in SKILL.md / feeds committed with tokens"
+      - "publish = separate command requiring explicit user confirmation"
+      - "rewrite must preserve attribution/links; no medical promises (EG brand)"
+      - "reject skills that shell-exec publish or scrape private chats"
 
----
+  rejected_cards_note: |
+    Buzz (zxcnny930/buzz): relevant real-time RSS→Telegram aggregator via REST;
+    card fetch returned 500 — pattern noted (pollInterval + botToken/chatId) but not primary
+    attribution item until page recoverable. Morning Brief (min870809/ai-morning-brief)
+    similar to NewsToday — skipped as duplicate pattern.
+```
 
-## adaptation_patterns (for Cursor / EG)
+## Cross-check (freshness)
 
-### HITL
-1. Status machine: `drafted → awaiting_ok → approved → published` (no skip).
-2. Side effects (Telegram post, email, public PDF drop) only after human OK.
-3. Agent must not hold resume/approve token for its own publish.
-4. Timeout: `abort` or `skip`, never silent `approve` for public posts.
-5. Optional: Telegram inline buttons for OK/Reject (HITL Protocol pattern).
+| Source | published_or_updated | freshness | takeaway |
+|--------|----------------------|-----------|----------|
+| clawhub.ai/api/search?q=RSS | live 2026-07-28 | ok | Rss Ai Reader still indexed (downloads ~8k) |
+| PipePost plugin page | live search 2026-07-28 | ok | End-to-end scout→translate→publish shape |
+| AK RSS 24h / Topic Monitor | live search 2026-07-28 | ok | OPML + caps are the FREE feed-list pattern |
+| Top-25 marketplace lists | 2026 blogs | ok (context only) | Top ≠ niche RSS; do not overfit trending |
 
-### PDF premium
-1. Steal: md→PDF pipeline + template separation (digest skill).
-2. Steal: shell-safety (no untrusted strings in CLI).
-3. Reject visual: light/blue/emoji digest → use EG dark graphite + cyan, premium typography.
-4. PDF generate ≠ publish; attach/send only post-HITL.
+## adaptation_notes (Cursor)
 
-### Trend rewrite / brand voice
-1. Steal: remix matrix + voice profile (do/don't, never-say).
-2. EG Trend Adapter: problem→mechanism→EG path→CTA; localization to RU brand tone.
-3. Hard reject: verbatim trend copy, medical claims, cheap fitness tone.
-4. Quality gate: voice match against EG tone files before queue.
-
-### Telegram channel
-1. Steal: scout/draft/approve/publisher separation (TG Channel Manager).
-2. Dedup index for already-posted ideas.
-3. Publisher reads only `approved` queue items after human OK.
-
-### Newsletter digest
-1. Steal: multi-source → score → template → optional PDF/email.
-2. EG: weekly utility digest as draft; HITL before any send/post.
-
----
-
-## security_flags / rejected_verbatim
-
-### security_flags (aggregate)
-- no secrets in prompts / SKILL body
-- no shell publish without confirm
-- no jailbreak / ignore-previous patterns observed in summaries (re-check on install)
-- no PII scrape of private Telegram; public channel dedup only
-- Lobster/exec + self-approve risk → require human-only gate for EG
-- Cron auto-publisher → disable or hard-gate for EG
-
-### rejected_verbatim
-- Full SKILL.md / prompts from any card above
-- Hook formulas, virality scores, exact command trees as copy-paste products
-- tech-news-digest PDF visual theme as EG brand
-- Any skill text that enables publish without OK
-
----
-
-## sources
-
-| url | published_or_updated | freshness | takeaway |
-|-----|---------------------|-----------|----------|
-| https://clawhub.ai/ | 2026-07-24 (live) | ok | Featured Lobster + skills hub entry |
-| https://clawhub.ai/rotorstar/hitl-protocol | unknown (live card) | warn | HITL cases + TG buttons |
-| https://clawhub.ai/guwidoe/lobster | unknown (live) | warn | approve gate + resume |
-| https://clawhub.ai/axisrow/tg-channel-manager | unknown (live) | warn | TG scout→approve→publish |
-| https://clawhub.ai/runesleo/runesleo-content-pipeline | unknown (live) | warn | queue status + adapt/approve |
-| https://clawhub.ai/kuan0808/multi-agent-brand-studio | unknown (live) | warn | brand isolation + approval |
-| https://clawhub.ai/dinstein/tech-news-digest | unknown (live) | warn | digest+PDF + shell safety |
-| https://clawhub.ai/gitflopez/brand-voice-style-guide-generator | unknown (live) | warn | voice profile structure |
-| https://clawhub.ai/akhmittra/content-remix-studio | unknown (live) | warn | platform remix / rewrite |
-| https://github.com/openclaw/lobster/issues/44 | issue live | ok | approval identity / channel gap warning |
-
-## confidence
-
-**0.78** — strong intent match via card summaries + search; Top/Trending SPA lists partially opaque to fetch; dates on cards often unknown → freshness mostly `warn`; patterns sufficient for architect, not for verbatim install.
-
-## NO factory write
-
-Research fragment only. Hand off to research-lead / brain / factory separately.
+1. **Не ставить** один мега-skill «как PipePost» — 3 артефакта: `eg-rss-digest` (skill+command), `eg-news-rewrite` (skill), `eg-blog-draft` (skill) + publish command с HITL.  
+2. **Tools:** Shell только для локального fetch-скрипта с allowlist; Telegram через MCP; blog = write files в site-next.  
+3. **Запреты в SKILL.md:** auto-publish, unbounded URL fetch, secrets, медобещания, verbatim чужих статей.  
+4. **Factory:** только после brain-lead; этот fragment = patterns only (`rejected_verbatim: true`).

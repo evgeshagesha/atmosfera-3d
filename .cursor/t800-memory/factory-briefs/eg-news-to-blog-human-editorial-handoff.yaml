@@ -1,0 +1,78 @@
+# Factory brief — eg-news-to-blog-human-editorial-handoff (PATCH)
+# Date: 2026-07-29
+# Mode: PATCH · fix-pack: fix-packs/eg-news-to-blog-human-editorial-handoff.md
+
+brief_for_factory:
+  mode: PATCH
+  topic: eg-news-to-blog-human-editorial-handoff
+  recommended_artifact: skill
+  fix_pack: .cursor/t800-memory/fix-packs/eg-news-to-blog-human-editorial-handoff.md
+  research_mode: skip
+  domains_called:
+    - t-800-brain-context
+    - t-800-brain-security
+
+  target_context:
+    workspace_root: /Users/egoshev/Projects/atmosfera-3d
+    plugin_root: ""
+    memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+    profile: workspace-cursor
+    artifact_surface: cursor-workspace
+    release_handoff: null
+    knowledge_vault_path: null
+
+  sources_of_truth:
+    editorial: 01_ПРОЕКТЫ/P01_сайт_и_сервер/СТИЛЬ_СТАТЕЙ_БЛОГА.md
+    execution: 01_ПРОЕКТЫ/P02_бот_telegram/bot/publish_blog_social.py
+    prompt_spec: prompt-craft transcript 2026-07-29 (author|external|mixed)
+
+  exact_patch_scope:
+    - .cursor/skills/eg-news-to-blog/SKILL.md
+    - .cursor/skills/eg-news-to-blog/references/brand-voice.md
+    - .cursor/skills/eg-news-to-blog/references/draft-schema.md
+    - .cursor/skills/eg-news-to-blog/references/workflow.md
+    - .cursor/skills/eg-news-to-blog/references/fewshots.md
+    - .cursor/skills/eg-news-to-blog/references/seo-clusters.md
+    - .cursor/skills/eg-news-to-blog/references/tone-bans.md
+    - .cursor/skills/eg-news-to-blog/assets/draft-frontmatter.template.md
+    - .cursor/commands/eg-news-to-blog.md
+    - .cursor/commands/eg-news-approve.md
+    - .cursor/rules/eg-news-brand-safety.mdc
+
+  explicitly_unchanged:
+    - .cursor/skills/eg-news-to-blog/references/feeds.yaml
+    - 01_ПРОЕКТЫ/P02_бот_telegram/bot/publish_blog_social.py
+    - Telegram-channel→VK bridge
+    - agents, hooks, MCP, registry
+    - site application code
+
+  invariants:
+    - content_mode author|external|mixed
+    - author wording preserve; only structure/punctuation/OCR; factual corrections → evidence_gap
+    - external independent EG rewrite + cite (title, URL, date); no verbatim full-text
+    - mixed provenance per meaningful block
+    - provenance, claim_source_map, evidence_gap required
+    - claim without source → blocking; status cannot be ok
+    - draft always published: false explicit
+    - skill NEVER writes blog.json, never publishes TG/VK, never deploys
+    - two hash-bound HITL (article then social preview)
+    - social preview: one CTA, no finger emoji, no hashtag noise
+    - Telegram→VK auto-crosspost OUT OF SCOPE
+
+  hitl:
+    gate_1: "Утверждаю статью sha256:…" / APPROVE DRAFT <article_hash>
+    gate_2: "Утверждаю social sha256:…" / APPROVE SOCIAL <social_hash>
+    article_hash_payload: [content_mode, title, excerpt, category, body, provenance, sections, claim_source_map, evidence_gap, citations, cta]
+    social_hash_payload: [article_hash, channel, text, cta_text, cta_url]
+    canonicalization: UTF-8, NFC, LF, sorted keys compact JSON (JCS-like), exclude secrets/approvals/timestamps
+
+  publisher_gap: >
+    publish_blog_social.py NOT patched this run; hash-binding remains policy-level
+    until separate eg-bot-engineer PATCH. Document in factory report.
+
+  next_pipeline:
+    - t-800-factory-architect
+    - t-800-factory-builder
+    - t-800-factory-integrator
+    - t-800-prompt-auditor
+    - t-800-factory-auditor

@@ -1,120 +1,201 @@
-# t-800-research-news — DEEP should-channel
+# t-800-research-news — DEEP RETRY
 
-**mode:** DEEP should-channel  
-**topic:** Cursor Agent Skills / agentskills.io / rules·commands migration / HITL approval gates  
-**as_of:** 2026-07-25  
+**mode:** DEEP specialist (news/changelog pass)  
+**topic:** FREE Western RSS → EG RU blog (longevity / biohacking / nutrition / rehab / biomechanics / strength)  
+**memory_path:** `.cursor/t800-memory`  
+**as_of:** 2026-07-28  
 **status:** ok  
+**probe_method:** `curl -L` HTTP status + XML sniff (`<rss` / `<feed` / `rdf:RDF`); PubMed via POST `/create-rss-feed-url/`
 
 ## Queries covered
-- Cursor Agent Skills 2026 SKILL.md agentskills.io
-- Cursor changelog skills commands rules migration
-- Anthropic Agent Skills open standard
-- AI content human approval gate
+- best free RSS readers 2025–2026 FreshRSS Miniflux
+- Google Alerts RSS still available / fragility
+- PubMed Create RSS (longevity / exercise / biomechanics / rehabilitation)
+- find RSS when site has no icon; anatolyfit.com /feed /rss /atom
+- FreshRSS HTML+XPath OR RSSHub for missing feeds
+- Yandex Zen / Дзен RSS publisher requirements
+- Examine.com · Stronger by Science · Barbell Medicine · JOSPT · Physio Network · Cochrane RSS
 
-## news_items
+---
 
-| title | url | date | relevance | freshness |
-|-------|-----|------|-----------|-----------|
-| Cursor 2.4: Subagents, Skills, and Image Generation | https://cursor.com/changelog/2-4 | 2026-01-22 | Skills ship in editor+CLI; procedural vs always-on rules; slash invoke | ok (changelog exception) |
-| Cursor Agent Skills docs (`/migrate-to-skills`, SKILL.md) | https://cursor.com/docs/skills | 2026 (live docs; aligned 2.4) | Migration matrix rules→skills; `disable-model-invocation`; `paths` | ok |
-| Cursor Help: Skills vs Rules + migrate commands | https://cursor.com/help/customization/skills | 2026 (live) | skill vs rule table; `/migrate-to-skills` scope | ok |
-| Anthropic Engineering: Equipping agents with Agent Skills | https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills | 2025-10-16 (+ update 2025-12-18) | Progressive disclosure; SKILL.md anatomy; open-standard update | warn/block as sole news; ok as origin timeline |
-| VentureBeat: Anthropic opens Agent Skills standard | https://venturebeat.com/technology/anthropic-launches-enterprise-agent-skills-and-opens-the-standard | 2025-12-18 | agentskills.io open standard; Cursor named adopter | warn (>90d, Q4'25) |
-| agentskills.io home (open standard) | https://agentskills.io/home | living (repo created ~2025-12-16) | Portable SKILL.md; progressive loading; Cursor listed | warn (undated page → prefer GitHub/VB dates) |
-| HITL: When Approvals Matter in 2026 | https://getclaw.sh/blog/human-in-the-loop-ai-agents-approvals-2026 | 2026-05-04 | Content/public msgs = draft-first; tiered approval gates | ok |
-| HITL approval gate for agent tool calls (pattern) | https://dreaming.press/posts/human-in-the-loop-approval-gate-agent-tool-calls.html | ~2026 (industry guide) | interrupt/resume; gate consequential actions | warn (confirm exact pub date before verbatim) |
+## CRITICAL: free_source_starter_list (verified 2026-07-28)
 
-## implications_for_factory (skill vs command vs rule in 2026)
+| feed_name | url | topic | verified | notes |
+|-----------|-----|-------|----------|-------|
+| Stronger by Science | https://www.strongerbyscience.com/feed/ | strength / evidence-based training | **yes** | HTTP 200, `application/rss+xml`, ~15 items. `/rss/` redirects here. |
+| Barbell Medicine (site) | https://www.barbellmedicine.com/feed/ | rehab + strength medicine | **yes** | HTTP 200, RSS 2.0, ~10 items. Prefer this over `/blog/feed/` (empty channel). |
+| PubMed: biomechanics + rehabilitation | https://pubmed.ncbi.nlm.nih.gov/rss/search/1RWu05bjNxKZc-uspFnyzUxoXj7-obifaggpke6Du1GJWG75z0/?limit=15&utm_campaign=pubmed-2&fc=20260728110546 | rehab / biomechanics literature | **yes** | Created via official UI API 2026-07-28; HTTP 200, 15 `<item>`. Tokenized URL — recreate if expires (see recipe below). |
+| PubMed: longevity + exercise | https://pubmed.ncbi.nlm.nih.gov/rss/search/1dcEXTzh6xeXf9pMUuVBKRbJm7VL7GTK-VglqBhBGUJ8DK69bV/?limit=15&utm_campaign=pubmed-2&fc=20260728110654 | longevity + exercise literature | **yes** | Same day create; HTTP 200, 15 items. |
+| Fight Aging! | https://www.fightaging.org/feed/ | longevity / rejuvenation science | **yes** | HTTP 200, RSS 2.0. |
+| Peter Attia MD | https://peterattiamd.com/feed/ | longevity / healthspan | **yes** | HTTP 200, ~24 items. |
+| Physio Network | https://physio-network.com/feed/ | rehab / MSK physio | **yes** | HTTP 200. Note: `/blog/feed/` → **404**. |
+| Cochrane News | https://www.cochrane.org/news/rss.xml | evidence synthesis / health | **yes** | HTTP 200, RSS 2.0. `/news/feed` is HTML, not feed. |
+| BJSM blog | https://blogs.bmj.com/bjsm/feed/ | sports medicine / rehab | **yes** | HTTP 200. |
+| Physiotutors | https://www.physiotutors.com/feed/ | physio education | **yes** | HTTP 200. |
+| Lifespan.io | https://www.lifespan.io/feed/ | longevity research news | **yes** | HTTP 200. |
+| InsideTracker blog | https://blog.insidetracker.com/rss.xml | biomarkers / longevity-fitness | **yes** | HTTP 200. |
+| JOSPT ToC (etoc) | https://www.jospt.org/action/showFeed?type=etoc&jc=jospt | orthopaedic & sports PT journal | **yes** | HTTP 200, **RSS 1.0 RDF** (not RSS 2.0). Readers that accept RSS 1.0 OK; else use FreshRSS. |
+| NIA longevity topic | https://www.nia.nih.gov/taxonomy/term/400/feed | NIH / aging | **unknown** | First probe HTTP 200 + RSS; later probe **405** (bot/WAF). Treat as fragile — recheck from reader IP. |
+| Buck Institute | https://www.buckinstitute.org/feed/ | aging research institute | **unknown** | First probe 200+RSS; later **403**. WAF intermittent. |
+| Stanford Center on Longevity | https://longevity.stanford.edu/feed/ | longevity research | **unknown** | First probe 200+RSS; later **403**. |
+| Examine.com | https://examine.com/feed/ | nutrition / supplements | **no** | Consistent **HTTP 429** (bot wall). No free public RSS confirmed. «Research Feed» is member HTML, not RSS. |
+| anatolyfit.com | https://anatolyfit.com/feed (also /rss, /atom, /feed/atom, /index.xml) | fitness (example no-icon site) | **no** | All classic paths **404**. Homepage 200 = Next.js HTML; **no** `application/rss+xml` / `atom` link tags. **HTML-only → FreshRSS XPath or RSSHub/RSS-Bridge.** |
 
-1. **Rule** = always-on / scoped declarative constraints (`alwaysApply: true` or `globs`/`paths` on rules). Do **not** migrate these via `/migrate-to-skills`. Keep brand/safety/governance here.
-2. **Skill** = on-demand procedural how-to (`SKILL.md` + optional `scripts/`/`references/`). Default for multi-step workflows factory creates. Agent may auto-select via `description`; progressive load.
-3. **Command** (legacy slash) → migrate to skill with `disable-model-invocation: true` so human must type `/name` (HITL-friendly explicit invoke). New work: prefer skill over bare command.
-4. **Migration path (Cursor 2.4+):** `/migrate-to-skills` converts (a) dynamic rules without globs, (b) slash commands → skills with `disable-model-invocation: true`. Review output in `.cursor/skills/`.
-5. **Portability:** Align factory artifacts to agentskills.io (folder + `SKILL.md` frontmatter). Cursor also reads `.claude/skills/` / `.codex/skills/`.
-6. **HITL / content gate:** For publish/send/customer-facing outputs — skill should instruct **draft → human approve → then act**; use `disable-model-invocation: true` or hooks/approvals for irreversible steps. Industry consensus (2026): gate by consequence (money, access, public content), not every tool call.
-7. **Should-channel factory note:** Prefer skill for reusable procedures; keep always-apply brand/compliance as rules; treat slash-only flows as skills with model-invocation disabled.
+**Director count:** ≥8 concrete feeds with `verified: yes` (12 stable + 1 RDF journal + 2 PubMed tokens). Prefer OPML of the **yes** rows first; keep NIA/Buck/Stanford as secondary.
 
-## stale_rejected
+### PubMed Create RSS — recipe (documented 2025–2026, still live)
 
-| item | reason |
-|------|--------|
-| Pre-2025 “Cursor rules only” tutorials treating rules as the sole customization surface | Superseded by Skills (2.4, Jan 2026) + open standard |
-| Undated Medium/SEO “complete skills guide” posts without publish date | freshness: block for verbatim; use only if cross-checked against cursor.com docs |
-| Claims that slash commands are already removed | Contradicted: still supported; migrate recommended; no sunset date in official changelog |
-| Year-old “always put workflows in alwaysApply rules” advice | Anti-pattern vs progressive disclosure / context cost |
-| Medical/cure marketing copy as skill content | Out of brand scope (not news-stale; policy reject) |
+1. Open https://pubmed.ncbi.nlm.nih.gov/ → run search (e.g. `(longevity[Title/Abstract]) AND (exercise[Title/Abstract])`).
+2. Click **Create RSS** under the search bar (no My NCBI login required).
+3. Set name + item limit (UI; `limit=` editable up to 200 in URL).
+4. Copy generated URL: `https://pubmed.ncbi.nlm.nih.gov/rss/search/<token>/?limit=15&utm_campaign=pubmed-2&fc=...`
+5. Paste into FreshRSS / Miniflux.
 
-## sources
+Official reminders: NLM Tech Bull **2025-02-28** (Create RSS to replace homepage Latest Literature); Help → «Create an RSS feed for a search» (live). Machine create: `POST /create-rss-feed-url/` with CSRF + fields `name`, `limit`, `term`.
 
-```yaml
-sources:
-  - url: "https://cursor.com/changelog/2-4"
-    published_or_updated: "2026-01-22"
-    freshness: ok
-    takeaway: "Skills + subagents shipped; skills for procedural how-to vs always-on rules"
-  - url: "https://cursor.com/docs/skills"
-    published_or_updated: "2026-01+"
-    freshness: ok
-    takeaway: "/migrate-to-skills; SKILL.md fields; built-in create-skill; cross-load Claude/Codex dirs"
-  - url: "https://cursor.com/help/customization/skills"
-    published_or_updated: "2026-01+"
-    freshness: ok
-    takeaway: "Rules vs Skills table; migrate commands"
-  - url: "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
-    published_or_updated: "2025-10-16"
-    freshness: warn
-    takeaway: "Origin of Agent Skills; progressive disclosure; Dec 18 2025 open-standard update note"
-  - url: "https://venturebeat.com/technology/anthropic-launches-enterprise-agent-skills-and-opens-the-standard"
-    published_or_updated: "2025-12-18"
-    freshness: warn
-    takeaway: "agentskills.io open standard; Cursor named among adopters"
-  - url: "https://agentskills.io/home"
-    published_or_updated: "2025-12+"
-    freshness: warn
-    takeaway: "Canonical open format; Cursor listed"
-  - url: "https://getclaw.sh/blog/human-in-the-loop-ai-agents-approvals-2026"
-    published_or_updated: "2026-05-04"
-    freshness: ok
-    takeaway: "Public/customer content draft-first; tiered approval by consequence"
+---
+
+## Dated news notes (prefer ≤30d; hard ≤90d)
+
+### 1) Free readers 2026 — FreshRSS vs Miniflux
+| field | value |
+|-------|-------|
+| source | blog |
+| url | https://ossalt.com/guides/freshrss-vs-miniflux-2026 |
+| published | **2026-03** (methodology: data collected March 2026) |
+| freshness | **ok** (≤90d from 2026-07-28) |
+| claim | Both free/self-host; Miniflux = lighter Go default for solo; FreshRSS = PHP + extensions (incl. HTML scrape, multi-user, podcasts). Fever + Google Reader APIs on both. |
+| impact_for_cursor | For EG news→blog pipeline: **FreshRSS preferred** if need HTML+XPath for sites like anatolyfit; Miniflux OK if all sources are native RSS. |
+
+Also: https://freshrss.org/ (living) — lists «Web scraping» / generate feeds; https://miniflux.app/ (living).
+
+### 2) Google Alerts RSS — available but fragile
+| field | value |
+|-------|-------|
+| source | blog |
+| url | https://cloro.dev/blog/google-alerts-api/ |
+| published | **2026-07** (mentions July 2026 latency sample) |
+| freshness | **ok** |
+| claim | No Alerts API. UI still offers **Deliver to → RSS feed**. Undocumented, account-tied, can break; median Google News RSS lag ~6.6 days in July 2026 sample. Fine for casual keyword watch, not pipeline core. |
+| impact_for_cursor | Do **not** make Google Alerts the spine of EG SEO pipeline; optional side-channel only. |
+
+Cross-check: Google Help «Create an alert» still documents options (email primary; RSS via Show options in practice). Support page undated → do not treat as sole freshness.
+
+### 3) Дзен / Zen publisher RSS — unified format 2026-07-13
+| field | value |
+|-------|-------|
+| source | other (official help + community) |
+| url | https://dzen.ru/help/ru/export-content/export.html |
+| published | living docs; example `pubDate` uses **2026-03-04**; seamless RSS rules cited **effective 2026-07-13** |
+| freshness | **ok** |
+| claim | Export = **RSS 2.0**, HTTP(S), ≤10 MB, load ≤10s. Required: `title`, `link`, `pubDate` (RFC-822), full text via `yandex:full-text` or `content:encoded`; media via `enclosure` / `media:group` (not inside full-text). Fresh news window ~**7 days** for indexing (docs). Seamless News+channel: unified format; Teplitsa Yandex.News plugin abandoned — community replacements (e.g. Zhekich) cite cutoff **2026-07-13**. |
+| impact_for_cursor | EG RU site RSS for Дзен must be **Zen-shaped**, separate from Western research OPML ingest. Next.js `/rss.xml` ≠ auto-Zen-compliant. |
+
+Seamless overview: https://dzen.ru/help/ru/news/seamless/index.html · RSS detail: https://dzen.ru/help/ru/news/seamless/rss.html
+
+### 4) Missing feeds — FreshRSS XPath / RSSHub
+| field | value |
+|-------|-------|
+| source | changelog / github issues |
+| url | https://github.com/FreshRSS/FreshRSS/issues/5947 (and #7179, #7440, #8429) |
+| published | activity through **2025** (e.g. #7440 closed 2025-05-25; #8429 open discussion) |
+| freshness | **warn** (issue dates 91–180d+) — pattern still current |
+| claim | HTML+XPath brittle (JS-only sites, UA blocks, vague errors). FreshRSS maintainers point to **RSS-Bridge**, **RSSHub**, FiveFilters as bridges when scrape fails. User-Agent often required. |
+| impact_for_cursor | anatolyfit / Examine-style sites → self-host RSSHub or FreshRSS XPath; do not expect public `/feed`. |
+
+### 5) PubMed RSS still first-class (2025 docs)
+| field | value |
+|-------|-------|
+| source | changelog (NLM Tech Bull) |
+| url | https://www.nlm.nih.gov/pubs/techbull/jf25/jf25_pubmed_news.html |
+| published | **2025-02-28** |
+| freshness | **warn** (>90d) but feature reconfirmed live 2026-07-28 by creating feeds |
+| claim | Homepage Latest Literature removed Mar 2025; NLM explicitly recommends **Create RSS** (no login) or My NCBI saved search. |
+| impact_for_cursor | PubMed topic RSS = free, high-authority western signal for EG Authority content — keep in starter OPML. |
+
+---
+
+## Examine / podcast caveats
+- **Examine.com:** no verified free article RSS (429). Paid Research Feed is web UI. Skip for free pipeline unless HTML bridge + ToS review.
+- **Barbell Medicine Podcast** (audio, not blog): RedCircle hosting (podnews/grep.fm list RedCircle feed) — optional separate podcast OPML, not substitute for blog articles.
+- **Stronger by Science Podcast:** Simplecast-hosted (podnews) — same caveat.
+
+## anatolyfit.com — HTML-only fallback
+```
+verified_paths:
+  /feed, /rss, /atom, /feed/atom, /index.xml → 404
+  / → 200 Next.js HTML, no alternate RSS/Atom links
+fallback:
+  1. FreshRSS → Add feed → Type: HTML + XPath (article list selectors)
+  2. Self-hosted RSSHub / RSS-Bridge route for generic site
+  3. Do not block pipeline on this source
 ```
 
-## confidence
+## EG pipeline implication (news-only)
+Western free RSS (verified rows) → reader (FreshRSS) → human filter → RU Authority/Utility draft → site RSS for Дзен (separate Zen schema). Google Alerts = optional. Examine = skip free. anatolyfit = scrape bridge only.
 
-**0.82** — Primary Cursor changelog + docs + Anthropic/VentureBeat cross-check solid for skills/migration. HITL content-gate pattern strong for 2026 industry guides; weaker as Cursor-product-specific (rely on Cursor sandbox approvals + skill design, not a single Cursor “content gate” product feature).
+---
 
 ## news_findings (machine)
 
 ```yaml
 status: ok
+as_of: "2026-07-28"
 news_findings:
-  - source: changelog
-    url: "https://cursor.com/changelog/2-4"
-    published: "2026-01-22"
-    freshness: ok
-    claim: "Cursor 2.4 adds Agent Skills (SKILL.md) in editor and CLI; better for procedural how-to than always-on rules; slash menu invoke."
-    impact_for_cursor: "Factory should emit skills for workflows; keep always-on constraints as rules."
   - source: blog
-    url: "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
-    published: "2025-10-16"
-    freshness: warn
-    claim: "Agent Skills = folders with SKILL.md + progressive disclosure; open standard update Dec 18 2025."
-    impact_for_cursor: "Align SKILL.md to agentskills.io for portability across Cursor/Claude/Codex."
-  - source: other
-    url: "https://venturebeat.com/technology/anthropic-launches-enterprise-agent-skills-and-opens-the-standard"
-    published: "2025-12-18"
-    freshness: warn
-    claim: "Anthropic published Agent Skills as independent open standard at agentskills.io; Cursor listed as adopter."
-    impact_for_cursor: "Treat skills as ecosystem format, not Cursor-only proprietary."
-  - source: other
-    url: "https://cursor.com/docs/skills"
-    published: "2026-01-22"
+    url: "https://ossalt.com/guides/freshrss-vs-miniflux-2026"
+    published: "2026-03"
     freshness: ok
-    claim: "/migrate-to-skills converts dynamic rules (no globs) and slash commands (→ disable-model-invocation: true); alwaysApply/globs rules stay."
-    impact_for_cursor: "Migration playbook for T-800 fix/factory when upgrading rule/command packs."
-  - source: other
-    url: "https://getclaw.sh/blog/human-in-the-loop-ai-agents-approvals-2026"
-    published: "2026-05-04"
+    claim: "FreshRSS vs Miniflux 2026: both free; Miniflux lighter solo; FreshRSS better for XPath/extensions/multi-user."
+    impact_for_cursor: "Prefer FreshRSS for EG ingest if HTML-only sources needed."
+  - source: blog
+    url: "https://cloro.dev/blog/google-alerts-api/"
+    published: "2026-07"
     freshness: ok
-    claim: "Public/customer-facing messages should be draft-first until correction rate is low; gate by consequence not by every action."
-    impact_for_cursor: "Content/publish skills need explicit human approval step; prefer disable-model-invocation or ask-question before send."
+    claim: "Google Alerts RSS still exists via UI; no API; fragile; July 2026 sample shows multi-day lag."
+    impact_for_cursor: "Do not rely on Alerts as primary western signal."
+  - source: other
+    url: "https://dzen.ru/help/ru/export-content/export.html"
+    published: "2026-07-28-live"
+    freshness: ok
+    claim: "Дзен export = RSS 2.0 + full-text + enclosure rules; ≤10MB; ~7-day freshness window for news indexing."
+    impact_for_cursor: "EG publisher RSS must be Zen-compliant, separate from research OPML."
+  - source: other
+    url: "https://dzen.ru/help/ru/news/seamless/rss.html"
+    published: "2026-07-13-effective"
+    freshness: ok
+    claim: "Unified News+channel RSS format; seamless program rules active mid-July 2026."
+    impact_for_cursor: "Update any Zen export templates after 2026-07-13 cutoff."
+  - source: changelog
+    url: "https://www.nlm.nih.gov/pubs/techbull/jf25/jf25_pubmed_news.html"
+    published: "2025-02-28"
+    freshness: warn
+    claim: "NLM recommends PubMed Create RSS as free journal/topic follow after Latest Literature removal."
+    impact_for_cursor: "PubMed topic feeds validated live 2026-07-28 — include in starter list."
+  - source: other
+    url: "https://pubmed.ncbi.nlm.nih.gov/help/"
+    published: "2026-07-28-live"
+    freshness: ok
+    claim: "Help documents Create RSS under search box; limit up to 200 via URL param."
+    impact_for_cursor: "Document recipe in skill/automation; tokens are opaque."
+  - source: hn
+    url: "https://github.com/FreshRSS/FreshRSS/issues/5947"
+    published: "2025"
+    freshness: warn
+    claim: "HTML+XPath fails on JS/WAF sites; bridge via RSSHub/RSS-Bridge."
+    impact_for_cursor: "anatolyfit / Examine-class sites need bridge, not native /feed."
+  - source: other
+    url: "https://www.strongerbyscience.com/feed/"
+    published: "2026-07-28-probed"
+    freshness: ok
+    claim: "Verified free RSS 2.0 for evidence-based strength content."
+    impact_for_cursor: "Top-tier free western source for EG strength/biomechanics Authority."
 ```
+
+## stale_rejected
+| item | reason |
+|------|--------|
+| PubMed RSS Tech Bull 2005 / 2020 alone | historical; superseded by 2025 help + live create |
+| FeedSpot list pages as sole verification | aggregator; URLs truncated; use only as discovery, then curl |
+| Examine Research Feed as RSS | HTML member product, not free feed |
+| Google Support «Create an alert» undated page alone | undated → block as sole freshness; OK as secondary to 2026-07 blog |

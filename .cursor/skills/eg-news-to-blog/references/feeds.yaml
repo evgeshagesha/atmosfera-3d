@@ -1,0 +1,115 @@
+# eg-news-to-blog — FREE RSS allowlist
+# Verified: 2026-07-28 · Exclude: Examine.com, anatolyfit
+# Caps are hard limits for v1 ingest
+
+version: 1
+updated: "2026-07-28"
+max_feeds: 15
+max_items_per_feed: 10
+global_max_items: 40
+exclude_notes: "Examine.com (429/paywall risk); anatolyfit (HTML-only, no RSS) — deferred v2"
+
+feeds:
+  - id: stronger-by-science
+    name: Stronger by Science
+    url: https://www.strongerbyscience.com/feed/
+    topic_tags: [strength, evidence-based-training]
+    verified: true
+    max_items: 10
+    notes: "Evidence-based strength; /rss/ redirects here"
+
+  - id: barbell-medicine
+    name: Barbell Medicine
+    url: https://www.barbellmedicine.com/feed/
+    topic_tags: [rehab, strength]
+    verified: true
+    max_items: 10
+    notes: "Rehab + strength clinical lens"
+
+  - id: pubmed-biomechanics-rehab
+    name: PubMed biomechanics + rehabilitation
+    url: https://pubmed.ncbi.nlm.nih.gov/rss/search/1RWu05bjNxKZc-uspFnyzUxoXj7-obifaggpke6Du1GJWG75z0/?limit=15&utm_campaign=pubmed-2&fc=20260728110546
+    topic_tags: [rehab, biomechanics, literature]
+    verified: true
+    max_items: 10
+    notes: "Token may expire — recreate PubMed saved search RSS if 404"
+
+  - id: pubmed-longevity-exercise
+    name: PubMed longevity + exercise
+    url: https://pubmed.ncbi.nlm.nih.gov/rss/search/1dcEXTzh6xeXf9pMUuVBKRbJm7VL7GTK-VglqBhBGUJ8DK69bV/?limit=15&utm_campaign=pubmed-2&fc=20260728110654
+    topic_tags: [longevity, exercise, literature]
+    verified: true
+    max_items: 10
+    notes: "Token may expire — recreate PubMed saved search RSS if 404"
+
+  - id: fight-aging
+    name: Fight Aging!
+    url: https://www.fightaging.org/feed/
+    topic_tags: [longevity, science]
+    verified: true
+    max_items: 10
+    notes: "Longevity science digest"
+
+  - id: peter-attia
+    name: Peter Attia MD
+    url: https://peterattiamd.com/feed/
+    topic_tags: [longevity, healthspan]
+    verified: true
+    max_items: 10
+    notes: "Healthspan / longevity essays — rewrite+cite only"
+
+  - id: physio-network
+    name: Physio Network
+    url: https://physio-network.com/feed/
+    topic_tags: [rehab, msk, physio]
+    verified: true
+    max_items: 10
+    notes: "MSK physio education"
+
+  - id: cochrane-news
+    name: Cochrane News
+    url: https://www.cochrane.org/news/rss.xml
+    topic_tags: [evidence-synthesis, research]
+    verified: true
+    max_items: 10
+    notes: "Evidence synthesis news — not full review text"
+
+  - id: bjsm-blog
+    name: BJSM blog
+    url: https://blogs.bmj.com/bjsm/feed/
+    topic_tags: [sports-medicine, rehab]
+    verified: true
+    max_items: 10
+    notes: "Sports medicine / rehab blog"
+
+  - id: physiotutors
+    name: Physiotutors
+    url: https://www.physiotutors.com/feed/
+    topic_tags: [physio, education]
+    verified: true
+    max_items: 10
+    notes: "Physio education content"
+
+  - id: lifespan-io
+    name: Lifespan.io
+    url: https://www.lifespan.io/feed/
+    topic_tags: [longevity, research-news]
+    verified: true
+    max_items: 10
+    notes: "Longevity research news"
+
+  - id: insidetracker-blog
+    name: InsideTracker blog
+    url: https://blog.insidetracker.com/rss.xml
+    topic_tags: [biomarkers, longevity, fitness]
+    verified: true
+    max_items: 10
+    notes: "Biomarkers / longevity-fitness — filter brand sales talk"
+
+  - id: jospt-toc
+    name: JOSPT ToC
+    url: https://www.jospt.org/action/showFeed?type=etoc&jc=jospt
+    topic_tags: [orthopaedic-pt, sports-pt]
+    verified: true
+    max_items: 10
+    notes: "RSS 1.0 RDF — parser must accept RDF or skip feed"

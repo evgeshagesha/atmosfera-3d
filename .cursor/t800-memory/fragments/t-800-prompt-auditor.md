@@ -1,45 +1,49 @@
-# t-800-prompt-auditor — eg-bot-manager-flow
+# t-800-prompt-auditor — eg-news-to-blog PATCH
 
-**stage:** prompt_auditor  
 **status:** ok  
-**score:** 90  
-**recommendation:** pass  
-**date:** 2026-07-27
+**stage:** prompt_auditor  
+**score:** 94  
+**date:** 2026-07-29  
+**artifacts:** skill `eg-news-to-blog`, commands `eg-news-to-blog` + `eg-news-approve`, rule `eg-news-brand-safety`, refs draft-schema + workflow (spot-check)
 
-## Scope
+## Verdict
 
-- skill: `.cursor/skills/eg-bot-manager-flow/SKILL.md` (+ references)
-- command: `.cursor/commands/eg-bot-manager-flow.md`
-- agent description patches: `eg-bot-engineer.md`, `eg-bot-knowledge.md`
+PASS → handoff `t-800-factory-auditor`. Critical checklist closed. No Description Trap, no `tools:` frontmatter, dual HITL + publish bans consistent across skill/commands/rule/refs.
 
-## Critical checklist
+## Critical checks (all pass)
 
-| Check | Result |
-|-------|--------|
-| Vague description | PASS — routing-specific |
-| Description Trap | PASS — description ≠ full body |
-| `tools:` in agent FM | PASS — absent |
-| Use when / Do NOT | PASS — skill + both agents |
-| name ≠ filename | PASS |
-| Prompt > 150 lines | PASS — SKILL 106 lines |
+| id | result | note |
+|----|--------|------|
+| description_trap | pass | description = routing + Use when / Do NOT; body = algorithm |
+| use_when_do_not | pass | present in skill frontmatter |
+| disable_model_invocation | pass | `true` on skill |
+| content_mode | pass | author \| external \| mixed operational in skill + schema |
+| provenance_claims_gaps | pass | required; unmapped/blocking → status ≠ ok |
+| dual_hitl_phrases | pass | Gate1/Gate2 phrases in workflow + approve command |
+| published_false | pass | explicit; normalizeBlogPost omit=true documented |
+| no_publish_patch | pass | skill/commands never blog.json / TG/VK |
+| social_rules | pass | one CTA; no 👆; no hashtag noise |
+| no_tools_frontmatter | pass | none |
+| progressive_disclosure | pass | SKILL 112L; details in refs; rule 25L |
+| rule_brevity | pass | alwaysApply short brand-safety, not full pipeline |
 
-## Brief constraints
+## Warnings (non-blocking)
 
-Phase A only · no new subagent · handoff engineer/knowledge/remotion · no med promises · no bot.py rewrite · registry_patch null — all reflected.
+1. **typo:** `SKILL.md` description line «медpromises» → лучше `медобещания` / `medical promises`.
+2. Commands без YAML frontmatter — норма для Cursor slash commands; тонкие роутеры ок.
 
-## Findings
+## Repair budget (optional polish)
 
-**critical:** none
+| file | fix |
+|------|-----|
+| `.cursor/skills/eg-news-to-blog/SKILL.md` | frontmatter: `медpromises` → `медобещания` |
 
-**warnings (non-blocking):**
-1. `eg-bot-knowledge` description ends with English: `this agent = KB texts only`
-2. Patched agents still lack full Cursor FM 5 fields (`model`/`readonly`/`is_background`) — pre-existing, out of description-patch scope
-3. Skill body mixes RU + EN section headers (`Code context`, `Workflow`) — readable, not a trap
+## Handoff
 
-## must_fix
-
-[]
-
-## Gate
-
-Ship to `t-800-factory-auditor`.
+```yaml
+next: t-800-factory-auditor
+summary: >
+  Prompt QA PASS (94). Skill+commands+short rule consistent on content_mode,
+  provenance/claims/gaps, dual hash HITL phrases, published:false, no blog.json
+  in PATCH, social bans. Optional typo only.
+```

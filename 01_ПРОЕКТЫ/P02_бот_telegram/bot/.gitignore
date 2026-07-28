@@ -1,3 +1,5 @@
+data/*.sqlite3
+data/*.sqlite3-*
 # Секреты бота — не коммитить
 .env
 .env.local

@@ -19,6 +19,7 @@ from telegram.ext import (
     CommandHandler,
     MessageHandler,
     ContextTypes,
+    TypeHandler,
     filters,
 )
 from openai import OpenAI
@@ -61,11 +62,14 @@ from handlers_products import (
     try_lead_keyword,
     try_payment_confirm,
 )
+from vk_channel_bridge import ChannelToVkBridge, VkDeliveryStore, VkWallClient
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO,
 )
+# httpx logs full Telegram Bot API URLs, which contain the bot token.
+logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 # Recent messages per chat (for /analiz and group context)
@@ -526,6 +530,32 @@ def main() -> None:
             logger.warning("set_chat_menu_button failed: %s", exc)
 
     app = Application.builder().token(config.BOT_TOKEN).post_init(_post_init).build()
+    if config.VK_BRIDGE_ENABLED:
+        if not config.VK_ACCESS_TOKEN or not config.VK_GROUP_ID:
+            logger.error(
+                "VK bridge disabled: VK_ACCESS_TOKEN and VK_GROUP_ID are required."
+            )
+        elif not config.CHANNEL_ID:
+            logger.error("VK bridge disabled: CHANNEL_ID is required.")
+        else:
+            vk_bridge = ChannelToVkBridge(
+                channel_id=config.CHANNEL_ID,
+                publisher=VkWallClient(
+                    access_token=config.VK_ACCESS_TOKEN,
+                    group_id=config.VK_GROUP_ID,
+                    api_version=config.VK_API_VERSION,
+                ),
+                store=VkDeliveryStore(config.VK_BRIDGE_DB_PATH),
+                album_settle_seconds=config.VK_ALBUM_SETTLE_SECONDS,
+            )
+            # Separate handler group: observe only new channel_post updates without
+            # taking updates away from the bot's existing command/message handlers.
+            app.add_handler(TypeHandler(Update, vk_bridge.handle_update), group=-1)
+            logger.info(
+                "VK bridge enabled: %s → VK group %s",
+                config.CHANNEL_ID,
+                config.VK_GROUP_ID,
+            )
     app.add_handler(CommandHandler("start", cmd_start))
     app.add_handler(CommandHandler("test", cmd_test))
     app.add_handler(CommandHandler("kurs", cmd_kurs))

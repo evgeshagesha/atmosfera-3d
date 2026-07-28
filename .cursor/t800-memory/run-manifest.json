@@ -1,0 +1,41 @@
+{
+  "slug": "eg-news-to-blog",
+  "command": "/t800-start CREATE",
+  "profile": "workspace-cursor",
+  "artifact_surface": "cursor-workspace",
+  "plugin_root": "",
+  "memory_path": "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory",
+  "registry_patch": null,
+  "release_handoff": null,
+  "updated": "2026-07-28T18:33:00+03:00",
+  "stages": {
+    "scout": "done",
+    "research": "done",
+    "prompt_craft": "done",
+    "brain": "done",
+    "factory_architect": "done",
+    "factory_builder": "done",
+    "factory_integrator": "done",
+    "factory_auditor": "pending"
+  },
+  "artifacts": [
+    ".cursor/skills/eg-news-to-blog/SKILL.md",
+    ".cursor/skills/eg-news-to-blog/references/feeds.yaml",
+    ".cursor/skills/eg-news-to-blog/references/tone-bans.md",
+    ".cursor/skills/eg-news-to-blog/references/brand-voice.md",
+    ".cursor/skills/eg-news-to-blog/references/draft-schema.md",
+    ".cursor/skills/eg-news-to-blog/references/seo-clusters.md",
+    ".cursor/skills/eg-news-to-blog/references/workflow.md",
+    ".cursor/skills/eg-news-to-blog/references/fewshots.md",
+    ".cursor/skills/eg-news-to-blog/assets/draft-frontmatter.template.md",
+    ".cursor/commands/eg-news-to-blog.md",
+    ".cursor/commands/eg-news-approve.md",
+    ".cursor/rules/eg-news-brand-safety.mdc"
+  ],
+  "integrator": {
+    "status": "ok",
+    "fixes": [],
+    "agents_created": false,
+    "registry_patched": false
+  }
+}
