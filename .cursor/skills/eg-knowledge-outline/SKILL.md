@@ -40,6 +40,13 @@ description: >
 
 ### 2. Pull из vault
 
+**Mandatory Read (перед outline по тренировочной системе / позиционированию / воронке):**
+
+1. `03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/TRAINING_SYSTEM_POSITIONING_MASTER.md`
+2. `03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/OWNERSHIP_MAP.md`
+
+Outline должен выравниваться с осью «ТЕБЕ НУЖЕН ТОЛЬКО ТЫ» из MASTER (философия системы, не CTA).
+
 По `references/vault-map.md`: матрицы (МФР, ПИР, дыхание, тесты, блок1), `01_каталоги/`, Functional Patterns, ФТ_КНИГИ, Product System.
 
 Порядок: README/каталоги → сырьё. Только папки по теме (Glob/Read).
@@ -51,6 +58,17 @@ description: >
 ### 4. Продуктовая лестница
 
 Следующий шаг: гайд / тест / курс / клуб / консультация / офлайн. Опираться на `06_ПРОДУКТЫ_И_ШКОЛА/` (+ дайджест Product System при необходимости).
+
+**Funnel checklist (CTA / следующий шаг):**
+
+| Шаг | ID / URL |
+|-----|----------|
+| Тест | `684` — https://egoshev.ru/testik |
+| База | `9990` |
+| Клуб | `1758` |
+| Анкета | https://egoshev.ru/anketa |
+
+YouTube / контент-CTA — **не** `eg.egoshev.ru`.
 
 ### 5. Путь сохранения (hint)
 

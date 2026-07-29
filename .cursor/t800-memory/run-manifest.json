@@ -1,41 +1,54 @@
 {
-  "slug": "eg-news-to-blog",
-  "command": "/t800-start CREATE",
+  "slug": "you-only-need-you-axis",
+  "command": "/t800-fix PATCH",
+  "mode": "PATCH",
   "profile": "workspace-cursor",
   "artifact_surface": "cursor-workspace",
-  "plugin_root": "",
+  "plugin_root": "/Users/egoshev/Projects/atmosfera-3d",
   "memory_path": "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory",
+  "brief": ".cursor/t800-memory/factory-briefs/you-only-need-you-axis.yaml",
   "registry_patch": null,
   "release_handoff": null,
-  "updated": "2026-07-28T18:33:00+03:00",
+  "updated": "2026-07-29T14:20:00+03:00",
+  "factory": {
+    "status": "ok",
+    "agent": "t-800-factory",
+    "mode": "PATCH"
+  },
+  "steps": [
+    {
+      "agent": "t-800-factory",
+      "status": "ok",
+      "note": "PATCH spokes: atmosfera-3d.mdc, eg-knowledge-outline SKILL + tone-bans"
+    },
+    {
+      "agent": "t-800-prompt-auditor",
+      "status": "ok",
+      "note": "skill Zero-Copy + axis line; no vault dump"
+    },
+    {
+      "agent": "t-800-factory-auditor",
+      "status": "ok",
+      "note": "scope-only 3 files; medclaim not softened; Zero-Copy preserved"
+    }
+  ],
   "stages": {
-    "scout": "done",
-    "research": "done",
-    "prompt_craft": "done",
-    "brain": "done",
-    "factory_architect": "done",
-    "factory_builder": "done",
-    "factory_integrator": "done",
-    "factory_auditor": "pending"
+    "scout": "skip",
+    "research": "skip",
+    "prompt_craft": "skip",
+    "brain": "skip",
+    "factory": "done",
+    "factory_auditor": "done"
   },
   "artifacts": [
-    ".cursor/skills/eg-news-to-blog/SKILL.md",
-    ".cursor/skills/eg-news-to-blog/references/feeds.yaml",
-    ".cursor/skills/eg-news-to-blog/references/tone-bans.md",
-    ".cursor/skills/eg-news-to-blog/references/brand-voice.md",
-    ".cursor/skills/eg-news-to-blog/references/draft-schema.md",
-    ".cursor/skills/eg-news-to-blog/references/seo-clusters.md",
-    ".cursor/skills/eg-news-to-blog/references/workflow.md",
-    ".cursor/skills/eg-news-to-blog/references/fewshots.md",
-    ".cursor/skills/eg-news-to-blog/assets/draft-frontmatter.template.md",
-    ".cursor/commands/eg-news-to-blog.md",
-    ".cursor/commands/eg-news-approve.md",
-    ".cursor/rules/eg-news-brand-safety.mdc"
+    ".cursor/rules/atmosfera-3d.mdc",
+    ".cursor/skills/eg-knowledge-outline/SKILL.md",
+    ".cursor/skills/eg-knowledge-outline/references/tone-bans.md"
   ],
-  "integrator": {
+  "auditor": {
     "status": "ok",
-    "fixes": [],
-    "agents_created": false,
-    "registry_patched": false
+    "findings": [],
+    "zero_copy": true,
+    "vault_writes": false
   }
 }

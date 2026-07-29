@@ -1,0 +1,15 @@
+# factory-brief: you-only-need-you-axis
+slug: you-only-need-you-axis
+mode: PATCH
+artifact_surface: cursor-workspace
+workspace: /Users/egoshev/Projects/atmosfera-3d
+memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+
+factory_scope_only:
+  - .cursor/rules/atmosfera-3d.mdc  # add 2–5 lines: central idea TEБЕ НУЖЕН ТОЛЬКО ТЫ = philosophy not CTA; cite MASTER
+  - .cursor/skills/eg-knowledge-outline/SKILL.md  # mention axis in mandatory read note
+  - .cursor/skills/eg-knowledge-outline/references/tone-bans.md  # additive: don't spam slogan as CTA; don't anti-gym
+
+MUST NOT: write vault; soften medclaim; create new skill; invent parallel philosophy file
+
+acceptance: auditor PASS; gates EXIT 0; Zero-Copy preserved

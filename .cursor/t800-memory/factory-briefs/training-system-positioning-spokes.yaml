@@ -1,0 +1,32 @@
+# factory-brief: training-system-positioning-spokes
+# Director wrote vault SoT. Factory scope: Cursor spokes only.
+
+slug: training-system-positioning-spokes
+mode: PATCH
+artifact_surface: cursor-workspace
+workspace: /Users/egoshev/Projects/atmosfera-3d
+memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+
+director_vault_done:
+  - 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/TRAINING_SYSTEM_POSITIONING_MASTER.md
+  - 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/OWNERSHIP_MAP.md
+
+factory_scope_only:
+  PATCH:
+    - .cursor/rules/atmosfera-3d.mdc
+    - .cursor/skills/eg-knowledge-outline/SKILL.md
+    - .cursor/skills/eg-knowledge-outline/references/tone-bans.md  # STRENGTHEN only
+
+constraints:
+  - Zero-Copy: ≤30 lines pointer section in atmosfera-3d.mdc
+  - Cite paths; do NOT paste TRAINING essay / playlist matrix
+  - EXTEND eg-knowledge-outline — mandatory Read TRAINING_MASTER + OWNERSHIP_MAP
+  - Funnel checklist: test 684 https://egoshev.ru/testik; baza 9990; club 1758; anketa https://egoshev.ru/anketa
+  - Additive bans: no physician; not anti-gym; «без тренажёров» ≠ «без оборудования»; YT never eg.egoshev.ru; no parallel EG OS root
+  - Keep existing medclaim bans; NEVER soften
+  - MUST NOT write vault / YOUTUBE playlists / agents / hooks / new fat skill
+
+acceptance:
+  - auditor PASS
+  - gates exit 0 when applicable
+  - diff only mdc + eg-knowledge-outline/**

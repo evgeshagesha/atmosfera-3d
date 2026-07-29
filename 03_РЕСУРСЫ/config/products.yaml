@@ -77,7 +77,7 @@ products:
     payment_type: one_time
     status: confirmed
     deep_link: "baza"
-    offer: "Пошаговая программа для восстановления подвижности, дыхания и качества движения"
+    offer: "Фундамент: убрать скованность, улучшить мобильность и контроль — подготовка к силе дома, на улице или в зале"
     sell_via: website
     page_url: "https://egoshev.ru/baza"
     prodamus_url: null  # ← ВПИСАТЬ
