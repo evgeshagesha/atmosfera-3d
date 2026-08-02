@@ -12,21 +12,20 @@
 | **Опора** | Первое видео уже live: https://youtu.be/sDRbfeB7BZM |
 | **CTA** | https://egoshev.ru/testik · https://egoshev.ru/anketa |
 | **Запрещено** | `eg.egoshev.ru` |
-| **Обновлено** | 29.07.2026 |
+| **Обновлено** | 01.08.2026 |
 
 ---
 
-## 🔥 Сегодня
+## 🔥 Сегодня (01.08 — YouTube + длинные)
 
 | # | Действие | Где | Готово? |
 |---:|---|---|---|
-| 1 | Создать плейлист **«Утренние зарядки \| 5–15 минут»** | YouTube Studio | [ ] |
-| 2 | Вставить описание из карточки | [01_UTRENNIE_ZARYADKI](./PLAYLISTS/01_UTRENNIE_ZARYADKI.md) | [ ] |
-| 3 | Добавить видео https://youtu.be/sDRbfeB7BZM первым | Studio → плейлист | [ ] |
-| 4 | Обновить описание ролика + закреп (CTA testik / anketa) | [Live-пакет](./PROJECTS/2026-07-29_zaryadka-na-vse-telo/10_LIVE_PACKAGE.md) | [ ] |
-| 5 | Выложить секцию главной **«Практики на каждый день»** с утренним плейлистом | Studio → Главная | [ ] |
-| 6 | Stories + Telegram по live-пакету | Instagram / TG | [ ] |
-| 7 | **VK video вручную:** загрузить нативное видео → пост со ссылкой на VK-ролик | VK | [ ] |
+| 1 | Упаковка канала: название / описание / 4 ссылки / баннер «ТЕБЕ НУЖЕН ТОЛЬКО ТЫ» | [01_CHANNEL_PACKAGING](./01_CHANNEL_PACKAGING.md) | [ ] |
+| 2 | Плейлист **«Утренние зарядки \| 5–15 минут»** + видео https://youtu.be/sDRbfeB7BZM | Studio | [ ] |
+| 3 | Описание + закреп первого ролика (только `egoshev.ru/testik`, `egoshev.ru/anketa`) | [Live-пакет](./PROJECTS/2026-07-29_zaryadka-na-vse-telo/10_LIVE_PACKAGE.md) | [ ] |
+| 4 | Выбрать тему **видео №2** (эксперт ИЛИ тренировка) → написать мне в чат | Этот чат | [ ] |
+| 5 | Прочитать съёмочный чеклист | [03_FILMING_GUIDE](./03_FILMING_GUIDE.md) | [ ] |
+| 6 | Digest Claude-пакета (для памяти Cursor) | [13_ATMOSFERA_OS_CLAUDE_DIGEST](./13_ATMOSFERA_OS_CLAUDE_DIGEST.md) | [x] |
 
 > ⚠️ Автопостинг Telegram→VK **не переносит YouTube-видео**. Мост использовать только для **текста и фото**. Видео во VK — всегда ручная загрузка.
 

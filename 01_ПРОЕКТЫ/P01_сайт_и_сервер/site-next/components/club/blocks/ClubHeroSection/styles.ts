@@ -608,24 +608,10 @@ export const CLUB_HERO_CSS = `
 }
 
 @media (max-width: 900px) {
+  /* Horizontal nav was clipping under the logo ("Обо мне" → "ине").
+     Keep links only in the burger panel on mobile. */
   .club-hero__nav {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    flex-wrap: nowrap;
-    gap: 4px 10px;
-    min-width: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .club-hero__nav::-webkit-scrollbar {
     display: none;
-  }
-
-  .club-hero__nav a {
-    font-size: 11px;
-    white-space: nowrap;
   }
 
   .club-hero__nav-secondary,
@@ -633,8 +619,18 @@ export const CLUB_HERO_CSS = `
     display: none;
   }
 
+  .club-hero__header-inner {
+    gap: 10px;
+    padding: 12px 14px 12px 16px;
+  }
+
+  .club-hero__logo {
+    margin-right: 4px;
+  }
+
   .club-hero__header-actions {
     display: inline-flex;
+    margin-left: auto;
   }
 
   .club-hero__site-link {
@@ -805,8 +801,8 @@ export const CLUB_HERO_CSS = `
     grid-column: 1 / -1;
     grid-row: 3;
     order: 0;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 10px;
     margin-top: 16px;
     max-width: none;
     padding-top: 0;
@@ -829,32 +825,36 @@ export const CLUB_HERO_CSS = `
   }
 
   .club-hero__feature {
-    grid-template-columns: 1fr;
-    justify-items: start;
-    gap: 8px;
-    padding: 10px 10px 12px;
+    grid-template-columns: 36px minmax(0, 1fr);
+    align-items: center;
+    justify-items: stretch;
+    gap: 12px;
+    min-height: 0;
+    height: auto;
+    padding: 12px 14px;
     border-radius: 14px;
   }
 
   .club-hero__feature-icon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
   }
 
   .club-hero__feature-icon svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
   }
 
   .club-hero__feature strong {
-    font-size: 10px;
-    letter-spacing: 0.03em;
+    font-size: 12px;
+    letter-spacing: 0.04em;
   }
 
   .club-hero__feature p {
-    font-size: 11px;
-    line-height: 1.35;
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.4;
   }
 }
 
@@ -875,7 +875,11 @@ export const CLUB_HERO_CSS = `
 
   .club-hero__features {
     margin-top: 14px;
-    gap: 6px;
+    gap: 8px;
+  }
+
+  .club-hero__feature {
+    padding: 12px 12px;
   }
 
   .club-hero__bridge {

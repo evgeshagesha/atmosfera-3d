@@ -1,0 +1,92 @@
+/* АТМОСФЕРА 3D — дизайн-токены. Использовать во всех страницах и документах. */
+
+:root {
+  /* Цвета */
+  --bg:           #060708;   /* фон */
+  --silver:       #d8dde4;   /* серебро-неон, акцент/заголовки */
+  --graphite-1:   #14171c;   /* карточки */
+  --graphite-2:   #1c2026;   /* блоки чуть светлее */
+  --steel:        #8a93a0;   /* вторичный текст */
+  --line:         rgba(216,221,228,0.12); /* тонкие линии */
+
+  /* Типографика */
+  --font-display: "Magistral", "Montserrat", system-ui, sans-serif; /* ExtraBold, капс */
+  --font-quote:   "Velo Sans", Georgia, serif;                       /* italic */
+  --font-body:    "Manrope", system-ui, sans-serif;
+
+  /* Ритм */
+  --radius: 14px;
+  --pad:    clamp(20px, 4vw, 56px);
+}
+
+/* Тёмный фон поверх белой базы Tilda */
+.eg-dark::before {
+  content: "";
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 0;
+}
+
+body.eg {
+  background: var(--bg);
+  color: var(--silver);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+.eg h1, .eg h2, .eg h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--silver);
+}
+
+.eg blockquote, .eg .quote {
+  font-family: var(--font-quote);
+  font-style: italic;
+  color: var(--steel);
+}
+
+.eg .card {
+  background: linear-gradient(180deg, var(--graphite-2), var(--graphite-1));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  position: relative;
+}
+
+/* Призрачный крупный номер секции */
+.eg .ghost-num {
+  position: absolute; top: 8px; right: 16px;
+  font-family: var(--font-display);
+  font-size: clamp(64px, 14vw, 180px);
+  color: rgba(216,221,228,0.05);
+  z-index: 0; pointer-events: none;
+}
+.eg .card > *:not(.ghost-num) { position: relative; z-index: 1; }
+
+/* Ромбовидные маркеры вместо буллетов */
+.eg ul.diamond { list-style: none; padding-left: 0; }
+.eg ul.diamond li { position: relative; padding-left: 22px; margin: 10px 0; }
+.eg ul.diamond li::before {
+  content: "◆"; position: absolute; left: 0; top: 0;
+  color: var(--silver); font-size: 10px; line-height: 1.9;
+}
+
+/* Кнопка-ссылка (в PDF — только <a>, не <div>) */
+.eg .btn {
+  display: inline-block;
+  font-family: var(--font-display); text-transform: uppercase;
+  letter-spacing: 0.06em; font-size: 14px;
+  padding: 14px 26px; border-radius: 999px;
+  border: 1px solid var(--silver); color: var(--silver);
+  text-decoration: none;
+}
+.eg .btn--solid { background: var(--silver); color: var(--bg); }
+
+/* PDF-страница */
+@page { size: A4; margin: 0; }
+.eg .cover { page-break-after: always; }
