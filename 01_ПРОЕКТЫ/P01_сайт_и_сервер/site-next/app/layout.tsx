@@ -38,24 +38,11 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/assets/tild6364-6163-4734-a134-626161373762/EG_atmosfera3D_stick.png"
-          media="(prefers-color-scheme: light)"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/assets/tild3632-6663-4164-b565-666631343131/photo_2025-05-13_135.png"
-          media="(prefers-color-scheme: dark)"
-        />
-        <link
-          rel="apple-touch-icon"
-          href="/assets/tild6339-6439-4065-b437-383430633035/photo_2025-05-13_135.png"
-        />
+        {/* Favicon / apple-touch: app/favicon.ico, app/icon.png, app/apple-icon.png (EG mark) */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <SiteFonts />
       </head>
       <body>
