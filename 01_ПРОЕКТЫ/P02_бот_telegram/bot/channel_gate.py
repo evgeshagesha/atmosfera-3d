@@ -44,7 +44,7 @@ def subscribe_keyboard(callback_data: str) -> InlineKeyboardMarkup:
             [InlineKeyboardButton("Подписаться на канал", url=CHANNEL_URL)],
             [
                 InlineKeyboardButton(
-                    "Я подписался — открыть гайд", callback_data=callback_data
+                    "Я подписался", callback_data=callback_data
                 )
             ],
         ]
@@ -58,7 +58,7 @@ def subscribe_guide_text(what: str = "гайд") -> str:
         "1) Нажмите «Подписаться на канал»\n"
         "2) Подпишитесь на канал Евгения\n"
         "3) Вернитесь сюда и нажмите\n"
-        "<b>«Я подписался — открыть гайд»</b>\n\n"
+        "<b>«Я подписался»</b>\n\n"
         "После этого сразу пришлю ссылку."
     ).format(what=safe)
 

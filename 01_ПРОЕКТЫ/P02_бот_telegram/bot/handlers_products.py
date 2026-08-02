@@ -15,7 +15,6 @@ from orders import find_order, mark_order_used
 from products import (
     get_access_url,
     get_invite_url,
-    get_lead_delivery,
     get_lead_keyword,
     get_level_file,
     get_level_meta,
@@ -29,7 +28,8 @@ from products import (
 
 CHANNEL_URL = "https://t.me/EvgeniiGoshev"
 CHANNEL_NAV_URL = "https://t.me/EvgeniiGoshev/1123"
-GUIDE_URL = "https://egoshev.ru/gaid"
+# Lead guide = channel post (not external PDF file / egoshev.ru/gaid)
+GUIDE_URL = "https://t.me/EvgeniiGoshev/1326"
 MENU_LINKS = [
     ("Тест тела · 684 ₽", "test"),
     ("Дыхание и осанка · 1 990 ₽", "breath"),
@@ -52,28 +52,26 @@ def _pay_or_page_button(label: str, product_id: str) -> InlineKeyboardButton | N
 
 
 async def send_guide_link(update: Update) -> None:
-    """Lead: calm URL button to /gaid (Telegram cannot color buttons gray)."""
+    """Lead: URL button to channel guide post (Telegram cannot color buttons gray)."""
     message = _msg(update)
     if not message:
         return
-    p = get_product("lead_telo") or {}
-    title = p.get("title", "С чего начинать работу с телом")
-    bonus = p.get("bonus", "")
     guide = get_page_url("lead_telo") or GUIDE_URL
-    lines = [
-        f"Ваш гайд «{title}».",
-        (f"Бонус: {bonus}." if bonus else ""),
-        "",
-        "Откройте по кнопке ниже — всё на одной странице.",
-    ]
-    # URL buttons are always system-styled (blue). No custom gray in Bot API.
+    text = (
+        "✅ <b>Подписка есть</b> — спасибо!\n\n"
+        "Вот ваш гайд:\n"
+        "<b>«С чего начинать работу с телом»</b>\n\n"
+        "Откройте по кнопке ниже и сохраните себе.\n\n"
+        "Не нужно делать всё сразу.\n"
+        "Один блок сегодня — уже хороший старт.\n\n"
+        "<b>И важный момент:</b>\n"
+        "в конце гайда вас ждёт ещё один <b>сюрприз</b>.\n"
+        "Обязательно дочитайте до конца."
+    )
     keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Открыть гайд", url=guide)]]
+        [[InlineKeyboardButton("Открыть гайд PDF", url=guide)]]
     )
-    await message.reply_text(
-        "\n".join(x for x in lines if x is not None and x != ""),
-        reply_markup=keyboard,
-    )
+    await message.reply_text(text, reply_markup=keyboard, parse_mode="HTML")
 
 
 async def send_channel_invite(update: Update) -> None:

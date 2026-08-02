@@ -39,7 +39,70 @@ class ChannelGateUnitTests(unittest.TestCase):
         rows = kb.inline_keyboard
         self.assertEqual(len(rows), 2)
         self.assertEqual(rows[0][0].url, "https://t.me/EvgeniiGoshev")
+        self.assertEqual(rows[1][0].text, "Я подписался")
         self.assertEqual(rows[1][0].callback_data, "subok:telo")
+
+
+class LeadGuideDeliveryTests(unittest.TestCase):
+    GUIDE_POST = "https://t.me/EvgeniiGoshev/1326"
+
+    def test_products_lead_page_url_is_channel_post(self):
+        from products import get_lead_delivery, get_page_url
+
+        self.assertEqual(get_page_url("lead_telo"), self.GUIDE_POST)
+        self.assertEqual(get_lead_delivery(), self.GUIDE_POST)
+
+    def test_guide_url_constant(self):
+        from handlers_products import GUIDE_URL
+
+        self.assertEqual(GUIDE_URL, self.GUIDE_POST)
+
+    def test_deliver_lead_guide_text_and_url_button(self):
+        """After subscribe: exact HTML copy + «Открыть гайд PDF» → channel post."""
+        import asyncio
+        from handlers_products import deliver_lead_guide
+
+        update = MagicMock()
+        update.effective_user.id = 11
+        update.effective_chat.id = 11
+        message = MagicMock()
+        message.chat_id = 11
+        update.effective_message = message
+        context = MagicMock()
+
+        async def _run():
+            with (
+                patch(
+                    "handlers_products.get_page_url", return_value=self.GUIDE_POST
+                ),
+                patch(
+                    "followups.schedule_lead_followups", MagicMock()
+                ),
+            ):
+
+                async def _reply_text(text, reply_markup=None, parse_mode=None):
+                    self.assertEqual(parse_mode, "HTML")
+                    self.assertIn("✅ <b>Подписка есть</b> — спасибо!", text)
+                    self.assertIn(
+                        "<b>«С чего начинать работу с телом»</b>", text
+                    )
+                    self.assertIn(
+                        "<b>И важный момент:</b>", text
+                    )
+                    self.assertIn(
+                        "ещё один <b>сюрприз</b>", text
+                    )
+                    self.assertIn("Обязательно дочитайте до конца.", text)
+                    self.assertNotIn("egoshev.ru/gaid", text)
+                    btn = reply_markup.inline_keyboard[0][0]
+                    self.assertEqual(btn.text, "Открыть гайд PDF")
+                    self.assertEqual(btn.url, self.GUIDE_POST)
+
+                message.reply_text = _reply_text
+                ok = await deliver_lead_guide(update, context)
+                self.assertTrue(ok)
+
+        asyncio.run(_run())
 
 
 class StartAliasTests(unittest.TestCase):

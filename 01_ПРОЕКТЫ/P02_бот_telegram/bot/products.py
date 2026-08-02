@@ -116,9 +116,9 @@ def get_lead_keyword() -> str:
 
 
 def get_lead_delivery() -> str | None:
-    """HTTP URL, local file path, or Telegram file_id for the lead guide."""
+    """Channel post URL for the lead guide (prefer page_url over local PDF)."""
     p = get_product("lead_telo") or {}
-    for key in ("file_id_or_url", "file_url", "page_url"):
+    for key in ("page_url", "file_url", "file_id_or_url"):
         val = (p.get(key) or "").strip()
         if not val or "ЗАМЕНИ" in val:
             continue
