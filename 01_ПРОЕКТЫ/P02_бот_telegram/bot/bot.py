@@ -197,38 +197,58 @@ async def _funnel_ask_question(course_id: str, course_title: str, step: int, pre
 
 
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Instagram → Start: subscribe check → guide. No bot intro menu."""
+    """Instagram → Start: subscribe guide → (callback) guide + follow-ups."""
     from handlers_products import flow_telo
 
+    if not update.effective_user:
+        return
     user_id = update.effective_user.id
     args = context.args or []
 
-    # Deep links: test / kurs / club / menu / … (not the lead guide)
-    if args and await cmd_start_products(update, context):
-        return
+    try:
+        # Deep links: test / kurs / club / menu / … (not the lead guide)
+        if args and await cmd_start_products(update, context):
+            return
 
-    # Legacy course deep links from site
-    if args and args[0].lower() in VALID_COURSE_IDS:
-        course_id = args[0].lower()
-        courses = load_courses()
-        course_title = courses.get(course_id, {}).get("title", course_id)
-        set_funnel_user(user_id, course_id, S_PAYMENT_LINK_SENT, dialogue_answers=[])
-        welcome = await _funnel_welcome(course_id, course_title)
-        await update.message.reply_text(welcome)
-        pay_url = get_prodamus_link(course_id)
-        catalog_url = get_catalog_url()
-        buttons = []
-        if pay_url:
-            buttons.append([InlineKeyboardButton(f"Оплатить курс «{course_title}»", url=pay_url)])
-        buttons.append([InlineKeyboardButton("Все курсы — выбрать другой", url=catalog_url)])
-        await update.message.reply_text(
-            "Выбери действие:",
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
-        return
+        # Legacy course deep links from site
+        if args and args[0].lower() in VALID_COURSE_IDS:
+            course_id = args[0].lower()
+            courses = load_courses()
+            course_title = courses.get(course_id, {}).get("title", course_id)
+            set_funnel_user(user_id, course_id, S_PAYMENT_LINK_SENT, dialogue_answers=[])
+            welcome = await _funnel_welcome(course_id, course_title)
+            if update.message:
+                await update.message.reply_text(welcome)
+            pay_url = get_prodamus_link(course_id)
+            catalog_url = get_catalog_url()
+            buttons = []
+            if pay_url:
+                buttons.append(
+                    [InlineKeyboardButton(f"Оплатить курс «{course_title}»", url=pay_url)]
+                )
+            buttons.append(
+                [InlineKeyboardButton("Все курсы — выбрать другой", url=catalog_url)]
+            )
+            if update.message:
+                await update.message.reply_text(
+                    "Выбери действие:",
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                )
+            return
 
-    # Plain /start or /start telo — lead funnel only (ChatPlace entry)
-    await flow_telo(update, context)
+        # Plain /start or /start telo — lead funnel (ChatPlace / Instagram entry)
+        await flow_telo(update, context)
+    except Exception as exc:
+        logger.exception("cmd_start failed user=%s: %s", user_id, exc)
+        try:
+            target = update.effective_message
+            if target:
+                await target.reply_text(
+                    "Не удалось открыть старт. Напишите ТЕЛО или /start ещё раз — "
+                    "пришлю инструкцию по подписке на канал."
+                )
+        except Exception:
+            pass
 
 
 async def cmd_zadanie(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

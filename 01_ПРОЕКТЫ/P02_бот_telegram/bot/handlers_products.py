@@ -5,7 +5,12 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, WebAppI
 from telegram.ext import ContextTypes
 
 import config
-from channel_gate import ask_subscribe, is_channel_subscriber
+from channel_gate import (
+    ask_subscribe,
+    is_channel_subscriber,
+    require_channel_sub,
+    send_subscribe_prompt,
+)
 from orders import find_order, mark_order_used
 from products import (
     get_access_url,
@@ -169,8 +174,13 @@ async def deliver_lead_guide(
 
     message = _msg(update)
     user = update.effective_user
-    if not message:
+    if not user:
         return False
+    chat_id = (
+        message.chat_id
+        if message is not None
+        else (update.effective_chat.id if update.effective_chat else user.id)
+    )
     guide = get_page_url("lead_telo") or GUIDE_URL
     text = (
         "✅ <b>Подписка есть</b> — спасибо!\n\n"
@@ -183,16 +193,20 @@ async def deliver_lead_guide(
         "в конце гайда вас ждёт ещё один <b>сюрприз</b>.\n"
         "Обязательно дочитайте до конца."
     )
-    await message.reply_text(
-        text,
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Открыть гайд PDF", url=guide)]]
-        ),
-        parse_mode="HTML",
+    markup = InlineKeyboardMarkup(
+        [[InlineKeyboardButton("Открыть гайд PDF", url=guide)]]
     )
+    if message is not None:
+        await message.reply_text(text, reply_markup=markup, parse_mode="HTML")
+    elif context is not None:
+        await context.bot.send_message(
+            chat_id=chat_id, text=text, reply_markup=markup, parse_mode="HTML"
+        )
+    else:
+        return False
     if context and user:
         schedule_lead_followups(
-            context, chat_id=message.chat_id, user_id=user.id
+            context, chat_id=chat_id, user_id=user.id
         )
     return True
 
@@ -200,15 +214,32 @@ async def deliver_lead_guide(
 async def flow_telo(
     update: Update, context: ContextTypes.DEFAULT_TYPE | None = None
 ) -> None:
-    """After Start from Instagram: ask channel sub → then guide + follow-ups."""
+    """Entry (/start, ТЕЛО): always show channel-subscribe guide when gate is on.
+
+    Unlock happens only via callback «Я подписался» → deliver_lead_guide.
+    """
     message = _msg(update)
     user = update.effective_user
-    if not message or not user or context is None:
+    if not user or context is None:
         return
 
-    # No "Привет, я бот Атмосфера 3D" — ChatPlace already welcomed them.
-    if not await is_channel_subscriber(context, user.id):
-        await ask_subscribe(message, callback_data="subok:telo", what="гайд")
+    chat_id = (
+        message.chat_id
+        if message is not None
+        else (update.effective_chat.id if update.effective_chat else user.id)
+    )
+
+    # Always re-show subscribe guide on entry when REQUIRE_CHANNEL_SUB=1.
+    # Previously already-subscribed users skipped it — looked like Start «did nothing»
+    # useful, and the channel CTA disappeared from the funnel.
+    if require_channel_sub():
+        await send_subscribe_prompt(
+            context=context,
+            chat_id=chat_id,
+            callback_data="subok:telo",
+            what="гайд",
+            reply_to_message=message,
+        )
         return
 
     await deliver_lead_guide(update, context)
@@ -367,11 +398,41 @@ async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
     )
 
 
+# Plain-text aliases for Telegram / ChatPlace «Start» reply-keyboard buttons
+# (they send text, not the /start command).
+_START_TEXT_ALIASES = frozenset(
+    {
+        "start",
+        "старт",
+        "/start",
+        "▶️ start",
+        "▶ start",
+        "начать",
+    }
+)
+
+
+def is_start_text(text: str) -> bool:
+    raw = (text or "").strip()
+    if not raw:
+        return False
+    low = raw.lower()
+    if low in _START_TEXT_ALIASES:
+        return True
+    # "/start@BotName" typed as plain text in some clients
+    if low.startswith("/start@") or low.startswith("/start "):
+        return True
+    return False
+
+
 async def try_lead_keyword(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> bool:
-    """Return True if message was handled as ТЕЛО lead."""
+    """Return True if message was handled as ТЕЛО lead or Start text button."""
     text = (update.message.text or "").strip()
+    if is_start_text(text):
+        await flow_telo(update, context)
+        return True
     keyword = get_lead_keyword()
     upper = text.upper()
     if upper != keyword and keyword not in upper.split():
@@ -620,16 +681,35 @@ async def on_subscribe_check(
 
     ok = await is_channel_subscriber(context, user.id)
     if not ok:
-        if query.message:
-            await query.message.reply_text(
-                "Пока не вижу подписку. Откройте канал, нажмите «Подписаться», "
-                "подождите пару секунд и снова нажмите «Я подписался».",
-                reply_markup=query.message.reply_markup,
-            )
+        chat_id = (
+            query.message.chat_id
+            if query.message
+            else (update.effective_chat.id if update.effective_chat else user.id)
+        )
+        # Re-send full subscribe guide (keyboard) so Start/callback never dead-ends.
+        await send_subscribe_prompt(
+            context=context,
+            chat_id=chat_id,
+            callback_data=data,
+            what="гайд" if data == "subok:telo" else "гайд вашего уровня",
+            reply_to_message=query.message,
+        )
+        tip = (
+            "Пока не вижу подписку. Откройте канал, нажмите «Подписаться», "
+            "подождите пару секунд и снова нажмите «Я подписался»."
+        )
+        try:
+            if query.message:
+                await query.message.reply_text(tip)
+            else:
+                await context.bot.send_message(chat_id=chat_id, text=tip)
+        except Exception:
+            pass
         return
 
+    # Do NOT call flow_telo here — it re-shows the subscribe prompt on purpose.
     if data == "subok:telo":
-        await flow_telo(update, context)
+        await deliver_lead_guide(update, context)
         return
     if data.startswith("subok:level:"):
         try:
