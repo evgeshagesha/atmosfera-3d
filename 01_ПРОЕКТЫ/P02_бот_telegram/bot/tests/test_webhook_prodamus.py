@@ -47,7 +47,7 @@ class WebhookFailClosedTests(unittest.TestCase):
         with mock.patch.dict(os.environ, {"PRODAMUS_SECRET": ""}, clear=False):
             r = self.client.post(
                 "/webhook",
-                data={"order_id": "999", "product_name": "клуб"},
+                data={"order_id": "999", "product_name": "тест тела"},
             )
         self.assertEqual(r.status_code, 503)
         self.assertEqual(json.loads(self.orders.read_text()), [])
@@ -56,7 +56,7 @@ class WebhookFailClosedTests(unittest.TestCase):
         with mock.patch.dict(os.environ, {"PRODAMUS_SECRET": "sec"}, clear=False):
             r = self.client.post(
                 "/webhook",
-                data={"order_id": "999", "product_name": "клуб"},
+                data={"order_id": "999", "product_name": "тест тела"},
             )
         self.assertEqual(r.status_code, 401)
         self.assertEqual(json.loads(self.orders.read_text()), [])
@@ -65,7 +65,7 @@ class WebhookFailClosedTests(unittest.TestCase):
         with mock.patch.dict(os.environ, {"PRODAMUS_SECRET": "sec"}, clear=False):
             r = self.client.post(
                 "/webhook",
-                data={"order_id": "999", "product_name": "клуб"},
+                data={"order_id": "999", "product_name": "тест тела"},
                 headers={"Sign": "0" * 64},
             )
         self.assertEqual(r.status_code, 403)
@@ -73,15 +73,32 @@ class WebhookFailClosedTests(unittest.TestCase):
 
     def test_valid_sign_registers(self):
         secret = "sec"
-        payload = {"order_id": "1001", "product_name": "клуб", "sum": "1758"}
+        payload = {"order_id": "1001", "product_name": "Онлайн-тест тела", "sum": "684"}
         sig = sign(payload, secret)
         with mock.patch.dict(os.environ, {"PRODAMUS_SECRET": secret}, clear=False):
-            r = self.client.post("/webhook", data=payload, headers={"Sign": sig})
+            with mock.patch.object(self.wh, "_notify_admins_payment"):
+                r = self.client.post("/webhook", data=payload, headers={"Sign": sig})
         self.assertEqual(r.status_code, 200, r.get_data(as_text=True))
         orders = json.loads(self.orders.read_text())
         self.assertEqual(len(orders), 1)
         self.assertEqual(orders[0]["order_id"], "1001")
-        self.assertEqual(orders[0]["product_id"], "club")
+        self.assertEqual(orders[0]["product_id"], "body_test")
+        self.assertEqual(orders[0]["amount"], "684")
+        self.assertIn("тест", orders[0]["product_title"].lower())
+
+    def test_club_not_mapped_via_prodamus(self):
+        """Club is Tribute-only — Prodamus name «клуб» must not become product_id=club."""
+        secret = "sec"
+        payload = {"order_id": "2002", "product_name": "клуб", "sum": "1758"}
+        sig = sign(payload, secret)
+        with mock.patch.dict(os.environ, {"PRODAMUS_SECRET": secret}, clear=False):
+            with mock.patch.object(self.wh, "_notify_admins_payment"):
+                r = self.client.post("/webhook", data=payload, headers={"Sign": sig})
+        self.assertEqual(r.status_code, 200)
+        orders = json.loads(self.orders.read_text())
+        self.assertEqual(len(orders), 1)
+        self.assertIsNone(orders[0]["product_id"])
+        self.assertEqual(orders[0]["amount"], "1758")
 
 
 if __name__ == "__main__":

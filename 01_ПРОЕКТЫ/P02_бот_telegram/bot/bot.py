@@ -327,10 +327,22 @@ async def cmd_access(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         return
     mark_order_used(order_id)
     courses = load_courses()
-    title = courses.get(product_id, {}).get("title", product_id)
-    await update.message.reply_text(
-        f"Доступ открыт. Переходи в группу по курсу «{title}»:\n{invite}"
+    title = (
+        order.get("product_title")
+        or courses.get(product_id, {}).get("title")
+        or product_id
     )
+    amount = str(order.get("amount") or "").strip()
+    currency = str(order.get("currency") or "RUB").strip() or "RUB"
+    lines = [
+        "Доступ открыт.",
+        f"Продукт: {title}",
+        f"Заказ: {order_id}",
+    ]
+    if amount:
+        lines.append(f"Сумма: {amount} {currency}")
+    lines.extend(["", f"Переходи в группу:\n{invite}"])
+    await update.message.reply_text("\n".join(lines))
 
 
 async def cmd_analiz(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

@@ -9,6 +9,8 @@ SECURITY (fail-closed):
 - Header `Sign` must match HMAC-SHA256 of the payload
 - Invalid/missing signature → 401/403, no invite path
 
+Club (Tribute) is NOT a Prodamus product — do not map club here.
+
 Run on VPS: gunicorn webhook_prodamus:app (see deploy/)
 Prodamus URL: https://bot.egoshev.ru/webhook
 """
@@ -17,6 +19,9 @@ from __future__ import annotations
 import json
 import logging
 import os
+import urllib.error
+import urllib.parse
+import urllib.request
 from pathlib import Path
 
 from flask import Flask, jsonify, make_response, request
@@ -35,11 +40,32 @@ log = logging.getLogger("webhook_prodamus")
 if not log.handlers:
     logging.basicConfig(level=logging.INFO)
 
-ORDERS_FILE = Path(__file__).resolve().parent / "orders.json"
+BASE_DIR = Path(__file__).resolve().parent
+ORDERS_FILE = BASE_DIR / "orders.json"
+PRODUCTS_FILE = BASE_DIR / "products.json"
+
+# Human titles if products.json missing a key (Prodamus contour only).
+_FALLBACK_TITLES = {
+    "body_test": "Онлайн-тест тела",
+    "course_breath_posture": "Дыхание и осанка",
+    "course_baza": "Базовая настройка тела",
+}
 
 
 def _prodamus_secret() -> str:
     return (os.getenv("PRODAMUS_SECRET") or "").strip()
+
+
+def _admin_ids() -> list[str]:
+    return [
+        x.strip()
+        for x in (os.getenv("ADMIN_TELEGRAM_IDS") or "").split(",")
+        if x.strip()
+    ]
+
+
+def _bot_token() -> str:
+    return (os.getenv("TELEGRAM_BOT_TOKEN") or "").strip()
 
 
 @app.after_request
@@ -58,7 +84,8 @@ def cors_preflight():
     return make_response("", 204)
 
 
-# Map Prodamus product name or id to our product_id
+# Map Prodamus product name / price hint → product_id.
+# Club / Tribute intentionally absent — club is paid via Tribute only.
 PRODUCT_TO_COURSE = {
     "тест": "body_test",
     "теста": "body_test",
@@ -74,11 +101,7 @@ PRODUCT_TO_COURSE = {
     "курс": "course_baza",
     "9990": "course_baza",
     "course_baza": "course_baza",
-    "клуб": "club",
-    "club": "club",
-    "1680": "club",
-    "1758": "club",
-    # legacy course funnel ids
+    # legacy course funnel ids (old catalog)
     "осанка": "posture",
     "осанку": "posture",
     "таз": "pelvis",
@@ -107,6 +130,34 @@ def normalize_product(name: str) -> str | None:
         if key in n:
             return course_id
     return None
+
+
+def _load_product_titles() -> dict[str, str]:
+    titles = dict(_FALLBACK_TITLES)
+    if not PRODUCTS_FILE.exists():
+        return titles
+    try:
+        data = json.loads(PRODUCTS_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return titles
+    if not isinstance(data, dict):
+        return titles
+    for pid, item in data.items():
+        if isinstance(item, dict) and item.get("title"):
+            titles[str(pid)] = str(item["title"])
+    return titles
+
+
+def product_title_for(product_id: str | None, raw_product: str = "") -> str:
+    titles = _load_product_titles()
+    if product_id and product_id in titles:
+        return titles[product_id]
+    raw = (raw_product or "").strip()
+    if raw:
+        return raw[:120]
+    if product_id:
+        return product_id
+    return "неизвестный продукт"
 
 
 def load_orders() -> list:
@@ -173,6 +224,77 @@ def _product_name_from_payload(data: dict) -> str:
     return str(product_name or "")
 
 
+def _amount_from_payload(data: dict) -> str:
+    for key in ("sum", "amount", "order_sum", "price", "cost", "Sum"):
+        val = data.get(key)
+        if val is not None and str(val).strip() != "":
+            return str(val).strip()
+    products = data.get("products")
+    if isinstance(products, list):
+        for item in products:
+            if isinstance(item, dict):
+                price = item.get("price") or item.get("sum") or item.get("amount")
+                if price is not None and str(price).strip() != "":
+                    return str(price).strip()
+    return ""
+
+
+def _currency_from_payload(data: dict) -> str:
+    cur = data.get("currency") or data.get("Currency") or "RUB"
+    return str(cur).strip() or "RUB"
+
+
+def _notify_admins_payment(
+    *,
+    order_id: str,
+    product_id: str | None,
+    product_title: str,
+    amount: str,
+    currency: str,
+    email: str,
+    raw_product: str,
+) -> None:
+    """Best-effort admin alert. Never blocks order registration."""
+    token = _bot_token()
+    admins = _admin_ids()
+    if not token or not admins:
+        log.info("Skip admin notify: TELEGRAM_BOT_TOKEN or ADMIN_TELEGRAM_IDS not set")
+        return
+
+    amount_line = f"{amount} {currency}".strip() if amount else "сумма не передана"
+    pid_line = product_id or "не определён"
+    lines = [
+        "💳 Оплата Prodamus",
+        f"Продукт: {product_title}",
+        f"Код: {pid_line}",
+        f"Заказ: {order_id}",
+        f"Сумма: {amount_line}",
+    ]
+    if email:
+        lines.append(f"Email: {email}")
+    if raw_product and raw_product != product_title:
+        lines.append(f"Raw: {raw_product[:120]}")
+    if not product_id:
+        lines.append("⚠️ Маппинг продукта не сработал — доступ автоматически не выдать.")
+    text = "\n".join(lines)
+
+    for admin_id in admins:
+        try:
+            body = urllib.parse.urlencode(
+                {"chat_id": admin_id, "text": text}
+            ).encode("utf-8")
+            req = urllib.request.Request(
+                f"https://api.telegram.org/bot{token}/sendMessage",
+                data=body,
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                if resp.status >= 400:
+                    log.warning("Admin notify HTTP %s for %s", resp.status, admin_id)
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            log.warning("Admin notify failed for %s: %s", admin_id, exc)
+
+
 @app.route("/webhook", methods=["GET", "HEAD", "POST"])
 def webhook():
     # Prodamus validates the URL on save (often GET/HEAD or empty POST).
@@ -214,6 +336,9 @@ def webhook():
     )
     product_name = _product_name_from_payload(data)
     product_id = normalize_product(product_name)
+    amount = _amount_from_payload(data)
+    currency = _currency_from_payload(data)
+    product_title = product_title_for(product_id, product_name)
 
     payment_status = str(data.get("payment_status") or data.get("Payment_status") or "").lower()
     if payment_status and payment_status not in ("success", "ok", ""):
@@ -234,15 +359,41 @@ def webhook():
         {
             "order_id": order_id,
             "product_id": product_id,
+            "product_title": product_title,
+            "amount": amount,
+            "currency": currency,
             "email": str(email)[:200] if email else "",
             "used": False,
             "raw_product": str(product_name)[:200],
         }
     )
     save_orders(orders)
-    log.info("Prodamus order registered order_id=%s product_id=%s", order_id, product_id)
+    log.info(
+        "Prodamus order registered order_id=%s product_id=%s amount=%s",
+        order_id,
+        product_id,
+        amount or "-",
+    )
 
-    return jsonify({"ok": True, "order_id": order_id, "product_id": product_id}), 200
+    _notify_admins_payment(
+        order_id=order_id,
+        product_id=product_id,
+        product_title=product_title,
+        amount=amount,
+        currency=currency,
+        email=str(email)[:200] if email else "",
+        raw_product=str(product_name)[:200],
+    )
+
+    return jsonify(
+        {
+            "ok": True,
+            "order_id": order_id,
+            "product_id": product_id,
+            "product_title": product_title,
+            "amount": amount,
+        }
+    ), 200
 
 
 @app.route("/health", methods=["GET", "HEAD"])

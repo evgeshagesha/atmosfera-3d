@@ -397,7 +397,34 @@ async def try_payment_confirm(update: Update) -> bool:
             "Заказ не найден. Проверьте номер или подождите 1–2 минуты после оплаты."
         )
         return True
-    product_id = order.get("product_id") or "course_baza"
+
+    product_id = order.get("product_id") or order.get("course_id")
+    product_title = (
+        order.get("product_title")
+        or (get_product(product_id) or {}).get("title")
+        or product_id
+        or "продукт"
+    )
+    amount = str(order.get("amount") or "").strip()
+    currency = str(order.get("currency") or "RUB").strip() or "RUB"
+    amount_line = f"{amount} {currency}" if amount else ""
+
+    if not product_id:
+        await update.message.reply_text(
+            "Оплата найдена, но продукт не распознан.\n"
+            f"Заказ: {order_id}"
+            + (f"\nСумма: {amount_line}" if amount_line else "")
+            + "\n\nНапишите организатору — доступ выдадим вручную."
+        )
+        return True
+
+    if product_id == "club":
+        await update.message.reply_text(
+            "Клуб оплачивается через Tribute, не через Prodamus.\n"
+            "Если уже оплатили в Tribute — доступ откроется там.\n"
+            "Команда /club — ссылки на оформление."
+        )
+        return True
 
     if product_id == "body_test":
         mark_order_used(order_id)
@@ -405,27 +432,48 @@ async def try_payment_confirm(update: Update) -> bool:
             get_access_url("body_test")
             or "https://egoshev.ru/testresult"
         )
-        await update.message.reply_text(
-            "Оплата теста подтверждена.\n\n"
-            f"Ваш доступ к тесту:\n{access}\n\n"
-            "Пройдите тест. Когда увидите свой уровень — напишите боту:\n"
-            "/level1 · /level2 · /level3\n"
-            "или /levelscore 42 (ваш балл) — пришлю PDF гайд в личку.\n\n"
-            "Разбор маршрута A–E — по запросу за 24–48 часов."
+        lines = [
+            "Оплата подтверждена.",
+            f"Продукт: {product_title}",
+            f"Заказ: {order_id}",
+        ]
+        if amount_line:
+            lines.append(f"Сумма: {amount_line}")
+        lines.extend(
+            [
+                "",
+                f"Ваш доступ к тесту:\n{access}",
+                "",
+                "Пройдите тест. Когда увидите свой уровень — напишите боту:",
+                "/level1 · /level2 · /level3",
+                "или /levelscore 42 (ваш балл) — пришлю PDF гайд в личку.",
+                "",
+                "Разбор маршрута A–E — по запросу за 24–48 часов.",
+            ]
         )
+        await update.message.reply_text("\n".join(lines))
         return True
 
     invite = get_invite_url(product_id)
     if not invite:
         await update.message.reply_text(
-            "Ссылка на доступ ещё не настроена. Напишите организатору — "
-            "оплата уже в системе."
+            "Оплата в системе, но ссылка на доступ ещё не настроена.\n"
+            f"Продукт: {product_title}\n"
+            f"Заказ: {order_id}"
+            + (f"\nСумма: {amount_line}" if amount_line else "")
+            + "\n\nНапишите организатору — выдадим доступ вручную."
         )
         return True
     mark_order_used(order_id)
-    p = get_product(product_id) or {}
-    title = p.get("title", product_id)
-    await update.message.reply_text(f"Доступ открыт — «{title}»:\n{invite}")
+    lines = [
+        "Доступ открыт.",
+        f"Продукт: {product_title}",
+        f"Заказ: {order_id}",
+    ]
+    if amount_line:
+        lines.append(f"Сумма: {amount_line}")
+    lines.extend(["", invite])
+    await update.message.reply_text("\n".join(lines))
     return True
 
 
