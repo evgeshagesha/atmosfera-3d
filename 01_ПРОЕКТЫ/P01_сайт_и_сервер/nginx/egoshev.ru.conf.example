@@ -1,0 +1,55 @@
+# Шаблон: /etc/nginx/sites-available/egoshev.ru
+# Цель: HTTPS работает (уже есть LE), HTTP → 301 на HTTPS.
+# Деплой только вручную по SSH (см. SSL_HTTP_REDIRECT_FIX.md). Не коммитить секреты/ключи.
+#
+# Важно:
+# - Сертификат сейчас только на CN=eg.egoshev.ru (не egoshev.ru / www).
+# - Certbot authenticator=nginx — после правок: nginx -t && systemctl reload nginx.
+# - Блок /prodamus/ на :443 сохраняем; на :80 редиректим целиком (webhook должен ходить на https).
+
+server {
+    server_name eg.egoshev.ru egoshev.ru www.egoshev.ru 5.42.96.101;
+
+    client_max_body_size 20m;
+
+    # Prodamus webhook (gunicorn :8765)
+    location /prodamus/ {
+        proxy_pass http://127.0.0.1:8765/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    listen [::]:443 ssl ipv6only=on;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/eg.egoshev.ru/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/eg.egoshev.ru/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    # Optional after redirect works:
+    # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+}
+
+# HTTP: только редирект на HTTPS (не проксировать сайт на :80)
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name eg.egoshev.ru egoshev.ru www.egoshev.ru 5.42.96.101;
+
+    return 301 https://$host$request_uri;
+}
