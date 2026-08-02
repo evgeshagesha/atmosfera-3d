@@ -5,6 +5,11 @@
 !.env.example
 **/.env
 **/.env.local
+# Local password scratchpad for the human only — never commit real secrets
+.secrets.local.md
+**/.secrets.local.md
+# Checklist is safe (placeholders only) — keep in git
+!00_ПУЛЬТ_УПРАВЛЕНИЯ/ЧЕКЛИСТ_СЕКРЕТЫ_TIMEWEB.md
 МЕДИА/
 # Тяжёлые скрины/книги/матрицы (локальная память; README/выжимки — в git)
 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/05_МЕТОДИКА_И_ПРАКТИКА/Functional_Patterns/00_сырьё_скрины/
