@@ -80,9 +80,14 @@ products:
     offer: "Фундамент: убрать скованность, улучшить мобильность и контроль — подготовка к силе дома, на улице или в зале"
     sell_via: website
     page_url: "https://egoshev.ru/baza"
-    prodamus_url: null  # ← ВПИСАТЬ
+    # HITL 02.08.2026: delivery = Tilda Members until own app. Do not invent Prodamus URL.
+    # Opening sales on Tilda = Evgeny manually. Prodamus + TG invite = optional later (not bot blocker).
+    prodamus_url: null
     members_url: null
+    access_type: "tilda_members"
     platform: "tilda_members_kinescope"
+    delivery: "tilda_members_until_app"
+    notes: "Доступ через Tilda Members (egoshev.ru/baza). Prodamus webhook optional later; club = Tribute."
 
   club:
     code: club

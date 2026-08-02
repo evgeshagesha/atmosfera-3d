@@ -35,10 +35,13 @@
     "price_rub": 9990,
     "type": "one_time",
     "deep_link": "baza",
-    "prodamus_url": "https://egoshev.payform.ru/ЗАМЕНИ_ССЫЛКУ_КУРС",
-    "telegram_invite_url": "https://t.me/+ЗАМЕНИ_ИНВАЙТ_КУРС",
+    "prodamus_url": null,
+    "telegram_invite_url": null,
     "page_url": "https://egoshev.ru/baza",
-    "description": "Флагманский курс · пошаговая настройка тела"
+    "access_type": "tilda_members",
+    "delivery": "tilda_members_until_app",
+    "description": "Флагманский курс · пошаговая настройка тела",
+    "notes": "HITL 02.08.2026: доступ через Tilda Members (egoshev.ru/baza) до своего app. Prodamus URL + TG-invite — optional later, не срочный блокер. Продажи на Tilda открывает Евгений. Клуб = Tribute."
   },
   "club": {
     "title": "Клуб Атмосфера 3D",
