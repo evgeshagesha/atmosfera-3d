@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin", "/admin/", "/api/admin", "/api/admin/"],
     },
     sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || "https://eg.egoshev.ru"}/sitemap.xml`,
   };

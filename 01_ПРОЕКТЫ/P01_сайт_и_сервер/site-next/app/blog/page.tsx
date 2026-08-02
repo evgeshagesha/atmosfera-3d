@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { blogPostHref, getBlogPosts } from "@/lib/content/blog";
+import { buildPageMetadata } from "@/lib/seo/build-metadata";
 
 import "./blog-index.css";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata("blog", {
   title: "Блог о движении, дыхании и восстановлении — Евгений Гошев",
   description:
     "Статьи Евгения Гошева о биомеханике, физической терапии, дыхании, осанке, восстановлении и функциональном движении.",
-};
+  ogImage: "/assets/eg/hero-evgeny-black.png",
+});
 
 export default function BlogIndexPage() {
   const posts = getBlogPosts();

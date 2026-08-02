@@ -82,7 +82,7 @@ export default async function BlogArticlePage({ params }: Props) {
       "@type": "Person",
       name: AUTHOR_NAME,
       url: SITE_URL,
-      sameAs: ["https://t.me/EvgeniiGoshev"],
+      sameAs: ["https://t.me/EGoshev"],
     },
     publisher: {
       "@type": "Organization",
