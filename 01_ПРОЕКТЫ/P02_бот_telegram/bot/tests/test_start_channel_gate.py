@@ -58,7 +58,7 @@ class LeadGuideDeliveryTests(unittest.TestCase):
         self.assertEqual(GUIDE_URL, self.GUIDE_POST)
 
     def test_deliver_lead_guide_text_and_url_button(self):
-        """After subscribe: exact HTML copy + «Открыть гайд PDF» → channel post."""
+        """After subscribe: exact HTML copy + «Открыть гайд 🎁» → channel post."""
         import asyncio
         from handlers_products import deliver_lead_guide
 
@@ -95,7 +95,7 @@ class LeadGuideDeliveryTests(unittest.TestCase):
                     self.assertIn("Обязательно дочитайте до конца.", text)
                     self.assertNotIn("egoshev.ru/gaid", text)
                     btn = reply_markup.inline_keyboard[0][0]
-                    self.assertEqual(btn.text, "Открыть гайд PDF")
+                    self.assertEqual(btn.text, "Открыть гайд 🎁")
                     self.assertEqual(btn.url, self.GUIDE_POST)
 
                 message.reply_text = _reply_text

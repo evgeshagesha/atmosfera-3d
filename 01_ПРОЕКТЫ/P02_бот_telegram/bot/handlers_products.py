@@ -69,7 +69,7 @@ async def send_guide_link(update: Update) -> None:
         "Обязательно дочитайте до конца."
     )
     keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Открыть гайд PDF", url=guide)]]
+        [[InlineKeyboardButton("Открыть гайд 🎁", url=guide)]]
     )
     await message.reply_text(text, reply_markup=keyboard, parse_mode="HTML")
 
@@ -192,7 +192,7 @@ async def deliver_lead_guide(
         "Обязательно дочитайте до конца."
     )
     markup = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Открыть гайд PDF", url=guide)]]
+        [[InlineKeyboardButton("Открыть гайд 🎁", url=guide)]]
     )
     if message is not None:
         await message.reply_text(text, reply_markup=markup, parse_mode="HTML")
