@@ -44,7 +44,7 @@ export const HOME_RUNTIME = {
 /** Check before deploy. */
 export const HOME_DEPLOY_NOTES = [
   "Форма контактов: нужны TELEGRAM_BOT_TOKEN и TELEGRAM_CHAT_ID в .env",
-  "Админка: ADMIN_PASSWORD в .env (по умолчанию dev: admin)",
+  "Админка: ADMIN_PASSWORD обязателен в .env (без пароля вход закрыт)",
   "Блог: data/blog.json, управление в /admin/blog",
   "Стили: legacy CSS из public/styles/legacy/css (без Tilda CDN)",
 ] as const;

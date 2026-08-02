@@ -3,9 +3,14 @@ import { redirect } from "next/navigation";
 
 import { ADMIN_COOKIE, verifyAdminSessionToken } from "@/lib/admin/auth";
 
+/** Fail-closed: any exception → unauthenticated. */
 export async function isAdminAuthenticated(): Promise<boolean> {
-  const cookieStore = await cookies();
-  return verifyAdminSessionToken(cookieStore.get(ADMIN_COOKIE)?.value);
+  try {
+    const cookieStore = await cookies();
+    return verifyAdminSessionToken(cookieStore.get(ADMIN_COOKIE)?.value);
+  } catch {
+    return false;
+  }
 }
 
 export async function requireAdmin() {

@@ -1,20 +1,45 @@
 """
-Minimal webhook receiver for Prodamus payment notifications.
+Webhook receiver for Prodamus payment notifications.
+
 Prodamus sends POST (multipart/form-data) after successful payment.
 Saves order to orders.json so the bot can give invite link on /access.
 
-Run on VPS: uvicorn webhook_prodamus:app --host 0.0.0.0 --port 8765
-Then in Prodamus set URL for notifications: https://your-domain.com:8765/webhook
-(Or put behind nginx and use port 80/443.)
+SECURITY (fail-closed):
+- PRODAMUS_SECRET must be set for any order registration
+- Header `Sign` must match HMAC-SHA256 of the payload
+- Invalid/missing signature → 401/403, no invite path
+
+Run on VPS: gunicorn webhook_prodamus:app (see deploy/)
+Prodamus URL: https://bot.egoshev.ru/webhook
 """
+from __future__ import annotations
+
 import json
-import re
+import logging
+import os
 from pathlib import Path
 
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
+
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:
+    pass
+
+from prodamus_signature import form_to_payload, verify as verify_prodamus_sign
 
 app = Flask(__name__)
+log = logging.getLogger("webhook_prodamus")
+if not log.handlers:
+    logging.basicConfig(level=logging.INFO)
+
 ORDERS_FILE = Path(__file__).resolve().parent / "orders.json"
+
+
+def _prodamus_secret() -> str:
+    return (os.getenv("PRODAMUS_SECRET") or "").strip()
 
 
 @app.after_request
@@ -31,6 +56,7 @@ def add_cors_headers(response):
 @app.route("/health", methods=["OPTIONS"])
 def cors_preflight():
     return make_response("", 204)
+
 
 # Map Prodamus product name or id to our product_id
 PRODUCT_TO_COURSE = {
@@ -51,6 +77,7 @@ PRODUCT_TO_COURSE = {
     "клуб": "club",
     "club": "club",
     "1680": "club",
+    "1758": "club",
     # legacy course funnel ids
     "осанка": "posture",
     "осанку": "posture",
@@ -95,53 +122,133 @@ def save_orders(orders: list) -> None:
     ORDERS_FILE.write_text(json.dumps(orders, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _extract_sign_header() -> str:
+    # Header names vary by proxy / client casing.
+    return (
+        request.headers.get("Sign")
+        or request.headers.get("sign")
+        or request.headers.get("X-Sign")
+        or ""
+    ).strip()
+
+
+def _collect_payload() -> dict:
+    if request.form:
+        flat = request.form.to_dict(flat=True)
+        return form_to_payload(flat)
+    if request.is_json:
+        data = request.get_json(silent=True) or {}
+        return data if isinstance(data, dict) else {}
+    # Fallback: raw urlencoded body
+    raw = request.get_data(as_text=True) or ""
+    if raw and "=" in raw:
+        from prodamus_signature import parse_form_body
+
+        return parse_form_body(raw)
+    return {}
+
+
+def _product_name_from_payload(data: dict) -> str:
+    product_name = (
+        data.get("product_name")
+        or data.get("products")
+        or data.get("product")
+        or ""
+    )
+    if isinstance(product_name, list):
+        names = []
+        for item in product_name:
+            if isinstance(item, dict):
+                names.append(str(item.get("name") or item.get("Name") or ""))
+            else:
+                names.append(str(item))
+        product_name = " ".join(n for n in names if n)
+    elif isinstance(product_name, dict):
+        product_name = str(product_name.get("name") or product_name.get("Name") or "")
+    if not product_name:
+        for k, v in data.items():
+            if "product" in str(k).lower() and v:
+                product_name = v
+                break
+    return str(product_name or "")
+
+
 @app.route("/webhook", methods=["GET", "HEAD", "POST"])
 def webhook():
     # Prodamus validates the URL on save (often GET/HEAD or empty POST).
-    # Real payment notifications are POST multipart/form-data with order_id.
     if request.method in ("GET", "HEAD"):
         return jsonify({"status": "ok"}), 200
 
-    data = request.form.to_dict() if request.form else {}
-    if not data and request.is_json:
-        data = request.get_json() or {}
+    data = _collect_payload()
+    order_id = (
+        data.get("order_id")
+        or data.get("orderId")
+        or data.get("id")
+        or ""
+    )
+    order_id = str(order_id).strip()
 
-    order_id = data.get("order_id") or data.get("orderId") or data.get("id") or ""
-    email = data.get("email") or data.get("customer_email") or data.get("client_email") or ""
-    product_name = data.get("product_name") or data.get("products") or data.get("product") or ""
-    if not product_name and "products[]" in data:
-        product_name = data.get("products[]")
-    if not product_name:
-        for k, v in data.items():
-            if "product" in k.lower() and v:
-                product_name = v
-                break
-
-    # Empty / probe POST during URL validation in Prodamus cabinet
+    # Empty / probe POST during URL validation in Prodamus cabinet — no order write.
     if not order_id:
         return jsonify({"ok": True, "message": "ready"}), 200
 
-    product_id = normalize_product(str(product_name))
+    secret = _prodamus_secret()
+    if not secret:
+        log.error("PRODAMUS_SECRET is not configured — rejecting payment notification")
+        return jsonify({"ok": False, "error": "webhook not configured"}), 503
+
+    signature = _extract_sign_header()
+    if not signature:
+        log.warning("Prodamus webhook rejected: missing Sign header (order_id present)")
+        return jsonify({"ok": False, "error": "signature required"}), 401
+
+    if not verify_prodamus_sign(data, secret, signature):
+        log.warning("Prodamus webhook rejected: invalid signature")
+        return jsonify({"ok": False, "error": "signature invalid"}), 403
+
+    email = (
+        data.get("email")
+        or data.get("customer_email")
+        or data.get("client_email")
+        or ""
+    )
+    product_name = _product_name_from_payload(data)
+    product_id = normalize_product(product_name)
+
+    payment_status = str(data.get("payment_status") or data.get("Payment_status") or "").lower()
+    if payment_status and payment_status not in ("success", "ok", ""):
+        # Do not issue access on canceled / denied callbacks.
+        log.info("Prodamus webhook ignored non-success payment_status=%s", payment_status)
+        return jsonify({"ok": True, "message": "ignored non-success status"}), 200
 
     orders = load_orders()
-    if any(str(o.get("order_id")) == str(order_id) for o in orders):
+    if any(str(o.get("order_id")) == order_id for o in orders):
         return jsonify({"ok": True, "message": "already registered"}), 200
 
-    orders.append({
-        "order_id": order_id,
-        "product_id": product_id or "body_test",
-        "email": email,
-        "used": False,
-        "raw_product": str(product_name)[:200],
-    })
+    if not product_id:
+        log.warning("Prodamus webhook: unknown product mapping for order_id=%s", order_id)
+        # Still record the signed order, but without a product → bot will not invent invite.
+        product_id = None
+
+    orders.append(
+        {
+            "order_id": order_id,
+            "product_id": product_id,
+            "email": str(email)[:200] if email else "",
+            "used": False,
+            "raw_product": str(product_name)[:200],
+        }
+    )
     save_orders(orders)
+    log.info("Prodamus order registered order_id=%s product_id=%s", order_id, product_id)
 
     return jsonify({"ok": True, "order_id": order_id, "product_id": product_id}), 200
 
 
 @app.route("/health", methods=["GET", "HEAD"])
 def health():
-    return jsonify({"status": "ok"})
+    configured = bool(_prodamus_secret())
+    return jsonify({"status": "ok", "prodamus_secret_configured": configured})
 
 
 if __name__ == "__main__":

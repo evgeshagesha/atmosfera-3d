@@ -1,36 +1,71 @@
 import crypto from "crypto";
 
 export const ADMIN_COOKIE = "eg_admin_session";
-const SESSION_VERSION = "eg-admin-v1";
+export const SESSION_VERSION = "eg-admin-v1";
 
-function getAdminSecret(): string {
-  return (
-    process.env.ADMIN_SECRET ||
-    process.env.ADMIN_PASSWORD ||
-    "egoshev-dev-admin-change-me"
-  );
+/** Fail-closed: no hardcoded secrets or default passwords. */
+export function getConfiguredAdminSecret(): string | null {
+  const secret = (process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD || "").trim();
+  return secret.length > 0 ? secret : null;
+}
+
+export function getConfiguredAdminPassword(): string | null {
+  const password = (process.env.ADMIN_PASSWORD || "").trim();
+  return password.length > 0 ? password : null;
+}
+
+export function isAdminAuthConfigured(): boolean {
+  return getConfiguredAdminPassword() !== null;
+}
+
+function timingSafeEqualString(a: string, b: string): boolean {
+  try {
+    const bufA = Buffer.from(a);
+    const bufB = Buffer.from(b);
+    if (bufA.length !== bufB.length) return false;
+    return crypto.timingSafeEqual(bufA, bufB);
+  } catch {
+    return false;
+  }
 }
 
 export function createAdminSessionToken(): string {
-  return crypto
-    .createHmac("sha256", getAdminSecret())
-    .update(SESSION_VERSION)
-    .digest("hex");
+  const secret = getConfiguredAdminSecret();
+  if (!secret) {
+    throw new Error("ADMIN_SECRET or ADMIN_PASSWORD must be configured");
+  }
+
+  return crypto.createHmac("sha256", secret).update(SESSION_VERSION).digest("hex");
 }
 
+/**
+ * Fail-closed session check: any error / missing config / bad token → false.
+ */
 export function verifyAdminSessionToken(token: string | undefined): boolean {
-  if (!token) return false;
+  try {
+    if (!token) return false;
+    if (!getConfiguredAdminSecret()) return false;
 
-  const expected = createAdminSessionToken();
-  if (token.length !== expected.length) return false;
-
-  return crypto.timingSafeEqual(Buffer.from(token), Buffer.from(expected));
+    const expected = createAdminSessionToken();
+    return timingSafeEqualString(token, expected);
+  } catch {
+    return false;
+  }
 }
 
+/**
+ * Fail-closed password check: missing/empty ADMIN_PASSWORD → nobody gets in.
+ * No default "admin".
+ */
 export function verifyAdminPassword(password: string): boolean {
-  const configured = process.env.ADMIN_PASSWORD;
-  if (!configured) return password === "admin";
-  return password === configured;
+  try {
+    const configured = getConfiguredAdminPassword();
+    if (!configured) return false;
+    if (!password) return false;
+    return timingSafeEqualString(password, configured);
+  } catch {
+    return false;
+  }
 }
 
 export function getAdminCookieOptions() {

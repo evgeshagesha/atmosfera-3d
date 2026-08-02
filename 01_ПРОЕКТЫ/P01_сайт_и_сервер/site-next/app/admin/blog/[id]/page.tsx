@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import AdminBlogForm from "@/components/admin/AdminBlogForm";
+import { requireAdmin } from "@/lib/admin/session";
 import { getBlogPostById } from "@/lib/content/blog";
 
 type Props = {
@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default async function AdminBlogEditRoute({ params }: Props) {
+  await requireAdmin();
   const { id } = await params;
   const post = getBlogPostById(id);
   if (!post) notFound();

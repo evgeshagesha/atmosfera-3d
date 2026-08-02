@@ -24,7 +24,11 @@ export default function AdminLoginPage() {
     setLoading(false);
 
     if (!response.ok) {
-      setError("Неверный пароль");
+      setError(
+        response.status === 503
+          ? "Админка не настроена на сервере (нужен ADMIN_PASSWORD)"
+          : "Неверный пароль",
+      );
       return;
     }
 
