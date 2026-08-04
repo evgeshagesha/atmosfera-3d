@@ -62,7 +62,12 @@ from handlers_products import (
     try_lead_keyword,
     try_payment_confirm,
 )
-from vk_channel_bridge import ChannelToVkBridge, VkDeliveryStore, VkWallClient
+from vk_channel_bridge import (
+    ChannelToVkBridge,
+    VkBridgeFeatures,
+    VkDeliveryStore,
+    VkWallClient,
+)
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -570,12 +575,22 @@ def main() -> None:
         elif not config.CHANNEL_ID:
             logger.error("VK bridge disabled: CHANNEL_ID is required.")
         else:
+            vk_features = VkBridgeFeatures(
+                video=config.VK_BRIDGE_VIDEO,
+                clips=config.VK_BRIDGE_CLIPS,
+                stories=config.VK_BRIDGE_STORIES,
+                coauthor_user_id=config.VK_COAUTHOR_USER_ID,
+                coauthor_screen_name=config.VK_COAUTHOR_SCREEN_NAME,
+                coauthor_label=config.VK_COAUTHOR_LABEL,
+            )
             vk_bridge = ChannelToVkBridge(
                 channel_id=config.CHANNEL_ID,
                 publisher=VkWallClient(
                     access_token=config.VK_ACCESS_TOKEN,
                     group_id=config.VK_GROUP_ID,
                     api_version=config.VK_API_VERSION,
+                    user_access_token=config.VK_USER_ACCESS_TOKEN,
+                    features=vk_features,
                 ),
                 store=VkDeliveryStore(config.VK_BRIDGE_DB_PATH),
                 album_settle_seconds=config.VK_ALBUM_SETTLE_SECONDS,
@@ -584,9 +599,16 @@ def main() -> None:
             # taking updates away from the bot's existing command/message handlers.
             app.add_handler(TypeHandler(Update, vk_bridge.handle_update), group=-1)
             logger.info(
-                "VK bridge enabled: %s → VK group %s",
+                "VK bridge enabled: %s → VK group %s "
+                "(video=%s clips=%s stories=%s coauthor=%s)",
                 config.CHANNEL_ID,
                 config.VK_GROUP_ID,
+                config.VK_BRIDGE_VIDEO,
+                config.VK_BRIDGE_CLIPS,
+                config.VK_BRIDGE_STORIES,
+                config.VK_COAUTHOR_SCREEN_NAME
+                or config.VK_COAUTHOR_USER_ID
+                or "off",
             )
     app.add_handler(CommandHandler("start", cmd_start))
     app.add_handler(CommandHandler("test", cmd_test))

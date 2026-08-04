@@ -12,9 +12,21 @@ COMMUNITY_CHAT_ID = os.getenv("COMMUNITY_CHAT_ID")  # optional: club group -100.
 CHANNEL_ID = os.getenv("CHANNEL_ID", "@EvgeniiGoshev")  # public channel username or -100...
 VK_BRIDGE_ENABLED = os.getenv("VK_BRIDGE_ENABLED", "0") == "1"
 VK_ACCESS_TOKEN = os.getenv("VK_ACCESS_TOKEN", "")
+# Optional user-admin token for video.save / shortVideo.create (community token fails).
+VK_USER_ACCESS_TOKEN = os.getenv("VK_USER_ACCESS_TOKEN", "")
 VK_GROUP_ID = os.getenv("VK_GROUP_ID", "")
 VK_API_VERSION = os.getenv("VK_API_VERSION", "5.199")
 VK_ALBUM_SETTLE_SECONDS = float(os.getenv("VK_ALBUM_SETTLE_SECONDS", "3"))
+# Optional media paths (text/photo wall stays on when VK_BRIDGE_ENABLED=1).
+VK_BRIDGE_VIDEO = os.getenv("VK_BRIDGE_VIDEO", "0") == "1"
+VK_BRIDGE_CLIPS = os.getenv("VK_BRIDGE_CLIPS", "0") == "1"
+VK_BRIDGE_STORIES = os.getenv("VK_BRIDGE_STORIES", "0") == "1"
+# Co-author mention in post text (official VK co-author API for clips is not public).
+# Confirmed personal page of Evgeniy: screen_name=egoshev1, id=424816541
+# (vk.ru/egoshev is a different account — do not use as default).
+VK_COAUTHOR_USER_ID = os.getenv("VK_COAUTHOR_USER_ID", "")
+VK_COAUTHOR_SCREEN_NAME = os.getenv("VK_COAUTHOR_SCREEN_NAME", "")
+VK_COAUTHOR_LABEL = os.getenv("VK_COAUTHOR_LABEL", "Евгений Гошев")
 # Gate lead/level PDF until user is subscribed to CHANNEL_ID (1=on, 0=off)
 REQUIRE_CHANNEL_SUB = os.getenv("REQUIRE_CHANNEL_SUB", "1")
 ADMIN_TELEGRAM_IDS = [
