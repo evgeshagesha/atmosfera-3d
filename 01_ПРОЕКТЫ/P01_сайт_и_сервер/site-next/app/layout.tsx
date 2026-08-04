@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import CookieConsent from "@/components/legal/CookieConsent";
 import SiteFonts from "@/components/seo/SiteFonts";
 import TelegramWebAppBoot from "@/components/seo/TelegramWebAppBoot";
-import YandexMetrika from "@/components/seo/YandexMetrika";
 import "./globals.css";
 
 const yandexVerification =
@@ -48,7 +48,7 @@ export default function RootLayout({
       <body>
         <TelegramWebAppBoot />
         {children}
-        <YandexMetrika />
+        <CookieConsent />
       </body>
     </html>
   );

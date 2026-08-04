@@ -11,7 +11,7 @@ export const LEGAL_OPERATOR = {
   form: "https://egoshev.ru/anketaplan",
   studioMaps: "https://yandex.ru/maps/-/CTu240~o",
   city: "Москва",
-  updated: "25.07.2026",
+  updated: "04.08.2026",
 } as const;
 
 /** Актуальные публичные цены (синхрон с products.yaml / Mini App). */

@@ -206,10 +206,27 @@
 
   /* ---------- Отправка ---------- */
   var text = "";
+  var submitBtn = document.getElementById("egSubmit");
+
+  function syncKidsSubmit() {
+    if (!submitBtn) return;
+    var step = form.querySelector('.eg-step[data-step="6"]') || form;
+    var consents = step.querySelectorAll("input[type=checkbox][required]");
+    var ok = Array.prototype.every.call(consents, function (c) { return c.checked; });
+    submitBtn.disabled = !ok;
+  }
+
+  form.addEventListener("change", function (e) {
+    if (e.target && e.target.name && String(e.target.name).indexOf("consent") === 0) {
+      syncKidsSubmit();
+    }
+  });
+  syncKidsSubmit();
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!validateStep(current)) return;
+    if (submitBtn && submitBtn.disabled) return;
 
     text = collect();
     if (summary) summary.textContent = text;

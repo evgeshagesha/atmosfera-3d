@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { injectConsentCheckbox } from "@/lib/legal/inject-consent";
 
 type ContactFormClientProps = {
   formId: string;
@@ -12,6 +13,10 @@ export default function ContactFormClient({ formId, popupHook }: ContactFormClie
     const popup = document.querySelector<HTMLElement>(".t-popup");
     const form = document.getElementById(formId) as HTMLFormElement | null;
     if (!popup || !form) return;
+
+    const disposeConsent = injectConsentCheckbox(form, {
+      submitSelector: "button[type='submit'], .t-submit",
+    });
 
     const open = () => {
       popup.style.display = "block";
@@ -63,15 +68,22 @@ export default function ContactFormClient({ formId, popupHook }: ContactFormClie
     };
 
     syncContactMethod();
-    form.addEventListener("change", (event) => {
+    const onChange = (event: Event) => {
       const target = event.target as HTMLElement;
       if (target instanceof HTMLInputElement && target.name === "messenger-type") {
         syncContactMethod();
       }
-    });
+    };
+    form.addEventListener("change", onChange);
 
     const onSubmit = async (event: Event) => {
       event.preventDefault();
+      const consent = form.querySelector<HTMLInputElement>('input[name="consent_pdn"]');
+      if (!consent?.checked) {
+        window.alert("Отметьте согласие на обработку персональных данных.");
+        return;
+      }
+
       const data = new FormData(form);
       const payload = Object.fromEntries(data.entries());
 
@@ -91,6 +103,8 @@ export default function ContactFormClient({ formId, popupHook }: ContactFormClie
         form.querySelector<HTMLElement>(".t-form__inputsbox")?.style.setProperty("display", "none");
         form.reset();
         syncContactMethod();
+        consent.checked = false;
+        consent.dispatchEvent(new Event("change", { bubbles: true }));
       } catch {
         window.alert("Не удалось отправить заявку. Попробуйте позже или напишите в Telegram.");
       }
@@ -107,9 +121,11 @@ export default function ContactFormClient({ formId, popupHook }: ContactFormClie
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
+      disposeConsent();
       window.removeEventListener("hashchange", onHash);
       document.removeEventListener("click", onClick);
       form.removeEventListener("submit", onSubmit);
+      form.removeEventListener("change", onChange);
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };

@@ -1,4 +1,5 @@
 import { initTSldsSlider } from "@/lib/site/sliders/t-slds-slider";
+import { injectConsentCheckbox } from "@/lib/legal/inject-consent";
 
 type Cleanup = () => void;
 
@@ -484,8 +485,16 @@ function setupLegacyForms(root: ParentNode): Cleanup {
   root.querySelectorAll<HTMLFormElement>("#allrecords form, .atm3d form").forEach((form) => {
     if (form.id === "bf" || form.id === "form2191126061") return;
 
+    cleanups.push(injectConsentCheckbox(form));
+
     const onSubmit = async (event: Event) => {
       event.preventDefault();
+      const consent = form.querySelector<HTMLInputElement>('input[name="consent_pdn"]');
+      if (consent && !consent.checked) {
+        window.alert("Отметьте согласие на обработку персональных данных.");
+        return;
+      }
+
       const data = new FormData(form);
       const payload = Object.fromEntries(data.entries());
 
@@ -500,6 +509,10 @@ function setupLegacyForms(root: ParentNode): Cleanup {
         const success = form.querySelector<HTMLElement>(".js-successbox, .t-form__successbox");
         if (success) success.style.display = "block";
         form.reset();
+        if (consent) {
+          consent.checked = false;
+          consent.dispatchEvent(new Event("change", { bubbles: true }));
+        }
       } catch {
         window.alert("Не удалось отправить. Напишите в Telegram: @EGoshev");
       }

@@ -250,6 +250,31 @@ export default function AnketaFormClient() {
     const submitMsg = document.getElementById("smsg");
     const hiddenText = document.getElementById("bft") as HTMLInputElement | null;
 
+    const requiredConsentIds = ["l1", "l2", "l3", "l4"] as const;
+
+    const syncSubmitEnabled = () => {
+      const ok = requiredConsentIds.every(
+        (id) => (document.getElementById(id) as HTMLInputElement | null)?.checked
+      );
+      if (!submitBtn) return;
+      submitBtn.setAttribute("aria-disabled", ok ? "false" : "true");
+      submitBtn.style.pointerEvents = ok ? "" : "none";
+      submitBtn.style.opacity = ok ? "" : "0.45";
+      if (!ok) {
+        submitBtn.setAttribute("title", "Отметьте обязательные согласия");
+      } else {
+        submitBtn.removeAttribute("title");
+      }
+    };
+
+    for (const id of requiredConsentIds) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      el.addEventListener("change", syncSubmitEnabled);
+      cleanups.push(() => el.removeEventListener("change", syncSubmitEnabled));
+    }
+    syncSubmitEnabled();
+
     const onCopy = async () => {
       const text = buildText();
       await copyText(text);
@@ -272,6 +297,7 @@ export default function AnketaFormClient() {
       }
 
       event.preventDefault();
+      if (submitBtn?.getAttribute("aria-disabled") === "true") return;
       const text = buildText();
       if (hiddenText) hiddenText.value = text;
       await copyText(text);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { injectConsentCheckbox } from "@/lib/legal/inject-consent";
 
 type SiteFormHandlerProps = {
   /** Scope queries to this block id */
@@ -23,8 +24,16 @@ export default function SiteFormHandler({
     const cleanups: Array<() => void> = [];
 
     for (const form of forms) {
+      cleanups.push(injectConsentCheckbox(form));
+
       const onSubmit = async (event: Event) => {
         event.preventDefault();
+        const consent = form.querySelector<HTMLInputElement>('input[name="consent_pdn"]');
+        if (!consent?.checked) {
+          window.alert("Отметьте согласие на обработку персональных данных.");
+          return;
+        }
+
         const data = new FormData(form);
         const payload = Object.fromEntries(data.entries());
 
@@ -39,6 +48,8 @@ export default function SiteFormHandler({
           const success = form.querySelector<HTMLElement>(".js-successbox, .t-form__successbox");
           if (success) success.style.display = "block";
           form.reset();
+          consent.checked = false;
+          consent.dispatchEvent(new Event("change", { bubbles: true }));
         } catch {
           window.alert("Не удалось отправить. Напишите в Telegram: @EGoshev");
         }
