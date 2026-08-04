@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
 
   return {
-    title: `${post.title} — ${AUTHOR_NAME}`,
+    title: post.seoTitle?.trim() || `${post.title} — ${AUTHOR_NAME}`,
     description: post.excerpt,
     alternates: {
       canonical: canonicalUrl,

@@ -12,6 +12,8 @@ export type BlogPost = {
   excerpt: string;
   image: string;
   category?: string;
+  /** Optional browser/SERP title; H1 stays `title`. */
+  seoTitle?: string;
   content: ContentBlock[];
   published: boolean;
   publishedAt: string;
@@ -99,6 +101,8 @@ export function normalizeBlogPost(raw: Partial<BlogPost> & { title: string }): B
   const publishedAt = String(raw.publishedAt ?? raw.updatedAt ?? new Date().toISOString());
   const updatedAt = String(raw.updatedAt ?? publishedAt);
 
+  const seoTitle = String(raw.seoTitle ?? "").trim() || undefined;
+
   return {
     id,
     slug,
@@ -106,6 +110,7 @@ export function normalizeBlogPost(raw: Partial<BlogPost> & { title: string }): B
     excerpt,
     image,
     category: raw.category?.trim() || undefined,
+    seoTitle,
     content,
     published: raw.published !== false,
     publishedAt,
