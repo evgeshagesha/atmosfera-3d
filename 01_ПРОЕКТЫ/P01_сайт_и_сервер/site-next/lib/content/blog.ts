@@ -56,6 +56,7 @@ function migrateLegacyPost(raw: Record<string, unknown>): BlogPost {
     excerpt: String(raw.excerpt ?? ""),
     image: String(raw.image ?? ""),
     category: raw.category ? String(raw.category) : undefined,
+    seoTitle: raw.seoTitle ? String(raw.seoTitle) : undefined,
     content,
     published: raw.published !== false,
     publishedAt: String(raw.publishedAt ?? raw.updatedAt ?? new Date().toISOString()),
