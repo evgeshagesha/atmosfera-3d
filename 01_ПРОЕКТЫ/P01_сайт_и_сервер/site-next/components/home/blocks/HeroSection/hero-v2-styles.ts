@@ -384,10 +384,10 @@ export const HERO_V2_CSS = `
     white-space: normal;
   }
   .egmain-title span:first-child {
-    max-width: 6.5ch;
+    max-width: 14ch;
   }
   .egmain-title span:last-child {
-    max-width: 8.5ch;
+    max-width: 10ch;
   }
   .egmain-lead {
     max-width: 36ch;

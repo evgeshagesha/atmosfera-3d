@@ -126,8 +126,8 @@ export default function HeroSection() {
                         </a>
                       </div>
                       <h1 className="egmain-title">
-                        <span>Верните телу</span>
-                        <span>свободу движения</span>
+                        <span>Создаю здоровое и красивое</span>
+                        <span>тело под ключ</span>
                       </h1>
                       <p className="egmain-lead">
                         Сила и долголетие начинаются с качественного движения и
@@ -142,7 +142,7 @@ export default function HeroSection() {
                       <div className="egmain-cta-wrap">
                         <div className="egmain-cta-row">
                           <Link href="/anketa" className="egmain-btn egmain-btn-primary egmain-btn-neon">
-                            Записаться на личный приём в Москве{" "}
+                            Заполнить анкету для личного приёма в Москве или онлайн{" "}
                             <span className="egmain-btn-arrow">→</span>
                           </Link>
                           <a href="#online" className="egmain-btn egmain-btn-neon">
