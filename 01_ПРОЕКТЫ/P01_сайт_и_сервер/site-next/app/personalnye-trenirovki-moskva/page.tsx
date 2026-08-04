@@ -135,9 +135,13 @@ export default function PersonalTrainingMoscowPage() {
         faq={FAQ}
         relatedLinks={[
           { href: "/mfr-massazh-moskva", label: "МФР и массаж в системе движения" },
+          {
+            href: "/funkcionalnye-trenirovki-moskva",
+            label: "Функциональные тренировки в Москве",
+          },
+          { href: "/mobilnost", label: "Мобильность и подвижность тела" },
           { href: "/club", label: "Онлайн-клуб Атмосфера 3D" },
           { href: "/blog", label: "Блог: метод и практика" },
-          { href: "/#online", label: "Онлайн-продукты на главной" },
           { href: "/uslugi", label: "Все услуги" },
         ]}
         primaryCtaLabel="Записаться на личный приём в Москве"

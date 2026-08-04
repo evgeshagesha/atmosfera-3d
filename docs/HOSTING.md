@@ -1,8 +1,9 @@
 # HOSTING — главный сайт на Timeweb + Tilda для продуктов
 
-> Решение 23.07.2026: **главный сайт `egoshev.ru` переезжает на Timeweb**.  
-> Продукты / Members / часть лендингов — **пока на Tilda** (ссылки с нового сайта).  
-> Клуб: оплата **Tribute**. Канал: посты после approve. Платный клуб — ведёт Евгений (не AI-спам).
+> **Актуально 04.08.2026:** канон лица / SEO / блог = **`eg.egoshev.ru`** (Next на VPS).  
+> Apex `egoshev.ru` пока = **DDoS-Guard + Tilda** (оплаты / Members) — не выключать.  
+> Полный план cutover: [`КАНОН_ДОМЕН_eg.egoshev.ru.md`](../01_ПРОЕКТЫ/P01_сайт_и_сервер/КАНОН_ДОМЕН_eg.egoshev.ru.md).  
+> Клуб: оплата **Tribute**. DNS не менять без явного «делай».
 
 ---
 
@@ -10,11 +11,11 @@
 
 | Адрес | Где | Роль |
 |--------|-----|------|
-| `egoshev.ru` | **Timeweb** (цель) | Главный сайт, блог, воронка, доверие, SEO |
-| `eg.egoshev.ru` | Timeweb | **Тест** до переключения DNS |
-| `egoshev.ru/baza`, `/club`… | **Tilda** (пока) | Продукты, Members, оплаты курсов |
+| `eg.egoshev.ru` | Timeweb Next (VPS) | **Канон:** сайт, блог, RSS, Mini App, SEO |
+| `egoshev.ru` / `www` | DDoS-Guard + **Tilda** | Оплаты, Members, product landing |
+| `egoshev.ru/baza`, `/testik`… | **Tilda** | Критичные money-пути (см. план канона) |
 | Tribute | Telegram | Подписка клуба Атмосфера 3D |
-| `bot.egoshev.ru` | Timeweb | Бот + webhook (курсы/тест Prodamus) |
+| `bot.egoshev.ru` | Timeweb | Бот + webhook (тест Prodamus) |
 
 ---
 

@@ -1,6 +1,6 @@
 # 🗺️ SEO Keyword Map — EG / Атмосфера 3D
 
-> Карта запросов по кластерам. Частотность везде **`pending_live (Wordstat)`** — цифры не выдумывать. Архитектура: подход C (service-cluster hub).
+> Карта запросов → страницы. Архитектура: **подход C** (5–7 money hubs + authority/blog spokes). Частотность везде **`pending_live`** — цифры не выдумывать.
 
 ---
 
@@ -8,182 +8,221 @@
 
 | | |
 |---|---|
-| **Дата** | 2026-08-03 |
-| **Регион по умолчанию** | Москва (Wordstat regionId **213**) |
-| **Частотность** | `pending_live (Wordstat)` |
-| **Источник** | research_brief DEEP · site_inventory |
-| **Статус** | 🟡 Seeds готовы · частоты ждут ручной сбор |
-| **Связанные** | [SEO_AUDIT_REPORT](./SEO_AUDIT_REPORT.md) · [CONTENT_SEO_GUIDE](./CONTENT_SEO_GUIDE.md) |
+| **Дата** | 2026-08-04 |
+| **Регион** | Москва (Wordstat regionId **213**) |
+| **Частотность** | `pending_live` — без live Wordstat |
+| **Подход** | C — service-cluster hub + authority |
+| **Wave 1 live** | `/personalnye-trenirovki-moskva` · `/mfr-massazh-moskva` |
+| **Wave 2 live** | `/funkcionalnye-trenirovki-moskva` · `/mobilnost` · `/osanka` |
+| **KPI** | Запись в студию > vanity traffic |
+| **Связанные** | [SEO_AUDIT_REPORT](./SEO_AUDIT_REPORT.md) · [SEO_ВОЛНА](./SEO_ВОЛНА_КОНТЕНТ_И_ДЗЕН.md) · [CONTENT_SEO_GUIDE](./CONTENT_SEO_GUIDE.md) · [SEO_ФУНДАМЕНТ](./SEO_ФУНДАМЕНТ.md) |
 
-> ⚠️ **Важно:** после сбора в [Вордстат](https://wordstat.yandex.ru/) замени `pending_live (Wordstat)` на число + дату в колонке «Частотность» и пересмотри «Приоритет».
-
----
-
-## 📊 Таблица запросов
-
-| Запрос | Частотность | Регион | Намерение | Конкуренция | Кластер | Страница | Приоритет |
-|---|---|---|---|---|---|---|---|
-| персональный тренер Москва | pending_live (Wordstat) | Москва | transactional | high (гипотеза) | personal_trainer | `/personalnye-trenirovki-moskva` | P0 |
-| персональные тренировки Москва | pending_live (Wordstat) | Москва | transactional | high | personal_trainer | `/personalnye-trenirovki-moskva` | P0 |
-| личный тренер Москва | pending_live (Wordstat) | Москва | transactional | high | personal_trainer | `/personalnye-trenirovki-moskva` | P0 |
-| персональный тренер Савёловская | pending_live (Wordstat) | Москва | transactional local | medium | personal_trainer | `/personalnye-trenirovki-moskva` | P1 |
-| функциональные тренировки Москва | pending_live (Wordstat) | Москва | transactional | medium–high | functional | `/funkcionalnye-trenirovki-moskva` | P0 |
-| функциональный тренинг | pending_live (Wordstat) | Москва / РФ | commercial / informational | medium | functional | `/funkcionalnye-trenirovki-moskva` | P1 |
-| функциональные тренировки персонально | pending_live (Wordstat) | Москва | transactional | medium | functional | `/funkcionalnye-trenirovki-moskva` | P1 |
-| мобильность суставов | pending_live (Wordstat) | РФ / Москва | informational → commercial | medium | mobility | `/mobilnost` | P1 |
-| мобилити тренировки | pending_live (Wordstat) | Москва | commercial | medium | mobility | `/mobilnost` | P1 |
-| подвижность тела тренировки | pending_live (Wordstat) | Москва | commercial | low–medium | mobility | `/mobilnost` | P2 |
-| осанка тренировки | pending_live (Wordstat) | РФ / Москва | commercial | medium | posture | `/osanka` | P0 |
-| коррекция осанки Москва | pending_live (Wordstat) | Москва | transactional | medium–high | posture | `/osanka` | P0 |
-| улучшить осанку упражнения | pending_live (Wordstat) | РФ | informational | high | posture | blog spoke → `/osanka` | P1 |
-| дыхание и осанка | pending_live (Wordstat) | РФ | commercial / product | medium | breathing / posture | `/osanka` + `egoshev.ru/dyhanieosanka` | P0 |
-| массаж Москва | pending_live (Wordstat) | Москва | transactional | very high | mfr_massage | `/mfr-massazh-moskva` | P0 |
-| МФР Москва | pending_live (Wordstat) | Москва | transactional | high | mfr_massage | `/mfr-massazh-moskva` | P0 |
-| миофасциальный релиз Москва | pending_live (Wordstat) | Москва | transactional | medium–high | mfr_massage | `/mfr-massazh-moskva` | P0 |
-| миофасциальный массаж | pending_live (Wordstat) | РФ / Москва | commercial | medium | mfr_massage | `/mfr-massazh-moskva` | P1 |
-| ОФП персональные тренировки Москва | pending_live (Wordstat) | Москва | transactional | medium | ofp | `/ofp` | P1 |
-| общая физическая подготовка тренер | pending_live (Wordstat) | Москва | commercial | medium | ofp | `/ofp` | P1 |
-| онлайн тренер | pending_live (Wordstat) | РФ | transactional | high | online | `/online-trener` | P0 |
-| онлайн персональные тренировки | pending_live (Wordstat) | РФ | transactional | high | online | `/online-trener` | P0 |
-| онлайн функциональные тренировки | pending_live (Wordstat) | РФ | commercial | medium | online | `/online-trener` | P1 |
-| биомеханика движения | pending_live (Wordstat) | РФ | informational / authority | medium | biomechanics | `/biomehanika` + `/about` | P1 |
-| биомеханика тренировки Москва | pending_live (Wordstat) | Москва | commercial / authority | medium | biomechanics | `/biomehanika` | P1 |
-| биомеханика тела | pending_live (Wordstat) | РФ | informational | medium | biomechanics | `/biomehanika` | P2 |
-| дыхательные практики | pending_live (Wordstat) | РФ | informational / commercial | high | breathing | blog + курс `dyhanieosanka` | P1 |
-| дыхательная гимнастика | pending_live (Wordstat) | РФ | informational | high | breathing | blog spoke | P2 |
-| снять мышечное напряжение | pending_live (Wordstat) | РФ | commercial / problem | medium–high | recovery | `/mfr-massazh-moskva` + blog | P1 |
-| восстановление тела после тренировок | pending_live (Wordstat) | РФ | informational / commercial | medium | recovery | blog → money MFR / club | P1 |
-| хроническое напряжение мышц | pending_live (Wordstat) | РФ | problem / informational | medium | recovery | blog → `/mfr-massazh-moskva` | P2 |
-| физический терапевт Москва | pending_live (Wordstat) | Москва | informational / expert | medium | physical_therapist | `/about` (**не** money URL) | P2 authority |
-| физическая терапия Москва | pending_live (Wordstat) | Москва | informational | medium | physical_therapist | `/about` | P3 authority |
-
-> 💡 **Конкуренция** в таблице — качественная гипотеза до SERP/Wordstat live; не путать с частотностью.
+> ⚠️ **Важно:** после ручного сбора в [Вордстат](https://wordstat.yandex.ru/) замени `pending_live` на число + дату и пересмотри Priority.
 
 ---
 
-## 🏷️ Title / H1 / CTA — черновики по кластерам
+## 🎯 Карта 1 экран — слова Евгения → страницы
 
-### personal_trainer
+| Слова / тема Евгения | Куда кладём | Тип | CTA |
+|---|---|---|---|
+| Массаж, расслабление | `/mfr-massazh-moskva` + blog recovery | money hub live | `/anketa` |
+| Функциональные тренировки | `/funkcionalnye-trenirovki-moskva` | money hub Wave 2 | `/anketa` · `/club` |
+| Персональные / «все виды тренировок» | `/personalnye-trenirovki-moskva` + хаб `/uslugi` | money hub live + hub | `/anketa` |
+| Биомеханика | `/biomehanika` + `/about` | authority | soft → `/anketa` |
+| Силовые / здоровье | `/ofp` или soft на personalnye + blog | money / blog | `/anketa` · `/club` |
+| ПРАВИЛО (Денис) | `/pravilo` (proposed) · Tilda-лендинг Дениса | money / sub-brand | запись ПравИло / студия |
+| Боль в спине | **только blog** (utility) → MFR / personalnye | authority blog | анкета, **не** «вылечим» |
+| Осанка | `/osanka` | money hub Wave 2 | `dyhanieosanka` · `/anketa` |
+| Мобильность | `/mobilnost` | money hub Wave 2 | `/anketa` · baza |
+| Долголетие | blog `longevity_movement` | authority blog | `/club` soft |
+
+> 💡 **PT / «физический терапевт»** — authority (`/about`), **не** primary money URL. На главной — secondary в title, не ядро коммерции.
+
+---
+
+## 📊 Таблица кластеров (операционная)
+
+| Кластер | Intent | Тип страницы | Целевой URL | Priority | Wordstat | CTA |
+|---|---|---|---|---|---|---|
+| **студия-money** (персоналка) | transactional local | money hub | `/personalnye-trenirovki-moskva` ✅ live | P0 | pending_live | `/anketa` · бот |
+| **МФР / массаж** | transactional local | money hub | `/mfr-massazh-moskva` ✅ live | P0 | pending_live | `/anketa` |
+| **расслабление** | commercial / problem | money + blog spoke | MFR hub + blog recovery | P1 | pending_live | `/mfr-massazh-moskva` → `/anketa` |
+| **функционал** | transactional | money hub | `/funkcionalnye-trenirovki-moskva` proposed | P0 Wave 2 | pending_live | `/anketa` · `/club` |
+| **сила / здоровье / ОФП** | commercial | money hub (опц.) | `/ofp` proposed · иначе personalnye + blog | P1–P2 | pending_live | `/anketa` · `/club` |
+| **осанка** | transactional / product bridge | money hub | `/osanka` proposed | P0 Wave 2 | pending_live | `egoshev.ru/dyhanieosanka` · `/anketa` |
+| **мобильность** | commercial | money hub | `/mobilnost` proposed | P0 Wave 2 | pending_live | `/anketa` · baza |
+| **спина** (осторожно!) | informational / problem | **authority blog** (не money «вылечим») | `/blog/...` → MFR / personalnye | P1 blog | pending_live | `/anketa` soft · **без** медобещаний |
+| **долголетие** | informational | authority blog | `/blog/...` (`longevity_movement`) | P2 | pending_live | `/club` soft |
+| **биомеханика** | informational / expert | authority | `/biomehanika` proposed + `/about` | P1 | pending_live | `/about` · `/anketa` soft |
+| **ПРАВИЛО** | transactional / brand | money / sub-brand | `/pravilo` proposed · SoT: отдельный лендинг Дениса | P2 Wave 2+ | pending_live | запись ПравИло / студия |
+| **онлайн** | transactional | money hub | `/online-trener` proposed · витрина `/online` | P1 | pending_live | `/club` · anketaplan · baza |
+| **PT authority** | expert | authority only | `/about` (**не** money) | P2–P3 | pending_live | soft `/anketa` |
+
+### Статус URL (live check 2026-08-04)
+
+| URL | HTTP | Роль |
+|---|---|---|
+| `/personalnye-trenirovki-moskva` | 200 | money Wave 1 |
+| `/mfr-massazh-moskva` | 200 | money Wave 1 |
+| `/funkcionalnye-trenirovki-moskva` | 200 | Wave 2 live |
+| `/osanka` | 200 | Wave 2 live |
+| `/mobilnost` | 200 | Wave 2 live |
+| `/ofp` | — | позже (не Wave 2 P0) |
+| `/pravilo` | — | позже (HITL) |
+| `/online-trener` | — | Wave 2+ |
+| `/biomehanika` | — | authority backlog |
+| `/uslugi` | 200 | hub (meta ✅) |
+| `/online` | 200 | витрина (meta ✅) |
+| `/personal` | 200 | **legal ПДн** — не таргетить «персональный тренер» |
+
+---
+
+## 🏷️ Seeds Wordstat (ручной сбор, регион 213)
+
+Колонки сбора: `phrase | region | count | devices | collected_at | cluster_id | page_target | intent`.
+
+| # | Запрос-seed | Кластер |
+|---|---|---|
+| 1 | персональный тренер Москва | студия-money |
+| 2 | персональные тренировки Москва | студия-money |
+| 3 | личный тренер Москва | студия-money |
+| 4 | функциональные тренировки Москва | функционал |
+| 5 | функциональный тренинг | функционал |
+| 6 | мобильность суставов | мобильность |
+| 7 | мобилити тренировки | мобильность |
+| 8 | осанка тренировки | осанка |
+| 9 | коррекция осанки Москва | осанка |
+| 10 | массаж Москва | МФР / массаж |
+| 11 | МФР Москва | МФР / массаж |
+| 12 | миофасциальный релиз Москва | МФР / массаж |
+| 13 | расслабляющий массаж Москва | расслабление |
+| 14 | силовые тренировки персонально Москва | сила / здоровье |
+| 15 | ОФП тренер Москва | сила / здоровье |
+| 16 | боль в спине упражнения | спина (blog) |
+| 17 | боли в пояснице что делать | спина (blog) |
+| 18 | долголетие движение | долголетие |
+| 19 | активное долголетие тренировки | долголетие |
+| 20 | правИло массаж / правИло практика | ПРАВИЛО |
+| 21 | биомеханика движения | биомеханика |
+| 22 | онлайн тренер | онлайн |
+| 23 | физический терапевт Москва | PT authority |
+
+> ⚠️ «боль в спине» — **utility/authority**, CTA = запись/анкета, язык функции и нагрузки, **не** клиника и **не** «вылечим».
+
+---
+
+## 🧾 Title / H1 / CTA — черновики по кластерам
+
+### студия-money / personal_trainer
 
 | Поле | Черновик |
 |---|---|
 | **Title** | Персональные тренировки в Москве — Евгений Гошев \| Атмосфера 3D |
 | **H1** | Персональные тренировки в Москве: система тела, а не хаос нагрузки |
-| **CTA** | Записаться на личный приём → `/anketa` · или начать с теста 684 ₽ |
+| **CTA** | Записаться на личный приём → `/anketa` |
 
-### functional
-
-| Поле | Черновик |
-|---|---|
-| **Title** | Функциональные тренировки в Москве — качество движения и сила |
-| **H1** | Функциональные тренировки: сначала паттерн, затем нагрузка |
-| **CTA** | Приём в студии → `/anketa` · клуб для регулярности → `/club` |
-
-### mobility
-
-| Поле | Черновик |
-|---|---|
-| **Title** | Мобильность и подвижность тела — тренировки в Москве |
-| **H1** | Мобильность: свобода суставов в связке с контролем и силой |
-| **CTA** | Разобрать ограничения офлайн → `/anketa` · онлайн-база → `egoshev.ru/baza` |
-
-### posture
-
-| Поле | Черновик |
-|---|---|
-| **Title** | Осанка и тренировки в Москве — настройка тела, не «выровнять навсегда» |
-| **H1** | Осанка как система: дыхание, грудной отдел, стопы, контроль |
-| **CTA** | Мини-курс «Дыхание и осанка» → `egoshev.ru/dyhanieosanka` · студия → `/anketa` |
-
-### mfr_massage
+### МФР / массаж / расслабление
 
 | Поле | Черновик |
 |---|---|
 | **Title** | МФР и массаж в Москве — восстановление тканей в системе движения |
 | **H1** | МФР и ручная работа: подготовка тканей к качественному движению |
-| **CTA** | Запись на приём → `/anketa` · без обещаний «снять боль навсегда» |
+| **CTA** | Запись → `/anketa` · без «снять боль навсегда» |
 
-### ofp
-
-| Поле | Черновик |
-|---|---|
-| **Title** | ОФП и персональные тренировки в Москве — база для спорта |
-| **H1** | ОФП: общая подготовка через качество движения |
-| **CTA** | Персональный разбор → `/anketa` · онлайн-сопровождение → `/online-trener` |
-
-### online
+### функционал
 
 | Поле | Черновик |
 |---|---|
-| **Title** | Онлайн-тренер Евгений Гошев — функционал, осанка, клуб |
-| **H1** | Онлайн-работа с телом: структура, ритм, прогрессия |
-| **CTA** | Клуб → `/club` · консультация 2 ч → `egoshev.ru/anketaplan` · база → `egoshev.ru/baza` |
+| **Title** | Функциональные тренировки в Москве — качество движения и сила |
+| **H1** | Функциональные тренировки: сначала паттерн, затем нагрузка |
+| **CTA** | Приём → `/anketa` · клуб → `/club` |
 
-### biomechanics
+### осанка
+
+| Поле | Черновик |
+|---|---|
+| **Title** | Осанка и тренировки в Москве — настройка тела, не «выровнять навсегда» |
+| **H1** | Осанка как система: дыхание, грудной отдел, стопы, контроль |
+| **CTA** | Мини-курс → `egoshev.ru/dyhanieosanka` · студия → `/anketa` |
+
+### мобильность
+
+| Поле | Черновик |
+|---|---|
+| **Title** | Мобильность и подвижность тела — тренировки в Москве |
+| **H1** | Мобильность: свобода суставов в связке с контролем и силой |
+| **CTA** | Офлайн-разбор → `/anketa` · база → `egoshev.ru/baza` |
+
+### сила / здоровье / ОФП
+
+| Поле | Черновик |
+|---|---|
+| **Title** | ОФП и силовая база в Москве — через качество движения |
+| **H1** | Сила на фундаменте паттерна, не «железо ради железа» |
+| **CTA** | `/anketa` · `/club` |
+
+### спина (blog only)
+
+| Поле | Черновик |
+|---|---|
+| **Title** | Боль в спине и нагрузка: что проверить в системе тела |
+| **H1** | Когда спина «кричит» — смотрим паттерн и нагрузку, не ярлык |
+| **CTA** | Разобрать офлайн → `/anketa` · ткани → `/mfr-massazh-moskva` |
+| **Запрет** | «вылечим», диагноз-ярлык, Physician schema |
+
+### долголетие (blog)
+
+| Поле | Черновик |
+|---|---|
+| **Title** | Долголетие через движение: сила, мобильность, дисциплина |
+| **H1** | Долгая функция тела строится практикой, не чудо-протоколом |
+| **CTA** | `/club` soft |
+
+### ПРАВИЛО (sub-brand Денис)
+
+| Поле | Черновик |
+|---|---|
+| **SoT** | Inbox / master-prompt: суб-бренд **«Атмосфера ПравИло»** — Денис (совладелец): правИло, даосский массаж, звукотерапия тибетскими чашами, дубовые ветки. Отдельная дизайн-система (чёрно-золотой), не серебро EG 3D. |
+| **Title (черновик)** | ПравИло и практики восстановления — Атмосфера ПравИло \| студия Москва |
+| **H1** | ПравИло: практики состояния и тканей в пространстве студии |
+| **CTA** | Запись на направление ПравИло / студия (уточнить канал записи HITL) |
+| **Не делать** | Смешивать дизайн с EG 3D; эзотерика вместо физиологии; медобещания |
+
+### биомеханика / PT authority
 
 | Поле | Черновик |
 |---|---|
 | **Title** | Биомеханика движения — Евгений Гошев \| Атмосфера 3D |
-| **H1** | Биомеханика: как тело работает как система |
-| **CTA** | Углубить в About → `/about` · применить на приёме → `/anketa` |
-
-### breathing
-
-| Поле | Черновик |
-|---|---|
-| **Title** | Дыхание и осанка — онлайн-программа Евгения Гошева |
-| **H1** | Дыхание как часть механики и состояния |
-| **CTA** | Программа 1 990 ₽ → `egoshev.ru/dyhanieosanka` · дальше база / клуб |
-
-### recovery
-
-| Поле | Черновик |
-|---|---|
-| **Title** | Восстановление и работа с напряжением — система Атмосфера 3D |
-| **H1** | Напряжение как сигнал системы: ткани, дыхание, нагрузка |
-| **CTA** | МФР/приём → `/mfr-massazh-moskva` · база → `egoshev.ru/baza` |
-
-### physical_therapist (authority only)
-
-| Поле | Черновик |
-|---|---|
-| **Title** | Евгений Гошев — путь, метод и системная работа с телом |
-| **H1** | Специалист по комплексной работе с телом (не клиника, не «врач» в SEO) |
-| **CTA** | История → `/about` · запись → `/anketa` · **не** money-landing «физический терапевт Москва» |
-
-> ⚠️ На главной сейчас PT в title primary — снизить; expert-запросы вести на `/about` + knowsAbout.
+| **H1** | Биомеханика: тело как система |
+| **CTA** | `/about` · soft `/anketa` · **не** money «физический терапевт Москва» |
 
 ---
 
 ## 🔀 Карта конверсии
 
 ```text
-ЗАПРОС → НАМЕРЕНИЕ → СТРАНИЦА → КОНТЕНТ → CTA → КОНВЕРСИЯ
+ЗАПРОС → INTENT → СТРАНИЦА → ANSWER-FIRST + FAQ → CTA → ЗАПИСЬ / ПРОДУКТ
 ```
 
-| Запрос (пример) | Намерение | Страница | Контент | CTA | Конверсия |
-|---|---|---|---|---|---|
-| персональный тренер Москва | transactional | `/personalnye-trenirovki-moskva` | Who/What/Where + FAQ + proof | Анкета / бот | Запись в студию |
-| функциональные тренировки Москва | transactional | `/funkcionalnye-trenirovki-moskva` | Метод + кому подходит | Анкета + клуб | Приём / подписка |
-| МФР Москва | transactional | `/mfr-massazh-moskva` | Ткани → движение (не «снять боль навсегда») | Анкета | Приём / пакет |
-| коррекция осанки Москва | transactional | `/osanka` | Механика осанки + дыхание | dyhanieosanka / анкета | Курс 1990 / студия |
-| онлайн тренер | transactional | `/online-trener` | Лестница онлайн | клуб / anketaplan / baza | Подписка / консультация |
-| биомеханика движения | informational | `/biomehanika` | Authority answer-first | about / анкета | Доверие → money |
-| физический терапевт Москва | expert | `/about` | Био + метод | анкета soft | Не clinic-conversion |
-| улучшить осанку упражнения | informational | blog article | Utility + links | `/osanka` | Spoke → money |
-| снять мышечное напряжение | problem | blog → MFR page | Механизм без диагноза | `/mfr-massazh-moskva` | Приём |
-| дыхание и осанка | product | landing + Tilda | Product bridge | `egoshev.ru/dyhanieosanka` | Оплата курса |
+| Запрос (пример) | Страница | CTA | Конверсия |
+|---|---|---|---|
+| персональный тренер Москва | `/personalnye-trenirovki-moskva` | `/anketa` | Студия |
+| МФР / массаж Москва | `/mfr-massazh-moskva` | `/anketa` | Студия |
+| функциональные тренировки | `/funkcionalnye-trenirovki-moskva` | `/anketa` | Студия |
+| коррекция осанки | `/osanka` | dyhanieosanka / anketa | Курс + студия |
+| боль в спине | blog → money | soft anketa | Доверие → запись |
+| правИло | `/pravilo` | запись ПравИло | Суб-бренд / студия |
+| физический терапевт Москва | `/about` | soft | Authority, не clinic |
 
-### Продуктовая лестница (мост с SEO)
+### Internal linking (правила)
 
-| Ступень | URL / продукт | Цена (cite yaml) |
+| Откуда | Куда | Зачем |
 |---|---|---|
-| Вход | тест тела | 684 ₽ |
-| Light | дыхание и осанка | 1 990 ₽ |
-| Core online | базовая настройка | 9 990 ₽ |
-| Retention | клуб | от 1 758 ₽/мес |
-| Premium online | консультация 2 ч | 20 000 ₽ |
-| Offline | студия / приём | draft в yaml → анкета |
+| Blog spoke | 1 money hub + 1 product | Spoke → hub |
+| Money hub | `/anketa` + 1 online (club/baza/dyhanie) | Запись + лестница |
+| `/uslugi` | все money hubs | Хаб, не thin all-in-one |
+| Home | 2–3 money + anketa | Не размывать H1 |
+| Blog «спина» | MFR **или** personalnye | Без medical CTA |
 
 ---
 
@@ -193,23 +232,36 @@
 |---|---|---|
 | `/personal` | Legal ПДн | Не таргетить «персональный тренер» |
 | `/uslugi` | Hub | Не одна страница на все money-intent |
-| `/online` | Витрина / merge-кандидат | Не оставлять пустой description |
-| `/club` | Product retention | Добавить JsonLd, не дублировать все money H1 |
-| `/blog/*` | Authority / utility spokes | Не конкурировать H1 с money landing |
+| `/online` | Витрина | Не путать с `/online-trener` без canonical |
+| `/club` | Product retention | JsonLd пока `[]` — backlog |
+| `/blog/*` | Authority / utility | Не дублировать H1 money |
+| Tilda `egoshev.ru` | Оплаты | Не убирать; dual-domain канон |
+
+---
+
+## 🚫 Запреты SEO-текстов
+
+| Запрещено | Почему |
+|---|---|
+| «вылечим», «исцеление», «избавим навсегда» | Медобещания |
+| Слово «врач» / Physician | Brand safety |
+| Anti-gym | Positioning |
+| «ТЕБЕ НУЖЕН ТОЛЬКО ТЫ» как CTA-спам | Философия ≠ слоган рекламы |
+| Doorway 50 thin pages | Подход C |
+| Выдуманный Wordstat | Integrity |
 
 ---
 
 ## ✅ Чеклист после Wordstat
 
-- [ ] Собрать counts по seeds (регион 213)
-- [ ] Обновить колонку «Частотность»
-- [ ] Пересмотреть P0–P3 приоритеты
-- [ ] Отсечь тонкие синонимы (doorway risk)
-- [ ] Зафиксировать SERP-кластеры: merge vs split URL
-- [ ] Синхронизировать launch order money pages с [SEO_AUDIT_REPORT](./SEO_AUDIT_REPORT.md)
+- [ ] Counts по seeds (регион 213)
+- [ ] Обновить колонку Wordstat в таблице кластеров
+- [ ] Пересмотреть P0–P3 и Wave 2 order
+- [ ] Отсечь тонкие синонимы (doorway)
+- [ ] HITL: подтвердить Wave 2 URL list в [SEO_ВОЛНА](./SEO_ВОЛНА_КОНТЕНТ_И_ДЗЕН.md)
 
 ---
 
 ## 🔗 Навигация
 
-[← SEO_AUDIT_REPORT](./SEO_AUDIT_REPORT.md) · [CONTENT_SEO_GUIDE](./CONTENT_SEO_GUIDE.md) · [СТИЛЬ_СТАТЕЙ_БЛОГА](./СТИЛЬ_СТАТЕЙ_БЛОГА.md) · [seo-clusters skill](../../.cursor/skills/eg-news-to-blog/references/seo-clusters.md)
+[← SEO_AUDIT_REPORT](./SEO_AUDIT_REPORT.md) · [SEO_ВОЛНА](./SEO_ВОЛНА_КОНТЕНТ_И_ДЗЕН.md) · [CONTENT_SEO_GUIDE](./CONTENT_SEO_GUIDE.md) · [Яндекс чеклист](./ЯНДЕКС_КАРТЫ_И_ВЕБМАСТЕР_ЧЕКЛИСТ.md) · [Канон домена](./КАНОН_ДОМЕН_eg.egoshev.ru.md)

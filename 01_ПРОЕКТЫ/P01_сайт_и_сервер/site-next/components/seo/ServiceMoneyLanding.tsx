@@ -150,11 +150,20 @@ export default function ServiceMoneyLanding({
             Ещё по теме
           </h2>
           <ul className="eg-money__related">
-            {relatedLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href}>{link.label}</Link>
-              </li>
-            ))}
+            {relatedLinks.map((link) => {
+              const external = /^https?:\/\//i.test(link.href);
+              return (
+                <li key={link.href}>
+                  {external ? (
+                    <a href={link.href} target="_blank" rel="noreferrer">
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href}>{link.label}</Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </section>
       </main>

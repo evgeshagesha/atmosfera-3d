@@ -138,9 +138,10 @@ export default function MfrMassageMoscowPage() {
             href: "/personalnye-trenirovki-moskva",
             label: "Персональные тренировки в Москве",
           },
+          { href: "/mobilnost", label: "Мобильность и подвижность тела" },
+          { href: "/osanka", label: "Осанка как система" },
           { href: "/club", label: "Онлайн-клуб Атмосфера 3D" },
           { href: "/blog", label: "Блог: метод и практика" },
-          { href: "/#online", label: "Онлайн-продукты на главной" },
           { href: "/uslugi", label: "Все услуги" },
         ]}
         primaryCtaLabel="Записаться на приём в студии"
