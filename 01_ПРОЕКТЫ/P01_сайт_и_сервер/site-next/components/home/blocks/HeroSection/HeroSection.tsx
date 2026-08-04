@@ -127,7 +127,7 @@ export default function HeroSection() {
                       </div>
                       <h1 className="egmain-title">
                         <span>Создаю здоровое и красивое</span>
-                        <span>тело под ключ</span>
+                        <span className="egmain-title-nowrap">тело под ключ</span>
                       </h1>
                       <p className="egmain-lead">
                         Сила и долголетие начинаются с качественного движения и

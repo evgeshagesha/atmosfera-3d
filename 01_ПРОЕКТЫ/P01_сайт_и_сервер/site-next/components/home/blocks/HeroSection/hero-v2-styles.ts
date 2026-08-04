@@ -131,6 +131,9 @@ export const HERO_V2_CSS = `
   display: block;
   white-space: nowrap;
 }
+.egmain-title-nowrap {
+  white-space: nowrap;
+}
 .egmain-lead {
   max-width: 640px;
   margin: 14px 0 0;
@@ -377,7 +380,8 @@ export const HERO_V2_CSS = `
     max-width: 100%;
     margin-top: 10px;
     padding-top: 0;
-    font-size: clamp(36px, 10.5vw, 48px);
+    /* Slightly tighter so «ТЕЛО ПОД КЛЮЧ» fits on one line at 375+ */
+    font-size: clamp(34px, 9.2vw, 46px);
     line-height: 0.98;
   }
   .egmain-title span {
@@ -386,8 +390,9 @@ export const HERO_V2_CSS = `
   .egmain-title span:first-child {
     max-width: 14ch;
   }
-  .egmain-title span:last-child {
-    max-width: 10ch;
+  .egmain-title-nowrap {
+    white-space: nowrap;
+    max-width: none;
   }
   .egmain-lead {
     max-width: 36ch;
@@ -445,7 +450,7 @@ export const HERO_V2_CSS = `
     inset: 0 -6% 44% 26%;
   }
   .egmain-title {
-    font-size: clamp(32px, 10vw, 42px);
+    font-size: clamp(30px, 8.8vw, 40px);
   }
   #egmain-hero a.egmain-btn {
     font-size: 10px !important;
