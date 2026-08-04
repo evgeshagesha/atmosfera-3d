@@ -5,7 +5,7 @@
 
 ## Last run
 
-- **Когда:** 2026-07-29 14:24
+- **Когда:** 2026-08-04 17:12
 - **Команда:** /t800-fix PATCH · eg-news-to-blog-human-editorial-handoff
 - **Research mode:** SKIP (LIGHT already on Director)
 - **Статус:** ship — factory-auditor PASS · prompt-auditor 94 · t800_run_gate EXIT 0 · 11/11 scope
@@ -15,6 +15,29 @@
 
 ## In progress
 
+- 2026-08-04 17:12 — `factory`: auditor PASS + gates exit 0; producer MVP shipped
+- 2026-08-04 17:12 — `factory`: Factory ▸ auditor PASS + gates exit 0 — atmosfera-producer-mvp
+- 2026-08-04 17:02 — `factory`: Factory ▸ architect OK → builder
+- 2026-08-04 16:59 — `factory`: Factory start: producer pack CREATE/EXTEND
+- 2026-08-04 16:59 — `brain`: brief_for_factory producer MVP ready
+- 2026-08-04 16:58 — `brain`: Brain ▸ domains: context+agents → brief ready (producer pack)
+- 2026-08-04 16:55 — `prompt_craft`: 7 prompt_specs OK; brain next
+- 2026-08-04 16:52 — `research`: DEEP PASS producer pack; prompt_craft next
+- 2026-08-04 16:45 — `research`: DEEP PASS producer pack; coverage 20 src / 2 mines; → brain-lead
+- 2026-08-04 16:37 — `scout`: producer pack OK; research DEEP next
+- 2026-08-04 16:35 — `intake`: answered: defaults MVP skills+2agents+cmd mixed HITL inherit Dev-boundary
+- 2026-08-04 16:32 — `intake`: asked; blocks_research until HITL
+- 2026-08-04 16:32 — `intake`: asked: 5 questions, blocks_research=true
+- 2026-08-04 16:31 — `intake`: producer pack clarifier running
+- 2026-08-04 12:26 — `done`: SEO wave1 live: money pages + Yandex checklist; factory SKIP
+- 2026-08-04 12:25 — `scout`: LIGHT SEO: block_factory; Dev money pages
+- 2026-08-03 15:39 — `factory`: SKIP: awaiting Evgeny confirm on SEO reports
+- 2026-08-03 15:39 — `brain`: docs delivered; factory BLOCK until HITL money pages
+- 2026-08-03 15:35 — `research`: DEEP PASS; wordstat pending_live; approach C service hubs
+- 2026-08-03 15:23 — `scout`: block_factory=true; research DEEP SEO; skill deferred
+- 2026-08-03 15:22 — `research`: mode=DEEP SEO semantics running
+- 2026-08-03 15:22 — `scout`: scout running
+- 2026-08-03 15:22 — `intake`: skipped: SEO audit brief clear
 - 2026-07-29 14:24 — `factory`: you-only-need-you-axis PASS; gates EXIT 0
 - 2026-07-29 14:22 — `done`: PATCH you-only-need-you-axis: auditor PASS, gates EXIT 0
 - 2026-07-29 14:21 — `factory`: PATCH you-only-need-you-axis PASS
@@ -43,6 +66,14 @@
 
 ## Completed
 
+- 2026-08-04 17:12 — `factory`: auditor PASS + gates exit 0; producer MVP shipped
+- 2026-08-04 17:12 — `factory`: Factory ▸ auditor PASS + gates exit 0 — atmosfera-producer-mvp
+- 2026-08-04 17:02 — `factory`: Factory ▸ architect OK → builder
+- 2026-08-04 16:59 — `factory`: Factory start: producer pack CREATE/EXTEND
+- 2026-08-04 16:52 — `research`: DEEP PASS producer pack; prompt_craft next
+- 2026-08-04 12:26 — `done`: SEO wave1 live: money pages + Yandex checklist; factory SKIP
+- 2026-08-03 15:39 — `factory`: SKIP: awaiting Evgeny confirm on SEO reports
+- 2026-08-03 15:35 — `research`: DEEP PASS; wordstat pending_live; approach C service hubs
 - 2026-07-29 14:24 — `factory`: you-only-need-you-axis PASS; gates EXIT 0
 - 2026-07-29 14:22 — `done`: PATCH you-only-need-you-axis: auditor PASS, gates EXIT 0
 - 2026-07-29 14:21 — `factory`: PATCH you-only-need-you-axis PASS

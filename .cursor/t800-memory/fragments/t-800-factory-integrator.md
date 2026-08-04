@@ -1,82 +1,98 @@
-# t-800-factory-integrator — eg-news-to-blog-human-editorial-handoff (PATCH)
+# t-800-factory-integrator — Atmosfera 3D producer pack
 
-```yaml
-status: ok
-stage: integrator
-profile: workspace-cursor
-artifact_surface: cursor-workspace
-plugin_root: ""
-memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
-registry_patch: null
-release_handoff: null
-when: 2026-07-29 00:58
-topic: eg-news-to-blog-human-editorial-handoff
-mode: PATCH
-```
+**Date:** 2026-08-04  
+**status:** ok  
+**stage:** integrator  
+**mode:** CREATE + EXTEND  
+**pack_name:** atmosfera-producer-mvp  
+**agent:** t-800-factory-integrator  
+**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`
+
+---
 
 ## Discovery
 
-- profile: `workspace-cursor`
-- artifact_surface: `cursor-workspace`
-- plugin_root: empty (write under `.cursor/` only)
-- no agents-registry / no install-plugin / no release-sync
+```yaml
+status: ok
+profile: workspace-cursor
+artifact_surface: cursor-workspace
+plugin_root: ""
+registry_patch: null
+release_handoff: null
+```
 
-## Checks
+---
 
-| id | check | result |
-|----|-------|--------|
-| C1 | 11 built paths exist + non-empty | pass |
-| C2 | command→skill→references routing (content_mode, dual HITL, published:false) | pass |
-| C3 | skill + approve do NOT write blog.json (this PATCH) | pass |
-| C4 | registry_patch null — agents-registry.json not edited | pass |
-| C5 | feeds.yaml untouched this integrator run | pass |
-| C6 | publish_blog_social.py not patched | pass (publisher_gap) |
-| C7 | agents / hooks / MCP / site code not in this PATCH write set | pass (integrator wrote none) |
+## Actions
 
-### C1 — built paths (11/11)
+| Action | Result |
+|--------|--------|
+| Verify builder artifacts | ok — 27/27 paths exist |
+| Plugin registry | skipped (workspace-cursor) |
+| AGENTS.md | +1 line: `/eg-producer` → `producer-drafts/` |
+| run-manifest.json | updated slug `atmosfera-producer-mvp`; integrator done |
+| rules/hooks/mcp | not touched |
+| skill bodies | not rewritten |
 
-1. `.cursor/skills/eg-news-to-blog/SKILL.md` — 5154 B
-2. `references/brand-voice.md` — 3115 B
-3. `references/draft-schema.md` — 5799 B
-4. `references/workflow.md` — 3720 B
-5. `references/fewshots.md` — 4491 B
-6. `references/seo-clusters.md` — 3179 B
-7. `references/tone-bans.md` — 2094 B
-8. `assets/draft-frontmatter.template.md` — 2472 B
-9. `.cursor/commands/eg-news-to-blog.md` — 1796 B
-10. `.cursor/commands/eg-news-approve.md` — 2276 B
-11. `.cursor/rules/eg-news-brand-safety.mdc` — 1346 B
+---
 
-### C2 — routing consistency
+## Verified paths (27)
 
-- `/eg-news-to-blog` → SKILL → refs (tone-bans, brand-voice, draft-schema, seo-clusters, workflow, fewshots) + template + SoT
-- `/eg-news-approve` → SKILL Approve + draft-schema + workflow + tone-bans; Gate1 `article_hash` → Gate2 `social_hash`
-- rule `eg-news-brand-safety`: content_mode author|external|mixed; dual HITL; `published: false`; no skill publish
-- template: `published: false` + hash fields present
+### Skills + refs (22)
 
-### C5 — feeds.yaml
+- `.cursor/skills/eg-producer-studio/SKILL.md`
+- `.cursor/skills/eg-producer-studio/references/voice-gate.md`
+- `.cursor/skills/eg-producer-studio/references/pillars.md`
+- `.cursor/skills/eg-producer-studio/references/calendar-schema.md`
+- `.cursor/skills/eg-producer-studio/references/repurpose-map.md`
+- `.cursor/skills/eg-producer-studio/references/cta-matrix.md`
+- `.cursor/skills/eg-reels-script/SKILL.md`
+- `.cursor/skills/eg-reels-script/references/beat-schema.yaml.md`
+- `.cursor/skills/eg-reels-script/references/hook-patterns.md`
+- `.cursor/skills/eg-reels-script/references/retention-spine.md`
+- `.cursor/skills/eg-reels-script/references/anti-bait.md`
+- `.cursor/skills/eg-reels-script/references/caption-cta.md`
+- `.cursor/skills/eg-warmup/SKILL.md`
+- `.cursor/skills/eg-warmup/references/touch-map.md`
+- `.cursor/skills/eg-warmup/references/stories-beats.md`
+- `.cursor/skills/eg-warmup/references/direct-soft.md`
+- `.cursor/skills/eg-warmup/references/ladder-bridge.md`
+- `.cursor/skills/eg-seo-brief/SKILL.md`
+- `.cursor/skills/eg-seo-brief/references/brief-schema.md`
+- `.cursor/skills/eg-seo-brief/references/cluster-cta.md`
+- `.cursor/skills/eg-seo-brief/references/meta-limits.md`
+- `.cursor/skills/eg-seo-brief/references/bans-seo.md`
 
-- Path exists (3565 B / 115 lines); listed as **unchanged** constraint
-- Integrator made **no** edits to `references/feeds.yaml`
-- Git shows file as staged `A` with the skill package (builder surface); not rewritten this stage
+### Commands (2)
 
-## publisher_gap
+- `.cursor/commands/eg-producer.md`
+- `.cursor/commands/продюсер.md`
 
-`01_ПРОЕКТЫ/P02_бот_telegram/bot/publish_blog_social.py` **not** patched this run.  
-After Gate2 state `READY_FOR_PUBLISHER` = dry-run handoff only (draft path + hashes).  
-Site/`blog.json` write and TG/VK send remain a **separate** publisher/admin contour.
+### Agents EXTEND (2)
 
-## Fixes made
+- `.cursor/agents/kontent.md`
+- `.cursor/agents/prodazhi.md`
 
-none (no broken path/link within exact_patch_scope)
+### Scaffold (1)
+
+- `90_ВХОДЯЩИЕ/producer-drafts/.gitkeep`
+
+---
+
+## Install note
+
+`artifact_surface: cursor-workspace` — Reload Window after factory completes so Cursor picks up new skills/commands/agents.
+
+---
 
 ## Handoff
 
+→ `t-800-prompt-auditor` → `t-800-factory-auditor`
+
 ```yaml
-next: t-800-prompt-auditor
-summary: >
-  cursor-workspace PATCH integrated: 11/11 artifacts present, routing
-  consistent (content_mode + dual HITL + published:false + no blog.json
-  write). registry_patch null. feeds.yaml / publisher / agents / hooks
-  untouched. publisher_gap noted for audit.
+status: ok
+verified_path_count: 27
+profile: workspace-cursor
+registry_touched: false
+agents_md_updated: true
 ```

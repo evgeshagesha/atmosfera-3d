@@ -1,174 +1,188 @@
-# t-800-research-lead — DEEP research_brief
+# t-800-research-lead — DEEP Research Brief
 
-**Date:** 2026-07-29  
+**Date:** 2026-08-04  
+**Topic:** Atmosfera 3D / Евгений Гошев — producer pack MVP  
 **memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**mode:** deep  
-**Progress:** `Research ▸ strategist→6 specialists→synthesis`  
-**Factory:** NOT run · **Vault files:** NOT written
+**Progress:** Research ▸ strategist→7 specialists→synthesis  
+**verdict:** `coverage_matrix.verdict: pass` · `confidence: high`  
+**Handoff:** → brain-lead / factory (OK)
 
 ---
+
+## research_brief
 
 ```yaml
 research_brief:
   mode: deep
-  topic: >
-    Encode locked personal-brand TRAINING SYSTEM positioning into Cursor workspace
-    (rules/skills as thin pointers, not prose clones) AND structure vault docs so
-    AI/team execute without contradiction; anti-dup vs live YouTube playlist architecture.
+  topic: "Atmosfera 3D personal-brand producer pack — Cursor skills + subagents + command (HITL, brand-safe, booking CTA)"
   artifact_surface: cursor-workspace
-  locked_constraints:
-    person: "Evgeny Goshev — athlete, physical therapist, biomechanics, natural movement, breath — NOT physician"
-    formula: "quality of movement first, then strength"
-    positioning: "strong/mobile/functional body WITHOUT DEPENDENCY on gym machines; NOT anti-gym; free equipment OK; body primary tool"
-    funnel: "Reels/Shorts → YouTube → https://egoshev.ru/testik (684) → course baza 9990 → club 1758 → personal/anketa"
-    youtube_public: "never eg.egoshev.ru in public descriptions"
-    repo: "do NOT invent parallel EG OS root"
+  workspace: /Users/egoshev/Projects/atmosfera-3d
+  memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+  scout_alignment:
+    block_factory: false
+    skills_needed: true
+    existing: "thin kontent+prodazhi; eg-news-to-blog HITL; no producer skill pack"
+  recommended_artifact: mix
+  artifact_surface_detail: cursor-workspace
 
   search_plan:
     intent_artifact: mix
-    must: [github, repo-miner, vendor-docs]
-    should: [clawhub, community]
-    nice: [news]
-    skip: [docs]  # Context7 — no library/SDK signal
-    compare_axes: [thinness, cursor_fit, anti_duplication, vault_executability, youtube_ownership, security, freshness, adapt_cost]
+    mode: deep
+    must_channels: [github, repo-miner, clawhub, vendor-docs, community]
+    should_channels: [news, custom_local_sot]
+    skip_channels:
+      - {id: research-docs, why: "No library/SDK — Context7 not always-on"}
+      - {id: vendor-docs-kie, why: "No image/video market API in MVP"}
+      - {id: github-autopost-scrapers, why: "Dev owns VK/TG autopost"}
+      - {id: remotion-mediabunny-deep, why: "Scripts/warmup/SEO only"}
+      - {id: site-next-money-pages, why: "Dev Wave2; SEO copy patterns only"}
+    adaptation_constraints:
+      - HITL_only_drafts_ok_no_auto_publish
+      - brand_safe_no_medical_claims
+      - atmosfera_eg_tone
+      - no_vk_tg_autopost_code
+      - no_site_edits_wave2
+      - t800_boundary_cursor_artifacts_only
+      - no_mass_download
+      - no_verbatim_clawhub_github_clone
+      - cta_rail: eg.egoshev.ru/anketa
+      - reuse: [eg-news-to-blog dual HITL, kontent.md, prodazhi.md, eg-news-brand-safety.mdc]
+      - models: inherit_chat
 
   synthesis:
     recommended_approach: >
-      Hub–Spoke Zero-Copy spine: AGENTS.md = ops hub (path index + protocols);
-      atmosfera-3d.mdc = short brand kernel (bans/PARA/tone) + thin pointer to vault
-      TRAINING SoT; Local Hub = vault under 01_EG_OS_БРЕНД (not YOUTUBE, not new EG OS root).
-      Merge vault OWNER_MAP + protocols-vs-prefs; merge thin skill router
-      (extend eg-knowledge-outline) with compile-don't-retrieve / cite-file patterns.
+      Skill-first hybrid: modular EG producer skill pack (4 skills, progressive
+      disclosure) + thin slash router /eg-producer (+ /продюсер) + EXTEND kontent
+      (drafter) and prodazhi (CTA/anketa) as skill-backed specialists — HITL drafts
+      only; no autopost/scrape; reuse eg-news HITL + brand-safety.
     why_best: >
-      Best cursor_fit + thinness + adapt_cost for existing AGENTS.md + atmosfera-3d.mdc
-      + EG_ИМПЕРИЯ_ЗНАНИЙ; fixes triple-SoT risk (user rules / project rules / vault)
-      without inventing parallel roots; preserves live YouTube PLAYLISTS ownership.
+      Best cursor_fit (skills=workflows, agents=clean context, command=orchestration)
+      + curated completeness (creator-studio architecture + vyral craft + ClawHub
+      schemas, not mass clone) + brand_safety/HITL (local SoT + reject auto-send).
+      EXTEND beats CREATE; modular beats monolith.
     runners_up:
-      - name: "agentic-vault governance alone"
-        why_weaker: "strong vault tables; weak Cursor Zero-Copy / alwaysApply budget"
-      - name: "skills-as-playbooks alone"
-        why_weaker: "on-demand load good; without Hub rails agents invent CTA / skill sprawl"
-      - name: "fat brand encyclopedia skill"
-        why_weaker: "REJECT — duplicates vault; clawhub/security anti-pattern"
+      - {approach: "Monolith creator-studio single skill", why_weaker: "Description Trap; weaker progressive disclosure"}
+      - {approach: "Agent-first CREATE new pair", why_weaker: "Duplicates kontent/prodazhi; vendor prefers skills for single-shot"}
+      - {approach: "Mass-curate 50–160 marketing skills", why_weaker: "no_mass_download; security; tone collision"}
+      - {approach: "Pack + Automations/Workspace auto-publish", why_weaker: "Breaks HITL; Dev owns channels"}
     merge_plan: >
-      A: AGENTS.md path→purpose index; Zero-Copy .mdc (ODPF 000-load-agents / Deuk);
-      OWNER_MAP; no AGENTS↔CLAUDE symlink.
-      B: TRAINING SoT + OWNERSHIP_MAP under 01_EG_OS_БРЕНД; protocols≠prefs;
-      vault SoT > channel adapters > parametric model.
-      C: extend eg-knowledge-outline (Read TRAINING + funnel checklist); SKILL lean;
-      references/ on demand; clawhub cite-file voice switcher; reject fat generators;
-      update Brand Foundation digests in place — digests ≠ second SoT.
-      Vendor/community: alwaysApply hard rails only; JIT Read; alwaysApply Tax budget.
-    confidence: high
+      A creator-studio → router, voice gate (vault Zero-Copy), calendar,
+      idea→script→caption→repurpose (strip niche). B vyral → hook batch/3-layer,
+      retention spine, timed grid, bait anti-patterns, one-ask CTA→anketa (strip
+      viral/FOMO). C ClawHub founder/content → pillars, funnel→EG ladder, SEO brief
+      skeleton, status idea→draft→review→ready (DROP Web3/schedule/Playwright/scrape).
+      D vendor → L1–L3 progressive, model inherit, beat YAML, STOP gates.
+      E eg-news-to-blog → refs layout, dual-HITL when social/blog path, published:false,
+      command UX, rules reuse. F kostja/corey → context-first, ≤2–3 skills/task hygiene.
     conflicts:
-      - "AGENTS-only hub vs atmosfera-3d.mdc → hybrid: AGENTS index + thin kernel .mdc"
-      - "TRAINING under YOUTUBE vs EG_OS brand → 01_EG_OS_БРЕНД wins"
-      - "new skill vs reuse → extend eg-knowledge-outline first"
+      - {conflict: "ClawHub schedule vs HITL", resolution: "schemas only; DROP auto-send"}
+      - {conflict: "monolith vs modular", resolution: "command router + modular craft skills"}
+      - {conflict: "commands Skills-centric vs Customize", resolution: "ship commands/eg-producer.md"}
+    confidence: high
+    needs_more_sources: false
 
-  recommended_artifact: both  # thin rule pointer + thin skill router
-  recommended_artifacts_detail:
-    rule: >
-      Thin alwaysApply increment in atmosfera-3d.mdc (or sibling ≤15–30 lines):
-      (1) before brand/method/CTA copy → Read TRAINING_SYSTEM_POSITIONING.md;
-      (2) never invent slogans / parallel EG OS root;
-      (3) never eg.egoshev.ru in YouTube public descriptions;
-      (4) link PLAYLISTS — do not restate playlist taxonomy;
-      (5) keep existing med bans / PARA / language here — NOT full essay.
-    skill: >
-      Prefer EXTEND eg-knowledge-outline: mandatory Read(TRAINING SoT + OWNERSHIP_MAP)
-      + funnel CTA checklist when producing lessons/outlines/content packs.
-      Separate thin /eg-training-cta skill ONLY if trigger differs (e.g. YouTube package packing).
-    both: true
-    anti_pattern: "Do not create fat alwaysApply brand bible or ClawHub-style style-guide skill"
-
-  recommended_vault_paths:
-    training_system_sot: "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/TRAINING_SYSTEM_POSITIONING.md"
-    ownership_map: "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/OWNERSHIP_MAP.md"
-    brand_foundation_existing: "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/EG_OS_00_Brand_Foundation_MASTER_v2.0.txt"
-    youtube_boundary: "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/03_КОНТЕНТ_СИСТЕМА/YOUTUBE/04_PLAYLIST_ARCHITECTURE.md"
-    youtube_playlists: "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/03_КОНТЕНТ_СИСТЕМА/YOUTUBE/PLAYLISTS/"
-    pulpit_context_pointer: "00_ПУЛЬТ_УПРАВЛЕНИЯ/ГЛАВНЫЙ_КОНТЕКСТ.md"
-    note: >
-      TRAINING_SYSTEM_POSITIONING.md = LOCKED rails (identity, formula, machine-independence,
-      funnel/CTA). Points TO Brand Foundation for deeper brand essay — does not clone it.
-      Does NOT invent parallel EG OS root; sits inside existing 01_EG_OS_БРЕНД/.
-
-  youtube_merge_vs_playlists: >
-    Morning playlist already LIVE (01_UTRENNIE_ZARYADKI). TRAINING SoT owns locked
-    identity/formula/positioning + funnel/CTA. 04_PLAYLIST_ARCHITECTURE + PLAYLISTS/
-    own playlist taxonomy and publish gates. YouTube packages LINK CTA from TRAINING SoT;
-    NEVER merge playlist matrix into brand SoT; NEVER put TRAINING under PLAYLISTS/;
-    NEVER restate 8-playlist map in Cursor rules/skills.
-
-  anti_duplication_rules:
-    - "No parallel EG OS root / EG_OS_v4 / TRAINING_SYSTEM_NEW outside 01_EG_OS_БРЕНД"
-    - "Zero-Copy: .mdc / SKILL / AGENTS must not paste TRAINING or playlist body prose"
-    - "Compile-don't-retrieve: update Brand Foundation / digests in place; digests ≠ second SoT"
-    - "OWNER_MAP: one Editable Here per Symptom Surface (Training ≠ YouTube Playlists)"
-    - "Do not symlink AGENTS.md ↔ CLAUDE.md as SoT twin (double-inject)"
-    - "User-rules EG dumps = prefs risk; project AGENTS + vault protocols win for locked rails"
-    - "ClawHub: reject_verbatim; thin cite-file routers only"
-    - "Max 1–2 alwaysApply brand-related rules; migrate description-only blobs to skills"
-    - "YouTube public copy: CTA from TRAINING SoT only; ban eg.egoshev.ru"
+  recommended_artifacts:
+    skills:
+      - name: eg-producer-studio
+        role: "voice/pillars/calendar/repurpose router; SoT pointers Zero-Copy"
+      - name: eg-reels-script
+        role: "hooks + timed grid + spine + caption one-ask CTA"
+      - name: eg-warmup
+        role: "Reels→Stories→Direct nurture sequence (HITL drafts)"
+      - name: eg-seo-brief
+        role: "SEO brief + money/blog copy drafts in Cursor; no Wave2 site edits"
+    subagents:
+      - name: kontent
+        action: EXTEND
+        role: "drafter — invokes producer skills; beats→draft HITL"
+      - name: prodazhi
+        action: EXTEND
+        role: "CTA/anketa/objections — soft offer-bridge + ban scan"
+    command:
+      primary: /eg-producer
+      alias: /продюсер
+      role: "thin orchestrator → skill → STOP → Task(kontent) → STOP → Task(prodazhi) CTA → ready"
+    rules_reuse:
+      - .cursor/rules/eg-news-brand-safety.mdc
+      - .cursor/rules/atmosfera-3d.mdc
+    critic_v1: "skill checklist / readonly Task mode — NOT a 3rd agent"
+    draft_path_default: "90_ВХОДЯЩИЕ/producer-drafts/"
+    hitl:
+      drafts: published_false
+      social_blog_path: "reuse dual hash article_hash→social_hash when applicable"
+      never: [auto_tg, auto_vk, auto_blog_json, auto_meta]
 
   adaptation_plan: >
-    (1) Create vault TRAINING_SYSTEM_POSITIONING.md + OWNERSHIP_MAP.md under 01_EG_OS_БРЕНД
-        (factory/HITL later — research does not write vault).
-    (2) Patch AGENTS.md: add SoT index rows (TRAINING path, YOUTUBE boundary, funnel pointer).
-    (3) Thin-up atmosfera-3d.mdc: keep kernel; add Read(TRAINING) mandate; no essay clone.
-    (4) Extend eg-knowledge-outline skill refs to TRAINING + OWNERSHIP_MAP + funnel checklist.
-    (5) Optional later: shrink global user-rules EG dumps to cut triple-SoT (out of this factory scope).
-    (6) Do not touch PLAYLISTS taxonomy except one-way links FROM TRAINING → architecture.
-
-  open_questions:
-    - "New TRAINING_SYSTEM_POSITIONING.md vs patch Brand Foundation in place — recommend NEW thin locked file that POINTS to Foundation (avoids editing huge .txt; still no parallel root)"
-    - "Extend eg-knowledge-outline only vs also thin YT-package CTA skill"
-    - "Later HITL shrink of global user-rules EG identity dumps"
+    1) Scaffold 4 skills (L1 triggers, L2 pipeline+HITL, L3 refs).
+    2) Pre-fill voice from vault pointers (Zero-Copy MASTER/ToV).
+    3) /eg-producer router → skill → beats STOP → Task(kontent) STOP →
+       Task(prodazhi) CTA STOP ready.
+    4) PATCH agent descriptions (skill-backed).
+    5) Drafts → 90_ВХОДЯЩИЕ/producer-drafts/; published:false.
+    6) Do NOT: Playwright/scrape/schedule/medical/viral bait/YouTube→eg domain.
+    7) Skip Workspace plugins / Automations / Remotion / site / VK-TG code.
 
   sources:
-    - {family: vendor, url: "https://cursor.com/docs/rules", freshness: ok}
-    - {family: vendor, url: "https://cursor.com/docs/skills", freshness: ok}
-    - {family: vendor, url: "https://cursor.com/docs/agent/prompting", freshness: ok}
-    - {family: vendor, url: "https://cursor.com/docs/cloud-agent/best-practices", freshness: ok}
-    - {family: vendor, url: "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models", freshness: ok, date: "2026-07-24"}
-    - {family: vendor, url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents", freshness: warn, date: "2025-09-29"}
-    - {family: vendor, url: "https://ai.google.dev/gemini-api/docs/prompting-strategies", freshness: ok}
-    - {family: vendor, url: "https://developers.openai.com/api/docs/guides/tools-file-search", freshness: ok}
-    - {family: github, url: "https://github.com/joygram/DeukAgentFlow", freshness: ok}
-    - {family: github, url: "https://github.com/kurtvalcorza/agentic-vault", freshness: ok}
-    - {family: github, url: "https://github.com/Ar9av/obsidian-wiki", freshness: ok}
-    - {family: github, url: "https://github.com/OpenDigitalProductFactory/opendigitalproductfactory", freshness: ok}
-    - {family: github, url: "https://github.com/Shopify/cli/pull/7984", freshness: ok}
-    - {family: github, url: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f", freshness: ok, date: "2026-04-04"}
-    - {family: community, url: "https://agenticthinking.ai/blog/alwaysapply-tax/", freshness: ok, date: "2026-01-27"}
-    - {family: community, url: "https://forum.cursor.com/t/skills-vs-commands-vs-rules/148875", freshness: ok, date: "2026-01-14"}
-    - {family: community, url: "https://forum.cursor.com/t/cursor-double-counts-symlinked-files-in-context-explorer-e-g-claude-md-agents-md/164295", freshness: ok, date: "2026-06-29"}
-    - {family: community, url: "https://habr.com/ru/companies/veai/articles/1031992/", freshness: ok}
-    - {family: clawhub, url: "https://clawhub.ai/chindden/skill-creator", freshness: ok}
-    - {family: clawhub, url: "https://clawhub.ai/jerome-benoit/obsidian-wiki", freshness: warn}
-    - {family: clawhub, url: "https://clawhub.ai/mupengi-bot/brand-voice", freshness: warn}
-    - {family: scout, note: "t-800-scout 2026-07-29 — triple-SoT risk; Skills/Rules live paths confirmed"}
+    - {url: "https://cursor.com/docs/skills", date: "2026-08-04", family: vendor, freshness: ok}
+    - {url: "https://cursor.com/docs/subagents", date: "2026-08-04", family: vendor, freshness: ok}
+    - {url: "https://cursor.com/docs/customize-cursor", date: "2026-08-04", family: vendor, freshness: ok}
+    - {url: "https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/overview", date: "2026-08-04", family: vendor, freshness: ok}
+    - {url: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices", date: "2026-08-04", family: vendor, freshness: ok}
+    - {url: "https://ai.google.dev/gemini-api/docs/prompting-strategies", date: "2026-08-04", family: vendor, freshness: ok}
+    - {url: "https://github.com/openai/openai-cookbook/blob/main/examples/Structured_Outputs_Intro.ipynb", date: "2026-07-14", family: vendor, freshness: ok}
+    - {url: "https://github.com/tanishaio/creator-studio-skill", date: "2026-04-27", family: github|repo_mine, freshness: warn}
+    - {url: "https://github.com/vyralcontent/content-skills", date: "2026-06-22", family: github|repo_mine, freshness: ok}
+    - {url: "https://github.com/coreyhaines31/marketingskills", date: "2026-07-29", family: github, freshness: ok}
+    - {url: "https://github.com/kostja94/marketing-skills", date: "2026-06-09", family: github, freshness: ok}
+    - {url: "https://clawhub.ai/renehdzgtz/founder-content-marketing", date: "unknown", family: clawhub, freshness: block_verbatim}
+    - {url: "https://clawhub.ai/ivangdavila/content-marketing", date: "unknown", family: clawhub, freshness: block_verbatim}
+    - {url: "https://clawhub.ai/1kalin/afrexai-social-media-engine", date: "2026-02-13", family: clawhub, freshness: warn}
+    - {url: "https://news.ycombinator.com/item?id=49139845", date: "2026-08-02", family: news|community, freshness: ok}
+    - {url: "https://habr.com/ru/companies/bothub/articles/1044774/", date: "2026-06-08", family: community, freshness: ok}
+    - {url: "https://habr.com/ru/companies/bitrix/articles/980654/", date: "2025-12-26", family: community, freshness: ok}
+    - {url: "https://chelseaandrea.substack.com/p/i-built-an-ai-pipeline-that-handles", date: "2026-05-13", family: community, freshness: ok}
+    - {url: "https://cursor.com/changelog/google-workspace-plugins", date: "2026-08-03", family: news, freshness: ok}
+    - {url: "file://.cursor/skills/eg-news-to-blog/", date: "2026-08-04", family: local_sot, freshness: ok}
 
   github:
-    shallow: pass
-    top_pattern: "Hub–Spoke Zero-Copy + skill path cites"
+    top_repos:
+      - tanishaio/creator-studio-skill
+      - vyralcontent/content-skills
+      - coreyhaines31/marketingskills  # selective only
+      - kostja94/marketing-skills      # pattern only
+    rejected: [mass dumps, TG/VK/Meta autopost cores, scrape pipelines, medical miracle templates]
+
   repo_mines:
-    count: 4
-    repos: [joygram/DeukAgentFlow, kurtvalcorza/agentic-vault, Ar9av/obsidian-wiki, OpenDigitalProductFactory/opendigitalproductfactory]
+    primary:
+      - tanishaio/creator-studio-skill
+      - vyralcontent/content-skills
+    light:
+      - coreyhaines31/marketingskills  # copywriting/emails/seo
+      - kostja94/marketing-skills      # project-context + authoring
+
   community:
-    status: pass
-    note: "Reddit site-search block; Forum+Habr+HN substituted"
+    verdict: "HITL-only + CTA anketa = community-validated premium pattern"
+    reddit_x: blocked_this_run  # do not cite as SoT
+    key: modular_skills_over_monolith; structural_HITL; autopost_fails_Meta
+
   clawhub:
-    status: pass
-    thesis: "thin routers cite files; fat style-guides rejected"
+    adapt: [founder-content-marketing, content-marketing, content-strategy, afrexai schemas_only]
+    reject: [instagram-account-operations Playwright, social-content Apify scrape, auto_schedule_publish]
+
   vendor_docs:
-    status: pass
-    mastodons: [cursor, openai, anthropic, gemini]
-  docs:
-    status: skip
+    hubs: [cursor, openai_cookbook_via_github, anthropic, gemini]
+    idea_seeds:
+      - progressive_disclosure_skill_files
+      - structured_output_for_script_beats
+      - brand_voice_constraints_in_system_prompt
+      - human_in_the_loop_stop_points
+    model: inherit_only
+
+  docs: null  # Context7 skipped per search_plan
+
   news:
-    status: skip
-    reason: "vendor docs already cover layering overrides"
+    reblock_factory: false
+    ignore_v1: [Google Workspace plugins, Automations /automate, iPad, mass marketing kits]
 
   coverage_matrix:
     strategist: pass
@@ -179,40 +193,54 @@ research_brief:
     clawhub: pass
     vendor_docs: pass
     context7_docs: skip
-    news: skip
-    sources_count: 21
-    sources_dated_ok_or_warn: 21
-    minima:
-      search_plan: true
-      synthesis_compare_ge_2_families: true
-      sources_ge_8: true
-      repo_mines_ge_2: true
-      clawhub_should_closed: true
-      vendor_or_context7: true
-      adaptation_plan: true
+    news: pass
+    sources_count: 20
+    dated_ok_or_warn: 17
+    deep_mines: 2
     verdict: pass
-    pass_criteria_met:
-      - "≥1 thin rule pointer pattern (ODPF 000-load-agents / Deuk Zero-Copy)"
-      - "≥1 thin skill router pattern (obsidian-wiki / clawhub brand-voice cite-file)"
-      - "≥1 vault schema pattern (OWNER_MAP + compile-don't-retrieve + indexes)"
-      - "Explicit TRAINING vs YouTube PLAYLISTS ownership boundary"
-      - "Zero invented brand alternative positioning"
-      - "adaptation_plan mappable to .cursor/rules + .cursor/skills + EG_ИМПЕРИЯ_ЗНАНИЙ"
 
-  handoff:
-    next: brain-lead
-    factory: blocked_until_brain
-    do_not: [write_vault_files, run_factory, invent_parallel_eg_os_root]
+  open_questions: []
+  # defaults locked by synthesizer:
+  # command /eg-producer + /продюсер; EXTEND kontent+prodazhi;
+  # drafts 90_ВХОДЯЩИЕ/producer-drafts/; warmup Reels→Stories→Direct;
+  # Workspace HITL out of v1
+
+  stale_rejected:
+    - "ClawHub/IG Playwright auto-send cards"
+    - "Apify/Phantom scrape social engines"
+    - "Mass 160+/800+ skill library installs"
+    - "OpenAI parallel_agents notebook pre-2026 pattern (block freshness — idea only)"
+    - "Anthropic equating skills blog 2025-10 as news delta (baseline only)"
+
+  confidence: high
 ```
 
 ---
 
-## Executive recommendation (for parent)
+## Recommended artifacts list (factory-ready)
 
-**Cursor:** both — thin alwaysApply rule pointer + extend existing skill (`eg-knowledge-outline`), not a fat new encyclopedia.
+| Type | Name | Action |
+|------|------|--------|
+| skill | `eg-producer-studio` | CREATE |
+| skill | `eg-reels-script` | CREATE |
+| skill | `eg-warmup` | CREATE |
+| skill | `eg-seo-brief` | CREATE |
+| subagent | `kontent` | EXTEND (skill-backed) |
+| subagent | `prodazhi` | EXTEND (CTA→anketa) |
+| command | `/eg-producer` (+ `/продюсер`) | CREATE |
+| rules | `eg-news-brand-safety` + `atmosfera-3d` | REUSE |
 
-**Vault:** `01_EG_OS_БРЕНД/TRAINING_SYSTEM_POSITIONING.md` + `OWNERSHIP_MAP.md`; YouTube stays in `03_КОНТЕНТ_СИСТЕМА/YOUTUBE/`.
+## Specialist fragments
 
-**vs playlists:** morning live; TRAINING owns rails/CTA; PLAYLISTS own taxonomy — link only.
+- `fragments/t-800-research-strategist.md`
+- `fragments/t-800-research-clawhub.md`
+- `fragments/t-800-research-vendor-docs.md`
+- `fragments/t-800-research-news.md`
+- `fragments/t-800-research-repo-miner.md`
+- `fragments/t-800-research-synthesizer.md`
+- (github/community findings embedded in lead brief)
 
-**coverage_matrix.verdict:** **pass** → safe to hand to brain-lead.
+## Next
+
+→ `Task(t-800-brain-lead)` then `Task(t-800-factory)` with this brief.  
+Do NOT factory in research-lead.

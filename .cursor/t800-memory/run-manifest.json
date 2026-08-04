@@ -1,54 +1,78 @@
 {
-  "slug": "you-only-need-you-axis",
-  "command": "/t800-fix PATCH",
-  "mode": "PATCH",
+  "slug": "atmosfera-producer-mvp",
+  "command": "/t800-start CREATE",
+  "mode": "CREATE",
   "profile": "workspace-cursor",
   "artifact_surface": "cursor-workspace",
   "plugin_root": "/Users/egoshev/Projects/atmosfera-3d",
   "memory_path": "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory",
-  "brief": ".cursor/t800-memory/factory-briefs/you-only-need-you-axis.yaml",
+  "brief": ".cursor/t800-memory/factory-briefs/atmosfera-producer-mvp.yaml",
   "registry_patch": null,
   "release_handoff": null,
-  "updated": "2026-07-29T14:20:00+03:00",
+  "updated": "2026-08-04T17:12:15+03:00",
   "factory": {
     "status": "ok",
     "agent": "t-800-factory",
-    "mode": "PATCH"
+    "mode": "CREATE"
   },
   "steps": [
     {
-      "agent": "t-800-factory",
+      "agent": "t-800-factory-architect",
+      "status": "ok"
+    },
+    {
+      "agent": "t-800-factory-builder",
+      "status": "ok"
+    },
+    {
+      "agent": "t-800-factory-integrator",
       "status": "ok",
-      "note": "PATCH spokes: atmosfera-3d.mdc, eg-knowledge-outline SKILL + tone-bans"
+      "note": "27/27 paths; AGENTS.md +1 line"
     },
     {
       "agent": "t-800-prompt-auditor",
       "status": "ok",
-      "note": "skill Zero-Copy + axis line; no vault dump"
+      "note": "3 non-blocking warnings"
     },
     {
       "agent": "t-800-factory-auditor",
+      "status": "ok"
+    },
+    {
+      "agent": "t800_run_gate",
       "status": "ok",
-      "note": "scope-only 3 files; medclaim not softened; Zero-Copy preserved"
+      "exit": 0
     }
   ],
   "stages": {
-    "scout": "skip",
-    "research": "skip",
-    "prompt_craft": "skip",
-    "brain": "skip",
+    "scout": "done",
+    "research": "done",
+    "prompt_craft": "done",
+    "brain": "done",
     "factory": "done",
     "factory_auditor": "done"
   },
   "artifacts": [
-    ".cursor/rules/atmosfera-3d.mdc",
-    ".cursor/skills/eg-knowledge-outline/SKILL.md",
-    ".cursor/skills/eg-knowledge-outline/references/tone-bans.md"
+    ".cursor/skills/eg-producer-studio/",
+    ".cursor/skills/eg-reels-script/",
+    ".cursor/skills/eg-warmup/",
+    ".cursor/skills/eg-seo-brief/",
+    ".cursor/commands/eg-producer.md",
+    ".cursor/commands/продюсер.md",
+    ".cursor/agents/kontent.md",
+    ".cursor/agents/prodazhi.md",
+    "90_ВХОДЯЩИЕ/producer-drafts/.gitkeep"
   ],
   "auditor": {
     "status": "ok",
-    "findings": [],
-    "zero_copy": true,
-    "vault_writes": false
+    "findings_critical": [],
+    "warnings": [
+      "W1 seo-brief L2 CTA pin",
+      "W2 warmup bans explicit",
+      "W3 studio CTA via L3"
+    ]
+  },
+  "gates": {
+    "t800_run_gate": "PASS"
   }
 }

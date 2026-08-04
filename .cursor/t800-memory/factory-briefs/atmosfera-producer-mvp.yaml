@@ -1,0 +1,76 @@
+brief_for_factory:
+  target_context:
+    workspace_root: "/Users/egoshev/Projects/atmosfera-3d"
+    memory_path: "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory"
+    artifact_surface: cursor-workspace
+    profile: workspace-cursor
+    knowledge_vault_path: null
+    pack_name: atmosfera-producer-mvp
+
+  research_brief_ref: fragments/t-800-research-lead.md
+  prompt_craft_ref: fragments/t-800-prompt-craft.md
+  scout_ref: fragments/t-800-scout.md
+  synthesis_summary: >
+    Skill-first hybrid: 4 modular producer skills (progressive disclosure) +
+    thin /eg-producer (+ /продюсер) + EXTEND kontent (drafter) and prodazhi
+    (CTA→anketa). HITL drafts only; Zero-Copy SoT; no site/autopost.
+
+  topic: "Atmosfera 3D / Евгений Гошев — producer pack MVP (skills+command+EXTEND agents)"
+  recommended_artifact: mix
+  mode: CREATE
+
+  factory_create_extend_list:
+    CREATE:
+      - {type: skill, name: eg-producer-studio, path: .cursor/skills/eg-producer-studio/SKILL.md, refs: references/}
+      - {type: skill, name: eg-reels-script, path: .cursor/skills/eg-reels-script/SKILL.md, refs: references/}
+      - {type: skill, name: eg-warmup, path: .cursor/skills/eg-warmup/SKILL.md, refs: references/}
+      - {type: skill, name: eg-seo-brief, path: .cursor/skills/eg-seo-brief/SKILL.md, refs: references/}
+      - {type: command, name: eg-producer, path: .cursor/commands/eg-producer.md}
+      - {type: command, name: продюсер, path: .cursor/commands/продюсер.md, note: "thin alias mirror; Latin /eg-producer primary"}
+      - {type: dir_scaffold, path: 90_ВХОДЯЩИЕ/producer-drafts/.gitkeep, note: "dir currently missing"}
+    EXTEND:
+      - {type: agent, name: kontent, path: .cursor/agents/kontent.md, note: "5-field FM + skill-backed; drafts→producer-drafts"}
+      - {type: agent, name: prodazhi, path: .cursor/agents/prodazhi.md, note: "CTA pin anketa + ban scan; drafts→producer-drafts"}
+    REUSE:
+      - .cursor/rules/atmosfera-3d.mdc
+      - .cursor/rules/eg-news-brand-safety.mdc
+      - .cursor/skills/eg-news-to-blog/
+    DO_NOT:
+      - new_rules
+      - critic_agent_v3
+      - hooks
+      - mcp.json
+      - site-next
+      - VK_TG_autopost_code
+      - Remotion_Mediabunny_in_pack
+
+  drafts:
+    path: 90_ВХОДЯЩИЕ/producer-drafts/
+    published: false
+
+  cta:
+    default: "https://eg.egoshev.ru/anketa"
+    rule: one_cta_only
+
+  models: inherit_chat
+  hitl:
+    mode: mixed_HITL
+    gate_phrases_ru:
+      - "Утверждаю brief"
+      - "Утверждаю beats"
+      - "Утверждаю черновик"
+      - "Ready"
+
+  companions:
+    hooks: false
+    scripts: false
+    mcp: false
+
+  prompt_auditor_focus:
+    - Description Trap on all 7 artifacts
+    - agent frontmatter exactly 5 fields; no tools:
+    - HITL STOP present in command
+    - CTA anketa single
+    - Zero-Copy — no MASTER essay dump
+
+  confidence: high

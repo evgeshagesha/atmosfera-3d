@@ -1,44 +1,32 @@
-# t-800-intake-clarifier — video montage agent
+# t-800-intake-clarifier — 2026-08-04
 
-**Когда:** 2026-07-28 22:12  
-**Статус:** `asked` · `blocks_research: true`  
-**Тема:** агент монтажа видео (Telegram → cut/анимация, Syntx, Remotion, talking-head / тренировки)
+## status
+`asked` — blocks research until answers
 
-## Почему не skip
+## hypothesis (fixed)
+| Field | Value |
+|-------|-------|
+| artifact_surface | `cursor-workspace` |
+| workspace | `/Users/egoshev/Projects/atmosfera-3d` |
+| memory_path | `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory` |
+| profile | `workspace-cursor` |
+| raw_goal | «скачай все плагины и skills с GitHub для идеального продюсера / продвижения бренда» |
 
-Неясны: продукт Syntx (API/ключ), форматы выхода, surface v1 (Cursor-only vs TG-бот), бюджет (бесплатно vs платный API), приоритет use-case (talking-head vs полная тренировка). Без ответов research/factory будут гадать по integrations и artifact_surface.
+## reframing (обязательно)
+- **НЕ** mass-download / clone «всех» GitHub plugins/skills.
+- T-800 = **курируемый** набор Cursor-артефактов под роль: продюсер + помощник продвижения бренда Атмосфера 3D (контент, Reels, прогрев, автопостинг HITL, SEO-наполнение).
+- Паттерны с GitHub/ClawHub — только после scout + DEEP research; адаптация, не verbatim copy.
+- Граница: VK автопостинг и Wave2 money pages — **Dev отдельно**; T-800 пишет только Cursor-артефакты (`.cursor/`).
 
-## Вопросы (ждут ответа)
+## open questions (2–5)
+1. Типы артефактов (skills / subagents / rules / commands / mix)?
+2. Readonly для leaf-агентов?
+3. Интеграции MCP/каналы в scope T-800 (HITL-only vs шире)?
+4. Модели по умолчанию?
+5. Подтверждение границы Dev vs T-800?
 
-1. Syntx — что именно? Ссылка/кабинет, есть ли ключ? Или «любая нейросеть» ок?
-2. Выход v1: Reels 9:16 / YouTube 16:9 / оба? Длина клипов?
-3. Где живёт v1: только Cursor (файл → агент) или реальный Telegram-бот автоматически?
-4. Бюджет: только ffmpeg+Remotion локально или платный Syntx/API ок?
-5. Приоритет v1: talking-head нарезка ИЛИ полная тренировка?
+## recommended_defaults (если «как лучше»)
+см. выходной YAML в ответе агента
 
-## Рекомендации (до ответов — гипотезы, не defaults)
-
-- **recommended_surface:** `cursor-workspace` skill+command для v1; связка с P02 ботом — phase 2 после HITL
-- **suggested_artifacts:** skill `eg-video-montage` (или аналог) + command `/eg-video-cut`; agent optional; Remotion skills reuse; bot webhook wiring deferred
-
-## Выход YAML
-
-```yaml
-status: asked
-intake_brief:
-  questions:
-    - Syntx: продукт/ссылка/ключ или любая нейросеть?
-    - Формат и длина: 9:16 / 16:9 / оба?
-    - Surface v1: Cursor-only vs Telegram-бот автоматом?
-    - Бюджет: бесплатно локально vs платный API ок?
-    - Приоритет v1: talking-head vs полная тренировка?
-  assumed_defaults: []
-  blocks_research: true
-recommended_surface: cursor-workspace (skill+command; bot = phase 2)
-suggested_artifacts:
-  - skill eg-video-montage
-  - command /eg-video-cut
-  - optional agent
-  - reuse remotion-* skills
-  - P02 bot wiring deferred
-```
+## blocks_research
+`true`

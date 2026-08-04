@@ -1,36 +1,47 @@
-# Fragment — t-800-factory (PATCH)
+# t-800-factory — Atmosfera 3D producer pack
 
-**Topic:** eg-news-to-blog-human-editorial-handoff  
-**As of:** 2026-07-29  
-**mode:** PATCH  
-**status:** ok · ship  
-**surface:** cursor-workspace  
-**registry_patch:** null
+**Date:** 2026-08-04  
+**status:** ok  
+**pack:** atmosfera-producer-mvp  
+**mode:** CREATE + EXTEND  
+**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`
 
 ## Pipeline
 
-architect → builder → integrator → prompt-auditor (94) → auditor → t800_run_gate EXIT 0
+| Stage | Status |
+|-------|--------|
+| architect | ok |
+| companions (hooks/scripts/mcp) | skipped (none) |
+| builder | ok |
+| integrator | ok (27/27) |
+| prompt-auditor | ok (3 WARN non-blocking) |
+| factory-auditor | ok |
+| t800_run_gate | PASS exit 0 |
 
-## Files changed (11)
+## Artifacts
 
-- `.cursor/skills/eg-news-to-blog/SKILL.md`
-- `.cursor/skills/eg-news-to-blog/references/brand-voice.md`
-- `.cursor/skills/eg-news-to-blog/references/draft-schema.md`
-- `.cursor/skills/eg-news-to-blog/references/workflow.md`
-- `.cursor/skills/eg-news-to-blog/references/fewshots.md`
-- `.cursor/skills/eg-news-to-blog/references/seo-clusters.md`
-- `.cursor/skills/eg-news-to-blog/references/tone-bans.md`
-- `.cursor/skills/eg-news-to-blog/assets/draft-frontmatter.template.md`
-- `.cursor/commands/eg-news-to-blog.md`
-- `.cursor/commands/eg-news-approve.md`
-- `.cursor/rules/eg-news-brand-safety.mdc`
+### CREATE
+- `.cursor/skills/eg-producer-studio/` (+ 5 refs)
+- `.cursor/skills/eg-reels-script/` (+ 5 refs)
+- `.cursor/skills/eg-warmup/` (+ 4 refs)
+- `.cursor/skills/eg-seo-brief/` (+ 4 refs)
+- `.cursor/commands/eg-producer.md`
+- `.cursor/commands/продюсер.md`
+- `90_ВХОДЯЩИЕ/producer-drafts/.gitkeep`
 
-## Untouched (explicit)
+### EXTEND
+- `.cursor/agents/kontent.md`
+- `.cursor/agents/prodazhi.md`
 
-- `feeds.yaml`
-- `publish_blog_social.py` (**publisher_gap**)
-- TG→VK bridge, agents, hooks, MCP, registry, site code
+### Integrator note
+- `AGENTS.md` +1 line (`/eg-producer` → `producer-drafts/`)
 
-## Decision
+## Gates
+- `python3 scripts/t800_run_gate.py --memory-path …` → **PASS**
+- repair_attempts: 0
 
-`ship` — dual HITL policy in Cursor artifacts; machine hash enforcement in publisher deferred.
+## How to use
+`/eg-producer` (alias `/продюсер`) → studio brief STOP → craft skill STOP → `Task(kontent)` STOP → `Task(prodazhi)` CTA anketa → Ready. Drafts: `90_ВХОДЯЩИЕ/producer-drafts/`.
+
+## Next for user
+Reload Window. Optional polish W1–W3 later.
