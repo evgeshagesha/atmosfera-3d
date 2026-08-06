@@ -141,28 +141,38 @@ export default function HeroSection() {
                         годы вперёд.
                       </p>
                       <div className="egmain-cta-wrap">
-                        <a
-                          href="https://t.me/EGoshev_bot"
-                          className="egmain-gift-btn"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <span className="egmain-gift-icon" aria-hidden="true">
-                            🎁
-                          </span>
-                          <span className="egmain-gift-label">
-                            Функциональная тренировка · 10 мин
-                          </span>
-                          <span className="egmain-gift-badge">подарок</span>
-                        </a>
                         <div className="egmain-cta-row">
-                          <Link href="/anketa" className="egmain-btn egmain-btn-primary egmain-btn-neon">
-                            Заполнить анкету для личного приёма в Москве или онлайн{" "}
-                            <span className="egmain-btn-arrow">→</span>
+                          <Link
+                            href="/anketa"
+                            className="egmain-btn egmain-btn-primary egmain-btn-neon egmain-btn-stack"
+                          >
+                            <span className="egmain-btn-copy">
+                              <span className="egmain-btn-label">
+                                Заполни анкету для личного приёма в Москве
+                              </span>
+                              <span className="egmain-btn-sub">
+                                Стоимость первой сессии 6000 ₽
+                              </span>
+                            </span>
+                            <span className="egmain-btn-arrow" aria-hidden="true">
+                              →
+                            </span>
                           </Link>
-                          <a href="#online" className="egmain-btn egmain-btn-neon">
-                            Пройти тест и получить персональный план · 684 ₽{" "}
-                            <span className="egmain-btn-arrow">→</span>
+                          <a
+                            href="https://t.me/EGoshev_bot"
+                            className="egmain-btn egmain-btn-neon egmain-btn-stack"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <span className="egmain-btn-copy">
+                              <span className="egmain-btn-label">
+                                Функциональная тренировка · 10 минут
+                              </span>
+                              <span className="egmain-btn-gift-badge">подарок</span>
+                            </span>
+                            <span className="egmain-btn-arrow" aria-hidden="true">
+                              →
+                            </span>
                           </a>
                         </div>
                       </div>
