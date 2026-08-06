@@ -188,104 +188,175 @@ export const HERO_V2_CSS = `
   align-items: stretch;
   gap: 10px;
   width: 100%;
-  max-width: min(720px, 100%);
+  max-width: min(560px, 100%);
   margin-top: 16px;
   padding-top: 0;
+  overflow: visible;
 }
 .egmain-cta-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   align-items: stretch;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
   margin-top: 0;
 }
 .egmain-btn,
 #egmain-hero a.egmain-btn {
+  position: relative;
   display: inline-flex !important;
-  flex: 1 1 0 !important;
+  flex: 0 0 auto !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
+  gap: 10px !important;
   min-width: 0 !important;
-  width: auto !important;
-  min-height: 48px !important;
-  padding: 10px 14px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 52px !important;
+  padding: 11px 18px !important;
   border: 1px solid rgba(210, 218, 228, 0.42) !important;
   border-radius: 999px !important;
   background: rgba(18, 20, 24, 0.82) !important;
   color: #fff !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 800 !important;
-  line-height: 1.2 !important;
-  letter-spacing: 0.06em !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0.04em !important;
   text-align: center !important;
   text-transform: uppercase !important;
+  white-space: nowrap !important;
+  overflow: visible;
   cursor: pointer;
   backdrop-filter: blur(8px);
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    background 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
 }
 .egmain-btn-stack,
 #egmain-hero a.egmain-btn-stack {
-  min-height: 54px !important;
-  padding: 9px 14px !important;
-  white-space: normal !important;
+  min-height: 56px !important;
+  padding: 10px 18px !important;
+  white-space: nowrap !important;
 }
 .egmain-btn-copy {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   min-width: 0;
   flex: 1 1 auto;
   max-width: 100%;
+  overflow: hidden;
 }
 .egmain-btn-label {
   display: block;
   max-width: 100%;
   font-size: inherit;
   font-weight: inherit;
-  line-height: 1.2;
+  line-height: 1.15;
   letter-spacing: inherit;
-  text-wrap: balance;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
 .egmain-btn-sub {
   display: block;
   color: rgba(9, 11, 14, 0.72);
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   line-height: 1.15;
   text-transform: none;
+  white-space: nowrap;
 }
 #egmain-hero a.egmain-btn:not(.egmain-btn-primary) .egmain-btn-sub {
   color: rgba(236, 242, 248, 0.72);
+}
+.egmain-btn-gift,
+#egmain-hero a.egmain-btn-gift {
+  border-color: rgba(120, 210, 230, 0.72) !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(28, 42, 52, 0.96) 0%,
+      rgba(18, 28, 36, 0.94) 45%,
+      rgba(36, 30, 24, 0.92) 100%
+    ) !important;
+  color: #f4fbff !important;
+  box-shadow:
+    0 0 0 1px rgba(110, 200, 220, 0.28),
+    0 0 18px rgba(80, 190, 210, 0.34),
+    0 0 36px rgba(180, 140, 90, 0.16),
+    inset 0 1px 0 rgba(190, 240, 255, 0.22),
+    inset 0 -1px 0 rgba(180, 130, 70, 0.12);
+  animation: egGiftPulse 2.2s ease-in-out infinite;
+}
+.egmain-btn-gift::before,
+#egmain-hero a.egmain-btn-gift::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 18%,
+    rgba(160, 230, 245, 0.14) 42%,
+    rgba(210, 170, 110, 0.12) 52%,
+    transparent 72%
+  );
+  background-size: 220% 100%;
+  animation: egGiftShimmer 2.4s ease-in-out infinite;
+  opacity: 0.85;
+}
+.egmain-btn-gift:hover,
+#egmain-hero a.egmain-btn-gift:hover {
+  transform: translateY(-2px);
+  border-color: rgba(150, 230, 245, 0.9) !important;
+  filter: brightness(1.06);
+  box-shadow:
+    0 0 0 1px rgba(130, 220, 240, 0.4),
+    0 0 26px rgba(90, 205, 225, 0.48),
+    0 0 48px rgba(190, 150, 95, 0.22),
+    inset 0 1px 0 rgba(210, 245, 255, 0.3);
+}
+.egmain-btn-gift:active,
+#egmain-hero a.egmain-btn-gift:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
 }
 .egmain-btn-gift-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-top: 1px;
-  padding: 3px 9px;
-  border: 1px solid rgba(190, 210, 225, 0.28);
+  padding: 4px 11px;
+  border: 1px solid rgba(150, 225, 240, 0.55);
   border-radius: 999px;
-  background: rgba(210, 222, 236, 0.12);
-  color: rgba(230, 238, 246, 0.92);
-  font-size: 8.5px;
+  background: linear-gradient(
+    180deg,
+    rgba(90, 200, 220, 0.34) 0%,
+    rgba(170, 130, 75, 0.28) 100%
+  );
+  color: #eefbff;
+  font-size: 9px;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   line-height: 1;
   text-transform: uppercase;
+  box-shadow:
+    0 0 12px rgba(80, 190, 210, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  white-space: nowrap;
 }
-.egmain-btn-neon,
-#egmain-hero a.egmain-btn-neon {
+.egmain-btn-neon:not(.egmain-btn-gift),
+#egmain-hero a.egmain-btn-neon:not(.egmain-btn-gift) {
   border-color: rgba(220, 228, 238, 0.55) !important;
   box-shadow:
     0 0 0 1px rgba(200, 210, 222, 0.22),
@@ -337,6 +408,7 @@ export const HERO_V2_CSS = `
   border-color: rgba(236, 240, 246, 0.95) !important;
   background: linear-gradient(180deg, #f4f6f9 0%, #d9dee6 100%) !important;
   color: #090b0e !important;
+  z-index: 1;
 }
 .egmain-btn-primary.egmain-btn-neon,
 #egmain-hero a.egmain-btn-primary.egmain-btn-neon {
@@ -363,14 +435,51 @@ export const HERO_V2_CSS = `
     filter: brightness(1.06);
   }
 }
+@keyframes egGiftPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(110, 200, 220, 0.28),
+      0 0 16px rgba(80, 190, 210, 0.3),
+      0 0 32px rgba(180, 140, 90, 0.12),
+      inset 0 1px 0 rgba(190, 240, 255, 0.2),
+      inset 0 -1px 0 rgba(180, 130, 70, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(130, 215, 235, 0.4),
+      0 0 22px rgba(90, 205, 225, 0.42),
+      0 0 40px rgba(190, 150, 95, 0.2),
+      inset 0 1px 0 rgba(210, 245, 255, 0.28),
+      inset 0 -1px 0 rgba(190, 140, 80, 0.16);
+  }
+}
+@keyframes egGiftShimmer {
+  0%,
+  100% {
+    background-position: 120% 0;
+    opacity: 0.55;
+  }
+  50% {
+    background-position: -20% 0;
+    opacity: 0.9;
+  }
+}
 .egmain-btn:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
 }
 .egmain-btn-arrow {
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
   font-size: 13px;
   line-height: 1;
+}
+.egmain-btn-copy,
+.egmain-btn-gift-badge {
+  position: relative;
+  z-index: 1;
 }
 @keyframes egHeroIn {
   to {
@@ -409,12 +518,6 @@ export const HERO_V2_CSS = `
       rgba(0, 0, 0, 0.72) 82%,
       #000 100%
     );
-  }
-  .egmain-cta-wrap {
-    gap: 8px;
-    max-width: 100%;
-    margin-top: 14px;
-    padding-top: 0;
   }
   .egmain-container {
     align-items: stretch;
@@ -480,53 +583,61 @@ export const HERO_V2_CSS = `
     padding: 5px 8px;
     font-size: 7.5px;
   }
+  .egmain-cta-wrap {
+    gap: 8px;
+    max-width: 100%;
+    margin-top: 14px;
+    padding-top: 0;
+  }
   .egmain-cta-row {
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     align-items: stretch;
     gap: 8px;
     margin-top: 0;
   }
   #egmain-hero a.egmain-btn {
-    flex: 1 1 0 !important;
+    flex: 0 0 auto !important;
     min-width: 0 !important;
-    width: auto !important;
-    min-height: 44px !important;
-    padding: 8px 9px !important;
-    gap: 5px !important;
-    font-size: 8.5px !important;
-    letter-spacing: 0.035em !important;
-    line-height: 1.18 !important;
-    white-space: normal !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 50px !important;
+    padding: 9px 14px !important;
+    gap: 8px !important;
+    font-size: 9.5px !important;
+    letter-spacing: 0.028em !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
   }
   #egmain-hero a.egmain-btn-stack {
-    min-height: 48px !important;
+    min-height: 52px !important;
     align-items: center !important;
-    padding: 7px 8px !important;
+    padding: 8px 14px !important;
   }
   .egmain-btn-copy {
-    gap: 2px;
+    gap: 3px;
   }
   .egmain-btn-label {
     max-width: 100%;
-    text-wrap: balance;
+    white-space: nowrap;
   }
   .egmain-btn-sub {
-    font-size: 7.5px;
+    font-size: 8px;
     letter-spacing: 0.04em;
     line-height: 1.1;
+    white-space: nowrap;
   }
   .egmain-btn-gift-badge {
     align-self: center;
     max-width: 100%;
     margin-top: 1px;
-    padding: 2px 6px;
-    font-size: 7px;
-    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    font-size: 8px;
+    letter-spacing: 0.12em;
     white-space: nowrap;
   }
   .egmain-btn-arrow {
-    font-size: 11px;
+    font-size: 12px;
   }
   .egmain-pillars {
     gap: 6px;
@@ -557,26 +668,26 @@ export const HERO_V2_CSS = `
     gap: 6px;
   }
   #egmain-hero a.egmain-btn {
-    min-height: 44px !important;
-    padding: 6px 6px !important;
-    gap: 3px !important;
-    font-size: 7.5px !important;
-    letter-spacing: 0.025em !important;
+    min-height: 48px !important;
+    padding: 8px 12px !important;
+    gap: 6px !important;
+    font-size: 8.5px !important;
+    letter-spacing: 0.02em !important;
   }
   #egmain-hero a.egmain-btn-stack {
-    min-height: 46px !important;
-    padding: 6px 6px !important;
+    min-height: 50px !important;
+    padding: 8px 12px !important;
   }
   .egmain-btn-sub {
-    font-size: 7px;
+    font-size: 7.5px;
   }
   .egmain-btn-gift-badge {
-    padding: 2px 5px;
-    font-size: 6.5px;
-    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    font-size: 7.5px;
+    letter-spacing: 0.1em;
   }
   .egmain-btn-arrow {
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -586,7 +697,9 @@ export const HERO_V2_CSS = `
     animation: none;
   }
   .egmain-btn,
-  .egmain-btn-neon {
+  .egmain-btn-neon,
+  .egmain-btn-gift,
+  .egmain-btn-gift::before {
     transition: none !important;
     animation: none !important;
   }

@@ -160,7 +160,7 @@ export default function HeroSection() {
                           </Link>
                           <a
                             href="https://t.me/EGoshev_bot"
-                            className="egmain-btn egmain-btn-neon egmain-btn-stack"
+                            className="egmain-btn egmain-btn-gift egmain-btn-neon egmain-btn-stack"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -168,7 +168,7 @@ export default function HeroSection() {
                               <span className="egmain-btn-label">
                                 Функциональная тренировка · 10 минут
                               </span>
-                              <span className="egmain-btn-gift-badge">подарок</span>
+                              <span className="egmain-btn-gift-badge">Подарок</span>
                             </span>
                             <span className="egmain-btn-arrow" aria-hidden="true">
                               →
