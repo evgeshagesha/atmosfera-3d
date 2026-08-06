@@ -28,8 +28,9 @@ from products import (
 
 CHANNEL_URL = "https://t.me/EvgeniiGoshev"
 CHANNEL_NAV_URL = "https://t.me/EvgeniiGoshev/1123"
-# Lead guide = channel post (not external PDF file / egoshev.ru/gaid)
+# Lead magnet = free daily workout in channel (not PDF / egoshev.ru/gaid)
 GUIDE_URL = "https://t.me/EvgeniiGoshev/1326"
+WORKOUT_URL = GUIDE_URL
 MENU_LINKS = [
     ("Тест тела · 684 ₽", "test"),
     ("Дыхание и осанка · 1 990 ₽", "breath"),
@@ -51,38 +52,47 @@ def _pay_or_page_button(label: str, product_id: str) -> InlineKeyboardButton | N
     return None
 
 
+def _lead_workout_delivery_copy(url: str) -> tuple[str, InlineKeyboardMarkup]:
+    text = (
+        "✅ <b>Отлично!</b>\n\n"
+        "Доступ открыт.\n"
+        "Поздравляю!\n\n"
+        "Теперь у тебя есть ежедневная функциональная тренировка, "
+        "которая поможет сделать тело более лёгким, подвижным и свободным.\n\n"
+        "Эту тренировку можно выполнять каждое утро.\n\n"
+        "Она особенно полезна, если:\n"
+        "• много сидишь;\n"
+        "• чувствуешь скованность;\n"
+        "• хочешь улучшить мобильность;\n"
+        "• хочешь начать заниматься правильно.\n\n"
+        "👇\n"
+        "Нажми кнопку ниже и открой тренировку."
+    )
+    keyboard = InlineKeyboardMarkup(
+        [[InlineKeyboardButton("🎥 Забрать тренировку", url=url)]]
+    )
+    return text, keyboard
+
+
 async def send_guide_link(update: Update) -> None:
-    """Lead: URL button to channel guide post (Telegram cannot color buttons gray)."""
+    """Lead: URL button to channel workout post."""
     message = _msg(update)
     if not message:
         return
-    guide = get_page_url("lead_telo") or GUIDE_URL
-    text = (
-        "✅ <b>Подписка есть</b> — спасибо!\n\n"
-        "Вот ваш гайд:\n"
-        "<b>«С чего начинать работу с телом»</b>\n\n"
-        "Откройте по кнопке ниже и сохраните себе.\n\n"
-        "Не нужно делать всё сразу.\n"
-        "Один блок сегодня — уже хороший старт.\n\n"
-        "<b>И важный момент:</b>\n"
-        "в конце гайда вас ждёт ещё один <b>сюрприз</b>.\n"
-        "Обязательно дочитайте до конца."
-    )
-    keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Открыть гайд 🎁", url=guide)]]
-    )
+    workout = get_page_url("lead_telo") or WORKOUT_URL
+    text, keyboard = _lead_workout_delivery_copy(workout)
     await message.reply_text(text, reply_markup=keyboard, parse_mode="HTML")
 
 
 async def send_channel_invite(update: Update) -> None:
-    """After guide: channel value + subscribe + nav pin."""
+    """Soft channel value + nav pin."""
     message = _msg(update)
     if not message:
         return
     text = (
         "Дальше — канал @EvgeniiGoshev.\n\n"
         "Там регулярно:\n"
-        "• выжимки из блога — самое важное за день\n"
+        "• ежедневные практики и тренировки\n"
         "• разборы тела, дыхания и движения\n"
         "• новости системы и следующие шаги\n\n"
         "В закрепе — навигация по всем направлениям.\n"
@@ -167,7 +177,7 @@ def _msg(update: Update):
 async def deliver_lead_guide(
     update: Update, context: ContextTypes.DEFAULT_TYPE | None = None
 ) -> bool:
-    """Send guide clearly + schedule soft follow-ups."""
+    """Send free daily workout + schedule drip follow-ups."""
     from followups import schedule_lead_followups
 
     message = _msg(update)
@@ -179,21 +189,8 @@ async def deliver_lead_guide(
         if message is not None
         else (update.effective_chat.id if update.effective_chat else user.id)
     )
-    guide = get_page_url("lead_telo") or GUIDE_URL
-    text = (
-        "✅ <b>Подписка есть</b> — спасибо!\n\n"
-        "Вот ваш гайд:\n"
-        "<b>«С чего начинать работу с телом»</b>\n\n"
-        "Откройте по кнопке ниже и сохраните себе.\n\n"
-        "Не нужно делать всё сразу.\n"
-        "Один блок сегодня — уже хороший старт.\n\n"
-        "<b>И важный момент:</b>\n"
-        "в конце гайда вас ждёт ещё один <b>сюрприз</b>.\n"
-        "Обязательно дочитайте до конца."
-    )
-    markup = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Открыть гайд 🎁", url=guide)]]
-    )
+    workout = get_page_url("lead_telo") or WORKOUT_URL
+    text, markup = _lead_workout_delivery_copy(workout)
     if message is not None:
         await message.reply_text(text, reply_markup=markup, parse_mode="HTML")
     elif context is not None:
@@ -212,9 +209,9 @@ async def deliver_lead_guide(
 async def flow_telo(
     update: Update, context: ContextTypes.DEFAULT_TYPE | None = None
 ) -> None:
-    """Entry (/start, ТЕЛО): always show channel-subscribe guide when gate is on.
+    """Entry (/start, ТЕЛО): channel-subscribe screen when gate is on.
 
-    Unlock happens only via callback «Я подписался» → deliver_lead_guide.
+    Unlock via callback «Забрать тренировку» → deliver_lead_guide.
     """
     message = _msg(update)
     user = update.effective_user
@@ -227,15 +224,13 @@ async def flow_telo(
         else (update.effective_chat.id if update.effective_chat else user.id)
     )
 
-    # Always re-show subscribe guide on entry when REQUIRE_CHANNEL_SUB=1.
-    # Previously already-subscribed users skipped it — looked like Start «did nothing»
-    # useful, and the channel CTA disappeared from the funnel.
+    # Always re-show subscribe screen on entry when REQUIRE_CHANNEL_SUB=1.
     if require_channel_sub():
         await send_subscribe_prompt(
             context=context,
             chat_id=chat_id,
             callback_data="subok:telo",
-            what="гайд",
+            what="тренировку",
             reply_to_message=message,
         )
         return
@@ -426,11 +421,23 @@ def is_start_text(text: str) -> bool:
 async def try_lead_keyword(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> bool:
-    """Return True if message was handled as ТЕЛО lead or Start text button."""
+    """Return True if message was handled as ТЕЛО lead, Start text, or «Сделал»."""
     text = (update.message.text or "").strip()
     if is_start_text(text):
         await flow_telo(update, context)
         return True
+
+    low = text.lower().strip(" !.?,…")
+    if low in ("сделал", "сделала", "сделали"):
+        await update.message.reply_text(
+            "Отлично.\n\n"
+            "Первый шаг уже сделан — это важнее идеальной техники.\n\n"
+            "Заметь, что изменилось в теле: легче, свободнее, спокойнее?\n"
+            "Можешь написать одним словом.\n\n"
+            "Завтра пришлю следующий шаг."
+        )
+        return True
+
     keyword = get_lead_keyword()
     upper = text.upper()
     if upper != keyword and keyword not in upper.split():
@@ -505,7 +512,7 @@ async def try_payment_confirm(update: Update) -> bool:
                 "",
                 "Пройдите тест. Когда увидите свой уровень — напишите боту:",
                 "/level1 · /level2 · /level3",
-                "или /levelscore 42 (ваш балл) — пришлю PDF гайд в личку.",
+                "или /levelscore 42 (ваш балл) — пришлю PDF вашего уровня в личку.",
                 "",
                 "Разбор маршрута A–E — по запросу за 24–48 часов.",
             ]
@@ -587,7 +594,7 @@ async def deliver_level_pdf(
             await ask_subscribe(
                 message,
                 callback_data=f"subok:level:{level}",
-                what="гайд вашего уровня",
+                what="PDF вашего уровня",
             )
             return False
 
@@ -601,7 +608,7 @@ async def deliver_level_pdf(
     await message.reply_text(
         f"Ваш результат: **{title}**\n"
         + (f"{summary}\n" if summary else "")
-        + "\nОтправляю персональный гайд PDF.",
+        + "\nОтправляю персональный PDF вашего уровня.",
         parse_mode="Markdown",
     )
 
@@ -642,7 +649,7 @@ async def cmd_level(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             level = None
     if level not in (1, 2, 3):
         await update.message.reply_text(
-            "Напишите /level1, /level2 или /level3 — пришлю гайд вашего уровня.\n"
+            "Напишите /level1, /level2 или /level3 — пришлю PDF вашего уровня.\n"
             "Либо: /levelscore 42 — подберу уровень по баллам."
         )
         return
@@ -684,12 +691,12 @@ async def on_subscribe_check(
             if query.message
             else (update.effective_chat.id if update.effective_chat else user.id)
         )
-        # Re-send full subscribe guide (keyboard) so Start/callback never dead-ends.
+        # Re-send full subscribe screen so Start/callback never dead-ends.
         await send_subscribe_prompt(
             context=context,
             chat_id=chat_id,
             callback_data=data,
-            what="гайд" if data == "subok:telo" else "гайд вашего уровня",
+            what="тренировку" if data == "subok:telo" else "PDF вашего уровня",
             reply_to_message=query.message,
         )
         tip = (
@@ -724,7 +731,7 @@ async def cmd_start_products(update: Update, context: ContextTypes.DEFAULT_TYPE)
     if not args:
         return False
     arg = args[0]
-    if arg in ("telo", "lead", "gaid", "guide", "гайд"):
+    if arg in ("telo", "lead", "gaid", "guide", "гайд", "workout", "train", "тренировка"):
         await flow_telo(update, context)
         return True
     if arg in ("test", "testik", "body_test"):

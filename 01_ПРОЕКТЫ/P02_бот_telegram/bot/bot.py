@@ -202,7 +202,7 @@ async def _funnel_ask_question(course_id: str, course_title: str, step: int, pre
 
 
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Instagram → Start: subscribe guide → (callback) guide + follow-ups."""
+    """Instagram → Start: subscribe → workout + drip follow-ups."""
     from handlers_products import flow_telo
 
     if not update.effective_user:
@@ -211,7 +211,7 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     args = context.args or []
 
     try:
-        # Deep links: test / kurs / club / menu / … (not the lead guide)
+        # Deep links: test / kurs / club / menu / … (not the lead workout)
         if args and await cmd_start_products(update, context):
             return
 
@@ -551,7 +551,14 @@ def main() -> None:
         except (ValueError, TypeError):
             pass
     async def _post_init(application: Application) -> None:
-        """Menu button opens Mini App (HTTPS catalog)."""
+        """Menu button + restore pending lead drip jobs after restart."""
+        from followups import restore_lead_followups
+
+        try:
+            await restore_lead_followups(application)
+        except Exception as exc:
+            logger.warning("restore_lead_followups failed: %s", exc)
+
         url = (getattr(config, "MINI_APP_URL", "") or "").strip()
         if not url:
             return

@@ -116,7 +116,7 @@ def get_lead_keyword() -> str:
 
 
 def get_lead_delivery() -> str | None:
-    """Channel post URL for the lead guide (prefer page_url over local PDF)."""
+    """Channel post URL for the free daily workout (prefer page_url)."""
     p = get_product("lead_telo") or {}
     for key in ("page_url", "file_url", "file_id_or_url"):
         val = (p.get(key) or "").strip()
