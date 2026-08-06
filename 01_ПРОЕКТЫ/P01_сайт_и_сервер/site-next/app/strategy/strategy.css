@@ -100,13 +100,15 @@
 }
 
 .st-btn--primary {
-  background: linear-gradient(135deg, var(--st-bronze), var(--st-bronze-hi));
+  background: linear-gradient(135deg, #b98a52 0%, #d0a265 100%);
   color: #14110d;
   padding: 0.95rem 1.4rem;
+  box-shadow: 0 8px 28px rgba(185, 138, 82, 0.22);
 }
 
 .st-btn--primary:hover {
-  filter: brightness(1.05);
+  background: linear-gradient(135deg, #c4965c 0%, #dbb07a 100%);
+  box-shadow: 0 10px 32px rgba(185, 138, 82, 0.3);
 }
 
 .st-btn--ghost {
@@ -132,10 +134,26 @@
 }
 
 .st-hero {
+  position: relative;
   padding: 3.5rem 0 2.5rem;
+  isolation: isolate;
   background:
-    radial-gradient(ellipse 70% 55% at 80% 20%, rgba(185, 138, 82, 0.12), transparent 60%),
-    var(--st-bg);
+    radial-gradient(ellipse 55% 50% at 12% 35%, rgba(185, 138, 82, 0.1), transparent 58%),
+    radial-gradient(ellipse 70% 60% at 88% 18%, rgba(185, 138, 82, 0.14), transparent 62%),
+    linear-gradient(165deg, #080808 0%, #111111 48%, #0c0c0c 100%);
+}
+
+.st-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 40% 45% at 72% 42%,
+    rgba(185, 138, 82, 0.08),
+    transparent 70%
+  );
 }
 
 .st-hero__grid {
@@ -290,21 +308,57 @@
   background: linear-gradient(160deg, #1a1a1a, #0a0a0a 55%, rgba(185, 138, 82, 0.18));
   border: 1px solid rgba(255, 255, 255, 0.06);
   aspect-ratio: 819 / 1024;
+  box-shadow:
+    0 0 0 1px rgba(185, 138, 82, 0.08),
+    0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 901px) {
+  .st-hero__frame {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 6%,
+      #000 88%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 6%,
+      #000 88%,
+      transparent 100%
+    );
+  }
 }
 
 .st-hero__photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 18%;
 }
 
 .st-hero__fade {
   position: absolute;
   inset: auto 0 0;
-  height: 28%;
-  background: linear-gradient(to top, var(--st-bg), transparent);
+  height: 32%;
+  background: linear-gradient(
+    to top,
+    #080808 0%,
+    rgba(8, 8, 8, 0.72) 35%,
+    transparent 100%
+  );
   pointer-events: none;
+}
+
+@media (min-width: 901px) {
+  .st-hero__fade {
+    height: 38%;
+    background:
+      linear-gradient(to top, #080808 0%, rgba(8, 8, 8, 0.55) 40%, transparent 100%),
+      linear-gradient(to left, rgba(8, 8, 8, 0.35) 0%, transparent 28%);
+  }
 }
 
 .st-glass {
@@ -315,16 +369,25 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.75rem;
   border-radius: 18px;
-  border: 1px solid rgba(185, 138, 82, 0.22);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(185, 138, 82, 0.06) 40%,
-    rgba(255, 255, 255, 0.03)
-  );
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(185, 138, 82, 0.07) 42%,
+      rgba(255, 255, 255, 0.03)
+    ) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(185, 138, 82, 0.45),
+      rgba(255, 255, 255, 0.08) 45%,
+      rgba(185, 138, 82, 0.28)
+    ) border-box;
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .st-glass__item {
@@ -670,6 +733,10 @@
 
   .st-hero__frame {
     width: min(100%, 340px);
+  }
+
+  .st-hero__photo {
+    object-position: center 12%;
   }
 
   .st-hero__insights {
