@@ -1,43 +1,44 @@
-# t-800-research-synthesizer — Atmosfera 3D producer MVP
+# t-800-research-synthesizer — EG client programs
 
-**Date:** 2026-08-04  
+**Date:** 2026-08-05  
 **memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**topic:** curated HITL producer pack (skills + 1–2 subagents + 1 command)  
+**topic:** Client programs — skills + `/eg-programma` (post-session / monthly / long-term)  
 **status:** ok  
 **needs_more_sources:** false  
 **confidence:** high
+
+---
 
 ## Families compared
 
 | Family | Status | Weight |
 |--------|--------|--------|
-| Vendor (Cursor/Claude/OpenAI/Gemini) | ok 2026-08-04 | primary cursor_fit |
-| Repo mines (creator-studio + vyral + corey/kostja light) | ok/warn | architecture + craft |
-| ClawHub (founder/content modules; reject scrape/autopost) | ok patterns; block verbatim | module schema + security DROP |
-| News (changelog + HN skills) | ok | skill-first; ignore Automations/Workspace v1 |
-| Local SoT (eg-news-to-blog, kontent/prodazhi, brand-safety) | always current | HITL + bans + thin-agent gap |
-| GitHub specialist fragment | **stale** (2026-07-29 vault topic) | superseded by repo-miner |
-| Community specialist fragment | **stale** (2026-07-29 vault topic) | axes from news HN + strategist; modular consensus held |
+| Local-vault (lead package) | ok 2026-08-05 | SoT structure, product boundary §14, eg-producer/eg-news HITL, STYLE SPEC draft |
+| Vendor-docs (Cursor + Claude/OpenAI/Gemini) | ok 2026-08-05 · 10 sources | cursor_fit, progressive refs, disable-model-invocation |
+| ClawHub (6 cards + rejects) | ok 2026-08-05 · patterns only | section maps, HITL gates; REJECT clinical/auto-send |
+| Community (agentskills + forum · package) | ok 2026-08-05 | 1+refs signal; anti 3-thin duplicate; command+skill |
+| News / GitHub mines | skip / nice only | no_mass_github; no delta needed |
 
-**Filtered out:** ClawHub Playwright/scrape/Buffer auto-send; Cursor Automations always-on; mass 50–160 skill installs; freshness `block` body copy; OpenAI parallel_agents notebook (>180d) — pattern only via fresher orch notebooks.
+**Filtered out:** ClawHub Personal Fitness Coach (fake Dr/clinic), KrumpPhysio clinical ROM, Fitness Engine injury-diagnose voice, auto-send/email, monolith skill essay, STYLE SPEC prose inside skill body.
 
-## Axis decisions (decisive)
+---
 
-| Axis | Winner | Why |
-|------|--------|-----|
-| skill_first vs agent_first | **skill_first** | Cursor docs: prefer skills for single-shot; HN Aug 2 progressive skills; agents = clean-context specialists only |
-| EXTEND vs CREATE pair | **EXTEND kontent + prodazhi** (skill-backed) | Scout gap = thin agents; CREATE duplicates names/roles; Zero-Copy hygiene |
-| monolith vs modular+router | **modular pack + thin router command** | kostja SkillsBench 2–3/task; vyral multi-skill; creator-studio router shape kept as *command/skill router* not 1 fat monolith |
-| progressive disclosure | **yes** | Anthropic L1–L3 + Cursor skills + eg-news-to-blog refs pattern |
-| HITL depth | **structural multi-STOP** (beats → draft → ready); dual-hash **only** if blog/social publish path | Mirror eg-news gates; no auto-publish; drafts ≈ `published: false` |
-| CTA | **eg.egoshev.ru/anketa** one-ask | vyral one-ask + creator signal-match; YouTube ≠ anketa domain |
-| security | **REJECT** IG Playwright / scrape / schedule APIs | ClawHub flags |
-| curation | **4–5 skills** (not 160) | no_mass_download |
-| autopost | **out of pack** | Dev boundary; news ignore Automations |
+## Axis scorecard (A vs B vs C)
 
-## Winner
+| Axis | A: 1 skill+3 refs+/eg-programma | B: 3 thin skills+cmd | C: monolith |
+|------|----------------------------------|----------------------|-------------|
+| cursor_fit | **win** progressive + slash-gate | ok but sprawl | fail context ring |
+| modular_architecture | **win** shared HITL/bans | weaker duplicate SKILL.md | fail |
+| zero_copy | **win** cite paths only | ok if shared refs | fail embed risk |
+| brand_safety | **win** one ban block | drift risk ×3 | weak |
+| hitl_gates | **win** disable-model-invocation | ok | weak auto-trigger risk |
+| doc_type_coverage | **win** 3 L3 refs | win but costlier | fake via bloat |
+| command_ux | **win** args route | ok discoverability | skill-only weak |
+| security | **win** no PII in skill | same if careful | same |
+| completeness | covered ≥8 families | same | same |
+| optional_agent | **skip** (router enough) | skip | n/a |
 
-**Hybrid modular skill pack (≤5) + thin `/eg-producer` router command + EXTEND `kontent`/`prodazhi` as skill-backed specialists — HITL drafts only.**
+**Winner:** Architecture **A**.
 
 ---
 
@@ -47,186 +48,158 @@
 status: ok
 synthesis:
   recommended_approach: >
-    Skill-first hybrid: modular EG producer skill pack (4–5 skills, progressive
-    disclosure) + one thin slash router `/eg-producer` (+ RU alias `/продюсер`)
-    + EXTEND existing thin agents kontent (drafter) and prodazhi (CTA/anketa/
-    objections) to invoke skills — do NOT create a parallel agent pair; do NOT
-    ship autopost/scrape; reuse eg-news-to-blog HITL + eg-news-brand-safety.
+    Architecture A — one router skill `eg-client-programs` (thin SKILL.md)
+    + references/{post-session,monthly-plan,long-term}.md (+ shared bans-checklist.md)
+    + thin slash command `/eg-programma` with $ARGUMENTS
+    (post-session|monthly|long-term; empty → ask) + optional Cyrillic alias `/программа`
+    (mirror `/продюсер`; reliability open_q). HITL drafts only to
+    `90_ВХОДЯЩИЕ/program-drafts/`; disable-model-invocation: true; optional agent: skip.
+    Zero-Copy cite vault SoT; never embed STYLE SPEC / 50-programs essays in skill.
   why_best: >
-    Maximizes cursor_fit (vendor: skills for workflows, 1–2 agents for clean
-    context, commands as orchestration), completeness without mass-download
-    (repo-miner: creator-studio architecture + vyral craft; clawhub: pillars/
-    calendar/voice schemas only), brand_safety (local SoT bans + reject ClawHub
-    auto-send), and HITL (news: ignore Automations; local dual-gate pattern).
-    EXTEND beats CREATE: scout already named kontent/prodazhi as the gap to
-    skill-back. Modular pack beats monolith: community/authoring hygiene
-    (2–3 skills/task) + eg-news already proved progressive refs work.
+    Maximizes cursor_fit (Cursor docs: thin SKILL + references/ progressive disclosure;
+    slash-only via disable-model-invocation) and modular_architecture without skill sprawl.
+    Shared HITL/bans/product-boundary (§14 post-session ≠ monthly paid protocol) live once —
+    community flags 3 thin skills that duplicate logic as anti-pattern; vendor prefers A;
+    local eg-producer proves thin command → skill + refs + STOP gates. Brand_safety and
+    security: one ban block + ClawHub rejects (no Dr/clinic, no auto-send). Completeness
+    ≥8 dated sources without github mines. Agent EXTEND adds no gap — eg-producer studio
+    also runs command+skill without a dedicated studio agent.
   runners_up:
-    - approach: "Monolith single creator-studio-style skill + 1 command, no pack split"
+    - name: "B: 3 thin skills + /eg-programma"
       why_weaker: >
-        Token/Description Trap risk; harder progressive disclosure; conflicts
-        with kostja SkillsBench and vyral multi-skill craft depth.
-    - approach: "Agent-first: CREATE eg-producer + eg-warmup pair; skills thin or absent"
+        Discoverability as three /skills is the only upside. Shared bans/HITL/Zero-Copy
+        either duplicate across SKILL.md (drift) or collapse to shared references/ —
+        then B is A with extra factory surface. Community anti-pattern: 3 thin duplicate
+        skills. eg-producer craft split is justified by different crafts (reels/seo);
+        here three doc types share one domain router.
+    - name: "C: monolith skill"
       why_weaker: >
-        Vendor prefers skills for single-shot; duplicates kontent/prodazhi;
-        agents without skill refs drift into essay prompts.
-    - approach: "Mass-curate ClawHub/GitHub marketing mega-packs (50–160)"
+        Context bloat (agentskills: SKILL.md <500 lines / <5k tok); forces essay copy of
+        vault SoT (Zero-Copy fail); worse progressive disclosure; rejected by strategist
+        hypothesis and vendor lean.
+    - name: "Optional agent EXTEND for client programs"
       why_weaker: >
-        Explicit no_mass_download; security flags (scrape/Playwright/schedule);
-        brand tone collision (viral/crypto/medical).
-    - approach: "Skill pack + Cursor Automations / Workspace Docs auto-write for publish"
-      why_weaker: >
-        Conflicts HITL no-auto-publish; news says ignore Automations + Workspace
-        plugins for v1; Dev owns TG/VK/site Wave2.
+        No clean-context specialist gap; command+skill covers routing like eg-producer
+        without dedicated agent. EXTEND only if later multi-chat longitudinal client
+        memory needs a named agent — out of v1 scope.
   merge_plan: >
-    A=tanishaio/creator-studio: SKILL/command workflow router table; voice gate
-    (pre-fill from EG vault, HITL refresh only); calendar columns; idea→script→
-    caption→repurpose chain; templates shape (not India/Hinglish content).
-    B=vyralcontent/content-skills: hook batch 6–10 + 3-layer; Hook→Escalation→
-    Payoff→CTA spine; TIME|SPOKEN|ON-SCREEN|VISUAL grid; bait anti-patterns;
-    one-ask CTA mapped to anketa/директ/студия/курс — strip viral/FOMO/upsell.
-    C=ClawHub founder+content-marketing (patterns only): pillars schema;
-    funnel TOFU/MOFU/BOFU → EG ladder; SEO brief skeleton; editorial status
-    machine idea→draft→review→ready (never auto-published); DROP Web3/schedule.
-    D=vendor Cursor/Claude/OpenAI/Gemini: progressive L1–L3; frontmatter
-    name+description+Do NOT; model inherit; structured beat YAML in skill body;
-    XML brand/bans sections; STOP before irreversible; optional readonly verifier
-    via Task — no invent JSON-schema API / tools: on agents.
-    E=local eg-news-to-blog: progressive skill layout (refs tone-bans/brand-voice/
-    workflow); dual HITL phrase gates when social/blog path; published:false
-    default for drafts; command pair UX (/run → /approve); rule reuse
-    eg-news-brand-safety + atmosfera-3d; Zero-Copy cite TRAINING_SYSTEM /
-    CONTENT_ROUTER — no essay paste.
-    F=coreyhaines+kostja (light): context-first before questions; authoring
-    checklist; 2–3 skills per task — not 50+.
+    STRUCTURE from local eg-producer-studio + /eg-producer: thin command router,
+    args → load matching craft path, HITL STOP before client-facing use; draft inbox
+    pattern. From eg-news-to-blog: disable-model-invocation true, brand-safety ban block,
+    draft-only never publish — lighter gates (single draft STOP + optional bans checklist
+    gate; no dual article/social hash). L3 CONTENT MAPS from vault: cite 50-programs.mdc
+    + TEMPLATE-program.md for type1; STYLE SPEC section maps for type1–3 as draft-gated
+    (if not «утверждаю» → markdown structure drafts citing STYLE SPEC as draft OR require
+    human confirm — brain open_q). Type3 = thinner skeleton ref only (future product;
+    no PDF canon). PRODUCT BOUNDARY from CURSOR PROMPT §14 + HOME_AND_FREE_EQUIPMENT
+    funnel: post-session title ≠ «Персональная программа на 30 дней»; no full sets/reps
+    protocol in type1; monthly = paid separate; long-term = accompaniment. VOICE/CTA cite
+    10-voice, 20-products, 40-design (inbox Claude OS) — paths only. PDF visual: cite
+    EG_PDF_PREMIUM_STYLE_SYSTEM.md Zero-Copy only (research does not author PDF).
+    CLAWHUB adapt only: Meeting Notes section spine, HITL Protocol soft gate, Wisdom
+    longitudinal slots → type3 skeleton, Fitness Engine week/phase blocks → monthly ref;
+    REJECT Dr/clinic/auto-send/disease intake. VENDOR prompt craft: Claude XML
+    <sot>/<bans>/<doc_type> + quote-ground; OpenAI-style draft frontmatter
+    {doc_type, hitl: draft, citations[], refused_claims[]}; Gemini constraints +
+    section-completion. Factory later writes `.cursor/` only — do not invent STYLE SPEC
+    essay inside skill.
   conflicts:
-    - conflict: "ClawHub/afrexai & calendar cards push schedule/Buffer vs Atmosfera HITL"
-      resolution: "HITL wins — adapt schemas only; DROP auto-send (clawhub security + intake)"
-      winner: "vendor + local SoT + intake constraints"
-    - conflict: "creator-studio monolith router vs vyral modular pack vs Cursor migrate-commands→skills"
-      resolution: "Modular skills + thin command as router (creator-studio table in command; craft in skills)"
-      winner: "hybrid (repo-miner eg_synthesis + vendor commands-as-routine)"
-    - conflict: "Cursor /docs/agent/commands Skills-centric vs Customize still lists Commands"
-      resolution: "Ship one .cursor/commands/eg-producer.md orchestrator; long-term may migrate-to-skills with disable-model-invocation"
-      winner: "customize-cursor + plugins reference"
-    - conflict: "github/community specialist fragments (Jul 29 vault) vs this producer topic"
-      resolution: "Do not use stale vault synthesis; use repo-miner + news HN modular/skill-first signals"
-      winner: "2026-08-04 producer findings"
-    - conflict: "UiPath HITL named in compare brief but no dated finding in specialist fragments"
-      resolution: "Do not invent UiPath; HITL stop points from Claude/Gemini/Cursor hooks + eg-news dual gates"
-      winner: "vendor + local SoT"
+    - issue: "STYLE SPEC existence"
+      sides: "Strategist probe: not in vault yet vs lead findings 2026-08-05: EG_CLIENT_PROGRAMS_STYLE_SPEC.md EXISTS as draft HITL"
+      winner: "lead findings — file exists; status = draft NOT SoT until Евгений «утверждаю»"
+      resolution: "Skill gates on approval status; cite as draft until affirmed"
+    - issue: "Architecture A vs B (discoverability)"
+      sides: "Vendor+community+strategist prefer 1+refs; B offers three /skill names"
+      winner: "A — args on /eg-programma + clear description; discoverability via command UX"
+      resolution: "Do not ship B unless product later demands three slash skill names; then hybrid thin wrappers → shared refs (still prefer single identity)"
+    - issue: "Skill name eg-client-programs vs eg-programma"
+      sides: "Vendor open_q; command is eg-programma"
+      winner: "eg-client-programs for skill folder (domain clarity); command stays /eg-programma"
+      resolution: "Mirror eg-producer-studio skill vs /eg-producer command naming"
+    - issue: "Cursor commands converging to skills vs keep command file"
+      sides: "Vendor: commands help → skills; local: eg-producer keeps thin command"
+      winner: "Keep thin .cursor/commands/eg-programma.md as router + skill with disable-model-invocation"
+      resolution: "Same proven hybrid as eg-producer; skill-only later optional"
+    - issue: "Community fragment file vs package date"
+      sides: "On-disk t-800-research-community.md stale 2026-07-29 (AGENTS topic); package summarizes 2026-08-05 community"
+      winner: "User/lead findings package for this topic (1+refs, command+skill)"
+      resolution: "Rank package community signal; do not trust stale fragment body for this synthesis"
   confidence: high
   sources_ranked:
-    - url: "https://cursor.com/docs/skills"
+    - id_or_url: "local:50-programs.mdc + TEMPLATE-program.md + §14 product boundary"
       score: 98
-      family: vendor
-    - url: "https://cursor.com/docs/subagents"
+      role: "SoT structure + commercial doc-type split (Zero-Copy cite)"
+    - id_or_url: "local:eg-producer-studio + /eg-producer HITL router"
       score: 96
-      family: vendor
-    - url: "https://cursor.com/docs/customize-cursor"
-      score: 94
-      family: vendor
-    - url: "https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/overview"
-      score: 93
-      family: vendor
-    - url: "https://github.com/vyralcontent/content-skills"
-      score: 92
-      family: repo_mine
-    - url: "https://github.com/tanishaio/creator-studio-skill"
-      score: 88
-      family: repo_mine
-      note: "architecture warn (low stars); replace niche content"
-    - url: "file://.cursor/skills/eg-news-to-blog/"
+      role: "Golden modular precedent for merge_plan shape"
+    - id_or_url: "https://cursor.com/docs/skills"
       score: 95
-      family: local_sot
-    - url: "https://clawhub.ai/renehdzgtz/founder-content-marketing"
-      score: 82
-      family: clawhub
-      note: "patterns only; unknown_date block_verbatim"
-    - url: "https://clawhub.ai/ivangdavila/content-marketing"
-      score: 80
-      family: clawhub
-    - url: "https://news.ycombinator.com/item?id=49139845"
-      score: 78
-      family: news
-    - url: "https://cursor.com/changelog/google-workspace-plugins"
-      score: 70
-      family: news
-      note: "confirm ignore_v1; block_factory false"
-    - url: "https://github.com/kostja94/marketing-skills"
-      score: 75
-      family: repo_mine_light
-    - url: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+      role: "Official progressive disclosure + disable-model-invocation"
+    - id_or_url: "local:eg-news-to-blog + eg-news-brand-safety"
+      score: 92
+      role: "HITL draft-only + ban pattern (lighter for client docs)"
+    - id_or_url: "local:EG_CLIENT_PROGRAMS_STYLE_SPEC.md (draft HITL)"
+      score: 90
+      role: "Section maps ×3 types; gate until утверждаю"
+    - id_or_url: "https://agentskills.io/ + community 1+refs signal"
+      score: 88
+      role: "SKILL size limits; modular_recommendation_signal 1+refs"
+    - id_or_url: "vendor: Claude/OpenAI/Gemini prompting cookbooks"
       score: 85
-      family: vendor
-    - url: "https://ai.google.dev/gemini-api/docs/prompting-strategies"
-      score: 80
-      family: vendor
+      role: "XML quote-ground, structured refusal, constraints/completion"
+    - id_or_url: "clawhub: Meeting Notes Pro + HITL Protocol + Human Approval"
+      score: 78
+      role: "Adapt section/HITL patterns only"
+    - id_or_url: "clawhub: Wisdom Coach + Fitness Engine (stripped)"
+      score: 70
+      role: "Type3 slots + monthly phase/week skeleton"
+    - id_or_url: "local:HOME_AND_FREE_EQUIPMENT_FUNNEL.md + voice/products/design rules"
+      score: 72
+      role: "Ladder CTAs + tone cite pack"
+    - id_or_url: "EG_PDF_PREMIUM_STYLE_SYSTEM.md (cite-only path)"
+      score: 65
+      role: "Visual Zero-Copy sibling; no PDF authoring in research"
+    - id_or_url: "clawhub REJECT: Personal Fitness Coach / KrumpPhysio"
+      score: 60
+      role: "Negative security/brand examples"
   needs_more_sources: false
   gaps_for_lead: []
-
-recommended_artifacts:
-  skills:
-    - "eg-producer-studio  # router workflows: voice refresh, pillars, calendar, repurpose matrix; refs→EG SoT pointers"
-    - "eg-reels-script      # hooks batch + timed grid + spine + caption one-ask; anti-bait; brand bans ref"
-    - "eg-warmup           # Reels→Stories→Direct sequence pack (not Stories-only)"
-    - "eg-seo-brief        # SEO brief + optional draft copy; HITL; drafts only; NO site Wave2 edits"
-    # optional 5th if factory needs split:
-    # - "eg-caption-cta    # only if eg-reels-script body exceeds progressive budget"
-  subagents:
-    - name: kontent
-      role: "EXTEND — content drafter; Task-invokes producer skills; emits beat schema then draft; HITL stop"
-    - name: prodazhi
-      role: "EXTEND — CTA rail eg.egoshev.ru/anketa, direct/objections, offer-bridge soft sell; bait/medical scan on offer CTAs"
-  command: "/eg-producer  # primary; RU alias /продюсер in same or paired command md; orchestrates skills + Task(kontent|prodazhi); STOP at beats, draft, ready"
-  rules_reuse:
-    - ".cursor/rules/eg-news-brand-safety.mdc"
-    - ".cursor/rules/atmosfera-3d.mdc"
-    # no new alwaysApply brand essay; cite vault SoT Zero-Copy
-  extend_vs_create: >
-    EXTEND kontent.md + prodazhi.md (skill-backed, richer description triggers,
-    point to .cursor/skills/eg-* ). Do NOT CREATE eg-producer/eg-warmup agent
-    pair. Do NOT mass-clone GitHub/ClawHub. Optional later: readonly critic as
-    Task mode inside kontent — not a 3rd agent in v1.
-
-adaptation_plan: |
-  1) Factory authoring (after brain): scaffold 4 skills under .cursor/skills/*/SKILL.md
-     with L1 description Use when/Do NOT; L2 short pipeline+HITL; L3 references/
-     (tone-bans pointer, beat schema, CTA matrix anketa, anti-patterns EG-safe).
-  2) Pre-fill brand_voice from vault pointers (ГЛАВНЫЙ_КОНТЕКСТ, CONTENT_ROUTER levels,
-     TRAINING_SYSTEM_POSITIONING_MASTER cite-only) — no [ASK] interview every run.
-  3) Write /eg-producer command: router table (idea|script|warmup|seo|calendar) →
-     load skill → emit YAML beats → STOP → Task(kontent) → STOP → optional
-     Task(prodazhi) for CTA → STOP ready; never TG/VK/blog publish.
-  4) PATCH kontent.md + prodazhi.md: description triggers; require skill read;
-     CTA default anketa; model inherit; prodazhi may be readonly when only verifying.
-  5) Mirror eg-news UX: drafts to 90_ВХОДЯЩИЕ/producer-drafts/ (default); explicit
-     published:false / status:draft; dual-hash only if packaging longform→social
-     like eg-news — else triple STOP phrases are enough for v1 Reels/warmup.
-  6) Security strip checklist in every skill Do NOT: Playwright, Apify scrape,
-     Buffer/Meta schedule, medical claims, viral engagement bait, YouTube→eg domain.
-  7) Skip v1: Google Workspace plugins, Automations, Remotion core, site money pages,
-     VK/TG autopost code.
-
-open_questions: []  # resolved with strong defaults below
-open_questions_resolved:
-  - q: "Command locale /eg-producer vs /продюсер?"
-    default: "Primary /eg-producer; add /продюсер alias (same orchestration body)."
-  - q: "EXTEND vs CREATE subagents?"
-    default: "EXTEND kontent + prodazhi."
-  - q: "SEO draft vault path?"
-    default: "90_ВХОДЯЩИЕ/producer-drafts/ (PARA inbox → later sort); not site-next."
-  - q: "Warmup scope?"
-    default: "Reels→Stories→Direct sequence pack."
-  - q: "Google Workspace Docs HITL?"
-    default: "Out of v1 (news+scout)."
+  recommended_artifact: mix
+  artifact_names:
+    skill: eg-client-programs
+    command: eg-programma
+    alias: программа
+    references:
+      - post-session.md
+      - monthly-plan.md
+      - long-term.md
+      - bans-checklist.md
+  draft_path: "90_ВХОДЯЩИЕ/program-drafts/"
+  cite_paths:
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/50-programs.mdc"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/programs/TEMPLATE-program.md"
+    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/05_МЕТОДИКА_И_ПРАКТИКА/EG_CLIENT_PROGRAMS_STYLE_SPEC.md"
+    - "/Users/egoshev/EG_ECOSYSTEM_MASTER/_PRESERVED/OLD_MASTER/06_RULES_AND_OPERATIONS/EG_PDF_PREMIUM_STYLE_SYSTEM.md"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/10-voice-and-language.mdc"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/20-products-prices.mdc"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/40-design-system.mdc"
+    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/02_КЛИЕНТСКИЙ_ПУТЬ/HOME_AND_FREE_EQUIPMENT_FUNNEL.md"
+    - ".cursor/skills/eg-producer-studio/SKILL.md"
+    - ".cursor/commands/eg-producer.md"
+    - ".cursor/skills/eg-news-to-blog/SKILL.md"
+  disable_model_invocation: true
+  optional_agent: skip
+  open_questions:
+    - "STYLE SPEC: skill behavior until Евгений says «утверждаю» — allow draft-cited markdown structure vs hard-block until confirm (brain)"
+    - "Cyrillic /программа alias reliability in Cursor Agent chat (open_q; recommend ship as mirror of /продюсер)"
+    - "When EG_КЛИЕНТЫ/ PARA lands — migrate draft_path from program-drafts/ (PII still not in git)"
+    - "Type3 PDF visual canon — defer until product exists; keep long-term.md skeleton-only for v1"
 ```
 
 ---
 
-## Handoff
+## Human summary
 
-→ research-lead: fold into `research_brief` + coverage_matrix  
-→ prompt-craft: SKILL descriptions + command body + EXTEND agent prompts  
-→ brain-lead: confirm artifact names / vault draft path  
-→ factory: **only after** brain + `/t800-start` — synthesizer does not write agents/skills
+**Победитель: A** — один skill `eg-client-programs` + 3–4 references + `/eg-programma` (+ `/программа`), HITL-only, agent skip.
+
+Согласны: vendor Cursor, community 1+refs, local eg-producer, strategist hypothesis. B слабее из‑за дублей; C — bloat. STYLE SPEC есть, но draft — гейт до «утверждаю».

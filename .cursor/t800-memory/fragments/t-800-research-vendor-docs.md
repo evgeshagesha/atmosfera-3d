@@ -1,307 +1,275 @@
-# t-800-research-vendor-docs — Atmosfera 3D producer pack
+# t-800-research-vendor-docs — EG client programs skill + `/eg-programma`
 
-**Fetched:** 2026-08-04  
-**Task:** DEEP vendor-docs for producer pack (skills + 1–2 subagents + 1 command, HITL, `model: inherit`)  
-**Surface:** `cursor-workspace` → `.cursor/`  
-**Skip:** Kie, Perplexity  
-**OpenAI note:** cookbook.openai.com / platform.openai.com blocked (Cloudflare); patterns mined from GitHub `openai/openai-cookbook` raw notebooks (same content hub).
+**Date accessed:** 2026-08-05  
+**Topic:** Cursor skills/commands + HITL prompting for 3 program doc types  
+**Mode:** DEEP  
+**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
+**status:** ok
+
+> 💡 Official vendor pages only (plus Agent Skills standard hub). No invented publish dates — `date_or_accessed` = access day unless page exposes a date.
 
 ---
 
-## status
+## Machine YAML
 
 ```yaml
 status: ok
-```
-
----
-
-## vendor_docs_brief
-
-```yaml
 vendor_docs_brief:
-  vendors: [cursor, openai, anthropic, gemini]
+  vendors: [cursor, anthropic, openai, gemini]
+  topic: "EG Atmosfera 3D client programs — skills + /eg-programma (post-session / monthly / long-term); HITL drafts; Zero-Copy vault SoT; no medical diagnoses"
+  fetched: "2026-08-05"
+  source_count: 10
+
+  sources:
+    - title: "Agent Skills (Cursor docs)"
+      url: "https://cursor.com/docs/skills"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: docs
+      key_takeaways:
+        - "SKILL.md frontmatter: name (must match folder), description (relevance), optional paths, disable-model-invocation, metadata"
+        - "Optional dirs: scripts/, references/, assets/ — progressive load; keep SKILL.md focused"
+        - "disable-model-invocation: true → slash-only (like classic command); no auto context inject"
+        - "paths / nested .cursor/skills/ scopes when agent works matching files"
+        - "/migrate-to-skills converts slash commands → skills with disable-model-invocation: true"
+
+    - title: "Skills help (customization)"
+      url: "https://cursor.com/help/customization/skills"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: docs
+      key_takeaways:
+        - "Skills = multi-step workflows; rules = short always/matching constraints"
+        - "Invoke via /skill-name or @skill-name"
+        - "Note: https://cursor.com/docs/agent/chat/commands resolves to this skills help — command UX converging on Skills"
+
+    - title: "Prompting agents"
+      url: "https://cursor.com/docs/agent/prompting"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: docs
+      key_takeaways:
+        - "@ mentions for files/folders, terminals, past chats, git diffs, browser — prefer explicit SoT attach for vault cite"
+        - "Context ring: Skills descriptions live in system context; large bodies should stay in references/ (progressive)"
+        - "Switch models mid-chat; capable models for multi-doc structured drafts"
+
+    - title: "Agent Review"
+      url: "https://cursor.com/docs/agent/agent-review"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: docs
+      key_takeaways:
+        - "Human-triggered review gate pattern: /agent-review on demand vs automatic"
+        - "Depth Quick vs Deep — map to HITL draft check vs deep brand/medical-ban audit (conceptual, not code-review copy)"
+
+    - title: "CLI slash commands reference"
+      url: "https://cursor.com/docs/cli/reference/slash-commands"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: docs
+      key_takeaways:
+        - "Built-in slash cmds take optional args (/plan [prompt], /shell [command]) — precedent for /eg-programma [type]"
+        - "Aliases documented for several cmds (/clear≈/new; /shell≈/sh|/run) — optional /программа alias if product wants RU UX"
+
+    - title: "Claude prompting best practices"
+      url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: cookbook
+      key_takeaways:
+        - "XML sections for mixed prompts: instructions / context / examples / documents — unambiguous parse"
+        - "Long docs (20k+): put longform at top; query/instructions after; nest <document> + source + content"
+        - "Ground with quotes from sources before drafting (cite vault SoT, don't invent clinical claims)"
+        - "Clear sequential steps; role in system; refusals — prefer clear user/system bans over prefills"
+        - "Autonomy vs safety: confirm before irreversible/shared actions — maps to no auto-send client docs"
+
+    - title: "Structured Outputs Intro (OpenAI Cookbook notebook)"
+      url: "https://cookbook.openai.com/examples/structured_outputs_intro"
+      date_or_accessed: "accessed 2026-08-05 (via github.com/openai/openai-cookbook raw notebook; cookbook.openai.com Cloudflare-blocked from this host)"
+      freshness: warn
+      kind: cookbook
+      key_takeaways:
+        - "strict schema → UI-ready steps / extracted fields; better than prose-only for gates"
+        - "refusal field when safety refuses — handle separately from schema parse"
+        - "Use cases: structured tutor steps, DB extract, entity→tools — adapt to draft metadata + section checklist"
+
+    - title: "Structured model outputs (OpenAI API)"
+      url: "https://developers.openai.com/api/docs/guides/structured-outputs"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: docs
+      key_takeaways:
+        - "Schema adherence ≠ JSON mode; prefer schema for typed drafts"
+        - "Explicit refusals programmatically detectable — pattern for diagnosis/medical-ban gate"
+        - "Simpler prompting when format is constrained; still need content bans in instructions"
+
+    - title: "Prompt design strategies (Gemini API)"
+      url: "https://ai.google.dev/gemini-api/docs/prompting-strategies"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: cookbook
+      key_takeaways:
+        - "Clear/specific instructions + constraints (do / don't)"
+        - "Response format + completion strategy (start section template, model completes)"
+        - "Examples + response prefix reduce JSON ambiguity; for complex schema use structured output feature"
+        - "og asset share-gemini-api-2026-07.png on page → content refreshed ~2026-07 (not a formal published_on)"
+
+    - title: "Agent Skills Overview (agentskills.io)"
+      url: "https://agentskills.io/home"
+      date_or_accessed: "accessed 2026-08-05"
+      freshness: ok
+      kind: docs
+      key_takeaways:
+        - "Open standard Cursor implements; portable skill packages"
+        - "Cursor listed; progressive/context-efficient skills are first-class across agents"
+
+  cursor_skill_patterns:
+    frontmatter:
+      required: [name, description]
+      optional: [paths, disable-model-invocation, metadata]
+      notes:
+        - "name lowercase/hyphens; must match parent folder"
+        - "description drives Agent Decides relevance"
+        - "legacy globs accepted; new skills use paths"
+    references_progressive_disclosure:
+      - "Keep SKILL.md thin: when-to-use, workflow, bans, cite paths to vault SoT"
+      - "Put per-doc-type templates/checklists in references/ (loaded on demand)"
+      - "Context ring shows skill descriptions always; bodies via progressive load"
+    disable_model_invocation:
+      - "true for HITL clinical-ish docs → only when user types /eg-programma or /skill-name"
+      - "Matches /migrate-to-skills behavior for former slash commands"
+    paths_scoping:
+      - "Optional: paths on draft dirs (e.g. **/programs/**, 90_ВХОДЯЩИЕ/**) if auto-surface desired later"
+      - "Default for client programs: leave paths unset + disable-model-invocation true (explicit only)"
+
+  command_patterns:
+    slash_router:
+      - "Thin command.md: parse $ARGUMENTS → route to skill + load matching references/"
+      - "Local precedent: .cursor/commands/eg-producer.md (studio|reels|warmup|seo + HITL STOP)"
+      - "Suggested args: post-session | monthly | long-term | (empty → ask)"
+    args:
+      - "CLI docs show [prompt]/[command] optional args — same UX for /eg-programma monthly"
+    alias_notes:
+      - "Official CLI uses aliases (/clear=/new; /shell=/sh|/run)"
+      - "Product alias /программа possible as second command file or skill name search — confirm Cyrillic slash UX in Cursor UI (open_question)"
+    migration_note:
+      - "docs/agent/chat/commands → skills help; prefer Skills-first; keep thin command as router OR skill-only with disable-model-invocation"
+
+  hitl_prompt_patterns:
+    structured_sections:
+      - "Claude XML: <sot_docs>, <client_input>, <doc_type>, <bans>, <output_schema> — Zero-Copy cite vault, don't paste corpus into skill"
+      - "Gemini: constraints + response format + completion prefix for section headers from TEMPLATE"
+      - "OpenAI: optional YAML/JSON envelope {doc_type, hitl_status, sections[], citations[], refused_claims[]}"
+    review_gates:
+      - "STOP after draft path written — user phrases: Утверждаю черновик / Ready (mirror eg-producer)"
+      - "No auto-send / no publish; drafts only under inbox or client draft path"
+      - "Optional second gate: brand+bans checklist (Agent Review analogy: on-demand depth)"
+    safety:
+      - "Hard bans: diagnoses, вылечим/исцеление/избавим навсегда, physician-claim"
+      - "On borderline medical ask: refuse diagnosis; offer functional movement framing + human review"
+      - "Claude: confirm before irreversible/shared side effects"
+      - "OpenAI refusal field pattern → surface refusal distinctly; do not coerce into schema"
+
+  implications_for:
+    option_a_1_skill_3_refs:
+      shape: "eg-client-programs (or eg-programma) SKILL.md + references/{post-session,monthly,long-term}.md + thin /eg-programma"
+      pros:
+        - "Matches Cursor progressive disclosure (official)"
+        - "One shared HITL/bans/Zero-Copy cite block — less drift"
+        - "Args load only needed L3 ref → context efficient for long templates"
+        - "Aligns strategist hypothesis + Agent Skills standard"
+      cons:
+        - "Three doc types less visible as separate / menu items unless command args clear"
+    option_b_3_thin_skills_command:
+      shape: "eg-programma-post-session + eg-programma-monthly + eg-programma-long-term + router command"
+      pros:
+        - "Discoverable as three /skills; mirrors eg-producer craft split"
+        - "Independent description triggers if disable-model-invocation false (usually unwanted here)"
+      cons:
+        - "Shared bans/HITL duplicated unless also shared references/ — maintenance cost"
+        - "More factory artifacts for same domain"
+    recommendation_for_synthesizer:
+      preference: "option_a_1_skill_3_refs + /eg-programma $ARGUMENTS"
+      rationale: "Official Cursor skills docs push references/ progressive disclosure; HITL client docs should be slash-gated (disable-model-invocation); eg-producer already proves thin command router + HITL STOP; three refs = three doc types without skill sprawl"
+      hybrid_ok: "If discoverability needed: three thin skills each disable-model-invocation true that only point to shared references/ + same command router — still prefer single skill identity"
+
+  idea_seeds:
+    - source: "Cursor docs/skills — progressive + disable-model-invocation"
+      pattern: "Thin SKILL + references/ + slash-only invocation"
+      adapt_for_cursor: "eg-programma skill: frontmatter disable-model-invocation true; references for 3 doc types; cite vault 50-programs + TEMPLATE paths, never copy essay"
+
+    - source: "eg-producer command + Cursor prompting @"
+      pattern: "Router parses args → craft skill; STOP gates; @attach SoT"
+      adapt_for_cursor: "/eg-programma post-session|monthly|long-term; require @TEMPLATE or Read SoT first; drafts to 90_ВХОДЯЩИЕ/ (or future client path)"
+
+    - source: "Claude XML + long context"
+      pattern: "Documents top, XML wrap, quote-ground then draft"
+      adapt_for_cursor: "Skill instructs: Read SoT → quote section headers → draft; bans in <bans>; output markdown draft only"
+
+    - source: "OpenAI Structured Outputs + refusal"
+      pattern: "Schema for metadata + detectable refusal"
+      adapt_for_cursor: "Optional YAML frontmatter on draft: doc_type, hitl: draft, citations[]; if user asks diagnosis → refuse block, no fake schema fill"
+
+    - source: "Gemini constraints + completion strategy"
+      pattern: "Start template sections; model completes under constraints"
+      adapt_for_cursor: "Prefill section outline from TEMPLATE-program.md; constrain: no diagnoses, services block per 50-programs"
+
+  open_questions:
+    - "Cyrillic slash alias /программа — does Cursor Agent chat reliably register non-ASCII command/skill names?"
+    - "Final draft path SoT: 90_ВХОДЯЩИЕ/ vs future EG_КЛИЕНТЫ/ (strategist: folder not found)"
+    - "EG_CLIENT_PROGRAMS_STYLE_SPEC.md not in vault yet — cite placeholder until Dev lands?"
+    - "Prefer skill name eg-programma vs eg-client-programs for / discoverability?"
+    - "Keep .cursor/commands/eg-programma.md long-term, or migrate fully to skill-only (Cursor commands→skills trend)?"
+
   rows:
     - vendor: cursor
       kind: docs
       url: "https://cursor.com/docs/skills"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Skills = Agent Skills standard: folder + SKILL.md; progressive load
-        (scripts/, references/, assets/). Frontmatter: name, description required;
-        paths, disable-model-invocation, metadata optional. Dirs:
-        .cursor/skills/, .agents/skills/, nested monorepo scoping.
-        /migrate-to-skills converts slash commands → skills with
-        disable-model-invocation: true.
-
-    - vendor: cursor
-      kind: docs
-      url: "https://cursor.com/docs/subagents"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Custom subagents in .cursor/agents/*.md. Fields: name, description,
-        model (default inherit), readonly, is_background. Clean context —
-        parent must pass prompt. Orchestrator pattern: Planner→Implementer→Verifier
-        with structured handoffs. Prefer skills for single-shot tasks.
-        Explicit /name invocation; parallel Task calls.
-
+      fetched: "2026-08-05"
+      takeaway: "Frontmatter + references/ progressive + disable-model-invocation for slash-gated HITL skills"
     - vendor: cursor
       kind: docs
       url: "https://cursor.com/docs/agent/prompting"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Context ring: System + Tools + Rules + Skills descriptions + MCP +
-        Subagents docs + conversation. Model switch mid-chat via picker —
-        do not pin in artifacts when inherit_chat. @ mentions for files/docs
-        when known; else let Agent search.
-
+      fetched: "2026-08-05"
+      takeaway: "@ context + skills descriptions in context ring → keep bodies in references/"
     - vendor: cursor
       kind: docs
-      url: "https://cursor.com/docs/agent/commands"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Official /docs/agent/commands currently redirects to Skills help:
-        multi-step workflows live in skills; slash /skill-name or @skill.
-        Commands remain a first-class Customize extension component
-        (see customize-cursor + plugins reference).
-
-    - vendor: cursor
-      kind: docs
-      url: "https://cursor.com/docs/customize-cursor"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Extension components: Plugins, Rules, Skills, Subagents, Hooks,
-        Commands — “Reusable prompts you invoke with / in Agent chat.
-        Commands are markdown files that define a focused workflow or action.”
-
-    - vendor: cursor
-      kind: docs
-      url: "https://cursor.com/docs/reference/plugins"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Workspace/plugin layout: commands/*.md with frontmatter name+description;
-        agents/*.md name+description (+ Cursor IDE also supports model/readonly/
-        is_background per subagents docs); skills/*/SKILL.md.
-        Discovery: folder-based under .cursor/ for project surface.
-
-    - vendor: cursor
-      kind: docs
-      url: "https://cursor.com/docs/hooks"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Machine HITL: beforeShellExecution can deny + user_message;
-        stop / subagentStop with optional followup_message + loop_limit.
-        Not a substitute for prompt-level brand gates; complements them.
-
-    - vendor: openai
-      kind: cookbook
-      url: "https://github.com/openai/openai-cookbook/blob/main/examples/Structured_Outputs_Intro.ipynb"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-07-14"
-      freshness: ok
-      takeaway: >
-        Structured Outputs: schema-constrained steps (math tutor array of
-        step objects), summarization schemas, entity extraction for tools.
-        Refusal field when schema cannot be filled. Adapt to Cursor as
-        markdown/YAML beat schemas in skill body (no native SO API in Agent).
-
-    - vendor: openai
-      kind: cookbook
-      url: "https://github.com/openai/openai-cookbook/blob/main/examples/Structured_outputs_multi_agent.ipynb"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-07-14"
-      freshness: ok
-      takeaway: >
-        Multi-agent: triage + specialized agents; group tools by role when
-        tool count hurts quality; structured handoff between agents.
-
-    - vendor: openai
-      kind: cookbook
-      url: "https://github.com/openai/openai-cookbook/blob/main/examples/Orchestrating_agents.ipynb"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-07-20"
-      freshness: ok
-      takeaway: >
-        Routines = NL instructions (system) + tools; soft branching;
-        handoffs between agents. Maps to Cursor: command/skill as routine,
-        Task(subagent) as handoff.
-
-    - vendor: openai
-      kind: cookbook
-      url: "https://github.com/openai/openai-cookbook/blob/main/examples/agents_sdk/parallel_agents.ipynb"
-      fetched: "2026-08-04"
-      published_or_updated: "2025-05-06"
-      freshness: block
-      stale_warning: >
-        >180d — use pattern only via fresher multi-agent/orch notebooks;
-        do not copy notebook verbatim. Idea: fan-out specialists → fan-in meta.
-
+      url: "https://cursor.com/help/customization/skills"
+      fetched: "2026-08-05"
+      takeaway: "Commands help redirects here; skills preferred for multi-step workflows"
     - vendor: anthropic
+      kind: cookbook
+      url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices"
+      fetched: "2026-08-05"
+      takeaway: "XML sections, long-doc order, quote-grounding, safety confirmations"
+    - vendor: openai
+      kind: cookbook
+      url: "https://cookbook.openai.com/examples/structured_outputs_intro"
+      fetched: "2026-08-05"
+      takeaway: "Strict schemas + refusal handling for HITL-safe structured drafts (warn: primary site CF-blocked; GH raw used)"
+    - vendor: openai
       kind: docs
-      url: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Clear/direct; explain why; 3–5 diverse examples in XML tags; XML
-        sections for instructions/context/examples; system role for tone;
-        agentic: ask before irreversible/shared-system actions; structured
-        state (JSON) + progress notes across windows.
-
-    - vendor: anthropic
-      kind: docs
-      url: "https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/overview"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Progressive disclosure L1 metadata (~100 tok always) → L2 SKILL.md
-        body on trigger → L3 references/scripts on demand. description =
-        what + when. Aligns with Cursor skills progressive model.
-
+      url: "https://developers.openai.com/api/docs/guides/structured-outputs"
+      fetched: "2026-08-05"
+      takeaway: "Schema adherence + explicit refusals"
     - vendor: gemini
-      kind: docs
+      kind: cookbook
       url: "https://ai.google.dev/gemini-api/docs/prompting-strategies"
-      fetched: "2026-08-04"
-      published_or_updated: "2026-08-04"
-      freshness: ok
-      takeaway: >
-        Constraints + response format + few-shot; system instruction for
-        tone/verbosity; XML/Markdown structured prompts; place persona +
-        constraints first; creative diversity via temperature (Cursor
-        inherit_chat → encode creativity via prompt constraints, not params);
-        agentic: pause on ambiguity/permission; chain/break components.
-
-  idea_seeds:
-    - id: progressive_disclosure_skill_files
-      source: "Anthropic Agent Skills overview + Cursor docs/skills"
-      pattern: >
-        L1 name+description always in context; L2 SKILL.md workflow;
-        L3 references/ (beat templates, brand bans, CTA matrix) and
-        scripts/ loaded only when step needs them.
-      adapt_for_cursor: >
-        Producer skills under .cursor/skills/<name>/SKILL.md keep body
-        short (pipeline steps + HITL gates). Put long brand voice, Reels
-        beat schemas, banned phrases into references/*.md; cite relative
-        paths. Optional paths: for content files only. description must
-        include Use when + Do NOT (anti Description Trap).
-
-    - id: structured_output_for_script_beats
-      source: "OpenAI Cookbook Structured_Outputs_Intro + Structured_outputs_multi_agent (2026-07-14)"
-      pattern: >
-        Schema-guaranteed arrays of step objects; multi-agent triage then
-        specialists; structured handoffs between stages.
-      adapt_for_cursor: >
-        In skill/command body define a fixed YAML/Markdown beat schema
-        (hook, conflict, mechanism, CTA, duration, channel). Require agent
-        to emit that schema before prose polish. Subagent handoffs pass
-        only the structured beat object + brand constraints — not full
-        chat. No inventing Cursor native JSON-schema API.
-
-    - id: brand_voice_constraints_in_system_prompt
-      source: "Claude prompting best practices (role + XML) + Gemini prompting strategies (constraints/tone in system)"
-      pattern: >
-        Role in system; constraints (tone, bans, verbosity) early;
-        XML sections for <brand>, <bans>, <task>, <examples>.
-      adapt_for_cursor: >
-        Put EG voice + medical/copy bans in skill/agent body top
-        (or alwaysApply rule only if short). Use XML-like sections in
-        agent/skill markdown. Few-shot 2–3 Atmosfera lines in
-        references/voice-examples.md — not in description. Explain WHY
-        bans exist (TTS / compliance / premium) so model generalizes.
-
-    - id: human_in_the_loop_stop_points
-      source: "Claude balancing autonomy/safety + Gemini ambiguity/permission + Cursor hooks stop/beforeShellExecution"
-      pattern: >
-        Pause before irreversible/shared-visible actions; ask on
-        ambiguity; machine deny hooks for destructive shell.
-      adapt_for_cursor: >
-        Producer pack: explicit STOP gates in skill/command —
-        (1) after brief/beat schema, (2) after draft script, (3) before
-        any publish/file-write to live blog/TG. Use ask-questions /
-        wait for user phrase. Subagents for draft generation can be
-        readonly: true; only parent writes after approval.
-        Optional hooks for shell publish scripts — not required for v1.
-
-  frontmatter_contracts:
-    skill:
-      path: ".cursor/skills/<name>/SKILL.md"
-      required: [name, description]
-      optional: [paths, disable-model-invocation, metadata]
-      notes: >
-        name must match folder; description = routing (what + when + Do NOT);
-        disable-model-invocation: true if slash-only like classic command.
-
-    subagent:
-      path: ".cursor/agents/<name>.md"
-      required_effective: [description]
-      recommended: [name, description, model, readonly, is_background]
-      model: inherit
-      forbidden: ["tools:"]
-      notes: >
-        Default model inherit for inherit_chat. No model pin.
-        1–2 focused specialists (e.g. script-drafter, brand-verifier).
-
-    command:
-      path: ".cursor/commands/<name>.md"
-      required: [name, description]
-      pattern: >
-        Slash entry that states HITL gates and Task(subagent) handoffs;
-        keep body as orchestration routine, not full brand essay.
-      migration_note: >
-        Cursor 2.4+ /migrate-to-skills can turn commands into skills with
-        disable-model-invocation: true — prefer one surface long-term.
-
-  command_patterns:
-    - name: producer-slash-orchestrator
-      shape: |
-        ---
-        name: eg-produce-<format>
-        description: Run Atmosfera producer pipeline for <format>. HITL at brief, draft, publish.
-        ---
-        # Steps
-        1. Load skill eg-<format>-producer (or follow inline routine)
-        2. Emit structured beats schema → STOP for user
-        3. Task(<drafter>) with beats + brand refs
-        4. Task(<verifier>) readonly brand check
-        5. STOP — user approve before write/publish
-      cite: "OpenAI routines/handoffs + Cursor customize Commands + subagents orchestrator"
-
-  do_not_invent_cursor_apis:
-    - "Do not add tools: to subagent frontmatter (T-800 + Cursor docs omit it)."
-    - "Do not pin model IDs when constraint is inherit_chat — use model: inherit only."
-    - "Do not treat /docs/agent/commands as a separate deep schema — page is Skills-centric; commands = markdown under commands/ per Customize + plugins reference."
-    - "Do not invent native Structured Outputs / JSON Schema enforcement in Cursor Agent — enforce via prompt schema + verifier subagent."
-    - "Do not use legacy skill field globs for new skills — use paths."
-    - "Do not assume cloud subagents inherit local MCP — team cloud MCP only."
-    - "Do not create dozens of vague producer subagents — max 1–2 + skills."
-    - "Do not put full brand essay in description (Description Trap)."
-
-  open_questions: []
+      fetched: "2026-08-05"
+      takeaway: "Constraints, format, completion strategy, examples for structured program sections"
 ```
 
 ---
 
-## Prompt-craft handoff (short)
+## Access notes
 
-| Artifact | Count hint | model | HITL |
-|----------|------------|-------|------|
-| Skills | progressive producer + optional format skills | n/a | stop after beats + draft |
-| Subagents | 1–2 (`inherit`, one may `readonly: true` verifier) | `inherit` | verifier before publish |
-| Command | 1 slash orchestrator in `.cursor/commands/` | n/a | gates in body |
+| Hub | Result |
+|-----|--------|
+| cursor.com/docs/skills | OK (WebFetch + `.md`) |
+| cursor.com/docs/agent/prompting | OK via `.md` (HTML CSR timeout) |
+| cursor.com/docs/agent/chat/commands | Redirects → help/customization/skills |
+| Claude prompting | OK (docs.anthropic.com) |
+| OpenAI cookbook HTML | Cloudflare blocked — used GH raw notebook + developers.openai.com |
+| Gemini prompting-strategies | OK (HTML extract) |
 
-**Hubs covered:** Cursor (≥4 pages) · OpenAI cookbook (≥3 notebooks) · Claude prompting + skills · Gemini prompting strategies.
+**Local cross-check (not counted in vendor source_count):** `.cursor/commands/eg-producer.md` HITL router precedent.

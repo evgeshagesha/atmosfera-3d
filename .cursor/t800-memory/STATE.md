@@ -5,16 +5,40 @@
 
 ## Last run
 
-- **Когда:** 2026-08-04 17:12
-- **Команда:** /t800-fix PATCH · eg-news-to-blog-human-editorial-handoff
-- **Research mode:** SKIP (LIGHT already on Director)
-- **Статус:** ship — factory-auditor PASS · prompt-auditor 94 · t800_run_gate EXIT 0 · 11/11 scope
-- **Fragment:** `fragments/t-800-factory.md`
-- **Brief:** `factory-briefs/eg-news-to-blog-human-editorial-handoff.yaml`
-- **Fix-pack:** `fix-packs/eg-news-to-blog-human-editorial-handoff.md`
+- **Когда:** 2026-08-06 11:30
+- **Команда:** /t800-start · client-programs DEEP research
+- **Research mode:** DEEP
+- **Статус:** research PASS — coverage_matrix pass · 22 sources · approach A skill+refs+command
+- **Fragment:** `fragments/t-800-research-lead.md`
+- **Brief:** research_brief in fragment (brain/factory next; NOT PDF)
+- **Fix-pack:** —
 
 ## In progress
 
+- 2026-08-06 11:30 — `scout`: strategy landing: block_factory; Dev builds /strategy
+- 2026-08-06 11:29 — `intake`: strategy landing: factory SKIP site-next Dev; product 30000
+- 2026-08-06 11:27 — `scout`: landing: block_factory; Dev-only; research SKIP
+- 2026-08-06 11:26 — `intake`: landing personal-strategy: Dev not factory; scout SKIP factory
+- 2026-08-05 19:26 — `factory`: client-programs MVP SHIP; gates exit 0
+- 2026-08-05 19:26 — `factory`: RETRY SHIP: auditor PASS · atmosfera-client-programs-mvp
+- 2026-08-05 19:23 — `factory`: RETRY closeout: artifacts complete, re-audit+gates
+- 2026-08-05 11:40 — `factory`: Factory ▸ auditor PASS · atmosfera-client-programs-mvp ship
+- 2026-08-05 11:36 — `factory`: eg-director-brand.mdc PASS; client-programs factory still may run
+- 2026-08-05 11:36 — `factory`: Factory ▸ auditor PASS + gates exit 0 — eg-director-brand SHIP
+- 2026-08-05 11:33 — `factory`: Factory ▸ architect OK → builder
+- 2026-08-05 11:32 — `factory`: Factory ▸ architect OK → builder eg-director-brand
+- 2026-08-05 11:31 — `factory`: CREATE atmosfera-client-programs-mvp started
+- 2026-08-05 11:30 — `brain`: director-rule brief ready; factory next
+- 2026-08-05 11:30 — `brain`: Brain ▸ domains: context+security → brief ready; CREATE eg-director-brand alwaysApply:false
+- 2026-08-05 11:27 — `prompt_craft`: client-programs specs OK; brain next
+- 2026-08-05 11:26 — `research`: SKIP director-rule; brain next; prices Zero-Copy
+- 2026-08-05 11:25 — `research`: DEEP PASS client-programs; prompt_craft next
+- 2026-08-05 11:24 — `intake`: CREATE rule: director-brand; research SKIP candidate; prices Zero-Copy products.yaml
+- 2026-08-05 ~11:25 — `research`: DEEP PASS client-programs; → brain-lead / prompt-craft
+- 2026-08-05 11:10 — `scout`: client-programs OK; DEEP research next
+- 2026-08-05 11:09 — `scout`: client-programs: stale KB 34d; DEEP next; block_factory=false
+- 2026-08-05 11:07 — `intake`: client-programs: defaults from MASTER PROMPT; egoshev1 confirmed
+- 2026-08-05 11:10 — `done`: /t800-fix eg-news-to-blog-human-editorial-handoff SHIP (prior)
 - 2026-08-04 17:12 — `factory`: auditor PASS + gates exit 0; producer MVP shipped
 - 2026-08-04 17:12 — `factory`: Factory ▸ auditor PASS + gates exit 0 — atmosfera-producer-mvp
 - 2026-08-04 17:02 — `factory`: Factory ▸ architect OK → builder
@@ -66,6 +90,16 @@
 
 ## Completed
 
+- 2026-08-05 19:26 — `factory`: client-programs MVP SHIP; gates exit 0
+- 2026-08-05 19:26 — `factory`: RETRY SHIP: auditor PASS · atmosfera-client-programs-mvp
+- 2026-08-05 19:23 — `factory`: RETRY closeout: artifacts complete, re-audit+gates
+- 2026-08-05 11:40 — `factory`: Factory ▸ auditor PASS · atmosfera-client-programs-mvp ship
+- 2026-08-05 11:36 — `factory`: eg-director-brand.mdc PASS; client-programs factory still may run
+- 2026-08-05 11:36 — `factory`: Factory ▸ auditor PASS + gates exit 0 — eg-director-brand SHIP
+- 2026-08-05 11:33 — `factory`: Factory ▸ architect OK → builder
+- 2026-08-05 11:32 — `factory`: Factory ▸ architect OK → builder eg-director-brand
+- 2026-08-05 11:31 — `factory`: CREATE atmosfera-client-programs-mvp started
+- 2026-08-05 11:25 — `research`: DEEP PASS client-programs; prompt_craft next
 - 2026-08-04 17:12 — `factory`: auditor PASS + gates exit 0; producer MVP shipped
 - 2026-08-04 17:12 — `factory`: Factory ▸ auditor PASS + gates exit 0 — atmosfera-producer-mvp
 - 2026-08-04 17:02 — `factory`: Factory ▸ architect OK → builder

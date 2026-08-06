@@ -1,0 +1,61 @@
+status: ok
+brief_for_factory:
+  pack_name: atmosfera-client-programs-mvp
+  action: CREATE
+  target_context:
+    workspace: /Users/egoshev/Projects/atmosfera-3d
+    memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+    artifact_surface: cursor-workspace
+    target_plugin: null
+    knowledge_vault_path: null
+    ui_language: ru
+  research_brief:
+    ref: fragments/t-800-research-lead.md
+    coverage_verdict: pass
+    confidence: high
+  prompt_craft:
+    ref: fragments/t-800-prompt-craft.md
+    status: ok
+  brain_lead:
+    ref: fragments/t-800-brain-lead.md
+    status: ok
+  recommended_artifact: mix  # skill + commands + scaffold; agent skip
+  create_artifacts:
+    - kind: skill
+      name: eg-client-programs
+      path: .cursor/skills/eg-client-programs/SKILL.md
+      frontmatter:
+        name: eg-client-programs
+        disable-model-invocation: true
+    - kind: skill_refs
+      paths:
+        - .cursor/skills/eg-client-programs/references/post-session.md
+        - .cursor/skills/eg-client-programs/references/monthly-plan.md
+        - .cursor/skills/eg-client-programs/references/long-term.md
+        - .cursor/skills/eg-client-programs/references/bans-checklist.md
+    - kind: command
+      name: eg-programma
+      path: .cursor/commands/eg-programma.md
+    - kind: command_alias
+      name: программа
+      path: .cursor/commands/программа.md
+    - kind: scaffold
+      path: 90_ВХОДЯЩИЕ/program-drafts/.gitkeep
+  skip_artifacts:
+    - agent
+    - rule
+    - hook
+    - director-rule / eg-director-brand
+    - client PDF generation
+    - site / VK / Remotion
+  hitl:
+    draft_path: 90_ВХОДЯЩИЕ/program-drafts/
+    stop_phrase: "Утверждаю черновик"
+  constraints:
+    - "CREATE only listed artifacts"
+    - "NO director-rule in this factory run"
+    - "disable-model-invocation: true"
+    - "Zero-Copy cite vault SoT; STYLE SPEC draft-gated"
+    - "Type1 ≠ 30-day; no sets/reps overload post-session; Type3 skeleton"
+    - "Brand bans no medical promises"
+    - "If conflict with simultaneous director-rule factory — only touch client-programs paths"

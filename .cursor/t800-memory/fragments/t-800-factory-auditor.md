@@ -1,221 +1,152 @@
-# t-800-factory-auditor — Atmosfera 3D producer pack FINAL
+# t-800-factory-auditor — atmosfera-client-programs-mvp (RETRY closeout)
 
-**Date:** 2026-08-04  
+**Date:** 2026-08-05  
 **status:** ok  
-**stage:** auditor  
-**mode:** CREATE + EXTEND (readonly validation)  
-**pack_name:** atmosfera-producer-mvp  
-**agent:** t-800-factory-auditor  
+**pack_name:** `atmosfera-client-programs-mvp`  
+**role:** factory-auditor (readonly validation)  
 **memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**artifact_surface:** cursor-workspace  
-**registry_patch:** null  
-**NOT done:** file edits of production artifacts (readonly)
+**artifact_surface:** `cursor-workspace`  
+**plugin_root:** empty (registry/install SKIP expected)  
+**recommendation:** ship  
+**ralph_wiggum_risk:** false
 
 ---
 
-## Evidence sources
-
-| Source | Result |
-|--------|--------|
-| `fragments/t-800-factory-architect.md` | tree + invariants baseline |
-| `fragments/t-800-factory-builder.md` | claimed 27 paths |
-| `fragments/t-800-factory-integrator.md` | verified 27/27 |
-| `fragments/t-800-prompt-auditor.md` | **status: ok** · critical `[]` · W1–W3 non-blocking |
-| filesystem `test -e` on all CREATE/EXTEND paths | **27/27 OK** |
-| agent FM parse (python) | kontent/prodazhi = 5 keys, no `tools:` |
-| content grep HITL/CTA/drafts/Zero-Copy | pass (see below) |
-| `scripts/validate-agents.sh` (plugin) | **passed** (43 agents) |
-| `scripts/audit-agent-graph.sh` (plugin) | **passed** (43 registry entries) |
-
----
-
-## 1) CREATE path completeness vs architect
-
-| Expected | Count | Actual |
-|----------|------:|--------|
-| Skills SKILL.md | 4 | 4 OK |
-| L3 refs | 18 (5+5+4+4) | 18 OK |
-| Commands | 2 | `eg-producer.md` + `продюсер.md` OK |
-| Scaffold | 1 | `90_ВХОДЯЩИЕ/producer-drafts/.gitkeep` OK |
-| Agents EXTEND | 2 | `kontent.md` + `prodazhi.md` OK |
-| **Total** | **27** | **27/27 exist** |
-
-Missing paths: **none**.
-
----
-
-## 2) EXTEND agents FM
-
-| Check | kontent | prodazhi |
-|-------|---------|----------|
-| keys exactly 5 | `name, description, model, readonly, is_background` | same |
-| `tools:` absent | pass | pass |
-| `model: inherit` | pass | pass |
-| `name` = filename | pass | pass |
-| Use when / Do NOT | pass | pass |
-| lines <150 | 68 | 70 |
-| drafts → producer-drafts | pass | pass |
-| `published: false` | pass | pass |
-| leaf `calls: []` | pass | pass |
-
----
-
-## 3) Forbidden artifacts
-
-| Forbidden | Evidence |
-|-----------|----------|
-| new rules `.mdc` | `.cursor/rules/` = only `atmosfera-3d`, `eg-bot-routing`, `eg-news-brand-safety` (pre-existing) |
-| hooks | no pack hooks; git status no hooks/mcp hits for pack |
-| mcp.json | not created |
-| critic agent | no `*critic*` under `.cursor/agents/` (4 agents: bot×2 + kontent + prodazhi) |
-| registry write | `registry_patch: null` · plugin validate/graph untouched by pack |
-
-**PASS** — DO_NOT list respected.
-
----
-
-## 4) Zero-Copy
-
-- Skill bodies cite SoT paths; no MASTER/ToV essay paste.
-- L3 `pillars.md` one-liner axis + Cite block only (not essay dump).
-- L3 schemas/checklists titled + purpose; lengths ~21–35 lines.
-
-**PASS.**
-
----
-
-## 5) Drafts + published + CTA
-
-| Invariant | Evidence |
-|-----------|----------|
-| `90_ВХОДЯЩИЕ/producer-drafts/` | command, skills, both agents |
-| `published: false` | command, studio, reels, warmup, seo, kontent, prodazhi |
-| one CTA anketa | command + alias hard-pin `https://eg.egoshev.ru/anketa`; reels/warmup/prodazhi L2; seo L3 `brief-schema`/`cluster-cta` |
-
-**PASS** pack-level. Non-blocking W1/W3: seo/studio L2 soft-pin (prompt-auditor).
-
----
-
-## 6) HITL `/eg-producer`
-
-Gates present in primary + alias:
-
-1. «Утверждаю brief»  
-2. «Утверждаю beats»  
-3. «Утверждаю черновик»  
-4. «Ready»
-
-Flow: studio → craft → `Task(kontent)` → `Task(prodazhi)` · nesting ≤2 · leaves no nested Task.
-
-**PASS.**
-
----
-
-## 7) Graph / calls consistency (workspace pack)
-
-```text
-/eg-producer (+ /продюсер)
-  → Read eg-producer-studio
-  → Read craft (reels|warmup|seo)
-  → Task(kontent)   [leaf, calls:[], Read skills]
-  → Task(prodazhi)  [leaf, calls:[], CTA anketa]
-  → producer-drafts/
-```
-
-| Edge | Status |
-|------|--------|
-| command → 4 skills (paths) | pass |
-| command → Task(kontent) → Task(prodazhi) | pass |
-| kontent calledBy `/eg-producer`·main; skills via Read | pass |
-| prodazhi calledBy `/eg-producer`·kontent·main | pass |
-| plugin registry for kontent/prodazhi | N/A (`registry_patch: null`) |
-
-**PASS** for workspace-cursor surface.
-
----
-
-## 8) Description Trap (spot check)
-
-prompt-auditor **ok** on all 8 prompt artifacts. Spot re-check:
-
-- All 4 skills: Use when + Do NOT; name=folder; 100–106 lines.
-- Both agents: routing-only description (7–8 desc lines).
-- Command thin router (65) + alias (29).
-
-**PASS.**
-
----
-
-## 9) Architect tree completeness
-
-Builder/integrator claim 27/27 matches auditor filesystem check. Optional AGENTS.md line present (`/eg-producer` → producer-drafts). Companions none.
-
-**PASS.**
-
----
-
-## Machine gates
+## Verdict
 
 ```yaml
+status: ok
+findings:
+  critical: []
+  warnings:
+    - id: W1
+      item: parallel_director_rule_present
+      note: >
+        .cursor/rules/eg-director-brand.mdc exists from separate pack.
+        This CREATE pack did not write it; brief skip_artifacts honored.
+    - id: W2
+      item: strict_create_without_brief_flag
+      note: >
+        t800_run_gate --strict-create alone → strict_create_brief: skipped_no_slug.
+        With --factory-brief <yaml> → brief ok. Prefer explicit --factory-brief on closeout.
+    - id: W3
+      item: verify_install_global_rule_warn
+      note: >
+        verify-install.sh PASS with WARN: global mandatory-routing rule missing
+        (plugin bootstrap concern; not pack blocker). Pack verify_install = skip.
+    - id: W4
+      item: cyrillic_slash_ux
+      note: >
+        /программа alias documents Latin /eg-programma as primary;
+        Cyrillic slash ID UX not vendor-verified (acceptable).
+passed:
+  - prompt-auditor   # Task 869ce7ba — status ok, 11/11 critical, ship_to_factory_auditor
+  - validate-agents  # 43 agents, exit 0
+  - audit-agent-graph # 43 entries, exit 0
+  - presence_8_8
+  - brief_alignment
+  - sha256_stable
 machine_gates:
-  validate_agents: pass   # plugin t-800-agent; 43 agents OK
-  audit_agent_graph: pass # plugin registry graph OK
-  verify_install: skip    # workspace-cursor; no plugin install
-  prompt_auditor: ok      # critical []; W1–W3 warnings only
-```
-
-`ralph_wiggum_risk: false` — paths + content + scripts executed.
-
----
-
-## Findings
-
-```yaml
-status: ok
-critical: []
-warnings:
-  - id: W1
-    source: prompt-auditor
-    file: .cursor/skills/eg-seo-brief/SKILL.md
-    issue: L2 CTA URL soft («anketa / лестница»); full URL in L3 + command
-    blocking: false
-  - id: W2
-    source: prompt-auditor
-    file: .cursor/skills/eg-warmup/SKILL.md
-    issue: Запреты omit explicit YouTube/врач/тело мечты (covered via medical + rules cite; URL pinned in Роль)
-    blocking: false
-  - id: W3
-    source: prompt-auditor
-    file: .cursor/skills/eg-producer-studio/SKILL.md
-    issue: L2 defers full anketa URL to cta-matrix (router OK)
-    blocking: false
-repair_hints: []   # no fail; optional polish W1–W3 only
-```
-
----
-
-## Passed checklist
-
-- [x] prompt-auditor status ok (required for skill/command/agent)
-- [x] validate-agents.sh pass
-- [x] audit-agent-graph.sh pass
-- [x] CREATE 27 paths exist vs architect
-- [x] EXTEND FM 5 fields / no tools / model inherit
-- [x] no forbidden rules/hooks/mcp/critic
-- [x] Zero-Copy
-- [x] drafts + published:false + CTA anketa
-- [x] HITL gates in eg-producer + alias
-- [x] graph command → skills → kontent → prodazhi
-
----
-
-## Recommendation
-
-```yaml
-status: ok
+  validate_agents: pass
+  audit_agent_graph: pass
+  verify_install: skip
+  t800_run_gate: pass
+  t800_run_gate_strict_create: pass
+  t800_run_gate_with_brief: pass
+  t800_factory_bypass_gate: pass
 ralph_wiggum_risk: false
 recommendation: ship
-note: >
-  Pack atmosfera-producer-mvp READY. Optional non-blocking W1–W3 polish only.
-  Reload Window so Cursor picks up new skills/commands/agents.
 ```
+
+---
+
+## Checklist (RETRY)
+
+| # | Check | Result |
+|---|--------|--------|
+| 1 | prompt-auditor gate | **PASS** — status ok · 11/11 critical · recommendation ship_to_factory_auditor |
+| 2 | create_artifacts 8/8 on disk | **PASS** |
+| 3 | Skill FM: name + description + `disable-model-invocation: true`; no `tools:` | **PASS** |
+| 4 | Commands thin + alias thin | **PASS** (56 / 26 lines) |
+| 5 | HITL STOP «Утверждаю черновик» | **PASS** |
+| 6 | Zero-Copy cite tables; STYLE SPEC draft-gated | **PASS** |
+| 7 | Type1 ≠ 30-day; no sets/reps overload; Type3 skeleton | **PASS** |
+| 8 | Brand bans checklist present | **PASS** |
+| 9 | Skip: agent / rule / hook / director-rule / site/VK | **PASS** (no pack agent/rule; no registry patch) |
+| 10 | AGENTS.md mentions `/eg-programma` | **PASS** |
+| 11 | Registry / docs/T-800-AGENTS.md pack entry | **SKIP** — workspace surface |
+| 12 | SHA256 unchanged vs prior auditor/builder | **PASS** (8/8 match) |
+| 13 | Prior closeout W1–W3 (factory.md / manifest / brief status) | **RESOLVED** |
+
+---
+
+## Artifacts + SHA256 (re-verified)
+
+| path | sha256 |
+|------|--------|
+| `.cursor/skills/eg-client-programs/SKILL.md` | `a1b3fe246e18b5f7e854a0b50748dbddc6b0058f56e76c6e2aaaf1e7df8436d1` |
+| `.../references/post-session.md` | `b857989e8eb5dbc07c55878a5b7518599774e66afc0293cbc19640c49a13607c` |
+| `.../references/monthly-plan.md` | `25e3e2668dfc1569e17e1ee65556a05851673aaf4933a6e200c6c346294159ea` |
+| `.../references/long-term.md` | `4234e37d344e5fb5583ea710329bd958efd659adb82219339951d5a07d742626` |
+| `.../references/bans-checklist.md` | `fe1c46a58562e86bb2d6d878e43f50b51a135b0ebb7ac0dc0f102ef2ab0c3266` |
+| `.cursor/commands/eg-programma.md` | `89d87219f16f8eb8d91ef08869e50fbd659ac89d52b8f5bdc016ced7cc4768e0` |
+| `.cursor/commands/программа.md` | `58083d315bcc7ef0665f86c6c6bb6053e6417a8dc699f5d8313f0c03ded54429` |
+| `90_ВХОДЯЩИЕ/program-drafts/.gitkeep` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+
+---
+
+## Machine gates (executed this RETRY)
+
+| Gate | Result | Notes |
+|------|--------|-------|
+| `validate-agents.sh` | **pass** | plugin 43 agents; pack adds zero agents |
+| `audit-agent-graph.sh` | **pass** | 43 registry entries; no pack agent |
+| `verify-install.sh` | **skip** for pack; plugin script PASS+WARN global rule | empty plugin_root |
+| `t800_run_gate.py` | **pass** | STATE.md ok |
+| `t800_run_gate.py --strict-create` | **pass** | brief skipped_no_slug without flag |
+| `t800_run_gate.py --strict-create --factory-brief …mvp.yaml` | **pass** | brief `status: ok` |
+| `t800_factory_bypass_gate.py` | **pass** | factory_completed true; 3 scanned paths |
+
+**ralph_wiggum_risk:** false — scripts executed this turn.
+
+---
+
+## Brief alignment
+
+- HITL draft → `90_ВХОДЯЩИЕ/program-drafts/` + STOP phrase ✓  
+- STYLE SPEC draft-gated (`style_spec_status: pending`) ✓  
+- Zero-Copy cite vault SoT ✓  
+- Type1 ≠ 30-day; Type3 skeleton; brand bans ✓  
+- NO director-rule in create list ✓  
+- NO site/VK/Remotion/PDF ✓  
+
+---
+
+## Graph (workspace — no registry)
+
+```
+user_slash:/eg-programma → skill:eg-client-programs → refs/{type}+bans
+user_slash:/программа → command:eg-programma → skill:eg-client-programs
+agents: []
+broken calls/calledBy: none
+subagent vs skill conflict: none
+```
+
+---
+
+## Prior departments
+
+| Dept | status |
+|------|--------|
+| architect | ok |
+| builder | ok |
+| integrator | ok |
+| prompt-auditor | ok (RETRY Task 869ce7ba) |
+
+---
+
+## Ship verdict
+
+**SHIP** — `status: ok`. Reload Window to discover skill/commands.
+
+Progress: `Auditor ▸ RETRY closeout PASS · 8/8 · gates evidence · ship`

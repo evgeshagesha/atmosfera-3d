@@ -1,47 +1,46 @@
 {
-  "slug": "atmosfera-producer-mvp",
+  "slug": "atmosfera-client-programs-mvp",
   "command": "/t800-start CREATE",
   "mode": "CREATE",
   "profile": "workspace-cursor",
   "artifact_surface": "cursor-workspace",
-  "plugin_root": "/Users/egoshev/Projects/atmosfera-3d",
+  "plugin_root": "",
   "memory_path": "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory",
-  "brief": ".cursor/t800-memory/factory-briefs/atmosfera-producer-mvp.yaml",
+  "brief": ".cursor/t800-memory/factory-briefs/atmosfera-client-programs-mvp.yaml",
   "registry_patch": null,
   "release_handoff": null,
-  "updated": "2026-08-04T17:12:15+03:00",
+  "updated": "2026-08-05T19:26+03:00",
   "factory": {
     "status": "ok",
     "agent": "t-800-factory",
-    "mode": "CREATE"
+    "mode": "CREATE",
+    "retry": true
   },
   "steps": [
     {
       "agent": "t-800-factory-architect",
-      "status": "ok"
+      "status": "ok",
+      "note": "RETRY: Architecture A already on disk; skip rebuild"
     },
     {
       "agent": "t-800-factory-builder",
-      "status": "ok"
+      "status": "ok",
+      "note": "RETRY: 8 artifacts present complete — no rewrite"
     },
     {
       "agent": "t-800-factory-integrator",
       "status": "ok",
-      "note": "27/27 paths; AGENTS.md +1 line"
+      "note": "RETRY: verified paths + AGENTS.md"
     },
     {
       "agent": "t-800-prompt-auditor",
       "status": "ok",
-      "note": "3 non-blocking warnings"
+      "note": "RETRY 869ce7ba: 11/11 critical PASS"
     },
     {
       "agent": "t-800-factory-auditor",
-      "status": "ok"
-    },
-    {
-      "agent": "t800_run_gate",
       "status": "ok",
-      "exit": 0
+      "note": "RETRY e1e22cad: PASS ship"
     }
   ],
   "stages": {
@@ -53,26 +52,21 @@
     "factory_auditor": "done"
   },
   "artifacts": [
-    ".cursor/skills/eg-producer-studio/",
-    ".cursor/skills/eg-reels-script/",
-    ".cursor/skills/eg-warmup/",
-    ".cursor/skills/eg-seo-brief/",
-    ".cursor/commands/eg-producer.md",
-    ".cursor/commands/продюсер.md",
-    ".cursor/agents/kontent.md",
-    ".cursor/agents/prodazhi.md",
-    "90_ВХОДЯЩИЕ/producer-drafts/.gitkeep"
+    ".cursor/skills/eg-client-programs/SKILL.md",
+    ".cursor/skills/eg-client-programs/references/post-session.md",
+    ".cursor/skills/eg-client-programs/references/monthly-plan.md",
+    ".cursor/skills/eg-client-programs/references/long-term.md",
+    ".cursor/skills/eg-client-programs/references/bans-checklist.md",
+    ".cursor/commands/eg-programma.md",
+    ".cursor/commands/программа.md",
+    "90_ВХОДЯЩИЕ/program-drafts/.gitkeep"
   ],
-  "auditor": {
-    "status": "ok",
-    "findings_critical": [],
-    "warnings": [
-      "W1 seo-brief L2 CTA pin",
-      "W2 warmup bans explicit",
-      "W3 studio CTA via L3"
-    ]
-  },
   "gates": {
-    "t800_run_gate": "PASS"
+    "t800_run_gate": "ok",
+    "t800_run_gate_strict_create": "ok",
+    "t800_run_gate_with_brief": "ok",
+    "t800_factory_bypass_gate": "ok",
+    "prompt_auditor": "ok",
+    "factory_auditor": "ok"
   }
 }

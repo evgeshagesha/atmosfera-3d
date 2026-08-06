@@ -1,11 +1,11 @@
 # t-800-research-lead — DEEP Research Brief
 
-**Date:** 2026-08-04  
-**Topic:** Atmosfera 3D / Евгений Гошев — producer pack MVP  
+**Date:** 2026-08-05  
+**Topic:** Atmosfera 3D / Евгений Гошев — client programs (3 doc types) → skills + `/eg-programma`  
 **memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**Progress:** Research ▸ strategist→7 specialists→synthesis  
-**verdict:** `coverage_matrix.verdict: pass` · `confidence: high`  
-**Handoff:** → brain-lead / factory (OK)
+**Progress:** Research ▸ strategist→4 specialists (+local-vault lead)→synthesis  
+**verdict:** `coverage_matrix.verdict: pass` · `confidence: high` · `sources_count: 22`  
+**Handoff:** → brain-lead / prompt-craft (OK) · **НЕ factory** · **НЕ клиентские PDF**
 
 ---
 
@@ -14,233 +14,203 @@
 ```yaml
 research_brief:
   mode: deep
-  topic: "Atmosfera 3D personal-brand producer pack — Cursor skills + subagents + command (HITL, brand-safe, booking CTA)"
+  topic: "EG Atmosfera 3D client programs — post-session / monthly plan / long-term → Cursor skills + /eg-programma"
   artifact_surface: cursor-workspace
   workspace: /Users/egoshev/Projects/atmosfera-3d
   memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
   scout_alignment:
     block_factory: false
     skills_needed: true
-    existing: "thin kontent+prodazhi; eg-news-to-blog HITL; no producer skill pack"
+    no_mass_github: true
+    existing_gap: "no eg-programma / eg-client-programs; SoT in 50-programs + TEMPLATE + STYLE SPEC draft"
   recommended_artifact: mix
-  artifact_surface_detail: cursor-workspace
+  artifact_surface_detail: "cursor-workspace (.cursor/skills + .cursor/commands only later)"
 
   search_plan:
     intent_artifact: mix
     mode: deep
-    must_channels: [github, repo-miner, clawhub, vendor-docs, community]
-    should_channels: [news, custom_local_sot]
+    must_channels: [custom_local_vault, vendor-docs, clawhub]
+    should_channels: [community]
+    nice_skipped: [news, github_shallow]
     skip_channels:
-      - {id: research-docs, why: "No library/SDK — Context7 not always-on"}
-      - {id: vendor-docs-kie, why: "No image/video market API in MVP"}
-      - {id: github-autopost-scrapers, why: "Dev owns VK/TG autopost"}
-      - {id: remotion-mediabunny-deep, why: "Scripts/warmup/SEO only"}
-      - {id: site-next-money-pages, why: "Dev Wave2; SEO copy patterns only"}
-    adaptation_constraints:
-      - HITL_only_drafts_ok_no_auto_publish
-      - brand_safe_no_medical_claims
-      - atmosfera_eg_tone
-      - no_vk_tg_autopost_code
-      - no_site_edits_wave2
-      - t800_boundary_cursor_artifacts_only
-      - no_mass_download
-      - no_verbatim_clawhub_github_clone
-      - cta_rail: eg.egoshev.ru/anketa
-      - reuse: [eg-news-to-blog dual HITL, kontent.md, prodazhi.md, eg-news-brand-safety.mdc]
-      - models: inherit_chat
+      - {id: docs_context7, why: "No library/SDK/API"}
+      - {id: repo-miner, why: "no_mass_github; deep_mines=0"}
+      - {id: github_as_must, why: "Intake no_mass_github=true"}
+      - {id: remotion_vk_site, why: "OUT per intake"}
+      - {id: pdf_html_pipeline, why: "STYLE SPEC / PDF = Dev; research cites only"}
+      - {id: medical_guideline_sites, why: "No diagnoses; method SoT in vault"}
 
   synthesis:
     recommended_approach: >
-      Skill-first hybrid: modular EG producer skill pack (4 skills, progressive
-      disclosure) + thin slash router /eg-producer (+ /продюсер) + EXTEND kontent
-      (drafter) and prodazhi (CTA/anketa) as skill-backed specialists — HITL drafts
-      only; no autopost/scrape; reuse eg-news HITL + brand-safety.
+      Architecture A — one router skill `eg-client-programs` (thin SKILL.md)
+      + references/{post-session,monthly-plan,long-term,bans-checklist}.md
+      + thin slash `/eg-programma` ($ARGUMENTS: post-session|monthly|long-term; empty→ask)
+      + optional Cyrillic alias `/программа` (mirror `/продюсер`; reliability open_q).
+      HITL drafts → `90_ВХОДЯЩИЕ/program-drafts/`; disable-model-invocation: true;
+      optional agent: skip. Zero-Copy cite vault SoT; never embed STYLE SPEC / 50-programs essays.
     why_best: >
-      Best cursor_fit (skills=workflows, agents=clean context, command=orchestration)
-      + curated completeness (creator-studio architecture + vyral craft + ClawHub
-      schemas, not mass clone) + brand_safety/HITL (local SoT + reject auto-send).
-      EXTEND beats CREATE; modular beats monolith.
+      Cursor docs + agentskills progressive disclosure; shared bans/HITL/product-boundary
+      once (community anti-pattern = 3 thin duplicate skills); local eg-producer proves
+      thin command→skill+refs+STOP; brand_safety + ClawHub rejects (no Dr/clinic/auto-send).
     runners_up:
-      - {approach: "Monolith creator-studio single skill", why_weaker: "Description Trap; weaker progressive disclosure"}
-      - {approach: "Agent-first CREATE new pair", why_weaker: "Duplicates kontent/prodazhi; vendor prefers skills for single-shot"}
-      - {approach: "Mass-curate 50–160 marketing skills", why_weaker: "no_mass_download; security; tone collision"}
-      - {approach: "Pack + Automations/Workspace auto-publish", why_weaker: "Breaks HITL; Dev owns channels"}
+      - {name: "B: 3 thin skills + /eg-programma", why_weaker: "discoverability only; drift unless shared refs → collapses to A"}
+      - {name: "C: monolith skill", why_weaker: "context bloat; Zero-Copy fail"}
+      - {name: "Optional agent EXTEND", why_weaker: "no gap; eg-producer runs without studio agent"}
     merge_plan: >
-      A creator-studio → router, voice gate (vault Zero-Copy), calendar,
-      idea→script→caption→repurpose (strip niche). B vyral → hook batch/3-layer,
-      retention spine, timed grid, bait anti-patterns, one-ask CTA→anketa (strip
-      viral/FOMO). C ClawHub founder/content → pillars, funnel→EG ladder, SEO brief
-      skeleton, status idea→draft→review→ready (DROP Web3/schedule/Playwright/scrape).
-      D vendor → L1–L3 progressive, model inherit, beat YAML, STOP gates.
-      E eg-news-to-blog → refs layout, dual-HITL when social/blog path, published:false,
-      command UX, rules reuse. F kostja/corey → context-first, ≤2–3 skills/task hygiene.
+      STRUCTURE from eg-producer-studio + /eg-producer. HITL lighter from eg-news-to-blog
+      (disable-model-invocation; draft-only; single STOP + bans checklist; no dual blog hash).
+      L3 maps: cite 50-programs + TEMPLATE for type1; STYLE SPEC §5 for type1–3 (draft-gated
+      until «утверждаю»). Type3 = skeleton only. PRODUCT BOUNDARY §14: post-session ≠
+      «Персональная программа на 30 дней»; no full sets/reps in type1. Cite voice/products/
+      design + funnel. PDF visual: cite EG_PDF_PREMIUM only. ClawHub adapt section/HITL/
+      week-phase; REJECT clinical theatre. Vendor: XML quote-ground + draft frontmatter
+      + constraints. Factory later `.cursor/` only.
     conflicts:
-      - {conflict: "ClawHub schedule vs HITL", resolution: "schemas only; DROP auto-send"}
-      - {conflict: "monolith vs modular", resolution: "command router + modular craft skills"}
-      - {conflict: "commands Skills-centric vs Customize", resolution: "ship commands/eg-producer.md"}
+      - {issue: "STYLE SPEC existence", resolution: "file EXISTS as draft HITL 2026-08-05; gate until утверждаю"}
+      - {issue: "A vs B discoverability", resolution: "A wins; args on /eg-programma"}
+      - {issue: "skill name", resolution: "eg-client-programs skill vs /eg-programma command (mirror producer)"}
+      - {issue: "commands→skills trend", resolution: "keep thin commands/eg-programma.md + skill disable-model-invocation"}
     confidence: high
     needs_more_sources: false
 
-  recommended_artifacts:
-    skills:
-      - name: eg-producer-studio
-        role: "voice/pillars/calendar/repurpose router; SoT pointers Zero-Copy"
-      - name: eg-reels-script
-        role: "hooks + timed grid + spine + caption one-ask CTA"
-      - name: eg-warmup
-        role: "Reels→Stories→Direct nurture sequence (HITL drafts)"
-      - name: eg-seo-brief
-        role: "SEO brief + money/blog copy drafts in Cursor; no Wave2 site edits"
-    subagents:
-      - name: kontent
-        action: EXTEND
-        role: "drafter — invokes producer skills; beats→draft HITL"
-      - name: prodazhi
-        action: EXTEND
-        role: "CTA/anketa/objections — soft offer-bridge + ban scan"
-    command:
-      primary: /eg-producer
-      alias: /продюсер
-      role: "thin orchestrator → skill → STOP → Task(kontent) → STOP → Task(prodazhi) CTA → ready"
-    rules_reuse:
-      - .cursor/rules/eg-news-brand-safety.mdc
-      - .cursor/rules/atmosfera-3d.mdc
-    critic_v1: "skill checklist / readonly Task mode — NOT a 3rd agent"
-    draft_path_default: "90_ВХОДЯЩИЕ/producer-drafts/"
-    hitl:
-      drafts: published_false
-      social_blog_path: "reuse dual hash article_hash→social_hash when applicable"
-      never: [auto_tg, auto_vk, auto_blog_json, auto_meta]
+  artifact_names:
+    skill: eg-client-programs
+    command: eg-programma
+    alias: программа
+    references:
+      - post-session.md
+      - monthly-plan.md
+      - long-term.md
+      - bans-checklist.md
+  draft_path: "90_ВХОДЯЩИЕ/program-drafts/"
+  disable_model_invocation: true
+  optional_agent: skip
 
-  adaptation_plan: >
-    1) Scaffold 4 skills (L1 triggers, L2 pipeline+HITL, L3 refs).
-    2) Pre-fill voice from vault pointers (Zero-Copy MASTER/ToV).
-    3) /eg-producer router → skill → beats STOP → Task(kontent) STOP →
-       Task(prodazhi) CTA STOP ready.
-    4) PATCH agent descriptions (skill-backed).
-    5) Drafts → 90_ВХОДЯЩИЕ/producer-drafts/; published:false.
-    6) Do NOT: Playwright/scrape/schedule/medical/viral bait/YouTube→eg domain.
-    7) Skip Workspace plugins / Automations / Remotion / site / VK-TG code.
+  cite_paths:
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/50-programs.mdc"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/programs/TEMPLATE-program.md"
+    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/05_МЕТОДИКА_И_ПРАКТИКА/EG_CLIENT_PROGRAMS_STYLE_SPEC.md"
+    - "/Users/egoshev/EG_ECOSYSTEM_MASTER/_PRESERVED/OLD_MASTER/06_RULES_AND_OPERATIONS/EG_PDF_PREMIUM_STYLE_SYSTEM.md"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/10-voice-and-language.mdc"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/20-products-prices.mdc"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/40-design-system.mdc"
+    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/02_КЛИЕНТСКИЙ_ПУТЬ/HOME_AND_FREE_EQUIPMENT_FUNNEL.md"
+    - ".cursor/skills/eg-producer-studio/SKILL.md"
+    - ".cursor/commands/eg-producer.md"
+    - ".cursor/skills/eg-news-to-blog/SKILL.md"
+    - "90_ВХОДЯЩИЕ/CURSOR PROMPT ATMOSFERA 3D.md#§14"
 
   sources:
-    - {url: "https://cursor.com/docs/skills", date: "2026-08-04", family: vendor, freshness: ok}
-    - {url: "https://cursor.com/docs/subagents", date: "2026-08-04", family: vendor, freshness: ok}
-    - {url: "https://cursor.com/docs/customize-cursor", date: "2026-08-04", family: vendor, freshness: ok}
-    - {url: "https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/overview", date: "2026-08-04", family: vendor, freshness: ok}
-    - {url: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices", date: "2026-08-04", family: vendor, freshness: ok}
-    - {url: "https://ai.google.dev/gemini-api/docs/prompting-strategies", date: "2026-08-04", family: vendor, freshness: ok}
-    - {url: "https://github.com/openai/openai-cookbook/blob/main/examples/Structured_Outputs_Intro.ipynb", date: "2026-07-14", family: vendor, freshness: ok}
-    - {url: "https://github.com/tanishaio/creator-studio-skill", date: "2026-04-27", family: github|repo_mine, freshness: warn}
-    - {url: "https://github.com/vyralcontent/content-skills", date: "2026-06-22", family: github|repo_mine, freshness: ok}
-    - {url: "https://github.com/coreyhaines31/marketingskills", date: "2026-07-29", family: github, freshness: ok}
-    - {url: "https://github.com/kostja94/marketing-skills", date: "2026-06-09", family: github, freshness: ok}
-    - {url: "https://clawhub.ai/renehdzgtz/founder-content-marketing", date: "unknown", family: clawhub, freshness: block_verbatim}
-    - {url: "https://clawhub.ai/ivangdavila/content-marketing", date: "unknown", family: clawhub, freshness: block_verbatim}
-    - {url: "https://clawhub.ai/1kalin/afrexai-social-media-engine", date: "2026-02-13", family: clawhub, freshness: warn}
-    - {url: "https://news.ycombinator.com/item?id=49139845", date: "2026-08-02", family: news|community, freshness: ok}
-    - {url: "https://habr.com/ru/companies/bothub/articles/1044774/", date: "2026-06-08", family: community, freshness: ok}
-    - {url: "https://habr.com/ru/companies/bitrix/articles/980654/", date: "2025-12-26", family: community, freshness: ok}
-    - {url: "https://chelseaandrea.substack.com/p/i-built-an-ai-pipeline-that-handles", date: "2026-05-13", family: community, freshness: ok}
-    - {url: "https://cursor.com/changelog/google-workspace-plugins", date: "2026-08-03", family: news, freshness: ok}
-    - {url: "file://.cursor/skills/eg-news-to-blog/", date: "2026-08-04", family: local_sot, freshness: ok}
+    - {id: "50-programs.mdc", family: local-vault, freshness: ok, accessed: "2026-08-05"}
+    - {id: "TEMPLATE-program.md", family: local-vault, freshness: ok, accessed: "2026-08-05"}
+    - {id: "EG_CLIENT_PROGRAMS_STYLE_SPEC.md", family: local-vault, freshness: ok, date: "2026-08-05", note: "draft HITL not SoT"}
+    - {id: "EG_PDF_PREMIUM_STYLE_SYSTEM.md", family: local-vault, freshness: ok, path: "EG_ECOSYSTEM_MASTER/.../OLD_MASTER/..."}
+    - {id: "eg-producer-studio+/eg-producer", family: local-precedent, freshness: ok}
+    - {id: "eg-news-to-blog HITL", family: local-precedent, freshness: ok}
+    - {id: "HOME_AND_FREE_EQUIPMENT_FUNNEL.md", family: local-vault, freshness: ok, date: "2026-07-29"}
+    - {id: "CURSOR PROMPT §14", family: local-vault, freshness: ok}
+    - {id: "10-voice + 20-products + 40-design", family: local-vault, freshness: ok}
+    - {url: "https://cursor.com/docs/skills", family: vendor, freshness: ok, accessed: "2026-08-05"}
+    - {url: "https://cursor.com/help/customization/skills", family: vendor, freshness: ok}
+    - {url: "https://cursor.com/docs/agent/prompting", family: vendor, freshness: ok}
+    - {url: "https://cursor.com/docs/cli/reference/slash-commands", family: vendor, freshness: ok}
+    - {url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices", family: vendor, freshness: ok}
+    - {url: "https://developers.openai.com/api/docs/guides/structured-outputs", family: vendor, freshness: ok}
+    - {url: "https://cookbook.openai.com/examples/structured_outputs_intro", family: vendor, freshness: warn}
+    - {url: "https://ai.google.dev/gemini-api/docs/prompting-strategies", family: vendor, freshness: ok}
+    - {url: "https://agentskills.io/specification", family: community, freshness: ok}
+    - {url: "https://forum.cursor.com/t/skills-vs-commands-vs-rules/148875", family: community, freshness: ok}
+    - {url: "https://clawhub.ai/olivermonneke/meeting-notes-pro", family: clawhub, freshness: warn}
+    - {url: "https://clawhub.ai/rotorstar/hitl-protocol", family: clawhub, freshness: warn}
+    - {url: "https://clawhub.ai/openauthority/human-approval", family: clawhub, freshness: warn}
 
-  github:
-    top_repos:
-      - tanishaio/creator-studio-skill
-      - vyralcontent/content-skills
-      - coreyhaines31/marketingskills  # selective only
-      - kostja94/marketing-skills      # pattern only
-    rejected: [mass dumps, TG/VK/Meta autopost cores, scrape pipelines, medical miracle templates]
-
-  repo_mines:
-    primary:
-      - tanishaio/creator-studio-skill
-      - vyralcontent/content-skills
-    light:
-      - coreyhaines31/marketingskills  # copywriting/emails/seo
-      - kostja94/marketing-skills      # project-context + authoring
-
+  github: null
+  repo_mines: null
   community:
-    verdict: "HITL-only + CTA anketa = community-validated premium pattern"
-    reddit_x: blocked_this_run  # do not cite as SoT
-    key: modular_skills_over_monolith; structural_HITL; autopost_fails_Meta
-
+    signal: "1+refs"
+    command_plus_skill: true
+    source_count: 6
   clawhub:
-    adapt: [founder-content-marketing, content-marketing, content-strategy, afrexai schemas_only]
-    reject: [instagram-account-operations Playwright, social-content Apify scrape, auto_schedule_publish]
-
+    cards_adapted: 6
+    rejected_verbatim: true
+    security_rejects: ["Personal Fitness Coach Dr theatre", "KrumpPhysio clinical", "auto-send", "disease intake"]
   vendor_docs:
-    hubs: [cursor, openai_cookbook_via_github, anthropic, gemini]
-    idea_seeds:
-      - progressive_disclosure_skill_files
-      - structured_output_for_script_beats
-      - brand_voice_constraints_in_system_prompt
-      - human_in_the_loop_stop_points
-    model: inherit_only
-
-  docs: null  # Context7 skipped per search_plan
-
-  news:
-    reblock_factory: false
-    ignore_v1: [Google Workspace plugins, Automations /automate, iPad, mass marketing kits]
+    source_count: 10
+    lean: "option A 1 skill + 3 refs + slash router"
+  docs: null
+  news: null
 
   coverage_matrix:
     strategist: pass
     synthesizer: pass
-    github_shallow: pass
-    repo_mines: pass
+    github_shallow: skip
+    repo_mines: skip
     community: pass
     clawhub: pass
     vendor_docs: pass
     context7_docs: skip
-    news: pass
-    sources_count: 20
-    dated_ok_or_warn: 17
-    deep_mines: 2
+    news: skip
+    local_vault: pass
+    sources_count: 22
+    min_sources_met: true
+    github_mines_required: false
+    clawhub_pass_required: true
+    clawhub_pass: true
+    vendor_or_context7: vendor-docs
     verdict: pass
 
-  open_questions: []
-  # defaults locked by synthesizer:
-  # command /eg-producer + /продюсер; EXTEND kontent+prodazhi;
-  # drafts 90_ВХОДЯЩИЕ/producer-drafts/; warmup Reels→Stories→Direct;
-  # Workspace HITL out of v1
+  adaptation_plan: >
+    Factory CREATE: .cursor/skills/eg-client-programs/SKILL.md (thin router, Zero-Copy cite table,
+    HITL STOP, draft_path, disable-model-invocation true) + references/post-session.md |
+    monthly-plan.md | long-term.md | bans-checklist.md + .cursor/commands/eg-programma.md
+    (+ /программа alias if supported). Do NOT promote STYLE SPEC to SoT until Евгений
+    «утверждаю». Do NOT write client PDFs. Do NOT copy 50-programs essays into skill.
+    Type1/2 section maps from STYLE SPEC §5 + 50-programs/TEMPLATE; type3 skeleton.
+    Product boundary: post-session title and no sets/reps protocol. Services block from
+    20-products. Mirror eg-producer HITL phrasing lightly.
+
+  open_questions:
+    - "STYLE SPEC: allow draft-cited markdown until «утверждаю» vs hard-block (brain)"
+    - "Cyrillic /программа reliability in Agent chat (recommend ship; mirror /продюсер)"
+    - "When EG_КЛИЕНТЫ/ PARA lands — migrate draft_path (PII never in git)"
+    - "Type3 PDF visual canon — defer; keep long-term.md skeleton for v1"
 
   stale_rejected:
-    - "ClawHub/IG Playwright auto-send cards"
-    - "Apify/Phantom scrape social engines"
-    - "Mass 160+/800+ skill library installs"
-    - "OpenAI parallel_agents notebook pre-2026 pattern (block freshness — idea only)"
-    - "Anthropic equating skills blog 2025-10 as news delta (baseline only)"
+    - "Scout note 'STYLE SPEC not materialised' — superseded: file exists as draft HITL"
+    - "ClawHub Personal Fitness Coach / KrumpPhysio clinical voice"
+    - "3 thin skills architecture (B) as default"
+    - "Monolith skill (C)"
+    - "Optional agent EXTEND for v1"
+    - "Mass github / repo-miner"
 
   confidence: high
+  handoff: "→ prompt-craft (optional) → brain-lead → factory CREATE .cursor/ only; NOT PDF"
 ```
 
 ---
 
-## Recommended artifacts list (factory-ready)
+## Progress line (parent)
 
-| Type | Name | Action |
-|------|------|--------|
-| skill | `eg-producer-studio` | CREATE |
-| skill | `eg-reels-script` | CREATE |
-| skill | `eg-warmup` | CREATE |
-| skill | `eg-seo-brief` | CREATE |
-| subagent | `kontent` | EXTEND (skill-backed) |
-| subagent | `prodazhi` | EXTEND (CTA→anketa) |
-| command | `/eg-producer` (+ `/продюсер`) | CREATE |
-| rules | `eg-news-brand-safety` + `atmosfera-3d` | REUSE |
+`Research ▸ strategist→4 specialists→synthesis` · coverage **pass** (22 src) · approach **A: eg-client-programs + 4 refs + /eg-programma**
+
+---
+
+## Vault finds (confirmed)
+
+| Path | Status |
+|------|--------|
+| `50-programs.mdc` | ✅ cite |
+| `TEMPLATE-program.md` | ✅ cite (post-session-biased) |
+| `EG_CLIENT_PROGRAMS_STYLE_SPEC.md` | ✅ draft HITL (not SoT) |
+| `EG_PDF_PREMIUM_STYLE_SYSTEM.md` | ✅ outside repo, cite-only |
+| `EG_КЛИЕНТЫ/` | ❌ missing → use `program-drafts/` |
+
+---
 
 ## Specialist fragments
 
 - `fragments/t-800-research-strategist.md`
-- `fragments/t-800-research-clawhub.md`
 - `fragments/t-800-research-vendor-docs.md`
-- `fragments/t-800-research-news.md`
-- `fragments/t-800-research-repo-miner.md`
+- `fragments/t-800-research-clawhub.md`
 - `fragments/t-800-research-synthesizer.md`
-- (github/community findings embedded in lead brief)
-
-## Next
-
-→ `Task(t-800-brain-lead)` then `Task(t-800-factory)` with this brief.  
-Do NOT factory in research-lead.
+- community: package in-session (on-disk community fragment may be prior-topic stale)

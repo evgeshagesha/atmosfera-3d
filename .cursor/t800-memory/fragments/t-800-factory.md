@@ -1,47 +1,55 @@
-# t-800-factory — Atmosfera 3D producer pack
+# t-800-factory — CREATE atmosfera-client-programs-mvp (RETRY SHIP)
 
-**Date:** 2026-08-04  
+**Date:** 2026-08-05  
+**Progress:** Factory ▸ RETRY closeout → prompt-auditor → auditor PASS · SHIP  
+**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
 **status:** ok  
-**pack:** atmosfera-producer-mvp  
-**mode:** CREATE + EXTEND  
-**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`
+**pack:** atmosfera-client-programs-mvp  
+**artifact_surface:** cursor-workspace  
+**retry:** prior PING timeouts (9778d45d, 10da2173) — artifacts already complete; re-audit + gates
 
-## Pipeline
+---
 
-| Stage | Status |
-|-------|--------|
-| architect | ok |
-| companions (hooks/scripts/mcp) | skipped (none) |
-| builder | ok |
-| integrator | ok (27/27) |
-| prompt-auditor | ok (3 WARN non-blocking) |
-| factory-auditor | ok |
-| t800_run_gate | PASS exit 0 |
+## Pipeline (RETRY)
+
+| Stage | Agent | Result |
+|-------|-------|--------|
+| discover | factory lead | partial→complete: 8/8 on disk |
+| architect | (prior) | ok — Architecture A |
+| companions | hooks / mcp / scripts | SKIP |
+| builder | (prior) | ok — no rewrite needed |
+| integrator | (prior) | ok — AGENTS.md +1 |
+| prompt-auditor | [869ce7ba](869ce7ba-46d4-4e73-bc9c-cce235cfbd18) | **ok** — 11/11 critical |
+| auditor | [e1e22cad](e1e22cad-7f68-441d-b420-e2abd7130a02) | **PASS** / ship |
+| gate | `t800_run_gate.py --strict-create --factory-brief` | **PASS** |
+| gate | `t800_factory_bypass_gate.py` | **PASS** |
 
 ## Artifacts
 
-### CREATE
-- `.cursor/skills/eg-producer-studio/` (+ 5 refs)
-- `.cursor/skills/eg-reels-script/` (+ 5 refs)
-- `.cursor/skills/eg-warmup/` (+ 4 refs)
-- `.cursor/skills/eg-seo-brief/` (+ 4 refs)
-- `.cursor/commands/eg-producer.md`
-- `.cursor/commands/продюсер.md`
-- `90_ВХОДЯЩИЕ/producer-drafts/.gitkeep`
+| Kind | Path |
+|------|------|
+| skill | `.cursor/skills/eg-client-programs/SKILL.md` (`disable-model-invocation: true`) |
+| ref | `.cursor/skills/eg-client-programs/references/post-session.md` |
+| ref | `.cursor/skills/eg-client-programs/references/monthly-plan.md` |
+| ref | `.cursor/skills/eg-client-programs/references/long-term.md` |
+| ref | `.cursor/skills/eg-client-programs/references/bans-checklist.md` |
+| command | `.cursor/commands/eg-programma.md` |
+| alias | `.cursor/commands/программа.md` |
+| scaffold | `90_ВХОДЯЩИЕ/program-drafts/.gitkeep` |
 
-### EXTEND
-- `.cursor/agents/kontent.md`
-- `.cursor/agents/prodazhi.md`
+## Skip
 
-### Integrator note
-- `AGENTS.md` +1 line (`/eg-producer` → `producer-drafts/`)
-
-## Gates
-- `python3 scripts/t800_run_gate.py --memory-path …` → **PASS**
-- repair_attempts: 0
+agent · rule · hook · MCP · director-rule · PDF · site · VK · Remotion · registry (workspace)
 
 ## How to use
-`/eg-producer` (alias `/продюсер`) → studio brief STOP → craft skill STOP → `Task(kontent)` STOP → `Task(prodazhi)` CTA anketa → Ready. Drafts: `90_ВХОДЯЩИЕ/producer-drafts/`.
 
-## Next for user
-Reload Window. Optional polish W1–W3 later.
+1. `/eg-programma post-session|monthly|long-term` (Latin primary)  
+2. Alias: `/программа`  
+3. Draft → `90_ВХОДЯЩИЕ/program-drafts/` → STOP «Утверждаю черновик»  
+4. **Reload Window** после CREATE  
+
+## Invariants
+
+- STYLE SPEC cite as draft (`style_spec_status: pending`) until user «утверждаю»  
+- Type1 ≠ «Персональная программа на 30 дней»; no sets/reps overload; Type3 skeleton  
+- Zero-Copy cite vault SoT; no auto-send  

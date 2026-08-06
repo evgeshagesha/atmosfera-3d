@@ -1,107 +1,79 @@
-# t-800-research-clawhub — Atmosfera 3D producer pack
+# t-800-research-clawhub — fragment
 
-**scanned_at:** 2026-08-04  
-**intent:** DEEP ClawHub → Cursor skills / subagents / command HITL  
-**brand:** Atmosfera 3D / EG — premium wellness; no medical claims  
-**rejected_verbatim:** true (всегда)
+> 💡 DEEP ClawHub pass · care-plan / session-notes / coaching · EG client programs  
+> scanned_at: 2026-08-05 · hub: https://clawhub.ai/ · rejected_verbatim: true
+
+## Intent
+
+Паттерны для Cursor workspace skills: post-session notes, monthly plan, long-term coaching. HITL drafts only. No medical diagnoses. Adapt structure only.
 
 ## Tabs scanned
 
-| Tab | Status | Notes |
-|-----|--------|-------|
-| Trending / Featured / New | partial | UI tabs render same popular feed without auth; content skills not in top strip |
-| Skills (seed + query) | ok | 5 seed + 4 adjacent cards deep-read |
-| Plugins | skim | Notion/Gmail/Calendar connectors noted; not adapted (auto-send risk) |
+- home / Trending listing (reachable)
+- `?tab=new` (reachable; listing overlap with trending — hub UI may not separate cleanly without auth)
+- `?tab=trending` — WebFetch timeout; used WebSearch + home listing as fallback
 
-## Ranked cards (producer pack relevance)
+## Cards (max 6)
 
-| Rank | Card | URL | Freshness | Verdict |
-|------|------|-----|-----------|---------|
-| 1 | Content Marketing for Founders | https://clawhub.ai/renehdzgtz/founder-content-marketing | unknown_date → pattern-only; live 2026-08-04 | **PRIMARY adapt** — 6 modules; DROP Web3 |
-| 2 | Content Marketing | https://clawhub.ai/ivangdavila/content-marketing | unknown_date → pattern-only | **PRIMARY** — funnel + consent memory + HITL storage |
-| 3 | Content Strategy | https://clawhub.ai/jk-0001/content-strategy | unknown_date → pattern-only | **ADAPT** — goals→pillars→calendar→metrics |
-| 4 | Social Media Content Engine | https://clawhub.ai/1kalin/afrexai-social-media-engine | 2026-02-13 (openclawai mirror) ≈172d → **WARN** | **ADAPT schemas** — DROP schedule/auto-send |
-| 5 | Social Media Content Calendar | https://clawhub.ai/seanwyngaard/social-media-content-calendar | unknown (YAML dates show 2026-02) → WARN | **ADAPT calendar schema** — DROP Buffer auto-import |
-| 6 | Internet Marketing | https://clawhub.ai/xeroc/internet-marketing | unknown_date → pattern-only | LIGHT — organic founder stack |
-| 7 | social-content (carlosfmtz) | https://clawhub.ai/carlosfmtz/social-content | unknown_date | **REJECT patterns** — scrape + schedule |
-| 8 | Instagram Account Operations | https://clawhub.ai/alexbloch-ia/instagram-account-operations | unknown_date | **REJECT** — Playwright auto-send |
-| — | cs-social-content | https://clawhub.ai/alirezarezvani/cs-social-content | fetch blocked (SPA shell) | **PARTIAL** — peer note: distribution of *approved* content only |
+| # | Name | URL | Relevance |
+|---|------|-----|-----------|
+| 1 | Meeting Notes Pro | https://clawhub.ai/olivermonneke/meeting-notes-pro | session notes + coaching template |
+| 2 | HITL Protocol | https://clawhub.ai/rotorstar/hitl-protocol | draft approval / multi-round review |
+| 3 | Human Approval | https://clawhub.ai/openauthority/human-approval | soft gate before send/destructive |
+| 4 | Wisdom & Accountability Coach | https://clawhub.ai/mikecourt/wisdom-accountability-coach | longitudinal coaching memory |
+| 5 | Personal Fitness Coach | https://clawhub.ai/ekintkara/personal-fitness-coach | program file tree + periodization cues |
+| 6 | Fitness & Training Engineering | https://clawhub.ai/1kalin/afrexai-fitness-engine | monthly/mesocycle plan modules |
 
-## Patterns to adapt (no verbatim)
+### Security-adjacent (scanned, not in top-6 adapt list)
 
-1. **Module router** (founder skill): Strategy → Calendar → Copy → Repurpose → SEO Brief → Thought Leadership as discrete Cursor skills or one skill with `when` routing.
-2. **Content pillars schema**: 3–5 named pillars + angle + example topics; map to EG: движение / дыхание / дисциплина / система тела / студия+путь клиента.
-3. **Editorial calendar columns**: `Date | Platform | Pillar | Type | Hook | Status | CTA` — status machine: idea → draft → review(HITL) → ready (never auto-published).
-4. **Repurpose matrix**: 1 pillar → Reel script + Stories + carousel + TG deep + SEO brief — format-native hooks, not copy-paste.
-5. **Voice YAML**: tone / vocabulary use|avoid / guardrails — inject Atmosfera bans (медобещания, «врач», anti-gym, дешёвый инфостиль).
-6. **Funnel alignment**: TOFU/MOFU/BOFU before drafting (ivangdavila) — map to EG ladder (доверие → запись/курс → сопровождение).
-7. **SEO brief skeleton**: primary/secondary KW, intent, H2 outline, differentiation angle, CTA to product step — HITL before write.
-8. **Reel timing skeleton**: hook 0–3s → context → value → soft CTA (save/DM) — calm premium voice, not crypto-contrarian aggression.
-9. **Consent memory folder**: ask before writing local strategy memory (HITL) — adapt to vault path, not `~/content-marketing/`.
-10. **Content score pre-publish**: hook/value/platform/CTA checklist ≥ threshold → then human approve.
+- **KrumpPhysio** https://clawhub.ai/arunnadarasa/krumpphysio — physio/rehab framing, joint angles, ROM scoring, NCD/rehab adherence → **HIGH flags** (diagnosis-adjacent, therapeutic claims). Pattern of structured scoring only; reject clinical voice.
+- **Writing Assistant** https://clawhub.ai/Clawdssen/agentledger-writing-assistant — «never auto-publish / auto-send»; store drafts local — useful HITL narrative (fetch timeout on full page; summary from search).
+- **AI Meeting Notes** https://clawhub.ai/jeffjhunter/ai-meeting-notes — dated filenames + action extract; risk if auto-email to attendees; client names in filenames.
+- **Planning with files** https://clawhub.ai/othmanadi/skills/planning-with-files — modular `task_plan` / `progress` / `findings` files for multi-step plans.
 
-## Security narrative scan
+## Patterns to adapt (NOT copy)
 
-| Flag | Found? | Where | Action for EG pack |
-|------|--------|-------|--------------------|
-| secrets_in_prompt | no | scanned cards | OK |
-| shell_without_confirm | **yes** | alexbloch IG ops (Playwright type+Enter send); CDP shell snippets | REJECT for producer pack |
-| scrape_PII | **yes** | carlosfmtz «SCRAPE» Apify/Phantom 500–1000 posts | REJECT; manual/public research only |
-| ignore_previous | no | — | OK |
-| auto_schedule_publish_APIs | **yes** | afrexai schedule batch; seanwyngaard Buffer/Hootsuite CSV; carlosfmtz queue; IG cron | DROP — drafts + HITL only; no Meta/Buffer/TG auto-send |
+1. **Section map for session notes** — Goal → Decisions/Findings → Actions(owner+when) → Open questions → Next session (from Meeting Notes Pro coaching block / GROW).
+2. **Modular plan files** — separate profile / session-log / monthly-plan / commitments (from Personal Fitness Coach tree + planning-with-files).
+3. **HITL gates** — soft confirm before any client-facing send; dual gate draft→approve (HITL Protocol review types: approval/edit/reject; Human Approval soft gate).
+4. **Longitudinal memory** — commitments + pattern notice + check-in delta (Wisdom Coach) → map to EG client card / progress, not therapy.
+5. **Periodization skeleton** — weeks as phases + deload + progression rule (Fitness Engine) → EG monthly coaching plan without gym-bro copy or injury-rehab diagnosis language.
+6. **Filename discipline** — `YYYY-MM-DD_slug.md` for session artifacts (AI Meeting Notes).
 
-## Hard DROP / reject list
+## Security flags summary
 
-- Full verbatim of any ClawHub SKILL.md / prompt
-- Web3 / crypto niche module and examples
-- Auto-schedule / auto-publish / Graph API / Buffer import as agent action
-- Instagram Playwright / MBS automation / DM blast
-- Competitor scrape-at-scale (Apify etc.)
-- Aggressive crypto-founder tone (fear hooks, «game-changer» inverse still cheap)
-- Trending medical TCM skill (倪海厦) — brand + medical-claim conflict
-- nemesis-c2-bridge (trending unrelated / attack tooling)
-- Plugins that send Gmail/Slack/WhatsApp without HITL
+| Card | Flags |
+|------|-------|
+| Meeting Notes Pro | low: follow-up email templates could auto-send if wired; PII in attendee lists |
+| HITL Protocol | low–med: webhook/callback transport; opaque tokens OK; do not auto-approve on timeout for client docs |
+| Human Approval | positive pattern: soft gate; warn soft HITL bypassable — for EG keep dual HITL in skill text + no auto TG/email |
+| Wisdom Coach | med: stores life/health narratives → PII; NOT therapy (skill says so) — still separate client data from marketing |
+| Personal Fitness Coach | **HIGH**: fake «Prof. Dr.» / clinical dietitian persona; asks metabolic disease (diabetes, thyroid); physician-claim risk vs EG bans |
+| Fitness Engine | med: «injury rehab», «diagnose plateau», health-check language → strip diagnosis framing |
+| KrumpPhysio (scan) | **HIGH**: physiotherapy coach, ROM/joint scoring as therapy, NCD framing |
 
-## Adaptation → Cursor (Atmosfera producer pack)
+## Recommended Cursor adaptations (EG)
 
-| Artifact | Role | HITL |
-|----------|------|------|
-| Skill: pillars + voice | Brand intake → 3–5 pillars + voice YAML | Confirm voice before drafts |
-| Skill: calendar | Week/month table → vault md | Review before «ready» |
-| Skill: repurpose | 1 asset → multi-format EG | Human picks formats |
-| Skill: seo-brief | Brief only; optional write-after-approve | Dual gate if publish path |
-| Subagent: strategist | Goals, pillars, mix %, ladder CTA | Propose → approve |
-| Subagent: copy editor | Hooks ×3, Reel/Stories/TG in EG ToV | Approve copy |
-| Command | `/producer-…` orchestration | **Mandatory** approve before any external channel |
+- Skill modules: `post-session-draft` · `monthly-plan-draft` · `coaching-arc-draft`
+- Frontmatter: `published: false` / `status: draft` · explicit HITL approve before client export
+- Ban list in skill: diagnoses, «вылечим», physician-claim, auto-send to client channels
+- Section map aligned to Atmosfera rule 50-programs (post-session) + vault SoT — cite paths, don’t dump corpus
+- Client PII only under client-data PARA path; never in producer drafts / public git
 
-**Brand overlay (always):** спокойный премиум; тело как система; Диагностика→…→Стабилизация в контент-углах; без «вылечим/исцеление»; YouTube CTA ≠ eg.egoshev.ru.
+## Rejected (do NOT copy)
 
-## Dated sources
+- Verbatim SKILL.md / GROW scripts / credential theatre («Dr. Ayşe», CSCS personas)
+- Medical diagnosis / SOAP clinical claims / joint-angle therapeutic scoring as care
+- Auto-email / auto-Telegram / auto-WhatsApp of session notes to clients
+- Scraping metabolic/PHI into shared writing-state or public repos
+- Injury-rehab «program diagnosis» language from fitness engine
+- Philosophy therapy substitute from Wisdom Coach for clinical cases
 
-| url | published_or_updated | freshness | takeaway |
-|-----|----------------------|-----------|----------|
-| https://clawhub.ai/renehdzgtz/founder-content-marketing | unknown (page live 2026-08-04) | block_verbatim / ok_patterns | Module router + pillars/calendar/SEO |
-| https://clawhub.ai/ivangdavila/content-marketing | unknown (live 2026-08-04) | block_verbatim / ok_patterns | Funnel + consent local memory |
-| https://clawhub.ai/jk-0001/content-strategy | unknown (live 2026-08-04) | block_verbatim / ok_patterns | Solopreneur 8-step strategy |
-| https://clawhub.ai/1kalin/afrexai-social-media-engine | 2026-02-13 (openclawai.io) | **warn** (~172d) | Voice YAML, Reels, scoring; drop automation ch.10 |
-| https://openclawai.io/skills/skill/afrexai-social-media-engine | 2026-02-13 | warn | Cross-check date for afrexai |
-| https://clawhub.ai/seanwyngaard/social-media-content-calendar | unknown; sample dates 2026-02 | warn | Calendar YAML + CSV schema only |
-| https://clawhub.ai/xeroc/internet-marketing | unknown (live 2026-08-04) | block_verbatim / ok_patterns | Organic founder GTM light |
-| https://clawhub.ai/carlosfmtz/social-content | unknown | block | Scrape + schedule — reject |
-| https://clawhub.ai/alexbloch-ia/instagram-account-operations | unknown | block | Shell auto-send — reject |
-| https://clawhub.ai/alirezarezvani/cs-social-content | fetch failed 2026-08-04 | unknown | Treat as distribute-approved-only; do not adapt auto-send |
+## Freshness
 
-## Query coverage
+- Hub live 2026-08-05; card publish dates often absent on listing → freshness **warn** (unknown absolute age); treat as marketplace patterns ≤90d listing presence with `stale_warning` if no version date.
+- Cross-check: ≥2 sources per pattern family (notes / HITL / coaching / program files).
 
-| Query | Best card(s) |
-|-------|----------------|
-| content marketing founder solopreneur | founder-content-marketing, jk-0001, xeroc |
-| personal brand thought leadership | founder MODULE 6 |
-| social content Instagram Reels | afrexai IG playbook, seanwyngaard |
-| content strategy calendar repurpose | ivangdavila, jk-0001, founder M2/M4 |
-| SEO content brief | founder MODULE 5 |
-| social media engine schedule publish | afrexai / carlos / sean — **patterns only; publish = REJECT** |
+## Status
 
-## Status for research-lead
-
-`status: ok` — enough cards for DEEP adaptation brief; cs-social-content SPA incomplete (noted). Factory must keep `rejected_verbatim: true` and HITL publish boundary.
+`status: ok` · source_count: 6 primary + 4 adjacent scans · rejected_verbatim: true

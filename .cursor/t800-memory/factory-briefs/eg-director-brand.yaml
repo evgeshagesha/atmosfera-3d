@@ -1,0 +1,99 @@
+# factory-brief — eg-director-brand (CREATE rule)
+# Authority: fragments/t-800-brain-lead.md (director pack) — 2026-08-05
+
+brief_for_factory:
+  target_context:
+    workspace_root: "/Users/egoshev/Projects/atmosfera-3d"
+    memory_path: "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory"
+    artifact_surface: cursor-workspace
+    profile: workspace-cursor
+    knowledge_vault_path: null
+    pack_name: eg-director-brand
+    plugin_root: null
+
+  research_brief: {}
+  synthesis_summary: >
+    CREATE thin project rule eg-director-brand.mdc (alwaysApply:false, Apply Intelligently).
+    Compress MASTER PROMPT into MUST DNA; Zero-Copy SoT for prices/positioning;
+    do not PATCH or duplicate atmosfera-3d.mdc essay. prompt-craft SKIP.
+
+  topic: >
+    Директор бренда / методологии / продуктов / контента / сайт —
+    Евгений Гошев / Атмосфера 3D (project RULE)
+
+  recommended_artifact: rule
+
+  factory_create_extend_list:
+    CREATE:
+      - type: rule
+        name: eg-director-brand
+        path: .cursor/rules/eg-director-brand.mdc
+        alwaysApply: false
+        note: "Apply Intelligently via description; thin DNA only"
+    REUSE_CROSSREF:
+      - .cursor/rules/atmosfera-3d.mdc
+      - .cursor/rules/eg-news-brand-safety.mdc
+      - .cursor/rules/eg-bot-routing.mdc
+    DO_NOT:
+      - PATCH atmosfera-3d.mdc
+      - alwaysApply true for v1
+      - paste full MASTER PROMPT
+      - invent prices / Club 4990
+      - create skill/command/agent/hook
+      - prompt-craft pass
+
+  frontmatter_required: |
+    ---
+    description: >
+      Стратегический директор бренда/методологии/продуктов/контента/текстов
+      Атмосфера 3D (Евгений Гошев): 6 плоскостей мышления, оффер-формула,
+      воронка, QA-10, Zero-Copy цены/ссылки. Use when: бренд, голос, оффер,
+      продукт, контент-стратегия, клиентский путь, сайт-копирайт, методология.
+      Do NOT use when: деплой бота (eg-bot-*), news RSS pipeline
+      (eg-news-brand-safety), Remotion/видео, чистый код без бренд-интента.
+      Цены/ссылки — только из SoT (не выдумывать).
+    alwaysApply: false
+    ---
+
+  body_budget:
+    target_lines: "120-180"
+    hard_stop: 220
+
+  must_constraints:
+    - role
+    - brand_pillars
+    - six_planes
+    - funnel_ladder
+    - prices_links_sot
+    - voice
+    - design_tokens
+    - offer_content_client
+    - qa10
+    - dedupe
+
+  sot_path_table:
+    - label: Prices/products
+      path: 03_РЕСУРСЫ/config/products.yaml
+    - label: Main context
+      path: 00_ПУЛЬТ_УПРАВЛЕНИЯ/ГЛАВНЫЙ_КОНТЕКСТ.md
+    - label: Positioning MASTER
+      path: 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/TRAINING_SYSTEM_POSITIONING_MASTER.md
+    - label: Ownership map
+      path: 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/OWNERSHIP_MAP.md
+    - label: Design tokens
+      path: 90_ВХОДЯЩИЕ/atmosfera-os-from-claude/brand/design-tokens.css
+    - label: Base alwaysApply rule
+      path: .cursor/rules/atmosfera-3d.mdc
+
+  constraints:
+    - "CREATE only .cursor/rules/eg-director-brand.mdc"
+    - "alwaysApply: false"
+    - "Body ≤~180 lines; hard stop ~220"
+    - "Zero-Copy prices; Club SoT = 1758 Tribute; ban 4990"
+    - "Cross-ref atmosfera-3d.mdc; no essay duplication"
+    - "No skill/command/agent/hook"
+    - "Russian body OK"
+
+  live_sot_note: "products.yaml club.price_rub: 1758 (Tribute class) — verified 2026-08-05"
+
+  next: architect → builder → integrator → auditor (prompt-auditor SKIP for rule)
