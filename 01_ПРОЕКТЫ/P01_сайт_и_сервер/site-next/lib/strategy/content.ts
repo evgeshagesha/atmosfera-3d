@@ -17,8 +17,8 @@ export const STRATEGY_PRODUCT = {
   telegramPublicUrl: "https://t.me/EvgeniiGoshev",
   leadEndpoint: "/api/strategy/lead",
   sourcePage: "personal-body-strategy-landing",
-  heroImage: "/strategy/hero-evgeny.webp?v=20260806b",
-  heroImageFallback: "/strategy/hero-evgeny.jpg?v=20260806b",
+  heroImage: "/strategy/hero-evgeny-v2.webp",
+  heroImageFallback: "/strategy/hero-evgeny-v2.jpg",
 } as const;
 
 export type FormFieldOption = { value: string; label: string };
