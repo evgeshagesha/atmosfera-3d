@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "funkcionalnye-trenirovki-moskva",
     "mobilnost",
     "osanka",
+    "strategy",
   ];
   const pageRoutes = ["", "blog", "kids", ...moneyRoutes, ...getAllRoutes()];
   const blogSlugs = getAllBlogSlugs();

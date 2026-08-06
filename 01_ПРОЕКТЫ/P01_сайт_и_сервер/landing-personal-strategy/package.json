@@ -1,0 +1,13 @@
+{
+  "name": "landing-personal-strategy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MVP landing — Персональная стратегия тела (Евгений Гошев)",
+  "scripts": {
+    "start": "node api/server.js",
+    "dev": "node api/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

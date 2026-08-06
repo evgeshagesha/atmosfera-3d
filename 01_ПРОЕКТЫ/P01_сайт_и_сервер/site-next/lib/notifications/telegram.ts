@@ -1,10 +1,24 @@
 type SendTelegramMessageOptions = {
   text: string;
+  /** Optional override; defaults to TELEGRAM_BOT_TOKEN / STRATEGY_TG_BOT_TOKEN */
+  token?: string;
+  /** Optional override; defaults to TELEGRAM_CHAT_ID / STRATEGY_TG_CHAT_ID */
+  chatId?: string;
 };
 
-export async function sendTelegramMessage({ text }: SendTelegramMessageOptions) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+export async function sendTelegramMessage({
+  text,
+  token: tokenOverride,
+  chatId: chatIdOverride,
+}: SendTelegramMessageOptions) {
+  const token =
+    tokenOverride ||
+    process.env.STRATEGY_TG_BOT_TOKEN ||
+    process.env.TELEGRAM_BOT_TOKEN;
+  const chatId =
+    chatIdOverride ||
+    process.env.STRATEGY_TG_CHAT_ID ||
+    process.env.TELEGRAM_CHAT_ID;
 
   if (!token || !chatId) {
     return { ok: false as const, reason: "not_configured" as const };

@@ -4,7 +4,7 @@
 # Оплаты: как появятся — впиши URL. Плейсхолдер null = блокер денег.
 
 version: 1
-updated: "2026-07-24"
+updated: "2026-08-06"
 currency: RUB
 brand: "Атмосфера 3D"
 owner: "Евгений Гошев"
@@ -128,6 +128,23 @@ products:
     page_url: "https://egoshev.ru/anketaplan"
     note: "Публичная цена: 20 000 ₽ / 2 часа"
 
+  # High-ticket lead product (заявка, не мгновенная оплата). Name temporary.
+  personal_body_strategy:
+    code: personal_body_strategy
+    level: 6
+    name: "Персональная стратегия тела"
+    price_rub: 30000
+    payment_type: service
+    status: confirmed
+    deep_link: "strategy"
+    formats:
+      - "онлайн"
+      - "очно Москва"
+    requires_form: true
+    form_url: "https://eg.egoshev.ru/strategy"
+    page_url: "https://eg.egoshev.ru/strategy"
+    note: "Временное название. CTA = короткая заявка (модалка), не мгновенная оплата. Не путать с personal_online 20 000 ₽."
+
   studio:
     code: studio
     level: 7
@@ -210,3 +227,4 @@ channels:
   anketa: "https://egoshev.ru/anketa"
   gaid: "https://egoshev.ru/gaid"
   online_block: "https://eg.egoshev.ru/#online"
+  strategy: "https://eg.egoshev.ru/strategy"
