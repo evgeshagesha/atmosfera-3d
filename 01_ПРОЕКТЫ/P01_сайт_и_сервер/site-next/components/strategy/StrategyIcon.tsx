@@ -2,9 +2,18 @@
 
 import type { ReactNode } from "react";
 
-type IconName = "person" | "calendar" | "chat" | "doc" | "support";
+export type StrategyIconName =
+  | "person"
+  | "calendar"
+  | "chat"
+  | "doc"
+  | "support"
+  | "scan"
+  | "focus"
+  | "start"
+  | "discipline";
 
-const PATHS: Record<IconName, ReactNode> = {
+const PATHS: Record<StrategyIconName, ReactNode> = {
   person: (
     <>
       <circle cx="12" cy="8" r="3.5" />
@@ -36,9 +45,33 @@ const PATHS: Record<IconName, ReactNode> = {
       <path d="M9 18.5h6" />
     </>
   ),
+  scan: (
+    <>
+      <path d="M8 4.5H5.5v3M16 4.5h2.5v3M8 19.5H5.5v-3M16 19.5h2.5v-3" />
+      <circle cx="12" cy="12" r="3.2" />
+    </>
+  ),
+  focus: (
+    <>
+      <circle cx="12" cy="12" r="7" />
+      <circle cx="12" cy="12" r="2.5" />
+      <path d="M12 5v2.2M12 16.8V19M5 12h2.2M16.8 12H19" />
+    </>
+  ),
+  start: (
+    <>
+      <circle cx="12" cy="12" r="8" />
+      <path d="M10 8.8l6 3.2-6 3.2z" />
+    </>
+  ),
+  discipline: (
+    <>
+      <path d="M5.5 12.5l4 4 9-9" />
+    </>
+  ),
 };
 
-export default function StrategyIcon({ name }: { name: IconName }) {
+export default function StrategyIcon({ name }: { name: StrategyIconName }) {
   return (
     <svg
       className="st-icon"

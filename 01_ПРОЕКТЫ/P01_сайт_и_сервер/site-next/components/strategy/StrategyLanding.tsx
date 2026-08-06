@@ -55,14 +55,21 @@ export default function StrategyLanding() {
             <div className="st-hero__copy">
               <p className="st-eyebrow">{c.hero.eyebrow}</p>
               <h1 id="st-hero-title" className="st-hero__title">
-                <span>{c.hero.titleLine1}</span>
-                <span>
-                  {c.hero.titleLine2}{" "}
-                  <span className="st-accent">{c.hero.titleAccent}</span>
-                </span>
+                <span className="st-hero__title-line">{c.hero.titleLine1}</span>
+                <span className="st-hero__title-accent">{c.hero.titleLine2}</span>
               </h1>
-              <p className="st-hero__subtitle">{c.hero.subtitle}</p>
               <p className="st-hero__body">{c.hero.body}</p>
+              <p className="st-hero__body-accent">{c.hero.bodyAccent}</p>
+
+              <ul className="st-hero__insights" aria-label="Что станет понятно">
+                {c.hero.insights.map((item) => (
+                  <li key={item.text} className="st-hero__insight">
+                    <StrategyIcon name={item.icon} />
+                    <span>{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+
               <div className="st-hero__actions">
                 <button
                   type="button"
@@ -71,9 +78,13 @@ export default function StrategyLanding() {
                 >
                   {c.hero.primaryCta}
                 </button>
-                <a className="st-text-link" href="#process">
+                <button
+                  type="button"
+                  className="st-text-link st-text-link--btn"
+                  onClick={() => openForm("strategy_hero_secondary")}
+                >
                   {c.hero.secondaryCta}
-                </a>
+                </button>
               </div>
               <p className="st-price-line">{c.hero.priceLine}</p>
             </div>
@@ -84,8 +95,8 @@ export default function StrategyLanding() {
                   className="st-hero__photo"
                   src={p.heroImage}
                   alt={c.hero.photoAlt}
-                  width={664}
-                  height={800}
+                  width={819}
+                  height={1024}
                   priority
                   sizes="(max-width: 900px) 90vw, 420px"
                 />
@@ -93,13 +104,11 @@ export default function StrategyLanding() {
               </div>
             </div>
           </div>
-        </section>
 
-        <section className="st-benefits" aria-label="Преимущества">
           <div className="st-container">
-            <ul className="st-benefits__list">
+            <ul className="st-glass" aria-label="Что входит в систему">
               {c.benefits.map((item) => (
-                <li key={item.title} className="st-benefits__item">
+                <li key={item.title} className="st-glass__item">
                   <StrategyIcon name={item.icon} />
                   <div>
                     <strong>{item.title}</strong>
