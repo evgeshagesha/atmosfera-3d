@@ -411,7 +411,7 @@ export const HERO_V2_CSS = `
     );
   }
   .egmain-cta-wrap {
-    gap: 9px;
+    gap: 8px;
     max-width: 100%;
     margin-top: 14px;
     padding-top: 0;
@@ -481,33 +481,52 @@ export const HERO_V2_CSS = `
     font-size: 7.5px;
   }
   .egmain-cta-row {
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
     margin-top: 0;
   }
   #egmain-hero a.egmain-btn {
-    flex: none !important;
-    width: 100% !important;
-    min-height: 54px !important;
-    padding: 12px 14px !important;
-    font-size: 10.5px !important;
-    letter-spacing: 0.06em !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    min-height: 44px !important;
+    padding: 8px 9px !important;
+    gap: 5px !important;
+    font-size: 8.5px !important;
+    letter-spacing: 0.035em !important;
+    line-height: 1.18 !important;
     white-space: normal !important;
   }
   #egmain-hero a.egmain-btn-stack {
-    min-height: 62px !important;
+    min-height: 48px !important;
     align-items: center !important;
+    padding: 7px 8px !important;
+  }
+  .egmain-btn-copy {
+    gap: 2px;
   }
   .egmain-btn-label {
-    max-width: 28ch;
+    max-width: 100%;
+    text-wrap: balance;
   }
   .egmain-btn-sub {
-    font-size: 9px;
+    font-size: 7.5px;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
   }
   .egmain-btn-gift-badge {
-    font-size: 8px;
-    padding: 3px 8px;
+    align-self: center;
+    max-width: 100%;
+    margin-top: 1px;
+    padding: 2px 6px;
+    font-size: 7px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .egmain-btn-arrow {
+    font-size: 11px;
   }
   .egmain-pillars {
     gap: 6px;
@@ -534,9 +553,30 @@ export const HERO_V2_CSS = `
   .egmain-title {
     font-size: clamp(30px, 8.8vw, 40px);
   }
+  .egmain-cta-row {
+    gap: 6px;
+  }
   #egmain-hero a.egmain-btn {
-    font-size: 10px !important;
-    letter-spacing: 0.05em !important;
+    min-height: 44px !important;
+    padding: 6px 6px !important;
+    gap: 3px !important;
+    font-size: 7.5px !important;
+    letter-spacing: 0.025em !important;
+  }
+  #egmain-hero a.egmain-btn-stack {
+    min-height: 46px !important;
+    padding: 6px 6px !important;
+  }
+  .egmain-btn-sub {
+    font-size: 7px;
+  }
+  .egmain-btn-gift-badge {
+    padding: 2px 5px;
+    font-size: 6.5px;
+    letter-spacing: 0.06em;
+  }
+  .egmain-btn-arrow {
+    font-size: 10px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
