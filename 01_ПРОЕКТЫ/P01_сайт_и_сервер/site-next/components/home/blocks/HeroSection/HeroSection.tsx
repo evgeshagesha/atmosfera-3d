@@ -141,6 +141,20 @@ export default function HeroSection() {
                         годы вперёд.
                       </p>
                       <div className="egmain-cta-wrap">
+                        <a
+                          href="https://t.me/EGoshev_bot"
+                          className="egmain-gift-btn"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span className="egmain-gift-icon" aria-hidden="true">
+                            🎁
+                          </span>
+                          <span className="egmain-gift-label">
+                            Функциональная тренировка · 10 мин
+                          </span>
+                          <span className="egmain-gift-badge">подарок</span>
+                        </a>
                         <div className="egmain-cta-row">
                           <Link href="/anketa" className="egmain-btn egmain-btn-primary egmain-btn-neon">
                             Заполнить анкету для личного приёма в Москве или онлайн{" "}

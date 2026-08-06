@@ -183,9 +183,84 @@ export const HERO_V2_CSS = `
 }
 .egmain-cta-wrap {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   width: 100%;
   margin-top: 16px;
   padding-top: 0;
+}
+.egmain-gift-btn,
+#egmain-hero a.egmain-gift-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  max-width: 100%;
+  min-height: 40px !important;
+  margin: 0;
+  padding: 8px 14px 8px 12px !important;
+  border: 1px solid rgba(120, 190, 210, 0.28) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(28, 36, 42, 0.92) 0%, rgba(12, 16, 20, 0.88) 100%) !important;
+  color: rgba(236, 244, 248, 0.92) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  box-shadow:
+    0 0 0 1px rgba(90, 160, 180, 0.08),
+    0 0 18px rgba(70, 150, 175, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+.egmain-gift-btn:hover,
+#egmain-hero a.egmain-gift-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(140, 205, 220, 0.42) !important;
+  color: #fff !important;
+  box-shadow:
+    0 0 0 1px rgba(100, 175, 195, 0.16),
+    0 0 24px rgba(80, 165, 190, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.egmain-gift-btn:focus-visible {
+  outline: 2px solid rgba(140, 205, 220, 0.7);
+  outline-offset: 3px;
+}
+.egmain-gift-icon {
+  flex: 0 0 auto;
+  font-size: 14px;
+  line-height: 1;
+  filter: grayscale(0.15) saturate(0.85);
+}
+.egmain-gift-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.egmain-gift-badge {
+  flex: 0 0 auto;
+  padding: 3px 8px;
+  border: 1px solid rgba(140, 205, 220, 0.28);
+  border-radius: 999px;
+  background: rgba(90, 170, 190, 0.12);
+  color: rgba(190, 230, 240, 0.92);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .egmain-cta-row {
   display: flex;
@@ -347,8 +422,19 @@ export const HERO_V2_CSS = `
     );
   }
   .egmain-cta-wrap {
+    gap: 9px;
     margin-top: 14px;
     padding-top: 0;
+  }
+  #egmain-hero a.egmain-gift-btn {
+    width: 100% !important;
+    min-height: 42px !important;
+    padding: 9px 12px !important;
+    font-size: 11px !important;
+    white-space: normal !important;
+  }
+  .egmain-gift-badge {
+    font-size: 8.5px;
   }
   .egmain-container {
     align-items: stretch;
@@ -464,7 +550,8 @@ export const HERO_V2_CSS = `
     animation: none;
   }
   .egmain-btn,
-  .egmain-btn-neon {
+  .egmain-btn-neon,
+  .egmain-gift-btn {
     transition: none !important;
     animation: none !important;
   }
