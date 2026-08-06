@@ -68,7 +68,7 @@ export const HERO_V2_CSS = `
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: min(680px, 58%);
+  width: min(720px, 62%);
   text-align: left;
 }
 .egmain-identity {
@@ -185,36 +185,41 @@ export const HERO_V2_CSS = `
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 10px;
   width: 100%;
+  max-width: min(720px, 100%);
   margin-top: 16px;
   padding-top: 0;
 }
 .egmain-cta-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 12px;
   width: 100%;
   margin-top: 0;
 }
 .egmain-btn,
 #egmain-hero a.egmain-btn {
   display: inline-flex !important;
+  flex: 1 1 0 !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 10px !important;
-  min-width: min(270px, 100%) !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  width: auto !important;
   min-height: 48px !important;
-  padding: 12px 22px !important;
+  padding: 10px 14px !important;
   border: 1px solid rgba(210, 218, 228, 0.42) !important;
   border-radius: 999px !important;
   background: rgba(18, 20, 24, 0.82) !important;
   color: #fff !important;
-  font-size: 11px !important;
+  font-size: 10px !important;
   font-weight: 800 !important;
-  line-height: 1.3 !important;
-  letter-spacing: 0.1em !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.06em !important;
   text-align: center !important;
   text-transform: uppercase !important;
   cursor: pointer;
@@ -228,8 +233,8 @@ export const HERO_V2_CSS = `
 }
 .egmain-btn-stack,
 #egmain-hero a.egmain-btn-stack {
-  min-height: 58px !important;
-  padding: 11px 20px !important;
+  min-height: 54px !important;
+  padding: 9px 14px !important;
   white-space: normal !important;
 }
 .egmain-btn-copy {
@@ -237,25 +242,27 @@ export const HERO_V2_CSS = `
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   min-width: 0;
+  flex: 1 1 auto;
   max-width: 100%;
 }
 .egmain-btn-label {
   display: block;
-  max-width: 34ch;
+  max-width: 100%;
   font-size: inherit;
   font-weight: inherit;
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: inherit;
+  text-wrap: balance;
 }
 .egmain-btn-sub {
   display: block;
   color: rgba(9, 11, 14, 0.72);
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.2;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
   text-transform: none;
 }
 #egmain-hero a.egmain-btn:not(.egmain-btn-primary) .egmain-btn-sub {
@@ -361,7 +368,9 @@ export const HERO_V2_CSS = `
   outline-offset: 3px;
 }
 .egmain-btn-arrow {
-  font-size: 14px;
+  flex-shrink: 0;
+  font-size: 13px;
+  line-height: 1;
 }
 @keyframes egHeroIn {
   to {
@@ -403,6 +412,7 @@ export const HERO_V2_CSS = `
   }
   .egmain-cta-wrap {
     gap: 9px;
+    max-width: 100%;
     margin-top: 14px;
     padding-top: 0;
   }
@@ -472,10 +482,12 @@ export const HERO_V2_CSS = `
   }
   .egmain-cta-row {
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 0;
   }
   #egmain-hero a.egmain-btn {
+    flex: none !important;
     width: 100% !important;
     min-height: 54px !important;
     padding: 12px 14px !important;
