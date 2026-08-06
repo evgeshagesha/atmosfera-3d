@@ -5,7 +5,7 @@
 
 ## Last run
 
-- **Когда:** 2026-08-06 11:30
+- **Когда:** 2026-08-06 23:37
 - **Команда:** /t800-start · client-programs DEEP research
 - **Research mode:** DEEP
 - **Статус:** research PASS — coverage_matrix pass · 22 sources · approach A skill+refs+command
@@ -15,6 +15,7 @@
 
 ## In progress
 
+- 2026-08-06 23:37 — `scout`: bot texts drip: block_factory; Dev implements
 - 2026-08-06 11:30 — `scout`: strategy landing: block_factory; Dev builds /strategy
 - 2026-08-06 11:29 — `intake`: strategy landing: factory SKIP site-next Dev; product 30000
 - 2026-08-06 11:27 — `scout`: landing: block_factory; Dev-only; research SKIP
