@@ -96,83 +96,85 @@ export default function StrategyLanding() {
 
       <main id="main">
         <section className="st-hero" aria-labelledby="st-hero-title">
-          <div className="st-hero__media">
-            <div className="st-hero__frame">
-              <Image
-                className="st-hero__photo"
-                src={p.heroImage}
-                alt={c.hero.photoAlt}
-                width={819}
-                height={1024}
-                priority
-                sizes="(max-width: 900px) 100vw, 52vw"
-              />
-              <div className="st-hero__fade st-hero__fade--bottom" aria-hidden="true" />
-              <div className="st-hero__fade st-hero__fade--left" aria-hidden="true" />
-            </div>
-          </div>
+          <div className="st-hero__grid">
+            <div className="st-bleed st-hero__copy">
+              <p className="st-eyebrow">
+                <span className="st-eyebrow__bar" aria-hidden="true" />
+                <span>{c.hero.eyebrow}</span>
+              </p>
 
-          <div className="st-bleed st-hero__copy">
-            <p className="st-eyebrow">
-              <span className="st-eyebrow__bar" aria-hidden="true" />
-              <span>{c.hero.eyebrow}</span>
-            </p>
+              <h1 id="st-hero-title" className="st-hero__title">
+                <span className="st-hero__title-line">{c.hero.titleLine1}</span>
+                <span className="st-hero__title-accent">{c.hero.titleLine2}</span>
+              </h1>
 
-            <h1 id="st-hero-title" className="st-hero__title">
-              <span className="st-hero__title-line">{c.hero.titleLine1}</span>
-              <span className="st-hero__title-accent">{c.hero.titleLine2}</span>
-            </h1>
+              <p className="st-hero__body">{c.hero.body}</p>
 
-            <p className="st-hero__body">{c.hero.body}</p>
+              <ul className="st-features" aria-label="Что входит">
+                {c.hero.features.map((item) => (
+                  <li key={item.title} className="st-features__item">
+                    <StrategyIcon name={item.icon} />
+                    <div className="st-features__text">
+                      <strong>{item.title}</strong>
+                      <span>{item.text}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
 
-            <ul className="st-features" aria-label="Что входит">
-              {c.hero.features.map((item) => (
-                <li key={item.title} className="st-features__item">
-                  <StrategyIcon name={item.icon} />
-                  <div className="st-features__text">
-                    <strong>{item.title}</strong>
-                    <span>{item.text}</span>
+              <div className="st-hero__offer">
+                <div className="st-price">
+                  <span className="st-price__label">{c.hero.priceLabel}</span>
+                  <div className="st-price__row">
+                    <span className="st-price__main">{p.priceLabel}</span>
+                    <span className="st-price__divider" aria-hidden="true" />
+                    <span className="st-price__day">
+                      <span className="st-price__day-value">{p.pricePerDayLabel}</span>
+                      <span className="st-price__day-suffix">{c.hero.pricePerDaySuffix}</span>
+                    </span>
                   </div>
-                </li>
-              ))}
-            </ul>
+                </div>
 
-            <div className="st-hero__offer">
-              <div className="st-price">
-                <span className="st-price__label">{c.hero.priceLabel}</span>
-                <div className="st-price__row">
-                  <span className="st-price__main">{p.priceLabel}</span>
-                  <span className="st-price__divider" aria-hidden="true" />
-                  <span className="st-price__day">
-                    <span className="st-price__day-value">{p.pricePerDayLabel}</span>
-                    <span className="st-price__day-suffix">{c.hero.pricePerDaySuffix}</span>
-                  </span>
+                <div className="st-hero__cta-row">
+                  <button
+                    type="button"
+                    className="st-btn st-btn--primary st-btn--hero"
+                    onClick={() => openLeadModal("strategy_hero_cta")}
+                  >
+                    {c.hero.primaryCta}
+                  </button>
+                  <p className="st-trust">
+                    <StrategyIcon name="lock" />
+                    <span>{c.hero.trustBefore}</span>
+                  </p>
                 </div>
               </div>
 
-              <div className="st-hero__cta-row">
-                <button
-                  type="button"
-                  className="st-btn st-btn--primary st-btn--hero"
-                  onClick={() => openLeadModal("strategy_hero_cta")}
-                >
-                  {c.hero.primaryCta}
-                </button>
-                <p className="st-trust">
-                  <StrategyIcon name="lock" />
-                  <span>{c.hero.trustBefore}</span>
-                </p>
-              </div>
+              <ul className="st-badges" aria-label="Формат работы">
+                {c.hero.badges.map((badge) => (
+                  <li key={badge.text} className="st-badges__item">
+                    <StrategyIcon name={badge.icon} />
+                    <span>{badge.text}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <ul className="st-badges" aria-label="Формат работы">
-              {c.hero.badges.map((badge) => (
-                <li key={badge.text} className="st-badges__item">
-                  <StrategyIcon name={badge.icon} />
-                  <span>{badge.text}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="st-hero__media">
+              <div className="st-hero__frame">
+                <Image
+                  className="st-hero__photo"
+                  src={p.heroImage}
+                  alt={c.hero.photoAlt}
+                  width={819}
+                  height={1024}
+                  priority
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                />
+                <div className="st-hero__fade st-hero__fade--bottom" aria-hidden="true" />
+                <div className="st-hero__fade st-hero__fade--left" aria-hidden="true" />
+              </div>
+            </div>
           </div>
         </section>
 

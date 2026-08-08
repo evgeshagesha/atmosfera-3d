@@ -15,12 +15,13 @@ export default function StrategyOfferSection({ onCta }: Props) {
 
   return (
     <section id={offer.id} className="st-offer" aria-labelledby="st-offer-title">
-      <div className="st-offer__shell">
+      <div className="st-bleed st-offer__shell">
         <div className="st-offer__top">
           <div className="st-offer__intro">
             <p className="st-offer__eyebrow">{offer.eyebrow}</p>
             <h2 id="st-offer-title" className="st-offer__title">
-              {offer.title}
+              <span className="st-offer__title-line">{offer.titleLine1}</span>
+              <span className="st-offer__title-accent">{offer.titleLine2}</span>
             </h2>
             <p className="st-offer__body">{offer.body}</p>
 
@@ -77,28 +78,22 @@ export default function StrategyOfferSection({ onCta }: Props) {
             <Image
               src={p.offerPortrait}
               alt={offer.portraitAlt}
-              width={819}
-              height={1024}
-              sizes="(max-width: 900px) 72vw, 280px"
+              width={1280}
+              height={1600}
+              sizes="(max-width: 900px) 78vw, 300px"
             />
           </div>
           <div className="st-offer-bio__copy">
             <blockquote className="st-offer-bio__quote">
+              <span className="st-offer-bio__marks" aria-hidden="true">
+                “
+              </span>
               <p>{offer.quote}</p>
             </blockquote>
             <p className="st-offer-bio__sub">{offer.quoteSub}</p>
 
-            <ul className="st-offer-bio__stats st-offer-bio__stats--desktop" aria-label="Опыт">
+            <ul className="st-offer-bio__stats" aria-label="Опыт">
               {offer.bio.map((item) => (
-                <li key={item.text}>
-                  <StrategyIcon name={item.icon} />
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
-
-            <ul className="st-offer-bio__stats st-offer-bio__stats--mobile" aria-label="Опыт">
-              {offer.bioMobile.map((item) => (
                 <li key={item.text}>
                   <StrategyIcon name={item.icon} />
                   <span>{item.text}</span>
@@ -108,7 +103,10 @@ export default function StrategyOfferSection({ onCta }: Props) {
           </div>
         </div>
 
-        <p className="st-offer__footer">{offer.footerLine}</p>
+        <p className="st-offer__footer">
+          <span>{offer.footerLine}</span>
+          <strong>{offer.footerAccent}</strong>
+        </p>
       </div>
     </section>
   );
