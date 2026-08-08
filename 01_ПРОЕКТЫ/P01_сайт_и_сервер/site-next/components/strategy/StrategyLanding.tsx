@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useState } from "react";
 
 import StrategyFormModal from "@/components/strategy/StrategyFormModal";
+import StrategyHowSection from "@/components/strategy/StrategyHowSection";
 import StrategyIcon from "@/components/strategy/StrategyIcon";
 import StrategyOfferSection from "@/components/strategy/StrategyOfferSection";
 import StrategyPlanSection from "@/components/strategy/StrategyPlanSection";
@@ -30,6 +31,15 @@ export default function StrategyLanding() {
     setMenuOpen(false);
     setModalOpen(true);
   }, []);
+
+  const scrollToStep4 = useCallback(() => {
+    track("strategy_hero_cta_scroll");
+    setMenuOpen(false);
+    const el = document.getElementById(c.offer.id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [c.offer.id]);
 
   return (
     <div className="st-page">
@@ -65,11 +75,7 @@ export default function StrategyLanding() {
         {menuOpen ? (
           <nav id="st-mobile-menu" className="st-mobile-menu" aria-label="Меню">
             <div className="st-bleed st-mobile-menu__inner">
-              <button
-                type="button"
-                className="st-mobile-menu__link"
-                onClick={() => openLeadModal("strategy_menu_lead")}
-              >
+              <button type="button" className="st-mobile-menu__link" onClick={scrollToStep4}>
                 {c.hero.primaryCta}
               </button>
               <a
@@ -77,7 +83,14 @@ export default function StrategyLanding() {
                 href={`#${c.plan.id}`}
                 onClick={() => setMenuOpen(false)}
               >
-                План на 30 дней
+                Шаг 2
+              </a>
+              <a
+                className="st-mobile-menu__link"
+                href={`#${c.how.id}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                Шаг 3
               </a>
               <a
                 className="st-mobile-menu__link"
@@ -139,7 +152,7 @@ export default function StrategyLanding() {
                   <button
                     type="button"
                     className="st-btn st-btn--primary st-btn--hero"
-                    onClick={() => openLeadModal("strategy_hero_cta")}
+                    onClick={scrollToStep4}
                   >
                     {c.hero.primaryCta}
                   </button>
@@ -178,37 +191,25 @@ export default function StrategyLanding() {
           </div>
         </section>
 
-        <StrategyPlanSection onCta={openLeadModal} />
+        <StrategyPlanSection />
+        <StrategyHowSection />
         <StrategyOfferSection onCta={openLeadModal} />
-
-        {c.placeholders.map((section) => (
-          <section
-            key={section.id}
-            id={section.id}
-            className="st-placeholder"
-            aria-labelledby={`${section.id}-title`}
-          >
-            <div className="st-container">
-              <h2 id={`${section.id}-title`} className="st-h2">
-                {section.title}
-              </h2>
-              <p className="st-muted">{section.note}</p>
-            </div>
-          </section>
-        ))}
       </main>
 
       <footer className="st-footer">
         <div className="st-container st-footer__inner">
           <p>{c.footer.note}</p>
           <p className="st-footer__phrase">{c.footer.brandPhrase}</p>
-          <p className="st-footer__legal">
-            <Link href={p.policyUrl}>Политика</Link>
-            {" · "}
-            <Link href={p.personalConsentUrl}>Согласие на ПДн</Link>
+          <nav className="st-footer__legal" aria-label="Юридическая информация">
+            {c.footer.links.map((link, i) => (
+              <span key={link.href}>
+                {i > 0 ? " · " : null}
+                <Link href={link.href}>{link.label}</Link>
+              </span>
+            ))}
             {" · "}
             <Link href="/">Главная</Link>
-          </p>
+          </nav>
         </div>
       </footer>
 

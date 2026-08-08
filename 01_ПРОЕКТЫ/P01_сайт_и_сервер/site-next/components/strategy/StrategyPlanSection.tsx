@@ -5,11 +5,7 @@ import Image from "next/image";
 import StrategyIcon from "@/components/strategy/StrategyIcon";
 import { STRATEGY_CONTENT, STRATEGY_PRODUCT } from "@/lib/strategy/content";
 
-type Props = {
-  onCta: (source: string) => void;
-};
-
-export default function StrategyPlanSection({ onCta }: Props) {
+export default function StrategyPlanSection() {
   const plan = STRATEGY_CONTENT.plan;
   const dayIndex = plan.highlightDayIndex;
 
@@ -18,14 +14,22 @@ export default function StrategyPlanSection({ onCta }: Props) {
       <div className="st-container">
         <div className="st-plan__intro">
           <div className="st-plan__copy">
+            <p className="st-plan__eyebrow">
+              <span>{plan.eyebrow}</span>
+              <span className="st-plan__eyebrow-line" aria-hidden="true" />
+            </p>
             <h2 id="st-plan-title" className="st-plan__title">
               {plan.title}
             </h2>
             <p className="st-plan__subtitle">{plan.subtitle}</p>
-            <p className="st-plan__body">{plan.body}</p>
+            <div className="st-plan__body">
+              {plan.body.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
           </div>
 
-          <div className="st-plan__visual" aria-hidden="false">
+          <div className="st-plan__visual">
             <div className="st-notebook">
               <Image
                 className="st-notebook__img"
@@ -39,9 +43,9 @@ export default function StrategyPlanSection({ onCta }: Props) {
           </div>
         </div>
 
-        <ul className="st-plan-features" aria-label="Что даёт план">
-          {plan.features.map((item) => (
-            <li key={item.title} className="st-plan-features__item">
+        <ul className="st-plan-pillars" aria-label="Принципы системы">
+          {plan.pillars.map((item) => (
+            <li key={item.title} className="st-plan-pillars__item">
               <StrategyIcon name={item.icon} />
               <strong>{item.title}</strong>
               <span>{item.text}</span>
@@ -81,8 +85,7 @@ export default function StrategyPlanSection({ onCta }: Props) {
                       <span>{row.label}</span>
                     </th>
                     {row.cells.map((cell, i) => {
-                      const hi =
-                        i === dayIndex || row.highlightCells.includes(i);
+                      const hi = row.highlightCells.includes(i);
                       return (
                         <td key={`${row.key}-${i}`} className={hi ? "is-highlight" : undefined}>
                           <span>{cell}</span>
@@ -124,15 +127,17 @@ export default function StrategyPlanSection({ onCta }: Props) {
           </div>
         </div>
 
-        <div className="st-plan__cta">
-          <button
-            type="button"
-            className="st-btn st-btn--primary"
-            onClick={() => onCta("strategy_plan_cta")}
-          >
-            {plan.cta}
-          </button>
-        </div>
+        <ul className="st-plan-stats" aria-label="Итоги системы">
+          {plan.stats.map((item) => (
+            <li key={item.title} className="st-plan-stats__item">
+              <StrategyIcon name={item.icon} />
+              <div>
+                <strong>{item.title}</strong>
+                <span>{item.text}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
