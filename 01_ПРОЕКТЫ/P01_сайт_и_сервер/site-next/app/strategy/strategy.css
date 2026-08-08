@@ -772,8 +772,8 @@
   }
 
   .st-hero {
-    padding: 0;
-    min-height: min(100vh, 900px);
+    padding: 0 0 1.5rem;
+    min-height: auto;
   }
 
   .st-hero__media {
@@ -781,7 +781,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(52vw, 720px);
+    width: min(50vw, 680px);
     z-index: 0;
   }
 
@@ -816,34 +816,35 @@
   .st-hero__copy {
     position: relative;
     z-index: 2;
-    width: min(100%, 560px);
+    width: min(100%, 580px);
     margin-right: auto;
-    padding: 5.5rem 0 2.5rem;
-    min-height: min(100vh, 900px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 5rem 0 1.75rem;
+    min-height: 0;
+    display: block;
   }
 
   .st-hero__title {
-    font-size: clamp(2.8rem, 4.2vw, 3.75rem);
-    max-width: 12ch;
+    font-size: clamp(2.55rem, 3.8vw, 3.45rem);
+    max-width: 11.5ch;
+    margin-bottom: 0.9rem;
   }
 
   .st-hero__body {
-    font-size: 1.02rem;
+    font-size: 0.98rem;
     max-width: 34rem;
     color: #cfcfcf;
+    margin-bottom: 1.15rem;
   }
 
   .st-features {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 1.15rem;
   }
 
   .st-features__item {
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 0;
-    padding: 1.05rem 0.85rem;
+    padding: 0.9rem 0.7rem;
   }
 
   .st-features__item:nth-child(2n) {
@@ -863,11 +864,11 @@
     background: none;
     -webkit-background-clip: unset;
     background-clip: unset;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   .st-price__day-value {
-    font-size: 1.85rem;
+    font-size: 1.7rem;
   }
 
   .st-hero__cta-row {
@@ -878,13 +879,14 @@
 
   .st-btn--hero {
     width: 100%;
+    padding: 1.05rem 1.25rem;
   }
 
   .st-badges {
     justify-content: flex-start;
     gap: 1.75rem;
-    margin-top: auto;
-    padding-top: 1.75rem;
+    margin-top: 1.35rem;
+    padding-top: 1.15rem;
   }
 
   .st-badges__item + .st-badges__item {
