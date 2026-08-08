@@ -1,14 +1,14 @@
-# t-800-brain-lead — Atmosfera client-programs MVP
+# t-800-brain-lead — eg-anketaplan
 
-**Date:** 2026-08-05  
-**Progress:** Brain ▸ domains: context+agents → brief ready  
+**Date:** 2026-08-08  
+**Progress:** Brain ▸ domains: context+security → brief ready  
 **memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**pack_name:** `atmosfera-client-programs-mvp`  
+**pack_name:** `eg-anketaplan`  
 **Handoff:** → `Task(t-800-factory)` with this brief  
 **status:** ok  
-**Scope:** client-programs ONLY — **NO** director-rule / eg-director-brand in this factory run
+**Scope:** skill `eg-anketaplan` (+ thin slash) ONLY — **NO** production site-next codegen in factory
 
-**Sources:** `fragments/t-800-research-lead.md` (DEEP PASS) · `fragments/t-800-prompt-craft.md` (specs OK)
+**Sources:** `fragments/t-800-research-lead.md` · `fragments/t-800-research-synthesizer.md` · domain brains context+security
 
 ---
 
@@ -16,23 +16,23 @@
 
 | Domain | Agent | Role |
 |--------|-------|------|
-| context | [brain-context](bb3fd24a-0b42-4bca-804d-c05ff2eb8d52) | skills/commands paths, frontmatter, disable-model-invocation, progressive refs, Cyrillic caveat |
-| agents | [brain-agents](e9148af5-6073-439c-857a-dfabee8389dc) | HITL STOP, @/Read SoT, Agent-mode draft-only bans |
+| context | [brain-context](02907721-bd2c-4b14-bed3-95bf6d644d36) | skill path, frontmatter, disable-model-invocation, progressive refs, Zero-Copy, slash companion, handoff≠bot-engineer |
+| security | [brain-security](d5531fba-bb50-489c-8c48-be219d97bfff) | TELEGRAM_* reuse, secrets, Idempotency day-1, PII LS, both-or-502 |
 
-Skipped: cloud, dev, admin, security, tools, teya (not in scope).
+Skipped: agents, cloud, dev, admin, tools, teya (skill+site-notify; Cursor SDK/Cloud/Teams N/A; agents not needed beyond HITL already in context precedents).
 
 ---
 
-## Architect decision (via brain-lead)
+## Open questions → brain defaults (brand/ops-safe)
 
-| Option | Verdict |
-|--------|---------|
-| Architecture A: 1 router skill + 4 refs + thin slash | **ACCEPT** |
-| Architecture B: 3 thin skills | **REJECT** (drift) |
-| Architecture C: monolith skill | **REJECT** (bloat / Zero-Copy fail) |
-| Optional agent | **SKIP** |
-| STYLE SPEC as SoT | **REJECT until user «утверждаю»** — cite as draft |
-| Director-rule in same factory | **OUT OF SCOPE** |
+| # | Question | Decision | Why |
+|---|----------|----------|-----|
+| 1 | `TELEGRAM_*` vs `ANKETAPLAN_TG_*` | **Reuse** `STRATEGY_TG_*` → `TELEGRAM_*` chain in `telegram.ts` | Least VPS friction; matches strategy/lead; isolate chat later only if ops needs separate inbox |
+| 2 | RHF day-1? | **Zod day-1; RHF SKIP** | Research: Zod preferred; site-next has neither; controlled state ports neon cleanly; add RHF later if DX pain |
+| 3 | Idempotency-Key? | **Client submitting lock day-1** | No durable store on Timeweb yet; both-or-502 + lock enough for v1; optional server key later |
+| 4 | Success UX | **In-place passport / success state** (same page) | HTML SoT parity; no `/anketaplan/success` route day-1 |
+| 5 | next@16.2.11+ | **Recommend hard-gate before production enable** (Dev note; not skill blocker) | Jul 2026 custom-server SSRF patch |
+| 6 | nginx body | **Recommend 1–2MB** for JSON+txt dump (Dev note) | Passport dump not photo mega-upload |
 
 ---
 
@@ -40,15 +40,22 @@ Skipped: cloud, dev, admin, security, tools, teya (not in scope).
 
 | Claim | Verdict |
 |-------|---------|
-| skill + `disable-model-invocation: true` | **PASS** — slash-only / HITL (mirror eg-news; NOT ambient like producer-studio `false`) |
-| thin commands + skill body | **PASS** — workspace precedent; vendor commands page legacy-adjacent |
-| Cyrillic `/программа` | **PASS ship** — Latin primary; alias like `/продюсер`; UX unverified in vendor docs |
-| `$ARGUMENTS` | **PASS soft** — workspace convention; empty → ask |
-| STYLE SPEC draft-cite until «утверждаю» | **PASS** — file header confirms черновик; skill sets `style_spec_status: pending` |
-| Zero-Copy 50-programs / TEMPLATE / PDF premium | **PASS** — cite table only |
-| Single STOP HITL | **PASS** — lighter than news dual-hash |
-| Agent CREATE | **SKIP** |
-| Site / VK / Remotion | **BAN** |
+| Artifact = skill HITL/ops + Dev handoff | **PASS** — not HTML forge; not subagent |
+| `disable-model-invocation: true` | **PASS** — HITL slash-like (eg-news / client-programs) |
+| Thin `/eg-anketaplan` command | **PASS** — HITL precedent |
+| Progressive `references/*` | **PASS** — keep SKILL.md thin |
+| Handoff → Dev/site-next, not eg-bot-engineer | **PASS** — P01 Next vs P02 Python bot |
+| Reuse TELEGRAM_* / STRATEGY_TG_* | **PASS** — security + local SoT |
+| No ANKETAPLAN_TG_* day-1 | **PASS** |
+| Zod day-1 / RHF optional SKIP | **PASS** — research hybrid selective B |
+| Client lock; no Idempotency store day-1 | **PASS** — security default |
+| In-place success | **PASS** — UI parity |
+| both-or-502 for msg+doc | **PASS** |
+| Zero-Copy prices / brand bans | **PASS** — cite SoT only |
+| Do not touch `/anketa` | **PASS** — hard constraint |
+| Timeweb eg.egoshev.ru only | **PASS** — not Vercel domain |
+| Skills not in agents-registry calls/calledBy | **PASS** — handoff table in body only |
+| Skill frontmatter model/readonly | **N/A** — those fields are for subagents |
 
 ---
 
@@ -56,7 +63,7 @@ Skipped: cloud, dev, admin, security, tools, teya (not in scope).
 
 ```yaml
 brief_for_factory:
-  pack_name: atmosfera-client-programs-mvp
+  pack_name: eg-anketaplan
   target_context:
     workspace: /Users/egoshev/Projects/atmosfera-3d
     memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
@@ -64,166 +71,134 @@ brief_for_factory:
     target_plugin: null
     knowledge_vault_path: null
     ui_language: ru
+    site_root: 01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next
   research_brief:
     ref: fragments/t-800-research-lead.md
+    synthesis_ref: fragments/t-800-research-synthesizer.md
     coverage_verdict: pass
     confidence: high
-    sources_count: 22
   prompt_craft:
-    ref: fragments/t-800-prompt-craft.md
-    status: ok
+    ref: null
+    note: "If prompt-craft fragment missing for this pack, factory prompt-auditor uses this brain brief + clawhub when/do-not patterns"
   synthesis_summary: >
-    CREATE one thin router skill eg-client-programs with progressive disclosure
-    references (post-session, monthly-plan, long-term, bans-checklist), thin slash
-    /eg-programma + Cyrillic alias /программа, HITL drafts to
-    90_ВХОДЯЩИЕ/program-drafts/. Agent SKIP. Zero-Copy cite vault SoT;
-    STYLE SPEC draft-gated until user «утверждаю». No PDF render, no site/VK/Remotion,
-    no director-rule in this run.
-  topic: "EG Atmosfera 3D client programs → skill + commands MVP"
-  recommended_artifact: mix  # skill + commands (+ scaffold); agent skip
-  action: CREATE
-  domains_called:
-    - t-800-brain-context
-    - t-800-brain-agents
-
-  create_artifacts:
-    - kind: skill
-      name: eg-client-programs
-      path: .cursor/skills/eg-client-programs/SKILL.md
-      frontmatter:
-        name: eg-client-programs
-        disable-model-invocation: true
-        # description: Use when / Do NOT from prompt-craft; no Description Trap
-      body: thin router — detect type → Read SoT + L3 ref + bans → draft → STOP
-    - kind: skill_refs
-      paths:
-        - .cursor/skills/eg-client-programs/references/post-session.md
-        - .cursor/skills/eg-client-programs/references/monthly-plan.md
-        - .cursor/skills/eg-client-programs/references/long-term.md
-        - .cursor/skills/eg-client-programs/references/bans-checklist.md
-      note: L3 outlines per prompt-craft §2; one-level deep from SKILL.md
-    - kind: command
-      name: eg-programma
-      path: .cursor/commands/eg-programma.md
-      role: primary thin slash router → skill
-      args: "post-session|monthly|long-term; empty→ask"
-    - kind: command_alias
-      name: программа
-      path: .cursor/commands/программа.md
-      role: Cyrillic alias of eg-programma; no duplicated logic; Latin primary
-    - kind: scaffold
-      path: 90_ВХОДЯЩИЕ/program-drafts/.gitkeep
-      note: HITL drafts; PII never commit
-
-  skip_artifacts:
-    - agent
-    - rule
-    - hook
-    - director-rule / eg-director-brand
-    - client PDF generation
-    - site / VK / Remotion pipelines
-
-  cite_sot_zero_copy:
-    - 90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/50-programs.mdc
-    - 90_ВХОДЯЩИЕ/atmosfera-os-from-claude/programs/TEMPLATE-program.md
-    - 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/05_МЕТОДИКА_И_ПРАКТИКА/EG_CLIENT_PROGRAMS_STYLE_SPEC.md  # DRAFT until «утверждаю»
-    - EG_PDF_PREMIUM_STYLE_SYSTEM.md  # cite-only outside repo
-    - 90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/10-voice-and-language.mdc
-    - 90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/20-products-prices.mdc
-    - 90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/40-design-system.mdc
-    - 03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/02_КЛИЕНТСКИЙ_ПУТЬ/HOME_AND_FREE_EQUIPMENT_FUNNEL.md
-    - 90_ВХОДЯЩИЕ/CURSOR PROMPT ATMOSFERA 3D.md#§14
-
-  precedents_mirror:
-    - .cursor/skills/eg-producer-studio/SKILL.md  # thin + refs (but disable=false — do NOT copy that flag)
-    - .cursor/commands/eg-producer.md
-    - .cursor/commands/продюсер.md
-    - .cursor/skills/eg-news-to-blog/SKILL.md  # disable-model-invocation true + HITL
-
-  hitl:
-    draft_path: 90_ВХОДЯЩИЕ/program-drafts/
-    stop_phrase: "Утверждаю черновик"
-    dual_hash: false
-    auto_send: false
-    draft_yaml_meta:
-      - doc_type
-      - "hitl: draft"
-      - citations[]
-      - refused_claims[]
-      - "style_spec_status: pending|approved"
-
-  product_boundary:
-    - "Type1 post-session ≠ product «Персональная программа на 30 дней»"
-    - "No full sets/reps protocol in post-session"
-    - "Type3 = skeleton only (no PDF visual canon v1)"
-    - "Services block from 20-products"
-
-  style_spec_gate: >
-    Cite EG_CLIENT_PROGRAMS_STYLE_SPEC.md as draft only. Do not promote to SoT.
-    Do not block markdown drafts on pending status — allow draft-cited outlines;
-    set style_spec_status: pending until user «утверждаю».
-    File header (2026-08-05): «Не использовать как SoT, пока Евгений не скажет утверждаю».
-
+    Hybrid A∪B∪C: thin RSC /anketaplan + one neon client island from
+    master-client-intake.html; POST /api/anketaplan/submit mirroring strategy/lead;
+    extend telegram.ts sendDocument; skill eg-anketaplan = HITL/ops + Dev handoff
+    only — Dev builds site-next AFTER factory. Defaults: reuse TELEGRAM_/STRATEGY_TG_,
+    Zod day-1 without RHF, client submit-lock, in-place success, both-or-502.
+  topic: "eg-anketaplan skill + Dev handoff for /anketaplan on eg.egoshev.ru"
   authoritative_facts:
-    - "Skill path: `.cursor/skills/<name>/SKILL.md`; required frontmatter name+description; optional disable-model-invocation, paths, metadata — https://cursor.com/docs/skills"
-    - "disable-model-invocation: true → explicit invoke only (slash); required for this pack"
-    - "Progressive disclosure: thin SKILL + references/ one level deep — Cursor skills docs"
-    - "Description Trap: description = routing only; body = algorithm — shared/prompt-craft-contract.md"
-    - "Commands: `.cursor/commands/<name>.md`; thin router → skill; plugin/deeplinks still recognize commands/"
-    - "Cyrillic slash: not in official docs; ship alias with Latin primary (local /продюсер precedent)"
-    - "$ARGUMENTS: workspace convention only; fail soft if empty → ask"
-    - "HITL STOP «Утверждаю …» is project gate, not Cursor API; single gate for this pack"
-    - "Agent mode can write files — bans must be explicit in skill (no auto-send/publish)"
-    - "Do NOT put agent 5-field schema (model/readonly/tools) on skill frontmatter"
-    - "Decision: Command=slash; Skill=workflow; Agent=SKIP; Rule=out of this run"
-
+    - "Skill path: .cursor/skills/eg-anketaplan/SKILL.md; name must match folder"
+    - "disable-model-invocation: true (slash/HITL, not ambient)"
+    - "Thin companion command: .cursor/commands/eg-anketaplan.md → read SKILL + refs"
+    - "Progressive refs: dev-handoff-checklist, cite-paths, hitl-gates, tone-bans"
+    - "No agents-registry calls/calledBy for skills — Handoff table in SKILL body"
+    - "Handoff primary: Dev / main Agent → site-next; NOT eg-bot-engineer"
+    - "Route: eg.egoshev.ru/anketaplan on Timeweb site-next — NOT separate Vercel"
+    - "Do NOT touch /anketa or components/anketa"
+    - "API: POST /api/anketaplan/submit; honeypot; server Zod; sendMessage then sendDocument(.txt+filename); both-or-502"
+    - "telegram.ts: extend sendTelegramDocument; env STRATEGY_TG_* → TELEGRAM_*; never NEXT_PUBLIC_*"
+    - "LS key egoshev_master_intake_v3; clear only on delivered:true (and honeypot soft-ok)"
+    - "Zod day-1; RHF SKIP day-1; controlled React state for neon parity"
+    - "Success UX: in-place (passport/success state), no /success route day-1"
+    - "Idempotency: client submitting lock day-1; no server Idempotency-Key store day-1"
+    - "Zero-Copy: cite products/prices SoT — never embed price tables in skill"
+    - "Brand bans: вылечим / исцеление / избавим навсегда / секретный·революционный / тело мечты / диагноз-ярлык; never «врач»"
   official_urls:
-    - https://cursor.com/docs/skills
-    - https://cursor.com/help/customization/skills
-    - https://cursor.com/docs/agent/prompting
-    - https://cursor.com/docs/agent/plan-mode
-    - https://cursor.com/docs/reference/plugins
-    - https://cursor.com/docs/reference/deeplinks
-    - https://cursor.com/docs/subagents
-    - https://agentskills.io
-
+    - "https://cursor.com/docs/skills"
+    - "https://cursor.com/docs/context/rules"
+    - "https://cursor.com/docs/agent/security"
+    - "https://core.telegram.org/bots/api"
+  recommended_artifact: skill
+  companion_artifacts:
+    - type: command
+      path: .cursor/commands/eg-anketaplan.md
+      role: thin slash router to skill
+  naming:
+    skill: eg-anketaplan
+    command: eg-anketaplan
+    route_cite: /anketaplan
+    api_cite: /api/anketaplan/submit
+  subagent_fields:
+    # N/A for skill — do NOT invent on SKILL.md
+    readonly: N/A
+    model: N/A
+    is_background: N/A
+  calls_graph:
+    # Skills: body handoff only (not agents-registry)
+    skill_handoff:
+      primary: "Dev / site-next Agent (implement Hybrid A∪B∪C)"
+      not:
+        - eg-bot-engineer
+        - eg-bot-knowledge
+        - remotion-*
+        - eg-news-to-blog
+        - eg-producer-*
+      pairsWith: []  # do not invent site agent
+    factory_creates:
+      - .cursor/skills/eg-anketaplan/SKILL.md
+      - .cursor/skills/eg-anketaplan/references/dev-handoff-checklist.md
+      - .cursor/skills/eg-anketaplan/references/cite-paths.md
+      - .cursor/skills/eg-anketaplan/references/hitl-gates.md
+      - .cursor/skills/eg-anketaplan/references/tone-bans.md
+      - .cursor/commands/eg-anketaplan.md
+    factory_does_not_create:
+      - site-next/app/anketaplan/**
+      - site-next/app/api/anketaplan/**
+      - production edits to telegram.ts (cite only in skill; Dev implements)
+  architecture_for_dev_handoff_cite:
+    page: "app/anketaplan/page.tsx thin RSC + one heavy client island"
+    styles: "CSS Modules from master-client-intake.html neon"
+    state: "controlled + LS egoshev_master_intake_v3 + currentChapter + #chapter-N; hydrate after mount"
+    validation: "Zod per-chapter + full schema before POST; RHF optional later"
+    api: "POST /api/anketaplan/submit mirror strategy/lead"
+    telegram: "sendMessage then sendDocument FormData+filename; both-or-502; not_configured soft like lead"
+    success_ux: "in-place"
+    idempotency: "client lock day-1"
+    env: "STRATEGY_TG_* | TELEGRAM_* server-only; no ANKETAPLAN_TG_* day-1"
+    deploy: "Timeweb eg.egoshev.ru; pm2 restart after env; recommend next@16.2.11+ before enable"
+    ch11: "no file upload from page — text summary in .txt only"
+  zero_copy_cite_only:
+    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/OWNERSHIP_MAP.md"
+    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/01_EG_OS_БРЕНД/TRAINING_SYSTEM_POSITIONING_MASTER.md"
+    - "03_РЕСУРСЫ/config/products.yaml"
+    - "00_ПУЛЬТ_УПРАВЛЕНИЯ/ГЛАВНЫЙ_КОНТЕКСТ.md"
+    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/20-products-prices.mdc"
+    - "90_ВХОДЯЩИЕ/anketaplan-source/master-client-intake.html"
+    - "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/lib/notifications/telegram.ts"
+    - "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/app/api/strategy/lead/route.ts"
+    - "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/components/strategy/StrategyFormModal.tsx"
   constraints:
-    - "CREATE only listed artifacts; agent/rule/hook SKIP"
-    - "NO director-rule / eg-director-brand in this factory run"
-    - "NO site code, VK pipeline, Remotion"
-    - "NO client PDF generation / no embed EG_PDF_PREMIUM CSS/HTML"
-    - "NO verbatim 50-programs or STYLE SPEC essays in SKILL.md"
-    - "NO promote STYLE SPEC to SoT before user «утверждаю»"
-    - "disable-model-invocation: true on skill"
-    - "Latin /eg-programma primary; /программа alias-only"
-    - "Brand bans: диагнозы; вылечим/исцеление/избавим навсегда; physician-claim «врач»; секретный/революционный; тело мечты"
-    - "PII drafts not for git commit"
-    - "After builder: Task(t-800-prompt-auditor) then factory-auditor"
-    - "Mirror prompt-craft body_outlines; do not invent new architecture"
-
-  open_questions_resolved:
-    - {q: "STYLE SPEC draft vs hard-block", a: "draft-cited markdown ALLOWED; style_spec_status pending; hard-block only medical/product bans"}
-    - {q: "Cyrillic /программа", a: "SHIP alias; Latin primary; verify UX post-CREATE"}
-    - {q: "EG_КЛИЕНТЫ/", a: "defer; keep program-drafts/ for v1"}
-    - {q: "Type3 PDF canon", a: "defer; long-term.md skeleton only"}
-
+    - "Factory CREATE skill (+ thin command + references) ONLY — no production HTML/TSX as done"
+    - "Main chat / non-factory MUST NOT Write skills/commands — Task(t-800-factory) only"
+    - "Do NOT touch /anketa"
+    - "Do NOT bake TELEGRAM_* / tokens / NEXT_PUBLIC secrets into skill or examples"
+    - "Do NOT auto-send PII to TG/email/CRM from skill"
+    - "HITL STOP before deploy / enable TG / production route"
+    - "Do NOT assume Vercel as deploy target"
+    - "Do NOT add grammY / node-telegram-bot-api for one-shot notify"
+    - "Do NOT use Server Action as primary TG BFF"
+    - "Zero-Copy: no price/product essays in skill body"
+    - "Brand bans in skill + tone-bans ref (med claims, physician-claim, cheap fitness spam)"
+    - "YouTube/content: never eg.egoshev.ru as CTA domain confusion — route is intentional product page on eg.egoshev.ru/anketaplan"
+  decisions_locked:
+    telegram_env: reuse_STRATEGY_TG_then_TELEGRAM
+    rhf_day1: skip
+    zod_day1: required
+    idempotency: client_lock_day1
+    success_ux: in_place
+    anketaplan_tg_isolation: deferred
   stale_warnings:
-    - "Plugin KB manifest pages last_synced ~2026-07-02 (~34d > 30) — prefer live official URLs for skills frontmatter"
-    - "KB skills.md incomplete vs current docs (paths/references/disable-model-invocation) — use https://cursor.com/docs/skills"
-    - "cursor.com/docs/agent/chat/commands redirects to Skills help — dedicated Commands reference retired; thin .cursor/commands still valid workspace pattern"
-    - "$ARGUMENTS not in current official docs"
-    - "HITL/draft-only not in T-800 KB — copy eg-producer / eg-news patterns"
-    - "STOP/quote-ground = project convention, not Cursor API"
-
-  factory_handoff:
-    next: "Task(t-800-factory)"
-    pack_name: atmosfera-client-programs-mvp
-    prompt_craft_ref: fragments/t-800-prompt-craft.md
-    research_ref: fragments/t-800-research-lead.md
+    - "KB manifest pages last_synced ~2026-07-02 (>30d from 2026-08-08) — prefer live cursor.com/docs/skills + agent/security"
+    - "telegram.ts currently sendMessage only — sendDocument is Dev extension after skill"
+    - "prompt-craft fragment for this pack may be absent — use brain when/do-not"
+  domains_called:
+    - context
+    - security
 ```
 
 ---
 
-## Progress line (parent)
+## Progress note for Director
 
-`Brain ▸ domains: context+agents → brief ready` · pack **atmosfera-client-programs-mvp** · → `Task(t-800-factory)`
+`Brain ▸ domains: context+security → brief ready` → next `Task(t-800-factory)` with pack `eg-anketaplan`.

@@ -1,91 +1,95 @@
-# t-800-prompt-auditor — atmosfera-client-programs-mvp (RETRY closeout)
+# t-800-prompt-auditor — eg-anketaplan
 
-**Date:** 2026-08-05  
-**status:** ok  
-**recommendation:** ship_to_factory_auditor  
-**pack:** atmosfera-client-programs-mvp (CREATE — files on disk)  
-**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**Specs read:** `fragments/t-800-prompt-craft.md`, `fragments/t-800-brain-lead.md`, `factory-briefs/atmosfera-client-programs-mvp.yaml`  
-**Contracts:** `shared/prompt-craft-contract.md`, `shared/t-800-agent-quality-contract.md`
+**stage:** prompt-auditor  
+**artifact:** skill + thin command  
+**audited:** 2026-08-08  
+**status:** ok
 
----
+## Verdict
 
-## Artifacts audited
+Pack `eg-anketaplan` проходит prompt QA. Critical нет. Nits неблокирующие — ship to factory-auditor.
 
-| # | Path | Lines | Verdict |
-|---|------|------:|---------|
-| 1 | `.cursor/skills/eg-client-programs/SKILL.md` | 128 | PASS |
-| 2 | `.../references/post-session.md` | 38 | PASS |
-| 3 | `.../references/monthly-plan.md` | 38 | PASS |
-| 4 | `.../references/long-term.md` | 35 | PASS |
-| 5 | `.../references/bans-checklist.md` | 45 | PASS |
-| 6 | `.cursor/commands/eg-programma.md` | 56 | PASS (thin) |
-| 7 | `.cursor/commands/программа.md` | 26 | PASS (thin alias) |
-| 8 | `90_ВХОДЯЩИЕ/program-drafts/.gitkeep` | present | PASS |
+## Checks
 
-Agent file for pack: **absent** (`.cursor/agents/` has no client-programs agent).  
-Director-rule in pack create list: **skipped** (out of scope per brief).
+| id | result | note |
+|----|--------|------|
+| skill_exists | pass | `.cursor/skills/eg-anketaplan/SKILL.md` |
+| command_exists | pass | `.cursor/commands/eg-anketaplan.md` thin router |
+| use_when_do_not | pass | skill + command description |
+| disable_model_invocation | pass | `true` on skill |
+| anti_description_trap | pass | routing only; no Next island/API dump |
+| no_tools_frontmatter | pass | N/A skill; no `tools:` |
+| name_eq_filename | pass | `eg-anketaplan` |
+| skill_line_budget | pass | 114 ≤ ~120; refs progressive |
+| do_not_touch_anketa | pass | skill/command/refs/bans |
+| handoff_dev_primary | pass | Dev/site-next; bot NOT primary |
+| zero_copy_prices | pass | cite-only; tone-bans section |
+| brand_bans | pass | tone-bans.md + SKILL bans |
+| locked_decisions | pass | STRATEGY_TG→TELEGRAM, Zod, RHF skip, client lock, in-place, both-or-502 |
+| no_secrets | pass | only ban-names; no tokens |
+| no_site_next_codegen | pass | no `app/anketaplan/**` / api dir |
 
----
+## Findings
 
-## Critical checklist
+critical: []
 
-| Check | Result |
-|-------|--------|
-| Description Trap absent (routing-only description) | **pass** |
-| `disable-model-invocation: true` on skill | **pass** |
-| Zero-Copy cite table present (no essay paste 50-programs/STYLE SPEC) | **pass** |
-| Type1 ≠ 30-day product boundary | **pass** |
-| no sets/reps overload wording in post-session | **pass** |
-| Type3 = skeleton only | **pass** |
-| STYLE SPEC pending / draft-gated | **pass** |
-| HITL STOP «Утверждаю черновик»; drafts → program-drafts/ | **pass** |
-| no agent file; no director-rule; no site/VK/Remotion | **pass** |
-| thin commands; Cyrillic alias thin | **pass** |
-| brand bans present | **pass** |
+warnings (non-blocking):
+- Command algorithm says «Gates A–C» while skill lists A–E; STOP section clarifies D–E post-Dev — intentional thin router, OK.
+- Skill description slightly dense (API/Telegram keywords) but still Use when/Do NOT routing, not body dump.
 
----
+## Recommendation
 
-## Contract QA (prompt-craft)
+`ship_to_factory_auditor`
 
 ```yaml
 status: ok
-findings:
-  critical: []
-  warnings:
-    - "Cyrillic /программа UX unverified in vendor docs — alias correctly defers to Latin /eg-programma (documented caveat; not a fail)."
-    - "SKILL.md 128 lines — under 150; dense but justified by cite table + algorithm + bans (Architecture A)."
-    - "eg-director-brand.mdc may exist elsewhere in workspace git status — out of this pack create_artifacts; do not fold into factory-auditor scope for this pack."
-recommendation: ship_to_factory_auditor
+stage: prompt-auditor
+checks:
+  - id: skill_exists
+    result: pass
+    note: SKILL.md present with role/workflow/handoff/bans/refs
+  - id: command_thin
+    result: pass
+    note: slash router; reads skill+refs; STOP before codegen
+  - id: use_when_do_not
+    result: pass
+    note: both skill and command frontmatter
+  - id: disable_model_invocation
+    result: pass
+    note: "true"
+  - id: anti_description_trap
+    result: pass
+    note: no Next island/API dump in description
+  - id: no_tools_frontmatter
+    result: pass
+    note: none
+  - id: name_eq_filename
+    result: pass
+    note: eg-anketaplan
+  - id: skill_line_budget
+    result: pass
+    note: "114 lines; progressive refs"
+  - id: do_not_touch_anketa
+    result: pass
+    note: explicit across pack
+  - id: handoff_dev_primary
+    result: pass
+    note: Dev/site-next; eg-bot-engineer not primary
+  - id: zero_copy_prices
+    result: pass
+    note: cite SoT only
+  - id: brand_bans
+    result: pass
+    note: tone-bans.md + physician/med bans
+  - id: locked_decisions
+    result: pass
+    note: TG chain Zod RHF lock in-place both-or-502
+  - id: no_secrets
+    result: pass
+    note: TELEGRAM_BOT_TOKEN named only as ban
+  - id: no_site_next_codegen
+    result: pass
+    note: cite only; no anketaplan app/api dirs
+findings: []
+repair_hints: []
 ```
-
-### Description Trap detail
-
-Skill `description` (~10 lines): zone + Use when + Do NOT only. Pipeline/algorithm lives in body. Commands likewise thin routers. **No Description Trap.**
-
-### Vague description
-
-Absent — specific triggers and exclusions.
-
-### `tools:` frontmatter
-
-Absent (skill uses skill fields; no agent).
-
-### name = filename
-
-`eg-client-programs` ↔ SKILL folder; `eg-programma` / `программа` ↔ command filenames. **PASS.**
-
----
-
-## Spec alignment (prompt-craft + brain-lead + factory brief)
-
-- Architecture A (1 skill + 4 refs + thin slash + RU alias): **match**
-- HITL single STOP, draft path, YAML meta: **match**
-- Type boundaries + bans checklist: **match**
-- Skip agent / director-rule / site/VK/Remotion / PDF: **match**
-
----
-
-## Recommended fixes
-
-None required for ship. Optional non-blocking: none for MVP closeout.

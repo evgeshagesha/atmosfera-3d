@@ -5,7 +5,7 @@
 
 ## Last run
 
-- **Когда:** 2026-08-06 23:37
+- **Когда:** 2026-08-08 20:59
 - **Команда:** /t800-start · client-programs DEEP research
 - **Research mode:** DEEP
 - **Статус:** research PASS — coverage_matrix pass · 22 sources · approach A skill+refs+command
@@ -15,6 +15,18 @@
 
 ## In progress
 
+- 2026-08-08 20:59 — `dev`: anketaplan live 8ba1194; eg.egoshev.ru/anketaplan 200
+- 2026-08-08 20:53 — `factory`: PASS eg-anketaplan skill; Dev build next
+- 2026-08-08 20:53 — `factory`: eg-anketaplan CREATE PASS — next Dev /anketaplan
+- 2026-08-08 20:51 — `factory`: eg-anketaplan integrator OK (6/6; registry null) → prompt-auditor
+- 2026-08-08 20:50 — `factory`: eg-anketaplan: architect OK → builder
+- 2026-08-08 20:49 — `factory`: eg-anketaplan CREATE start: architect
+- 2026-08-08 20:48 — `craft`: prompt_spec eg-anketaplan ok
+- 2026-08-08 20:48 — `brain`: brain_brief готов; pack eg-anketaplan; TELEGRAM reuse; Zod; in-place
+- 2026-08-08 20:47 — `brain`: Brain ▸ domains: context+security → brief ready (eg-anketaplan)
+- 2026-08-08 20:47 — `research`: mode=DEEP; synthesis готов; hybrid island+/api/anketaplan/submit
+- 2026-08-08 20:35 — `scout`: scout_report готов; stale KB; block_factory=false
+- 2026-08-08 20:34 — `intake`: answered: /anketaplan on site-next; HTML Codex path; leave /anketa; TG reuse assumed
 - 2026-08-06 23:37 — `scout`: bot texts drip: block_factory; Dev implements
 - 2026-08-06 11:30 — `scout`: strategy landing: block_factory; Dev builds /strategy
 - 2026-08-06 11:29 — `intake`: strategy landing: factory SKIP site-next Dev; product 30000
@@ -91,6 +103,13 @@
 
 ## Completed
 
+- 2026-08-08 20:53 — `factory`: PASS eg-anketaplan skill; Dev build next
+- 2026-08-08 20:53 — `factory`: eg-anketaplan CREATE PASS — next Dev /anketaplan
+- 2026-08-08 20:50 — `factory`: eg-anketaplan: architect OK → builder
+- 2026-08-08 20:49 — `factory`: eg-anketaplan CREATE start: architect
+- 2026-08-08 20:48 — `brain`: brain_brief готов; pack eg-anketaplan; TELEGRAM reuse; Zod; in-place
+- 2026-08-08 20:47 — `research`: mode=DEEP; synthesis готов; hybrid island+/api/anketaplan/submit
+- 2026-08-08 20:35 — `scout`: scout_report готов; stale KB; block_factory=false
 - 2026-08-05 19:26 — `factory`: client-programs MVP SHIP; gates exit 0
 - 2026-08-05 19:26 — `factory`: RETRY SHIP: auditor PASS · atmosfera-client-programs-mvp
 - 2026-08-05 19:23 — `factory`: RETRY closeout: artifacts complete, re-audit+gates

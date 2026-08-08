@@ -1,4 +1,4 @@
-# t-800-intake-clarifier — 2026-08-04
+# t-800-intake-clarifier — 2026-08-08
 
 ## status
 `asked` — blocks research until answers
@@ -6,27 +6,26 @@
 ## hypothesis (fixed)
 | Field | Value |
 |-------|-------|
-| artifact_surface | `cursor-workspace` |
+| artifact_surface | `cursor-workspace` (discovery) |
 | workspace | `/Users/egoshev/Projects/atmosfera-3d` |
 | memory_path | `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory` |
-| profile | `workspace-cursor` |
-| raw_goal | «скачай все плагины и skills с GitHub для идеального продюсера / продвижения бренда» |
+| raw_goal | Анкета месячного плана после покупки консультации → production Next.js (App Router + TS) на anketa.egoshev.ru из `master-client-intake.html` + Telegram POST `/api/submit` (TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID server-only) |
 
-## reframing (обязательно)
-- **НЕ** mass-download / clone «всех» GitHub plugins/skills.
-- T-800 = **курируемый** набор Cursor-артефактов под роль: продюсер + помощник продвижения бренда Атмосфера 3D (контент, Reels, прогрев, автопостинг HITL, SEO-наполнение).
-- Паттерны с GitHub/ClawHub — только после scout + DEEP research; адаптация, не verbatim copy.
-- Граница: VK автопостинг и Wave2 money pages — **Dev отдельно**; T-800 пишет только Cursor-артефакты (`.cursor/`).
+## blocker
+`master-client-intake.html` **не найден** в Projects / Downloads / Desktop — без файла нельзя «максимально точно сохранить вид».
 
 ## open questions (2–5)
-1. Типы артефактов (skills / subagents / rules / commands / mix)?
-2. Readonly для leaf-агентов?
-3. Интеграции MCP/каналы в scope T-800 (HITL-only vs шире)?
-4. Модели по умолчанию?
-5. Подтверждение границы Dev vs T-800?
+1. Где лежит `master-client-intake.html`? (абсолютный путь / вложить в чат / Google Drive / другой источник)
+2. Отдельный Next-проект `anketa.egoshev.ru` (Vercel как в ТЗ) **или** маршрут внутри текущего `site-next` на Timeweb?
+3. T-800 артефакт: skill/command/агент для сопровождения анкеты, **или** только код приложения (тогда factory-brief = skill-обёртка + handoff на build)?
+4. Telegram: новая группа «заявки месячный план» **или** те же STRATEGY_TG / TELEGRAM_* что на VPS для `/strategy`?
+5. Связь с существующей `/anketa` на eg.egoshev.ru — не трогать / заменить / редирект?
 
-## recommended_defaults (если «как лучше»)
-см. выходной YAML в ответе агента
+## assumed_defaults
+[] — ничего не угадываем до ответов
 
 ## blocks_research
 `true`
+
+## next_after_answers
+scout → research DEEP → brain → factory

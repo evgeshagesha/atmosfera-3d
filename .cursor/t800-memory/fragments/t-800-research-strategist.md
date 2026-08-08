@@ -1,281 +1,286 @@
-# t-800-research-strategist — Search Plan
+# t-800-research-strategist — anketaplan Next.js port
 
-**Date:** 2026-08-05  
-**Topic:** Client programs (клиентские программы) — skills + `/eg-programma`  
-**Workspace:** `/Users/egoshev/Projects/atmosfera-3d`  
-**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**Mode:** DEEP  
-**Intent:** mix (skills + command; optional agent later — prefer skip if router enough)
+> Generated: 2026-08-08 · Mode: DEEP · Intent: mix (skill wrapper + Dev handoff)  
+> Workspace: `/Users/egoshev/Projects/atmosfera-3d`  
+> memory_path: `.cursor/t800-memory`
 
----
+## Probe notes (strategist only — not findings)
 
-## Intake signals locked
-
-| Signal | Value |
-|--------|--------|
-| Doc types ×3 | post-session · monthly plan · long-term coaching |
-| HITL | drafts only; no auto-send / no publish |
-| Zero-Copy | cite `50-programs.mdc` + TEMPLATE + STYLE SPEC (when Dev lands) |
-| artifact_surface | cursor-workspace; factory boundary `.cursor/` only |
-| OUT | vk / site / remotion |
-| no_mass_github | **true** → github ≠ must; no repo-miner; no mass clone |
-| scout | `block_factory=false`, `skills_needed=true` |
+- Local SoT already exists: `site-next/app/api/strategy/lead/route.ts` + `lib/notifications/telegram.ts` (**sendMessage only** — no `sendDocument` yet). Compare is **local**, not a research channel.
+- Source monolith: `90_ВХОДЯЩИЕ/anketaplan-source/master-client-intake.html` — 12 chapters, branches, pain cards, BMI/BMR, `localStorage` key `egoshev_master_intake_v3`, passport summary.
+- `/anketa` must stay untouched; new route `/anketaplan` on same Next app → Timeweb `eg.egoshev.ru`.
+- Probe GitHub: strong candidates for miner — `63r6o/shadcn-nextjs-multistep-form-example` (Context+localStorage+Zod+ssr:false), `SametAydinhan/multi-step-form-nextjs` (RHF+Zod), Zustand-persist wizards as runner-up pattern.
+- Probe docs: Route Handler preferred over Server Actions for large JSON + TG file attach + explicit status codes; Vercel body limits ≠ Timeweb Node/PM2 (self-host more forgiving, still need size cap).
 
 ---
-
-## Probe (strategist-light)
-
-1. **Local vault confirm (2026-08-05):**
-   - ✅ `90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/50-programs.mdc` — post-session structure, МФР, services block, bans
-   - ✅ `90_ВХОДЯЩИЕ/atmosfera-os-from-claude/programs/TEMPLATE-program.md` — 10-section template + training-week model
-   - ✅ Adjacent: `10-voice-and-language.mdc`, `20-products-prices.mdc`, `40-design-system.mdc`, `brand/design-tokens.css` (inbox pack)
-   - ✅ Modular precedent: `.cursor/skills/eg-producer-studio` + `.cursor/commands/eg-producer.md` (router → thin craft skills + HITL)
-   - ✅ HITL precedent: `eg-news-to-blog` dual gate / brand-safety
-   - ⚠️ `EG_CLIENT_PROGRAMS_STYLE_SPEC.md` — **not in vault yet** (Dev parallel; cite placeholder)
-   - ⚠️ `EG_КЛИЕНТЫ/` tree — **not found** as named folder; drafts likely `90_ВХОДЯЩИЕ/` or future path — open_question
-   - ⚠️ `EG_PDF_PREMIUM_STYLE_SYSTEM.md` — not in atmosfera-3d root; search home/EG ecosystem in fan-out
-   - Journey: `03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/02_КЛИЕНТСКИЙ_ПУТЬ/*`
-
-2. **Web probe:** Cursor skills docs stable — `name`/`description`/`paths`/`disable-model-invocation`; progressive disclosure via `references/`. Aligns with 1 skill + 3 refs OR 3 thin skills + command router.
-
----
-
-## Strategy rationale
-
-| Question | Strategist call |
-|----------|-----------------|
-| Where is official truth for *content*? | **Local vault** (50-programs + TEMPLATE + voice/products) — primary must |
-| Where is official truth for *Cursor artifact shape*? | **vendor-docs Cursor** (skills + commands + prompting) |
-| Where are modular skill patterns? | **Local eg-producer pack** + **ClawHub** structure (adapt, no copy) + **community** skill authoring |
-| Prompt craft for HITL structured clinical-ish docs? | **vendor-docs** Claude XML + OpenAI structured / cookbook patterns — not medical APIs |
-| Why skip mass GitHub? | Intake `no_mass_github`; domain is brand SoT + Cursor UX, not open-source care-plan repos. Coverage ≥8 via vault + vendor + clawhub + community + journey docs |
-| Context7? | Skip — no library/SDK named |
-| News? | Nice-only if skills API change post-scout; scout already Aug 5 — default skip unless lead sees changelog delta |
-
-**Synthesis target hypothesis (for synthesizer to confirm/reject):**  
-**1 router skill `eg-client-programs` (or `eg-programma`) + 3 L3 refs** (post-session / monthly / long-term) **+ command `/eg-programma`** with optional alias `/программа` — mirror `eg-producer` pattern. Alternative: 3 thin skills + thin command. Prefer skill-first modular over new agent unless compare shows router agent value.
-
----
-
-## Expected source families (≥8 without mass github)
-
-1. `50-programs.mdc` (local)
-2. `TEMPLATE-program.md` (local)
-3. Voice + products + design rules (local inbox pack)
-4. `eg-producer` command+skills modular HITL precedent (local)
-5. `eg-news` / brand-safety HITL gates (local)
-6. Customer journey vault docs (local)
-7. Cursor docs — skills (vendor)
-8. Cursor docs — commands / agent prompting (vendor)
-9. Anthropic Claude prompting best practices (vendor)
-10. OpenAI Cookbook — structured outputs / evals / HITL-ish patterns (vendor)
-11. ClawHub skill cards ×2–4 structure-only (clawhub)
-12. Community: agentskills.io / localskills / Cursor forum-or-Reddit skill authoring (community)
-13. Optional: EG PDF premium style path if located outside repo (custom/local)
-14. Scout fragment freshness (already in memory)
-
----
-
-## Machine YAML
 
 ```yaml
 status: ok
 search_plan:
-  topic: "EG Atmosfera 3D client programs — post-session / monthly plan / long-term coaching → Cursor skills + /eg-programma"
+  topic: "Port monolithic master-client-intake.html → Next.js App Router+TS page /anketaplan on site-next (eg.egoshev.ru/Timeweb); TG submit API with .txt attach; skill wrapper eg-anketaplan + Dev handoff (no production code in research)"
   intent_artifact: mix
-  intent_detail: "skills (1+refs or 3 thin) + command /eg-programma (+ optional /программа alias); agent optional EXTEND only if synthesis proves need"
   mode: deep
-  constraints:
-    hitl_only: true
-    zero_copy: true
-    no_medical_diagnoses_or_promises: true
-    artifact_surface: cursor-workspace
-    factory_boundary: ".cursor/ only"
-    out_of_scope: [vk, site, remotion, pdf_render_pipeline, STYLE_SPEC_authoring]
-    no_mass_github: true
-    scout:
-      block_factory: false
-      skills_needed: true
+  product_constraints:
+    preserve_ui:
+      - white neon glow
+      - 12 chapters + progress
+      - chips, scales, conditional branches (kids/women/men/sport)
+      - pain zone cards
+      - auto age/BMI/BMR/calories
+      - localStorage persist/restore
+      - final passport summary
+    api:
+      - "POST /api/submit OR /api/anketaplan/submit"
+      - server-only TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
+      - short TG message + .txt attachment
+      - anti double-submit, validation, size limit, consent
+      - UX states: sending|sent|error; retry without data loss
+    do_not_touch: ["/anketa"]
+    source: "90_ВХОДЯЩИЕ/anketaplan-source/master-client-intake.html"
+    deploy_target: "Timeweb VPS eg.egoshev.ru (NOT separate Vercel domain)"
+    local_compare_not_channel:
+      paths:
+        - "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/app/api/strategy/lead/route.ts"
+        - "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/lib/notifications/telegram.ts"
+        - "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/components/strategy/*"
+        - "01_ПРОЕКТЫ/P01_сайт_и_сервер/КАНОН_ДОМЕН_eg.egoshev.ru.md"
+      note: "Research-lead/synthesizer MUST compare TG pattern locally; do not invent a 'local' channel id."
+
+  expected_sources_total: "≥10 dated (DEEP minima ≥8); target 12–16 across channels"
+  expected_repo_mines: 2
+
   channels:
-    - id: custom
-      label: local-vault
+    - id: docs
       priority: must
-      why: >
-        Primary SoT for document structure, clinical-accuracy-without-diagnosis framing,
-        МФР method, services block, TEMPLATE sections, voice bans, product CTAs, design tokens.
-        Zero-Copy research must map cite-paths; cannot be replaced by ClawHub/GitHub.
-        Contract allows custom channels; DEEP coverage without github mines.
-      queries:
-        - "50-programs.mdc structure post-session markers services block safety"
-        - "TEMPLATE-program.md section map vs 3 doc types gaps (monthly / long-term)"
-        - "eg-producer modular router vs craft skills HITL STOP pattern"
-        - "eg-news dual HITL / brand-safety reuse for client docs"
-        - "EG_CLIENT_PROGRAMS_STYLE_SPEC OR PDF premium style path"
-        - "EG_КЛИЕНТЫ OR drafts destination patterns 90_ВХОДЯЩИЕ"
-        - "02_КЛИЕНТСКИЙ_ПУТЬ journey → product ladder after session"
-        - "10-voice 20-products 40-design cite list for skill frontmatter Do Not Use"
+      specialist: t-800-research-docs
+      why: "Official Next.js App Router truth for Route Handlers, request.formData/json, Client Components, forms UX (pending/error), body limits — Context7 required by brief."
       sites_or_hubs:
-        - "/Users/egoshev/Projects/atmosfera-3d/90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/50-programs.mdc"
-        - "/Users/egoshev/Projects/atmosfera-3d/90_ВХОДЯЩИЕ/atmosfera-os-from-claude/programs/TEMPLATE-program.md"
-        - "/Users/egoshev/Projects/atmosfera-3d/90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/"
-        - "/Users/egoshev/Projects/atmosfera-3d/.cursor/skills/eg-producer-studio/"
-        - "/Users/egoshev/Projects/atmosfera-3d/.cursor/commands/eg-producer.md"
-        - "/Users/egoshev/Projects/atmosfera-3d/.cursor/skills/eg-news-to-blog/"
-        - "/Users/egoshev/Projects/atmosfera-3d/03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/02_КЛИЕНТСКИЙ_ПУТЬ/"
-        - "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory/fragments/t-800-scout.md"
-      specialist: t-800-research-lead
-      execution_note: >
-        No dedicated vault specialist — research-lead runs workspace Read/Grep pass
-        BEFORE or IN PARALLEL with external fan-out; findings feed synthesizer as source family #1.
+        - "Context7 → /vercel/next.js"
+        - "https://nextjs.org/docs"
+      queries:
+        - "App Router Route Handlers POST request.json request.formData"
+        - "Next.js forms Client Components useActionState vs fetch Route Handler"
+        - "body size limits serverActions vs route handlers Node runtime"
+        - "dynamic ssr false localStorage client-only patterns"
+        - "NextResponse JSON status 400 413 429 502"
+      context7:
+        library_hint: "/vercel/next.js"
+        max_queries: 5
+        focus:
+          - "Route Handlers"
+          - "mutating data / forms"
+          - "Client Components"
+          - "File conventions app router"
+      expected_source_count: 4
+      notes_for_specialist: |
+        Prefer Context7 over blog spam. Extract: when Route Handler vs Server Action;
+        how to return typed JSON errors; Node runtime for Telegram fetch + Buffer/Blob;
+        any guidance on large POST payloads. Flag Next version drift vs site-next package.json.
+        Output docs_brief with URLs/dates for synthesizer.
+
+    - id: github
+      priority: must
+      specialist: t-800-research-github
+      why: "Find multi-step wizard + localStorage + Zod/RHF patterns and Telegram Bot sendDocument examples adaptable to site-next."
+      sites_or_hubs:
+        - "github.com"
+        - "https://github.com/search"
+      queries:
+        - "Next.js App Router multi-step form TypeScript localStorage"
+        - "react-hook-form zod wizard App Router"
+        - "shadcn multistep form nextjs localStorage"
+        - "Telegram Bot API sendDocument Node.js FormData typescript"
+        - "Next.js route handler telegram notification file attachment"
+        - "anti double submit idempotency form Next.js"
+      expected_source_count: 6
+      notes_for_specialist: |
+        Rank by: App Router fit, TS, localStorage persist, step validation, license clarity.
+        Seed shortlist (probe 2026-08-08 — verify stars/activity before promoting):
+        top_repos_candidates:
+          - owner_repo: "63r6o/shadcn-nextjs-multistep-form-example"
+            why: "Context + localStorage + per-step Zod + next/dynamic ssr:false — closest to 12-chapter persist"
+          - owner_repo: "SametAydinhan/multi-step-form-nextjs"
+            why: "RHF + Zod multi-step App Router baseline"
+          - pattern_alt: "Zustand persist wizard (e.g. benjaminshoemaker/vibecode_spec_generator) — only if Context approach looks fragile for 12 chapters"
+        Also surface ≥2 repos showing Telegram sendDocument / multipart upload from Node.
+        Hand OFF top 2–3 repos to repo-miner with explicit mine goals (see repo-miner notes).
+        Do NOT deep-mine in this channel — shallow ranking + metadata only.
+
+    - id: repo-miner
+      priority: must
+      specialist: t-800-research-repo-miner
+      why: "DEEP minima ≥2 deep-mines; extract concrete file-level patterns for wizard state, validation, submit UX, TG attach."
+      sites_or_hubs:
+        - "github.com (clone-free: WebFetch raw / tree)"
+      queries: []  # uses top_repos from github specialist
+      expected_source_count: 2
+      notes_for_specialist: |
+        Mine exactly ≥2 repos from github shortlist. Preferred pair:
+        1) 63r6o/shadcn-nextjs-multistep-form-example — extract: layout dynamic import, context persist key, step schema pick, clear-after-success.
+        2) Best Telegram sendDocument / Next route-handler TG example from github ranking (if none quality, mine a Node Bot API example + separately note adaptation).
+        Mine goals checklist:
+          - chapter/step navigation + URL hash or query
+          - localStorage hydrate without SSR crash
+          - per-step required validation
+          - submit pending/success/error + retry preserving draft
+          - server: validation, size limit, env-only secrets
+          - Telegram: sendMessage + sendDocument (.txt) multipart
+          - double-submit guard (client lock + optional server idempotency key)
+        Output: file paths, snippets citations (short), adaptation bullets for site-next (NOT copy-paste wholesale).
+        Forbidden: clone unless user asked; no production code write.
 
     - id: vendor-docs
       priority: must
-      why: >
-        Cursor skill/command shape is vendor truth; prompting cookbooks give HITL structured-doc
-        patterns (XML sections, progressive disclosure, safety refusals) without inventing medical APIs.
-        Scout already sampled skills API — deepen commands + Agent prompting + 2 cookbooks.
-      queries:
-        - "Cursor docs skills SKILL.md frontmatter paths disable-model-invocation references"
-        - "Cursor docs commands slash command arguments router pattern"
-        - "Cursor Agent prompting best practices structured workflows"
-        - "Claude prompting best practices XML sections safety refusals long documents"
-        - "OpenAI cookbook structured outputs OR agent HITL review patterns"
-        - "Gemini prompting strategies optional third mastodon if multi-model inherit"
-      sites_or_hubs:
-        - "https://cursor.com/docs/skills"
-        - "https://cursor.com/docs/agent/prompting"
-        - "https://cursor.com/docs/agent/chat/commands"
-        - "https://cursor.com/help/customization/skills"
-        - "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
-        - "https://cookbook.openai.com/"
-        - "https://ai.google.dev/gemini-api/docs/prompting-strategies"
       specialist: t-800-research-vendor-docs
-      idea_seeds_focus:
-        - "progressive disclosure: thin SKILL + references per doc type"
-        - "disable-model-invocation vs auto-trigger for clinical client docs"
-        - "HITL stop gates before client-facing language final"
-        - "refusal / safety framing without medical claims"
-
-    - id: clawhub
-      priority: must
-      why: >
-        Skills marketplace for *structure* of care-plan / clinical-doc / coaching-plan skills —
-        adapt patterns only; rejected_verbatim true. ClawHub pass required when must (DEEP).
-        Thin scan Top/Trending/New; 3–6 cards max; no mass clone.
-      queries:
-        - "care plan skill"
-        - "client notes OR session notes skill"
-        - "coaching plan OR training program skill"
-        - "HITL review OR draft approval skill"
-        - "structured medical-adjacent documentation skill (safety scan)"
+      why: "Telegram Bot API is the delivery contract (message + document). Cursor skill docs needed because intent includes eg-anketaplan skill wrapper. Vercel form/README patterns only as ADAPT source for Timeweb — not deploy target."
       sites_or_hubs:
-        - "https://clawhub.ai/"
-      specialist: t-800-research-clawhub
-      security_scan: true
-      max_items: 6
+        - "https://core.telegram.org/bots/api"
+        - "https://cursor.com/docs"
+        - "https://nextjs.org/docs (cross-check only)"
+        - "Vercel docs / template READMEs (forms, env, deploy) — adapt language only"
+      queries:
+        - "Telegram Bot API sendMessage sendDocument multipart/form-data caption limits"
+        - "Telegram Bot API file size limits document"
+        - "Cursor Agent skills SKILL.md structure tools"
+        - "Vercel Next.js form submission env secrets README patterns adapt self-host"
+      expected_source_count: 4
+      notes_for_specialist: |
+        MUST fetch Telegram Bot API rows for sendMessage + sendDocument (limits, caption, parse_mode HTML).
+        Cursor docs: skill frontmatter / when to wrap Dev handoff — idea_seeds for prompt-craft later.
+        Vercel: extract env naming, form→API checklist from README/templates; rewrite deploy steps to Timeweb
+        (PM2 `egoshev`, nginx, eg.egoshev.ru) per КАНОН_ДОМЕН — do not recommend new Vercel project.
+        SKIP OpenAI/Claude/Gemini cookbooks — not a prompting/multi-model task (open_question only if skill needs multi-model).
+        Output vendor_docs_brief + idea_seeds[] for skill wrapper boundaries (HITL, no auto-publish secrets).
 
     - id: community
       priority: should
-      why: >
-        Live author experience on modular skills (1 skill + refs vs many skills), slash-command
-        routers, Russian alias commands, progressive disclosure pitfalls — complements vendor docs.
-        LIGHT depth OK; 2–4 posts/articles.
-      queries:
-        - "Cursor skills modular references folder best practices"
-        - "Cursor slash command vs skill when to use both"
-        - "agentskills.io specification progressive disclosure"
-        - "Reddit OR forum Cursor agent skills SKILL.md too long"
-        - "HITL human review AI clinical notes OR coaching docs (non-diagnostic)"
-      sites_or_hubs:
-        - "https://agentskills.io/"
-        - "https://localskills.sh/"
-        - "https://www.reddit.com/r/cursor"
-        - "https://forum.cursor.com/"
-        - "Habr / X optional if Russian Cursor skill threads appear"
       specialist: t-800-research-community
+      why: "Live pitfalls: SSR localStorage, multi-step UX abandonment, double-submit, TG attachment failures, self-host vs serverless body limits."
+      sites_or_hubs:
+        - "reddit.com/r/nextjs"
+        - "reddit.com/r/reactjs"
+        - "news.ycombinator.com"
+        - "habr.com"
+        - "stackoverflow.com"
+      queries:
+        - "Next.js App Router localStorage multi-step form SSR hydration"
+        - "prevent double form submit React fetch pending"
+        - "Telegram bot sendDocument from Next.js API route"
+        - "self-hosted Next.js vs Vercel body size limit form"
+        - "wizard form 10+ steps UX validation progress"
+      expected_source_count: 3
+      notes_for_specialist: |
+        Prefer 2024–2026 posts with concrete failure modes. Capture: hydration mismatch fixes,
+        idempotency patterns, UX for long health intakes (consent, privacy tone — no medical claims).
+        RU Habr OK if Next/self-host relevant.
+
+    - id: clawhub
+      priority: should
+      specialist: t-800-research-clawhub
+      why: "Intent includes skill wrapper eg-anketaplan — mine marketplace patterns for form/intake/HITL skills; do not copy verbatim."
+      sites_or_hubs:
+        - "https://clawhub.ai/"
+      queries:
+        - "form intake questionnaire wizard"
+        - "Next.js handoff skill"
+        - "Telegram notify skill"
+        - "multi-step onboarding"
+      expected_source_count: 3
+      notes_for_specialist: |
+        Scan Top/Trending/New. Extract structure/security narrative only.
+        Reject skills that embed bot tokens or auto-post PII.
+        adaptation_plan → Cursor SKILL.md boundaries: when to invoke, paths to site-next,
+        forbid touching /anketa, forbid committing secrets, HITL before deploy.
+        rejected_verbatim: true always.
 
     - id: news
       priority: nice
-      why: >
-        Only if lead needs freshness delta after scout (Aug 5). Skills API already checked.
-        Skip by default to save budget; flip to should if changelog shows skills/commands break.
-      queries:
-        - "Cursor changelog skills commands August 2026"
-      sites_or_hubs:
-        - "https://cursor.com/changelog"
       specialist: t-800-research-news
-
-    - id: github
-      priority: nice
-      why_downgraded: >
-        Intake no_mass_github=true. Domain truth is vault + Cursor UX, not OSS care-plan repos.
-        GitHub is NOT must and NOT should. Optional ≤1 shallow URL citation (e.g. agentskills
-        examples) ONLY if community/vendor leave a concrete gap — zero clones, zero repo-miner.
-      queries:
-        - "agentskills examples SKILL.md references pattern (shallow link only)"
+      why: "Catch breaking Next.js form/body-limit / App Router changes that would invalidate patterns; low priority vs docs+github."
       sites_or_hubs:
-        - "github.com (shallow link-only if needed)"
-      specialist: t-800-research-github
-      hard_limits:
-        deep_mines: 0
-        mass_download: false
-        clone: false
-        max_repos_if_activated: 1
-        mode_if_activated: shallow_urls_only
+        - "https://nextjs.org/blog"
+        - "https://github.com/vercel/next.js/releases"
+        - "HN / tech blogs (selective)"
+      queries:
+        - "Next.js 15 16 proxyClientMaxBodySize serverActions bodySizeLimit"
+        - "App Router forms breaking changes 2025 2026"
+      expected_source_count: 2
+      notes_for_specialist: |
+        Only include if dated change affects Route Handler POST or Client form patterns.
+        Map implications to Timeweb Node runtime (often different from Vercel limits).
 
   compare_axes:
-    - "cursor_fit: skill+command shape vs Cursor docs + eg-producer precedent"
-    - "modular_architecture: 1 skill+3 refs vs 3 thin skills vs monolith essay skill"
-    - "zero_copy_compliance: cite 50-programs/TEMPLATE/STYLE SPEC vs embedding prose"
-    - "brand_safety: diagnosis bans, services block, voice anti-AI markers"
-    - "hitl_gates: draft path, STOP before client send, no auto-publish"
-    - "doc_type_coverage: post-session vs monthly vs long-term gap fill"
-    - "command_ux: /eg-programma args + /программа alias vs skill-only trigger"
-    - "security: clawhub flags; no PII in skill body; client data not in git"
-    - "completeness: ≥8 dated sources without github mines"
-    - "optional_agent: EXTEND value vs command+skills enough (prefer skip)"
+    - "architecture_fit_site_next"   # App Router + existing lib/notifications/telegram.ts extensibility
+    - "ui_parity_risk"              # monolith CSS/JS → React without losing neon/branches/pain cards
+    - "state_persistence"           # localStorage key strategy, SSR safety, retry without data loss
+    - "telegram_delivery"           # sendMessage+sendDocument, secrets server-only, failure modes
+    - "security_privacy"            # consent, size limit, anti double-submit, no token leakage, PII in TG
+    - "deploy_timeweb_fit"          # same domain path /anketaplan; env on VPS; no Vercel split
+    - "do_not_touch_anketa"         # isolation from existing /anketa
+    - "skill_vs_dev_boundary"       # what eg-anketaplan skill owns vs what Dev implements in site-next
+    - "freshness"                   # dated sources ≥8
+    - "completeness"                # covers UI port + API + TG + deploy + skill handoff
 
   skip_channels:
-    - id: docs
-      why: "Context7 / research-docs — no library, SDK, npm, or API package in intake; skip unless a render lib appears (PDF is Dev OUT)"
-    - id: repo-miner
-      why: "no_mass_github; deep mines would violate intake; coverage via local-vault + vendor + clawhub + community"
-    - id: github_as_must
-      why: "Explicit intake no_mass_github; github channel max nice/shallow; never must/should for this pack"
-    - id: remotion_vk_site
-      why: "OUT of research pack per intake boundary"
-    - id: pdf_html_pipeline
-      why: "STYLE SPEC / HTML→PDF authoring is Dev parallel; research only maps cite path + structural implications"
-    - id: medical_guideline_sites
-      why: "Brand bans diagnoses/promises; do not research clinical protocols as source of truth — vault method only"
+    - id: vendor-docs-openai-claude-gemini-cookbooks
+      why: "Not a multi-model prompting task; skill is thin wrapper + Dev handoff. Cursor docs + Telegram API suffice for vendor-docs must."
+    - id: kie-grs-image-video
+      why: "No media generation; chapter 11 explicitly says files not uploaded on page."
+    - id: vercel-as-deploy-target
+      why: "Product constraint: ship on Timeweb eg.egoshev.ru inside existing site-next — Vercel README only for pattern adaptation."
+    - id: context7-always-on-other-libs
+      why: "No signal for RHF/Zod/Zustand as mandatory deps yet — decide in synthesis; Context7 only Next.js unless github forces a library."
+    - id: local-as-channel
+      why: "strategy/telegram compare is workspace SoT for synthesizer/lead — not WebSearch/WebFetch channel."
 
   open_questions:
-    - "Where will EG_CLIENT_PROGRAMS_STYLE_SPEC.md land (path) and when — factory cite placeholder vs wait?"
-    - "Draft destination: 90_ВХОДЯЩИЕ/ vs EG_КЛИЕНТЫ/ (folder missing) — confirm path for HITL outputs"
-    - "Is /программа Cyrillic alias required in v1 or defer?"
-    - "Do monthly + long-term need separate section maps beyond TEMPLATE (TEMPLATE biased to post-session)?"
-    - "Optional agent: skip for v1 if /eg-programma + skill router mirrors eg-producer?"
-    - "Locate EG_PDF_PREMIUM_STYLE_SYSTEM.md outside repo for Zero-Copy cite (home/EG ecosystem)?"
+    - "Exact API path: /api/submit vs /api/anketaplan/submit (prefer namespaced to avoid colliding with future globals)?"
+    - "Reuse TELEGRAM_* env vs dedicated ANKETAPLAN_TG_* (strategy already has STRATEGY_TG_* fallbacks)?"
+    - "Extend lib/notifications/telegram.ts with sendDocument vs one-off in anketaplan route?"
+    - "Client architecture: single Client page (closest to monolith) vs multi-route wizard — UI parity vs maintainability?"
+    - "Zod/RHF adoption vs porting vanilla serialize/validateChapter — skill may recommend one; Dev chooses under time pressure?"
+    - "Max .txt / JSON payload size policy for Timeweb nginx + Node (set explicit MB)?"
+    - "After successful send: clear localStorage immediately or keep until user confirms (retry UX)?"
+    - "Skill scope: only research/handoff checklist, or also codegen prompts for components?"
 
-  coverage_expectation:
-    min_sources: 8
-    without_github_mines: true
-    clawhub_pass_required: true
-    vendor_or_context7: "vendor-docs (Cursor + ≥2 cookbooks); Context7 skip"
-    local_vault_counts_as_source_family: true
-    synthesizer_must_compare:
-      - "architecture A: 1 skill + 3 references + /eg-programma"
-      - "architecture B: 3 thin skills + /eg-programma"
-      - "architecture C: monolith skill (likely reject — context bloat)"
+  specialist_fanout_order:
+    - "docs (Context7 Next) ∥ github ∥ vendor-docs (Telegram+Cursor+Vercel-adapt)"
+    - "repo-miner (after github top_repos)"
+    - "community ∥ clawhub"
+    - "news (nice, if budget)"
+    - "synthesizer (must compare ≥2 families: e.g. Context+localStorage wizard vs RHF+Zustand; Route Handler+TG extend vs Server Action)"
+
+  synthesizer_hints:
+    recommended_comparison_families:
+      - "A: Port as one heavy Client Component + CSS module/global neon (max UI parity)"
+      - "B: Multi-step RHF+Zod+Context/Zustand (max maintainability)"
+      - "C: API — extend existing telegram.ts + mirror strategy/lead validation/honeypot patterns"
+    must_produce:
+      - "one recommended_approach"
+      - "merge_plan (UI from A + API from C + state bits from B)"
+      - "adaptation_plan for Timeweb path eg.egoshev.ru/anketaplan"
+      - "skill_boundary for eg-anketaplan (HITL, paths, bans)"
+      - "explicit note: research delivers plan/patterns only — no production code"
+    local_inputs_required:
+      - "Read strategy lead route + telegram.ts before ranking TG approach"
+      - "Skim master-client-intake.html chapter/branch/localStorage contracts"
+      - "Confirm /anketa isolation"
+
+  coverage_expectations:
+    strategist: pass
+    github_shallow: must
+    repo_mines: "≥2"
+    context7_docs: must
+    vendor_docs: must
+    community: should
+    clawhub: should
+    news: nice
+    sources_count_target: "12-16"
+    verdict_gate: "fail if <8 dated sources OR <2 mines OR missing Context7 OR missing Telegram API facts"
 ```
 
----
+## Progress for lead
 
-## Fan-out order (for research-lead)
-
-1. **Parallel:** local-vault (lead) + vendor-docs + clawhub  
-2. **Then:** community (should)  
-3. **Optional:** news if changelog delta; github shallow only if gap  
-4. **Synthesizer** → recommended_approach + merge_plan → research_brief + coverage_matrix  
-
-**Do not** call factory from research. Prompt-craft after synthesis.
+1. Strategist complete — `search_plan` ready for fan-out.
+2. Next: parallel `docs` + `github` + `vendor-docs`; then `repo-miner` on github `top_repos`.
+3. Local strategy/TG compare = synthesizer input, not a channel.

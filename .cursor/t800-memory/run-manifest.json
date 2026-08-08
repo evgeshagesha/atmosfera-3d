@@ -1,46 +1,46 @@
 {
-  "slug": "atmosfera-client-programs-mvp",
+  "slug": "eg-anketaplan",
   "command": "/t800-start CREATE",
   "mode": "CREATE",
   "profile": "workspace-cursor",
   "artifact_surface": "cursor-workspace",
   "plugin_root": "",
   "memory_path": "/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory",
-  "brief": ".cursor/t800-memory/factory-briefs/atmosfera-client-programs-mvp.yaml",
+  "brief": ".cursor/t800-memory/factory-briefs/eg-anketaplan.yaml",
   "registry_patch": null,
   "release_handoff": null,
-  "updated": "2026-08-05T19:26+03:00",
+  "updated": "2026-08-08T20:51+03:00",
   "factory": {
-    "status": "ok",
-    "agent": "t-800-factory",
+    "status": "integrator_ok",
+    "agent": "t-800-factory-integrator",
     "mode": "CREATE",
-    "retry": true
+    "retry": false
   },
   "steps": [
     {
       "agent": "t-800-factory-architect",
       "status": "ok",
-      "note": "RETRY: Architecture A already on disk; skip rebuild"
+      "note": "Architecture A: skill+refs+thin command; no site-next"
     },
     {
       "agent": "t-800-factory-builder",
       "status": "ok",
-      "note": "RETRY: 8 artifacts present complete — no rewrite"
+      "note": "6 artifacts written under .cursor/skills|commands"
     },
     {
       "agent": "t-800-factory-integrator",
       "status": "ok",
-      "note": "RETRY: verified paths + AGENTS.md"
+      "note": "Verified 6/6; disable-model-invocation; registry_patch null; Reload Window"
     },
     {
       "agent": "t-800-prompt-auditor",
-      "status": "ok",
-      "note": "RETRY 869ce7ba: 11/11 critical PASS"
+      "status": "pending",
+      "note": "next"
     },
     {
       "agent": "t-800-factory-auditor",
-      "status": "ok",
-      "note": "RETRY e1e22cad: PASS ship"
+      "status": "pending",
+      "note": "after prompt-auditor"
     }
   ],
   "stages": {
@@ -48,25 +48,21 @@
     "research": "done",
     "prompt_craft": "done",
     "brain": "done",
-    "factory": "done",
-    "factory_auditor": "done"
+    "factory": "integrator_ok",
+    "factory_auditor": "pending"
   },
   "artifacts": [
-    ".cursor/skills/eg-client-programs/SKILL.md",
-    ".cursor/skills/eg-client-programs/references/post-session.md",
-    ".cursor/skills/eg-client-programs/references/monthly-plan.md",
-    ".cursor/skills/eg-client-programs/references/long-term.md",
-    ".cursor/skills/eg-client-programs/references/bans-checklist.md",
-    ".cursor/commands/eg-programma.md",
-    ".cursor/commands/программа.md",
-    "90_ВХОДЯЩИЕ/program-drafts/.gitkeep"
+    ".cursor/skills/eg-anketaplan/SKILL.md",
+    ".cursor/skills/eg-anketaplan/references/cite-paths.md",
+    ".cursor/skills/eg-anketaplan/references/dev-handoff-checklist.md",
+    ".cursor/skills/eg-anketaplan/references/hitl-gates.md",
+    ".cursor/skills/eg-anketaplan/references/tone-bans.md",
+    ".cursor/commands/eg-anketaplan.md"
   ],
   "gates": {
-    "t800_run_gate": "ok",
-    "t800_run_gate_strict_create": "ok",
-    "t800_run_gate_with_brief": "ok",
-    "t800_factory_bypass_gate": "ok",
-    "prompt_auditor": "ok",
-    "factory_auditor": "ok"
+    "t800_run_gate": "pending",
+    "t800_run_gate_strict_create": "pending",
+    "prompt_auditor": "pending",
+    "factory_auditor": "pending"
   }
 }

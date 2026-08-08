@@ -1,216 +1,203 @@
-# t-800-research-lead — DEEP Research Brief
+# t-800-research-lead — anketaplan DEEP research_brief
 
-**Date:** 2026-08-05  
-**Topic:** Atmosfera 3D / Евгений Гошев — client programs (3 doc types) → skills + `/eg-programma`  
-**memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**Progress:** Research ▸ strategist→4 specialists (+local-vault lead)→synthesis  
-**verdict:** `coverage_matrix.verdict: pass` · `confidence: high` · `sources_count: 22`  
-**Handoff:** → brain-lead / prompt-craft (OK) · **НЕ factory** · **НЕ клиентские PDF**
+> Generated: 2026-08-08 · Mode: DEEP · status: ok  
+> Pipeline: strategist → docs∥github∥vendor → repo-miner(4) → community∥clawhub∥news → synthesizer  
+> Workspace: `/Users/egoshev/Projects/atmosfera-3d`  
+> memory_path: `.cursor/t800-memory`  
+> Next handoff: brain-lead → factory (skill `eg-anketaplan` + Dev site-next)
+
+## Progress
+
+`Research ▸ strategist→7 specialists→synthesis` · coverage **PASS** · confidence **high**
+
+## Local SoT (not a research channel)
+
+| Path | Fact |
+|------|------|
+| `site-next/lib/notifications/telegram.ts` | `sendMessage` only; `STRATEGY_TG_*` → `TELEGRAM_*`; `not_configured` soft-ok |
+| `site-next/app/api/strategy/lead/route.ts` | normalize → honeypot → validate → TG → 400/502/`ok+delivered` |
+| `site-next/components/strategy/StrategyFormModal.tsx` | client `fetch` + submitting lock; error keeps form |
+| `90_ВХОДЯЩИЕ/anketaplan-source/master-client-intake.html` | 12 гл., LS `egoshev_master_intake_v3`, `#chapter-N`, BMI/BMR, ветки, passport |
+| `site-next` package | Next **16.2.10** · React 19 · **no** RHF/Zod yet |
+| `/anketa` | components/anketa — **do not touch**; kids-anketa separate |
 
 ---
-
-## research_brief
 
 ```yaml
 research_brief:
   mode: deep
-  topic: "EG Atmosfera 3D client programs — post-session / monthly plan / long-term → Cursor skills + /eg-programma"
-  artifact_surface: cursor-workspace
-  workspace: /Users/egoshev/Projects/atmosfera-3d
-  memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
-  scout_alignment:
-    block_factory: false
-    skills_needed: true
-    no_mass_github: true
-    existing_gap: "no eg-programma / eg-client-programs; SoT in 50-programs + TEMPLATE + STYLE SPEC draft"
-  recommended_artifact: mix
-  artifact_surface_detail: "cursor-workspace (.cursor/skills + .cursor/commands only later)"
-
+  topic: "Port master-client-intake.html → Next App Router+TS /anketaplan on site-next (eg.egoshev.ru/Timeweb); TG submit + .txt; skill eg-anketaplan + Dev handoff"
+  status: ok
   search_plan:
-    intent_artifact: mix
-    mode: deep
-    must_channels: [custom_local_vault, vendor-docs, clawhub]
-    should_channels: [community]
-    nice_skipped: [news, github_shallow]
-    skip_channels:
-      - {id: docs_context7, why: "No library/SDK/API"}
-      - {id: repo-miner, why: "no_mass_github; deep_mines=0"}
-      - {id: github_as_must, why: "Intake no_mass_github=true"}
-      - {id: remotion_vk_site, why: "OUT per intake"}
-      - {id: pdf_html_pipeline, why: "STYLE SPEC / PDF = Dev; research cites only"}
-      - {id: medical_guideline_sites, why: "No diagnoses; method SoT in vault"}
-
+    must: [docs, github, repo-miner, vendor-docs]
+    should: [community, clawhub]
+    nice: [news]
+    skip: [vercel-as-deploy-target, always-on-other-libs, local-as-channel]
   synthesis:
+    compared:
+      - A: "Heavy Client + neon CSS (UI parity)"
+      - B: "RHF+Zod multi-step (maintainability / LS)"
+      - C: "Extend telegram.ts + mirror strategy/lead (API)"
     recommended_approach: >
-      Architecture A — one router skill `eg-client-programs` (thin SKILL.md)
-      + references/{post-session,monthly-plan,long-term,bans-checklist}.md
-      + thin slash `/eg-programma` ($ARGUMENTS: post-session|monthly|long-term; empty→ask)
-      + optional Cyrillic alias `/программа` (mirror `/продюсер`; reliability open_q).
-      HITL drafts → `90_ВХОДЯЩИЕ/program-drafts/`; disable-model-invocation: true;
-      optional agent: skip. Zero-Copy cite vault SoT; never embed STYLE SPEC / 50-programs essays.
-    why_best: >
-      Cursor docs + agentskills progressive disclosure; shared bans/HITL/product-boundary
-      once (community anti-pattern = 3 thin duplicate skills); local eg-producer proves
-      thin command→skill+refs+STOP; brand_safety + ClawHub rejects (no Dr/clinic/auto-send).
-    runners_up:
-      - {name: "B: 3 thin skills + /eg-programma", why_weaker: "discoverability only; drift unless shared refs → collapses to A"}
-      - {name: "C: monolith skill", why_weaker: "context bloat; Zero-Copy fail"}
-      - {name: "Optional agent EXTEND", why_weaker: "no gap; eg-producer runs without studio agent"}
+      Hybrid A∪B∪C — Neon client island on /anketaplan (A) + SSR-safe localStorage,
+      chapter gates, clear-on-delivered, submitting lock from B (Zod preferred;
+      RHF optional day-1) + POST /api/anketaplan/submit and telegram.ts
+      sendDocument mirroring strategy/lead (C). Skill eg-anketaplan = HITL/ops
+      + Dev handoff only — no production codegen in skill.
+    rationale: >
+      UI parity forces A; delivery/security/Timeweb force C; persistence and
+      chapter gates need selective B — not full multi-route RHF. Pure A/B/C
+      each fail ≥1 axis; hybrid covers all without touching /anketa or Vercel domain.
     merge_plan: >
-      STRUCTURE from eg-producer-studio + /eg-producer. HITL lighter from eg-news-to-blog
-      (disable-model-invocation; draft-only; single STOP + bans checklist; no dual blog hash).
-      L3 maps: cite 50-programs + TEMPLATE for type1; STYLE SPEC §5 for type1–3 (draft-gated
-      until «утверждаю»). Type3 = skeleton only. PRODUCT BOUNDARY §14: post-session ≠
-      «Персональная программа на 30 дней»; no full sets/reps in type1. Cite voice/products/
-      design + funnel. PDF visual: cite EG_PDF_PREMIUM only. ClawHub adapt section/HITL/
-      week-phase; REJECT clinical theatre. Vendor: XML quote-ground + draft frontmatter
-      + constraints. Factory later `.cursor/` only.
-    conflicts:
-      - {issue: "STYLE SPEC existence", resolution: "file EXISTS as draft HITL 2026-08-05; gate until утверждаю"}
-      - {issue: "A vs B discoverability", resolution: "A wins; args on /eg-programma"}
-      - {issue: "skill name", resolution: "eg-client-programs skill vs /eg-programma command (mirror producer)"}
-      - {issue: "commands→skills trend", resolution: "keep thin commands/eg-programma.md + skill disable-model-invocation"}
-    confidence: high
-    needs_more_sources: false
+      Factory builds skill eg-anketaplan (WHEN/DO NOT, cite site-next paths, HITL,
+      Dev handoff checklist, forbid secrets & /anketa). Dev implements in site-next:
+      (1) thin RSC page app/anketaplan/page.tsx + CSS module neon port;
+      (2) one heavy 'use client' island (chapters/chips/scales/branches/pain/BMI/BMR/passport);
+      (3) LS key egoshev_master_intake_v3 + currentChapter + optional #chapter-N;
+      hydrate after mount; (4) per-chapter Zod + full schema before POST;
+      (5) app/api/anketaplan/submit/route.ts = normalize→honeypot→consent/size/validate→
+      short sendMessage then sendDocument(.txt+filename)→400/502/ok+delivered;
+      (6) extend lib/notifications/telegram.ts with FormData sendDocument (no new SDK);
+      (7) client lock + sending|sent|error + retry keeps draft; clear LS only on delivered;
+      (8) Timeweb smoke on eg.egoshev.ru/anketaplan — Vercel README = adapt patterns only.
+    adaptation_plan: >
+      Ship inside existing site-next on Timeweb (PM2 egoshev + nginx + eg.egoshev.ru).
+      Do NOT create a separate Vercel project/domain. Rewrite any user-TZ Vercel README
+      steps to: VPS .env (TELEGRAM_* server-only), nginx client_max_body_size,
+      next build + pm2 restart, smoke TG message+.txt. Prefer next@16.2.11+ before
+      enable (Jul 2026 custom-server SSRF). Align proxyClientMaxBodySize if proxy.ts
+      buffers Route Handlers. HTML-escape TG summary; caption ≤1024; ch11 no uploads on page.
 
-  artifact_names:
-    skill: eg-client-programs
-    command: eg-programma
-    alias: программа
-    references:
-      - post-session.md
-      - monthly-plan.md
-      - long-term.md
-      - bans-checklist.md
-  draft_path: "90_ВХОДЯЩИЕ/program-drafts/"
-  disable_model_invocation: true
-  optional_agent: skip
+  recommended_architecture:
+    page: "Thin RSC shell (metadata/canonical) + one heavy Client Component island"
+    not: "RSC-per-chapter OR multi-route /anketaplan/stepN (hurts neon UI parity)"
+    styles: "CSS Modules (or colocated anketaplan.css) porting monolith neon tokens/glow"
+    state: "Controlled form state + SSR-safe LS hydrate (BBEDERRAR pattern); Zod chapter gates"
+    deps_day1: "Zod preferred; RHF optional (site-next has neither today)"
 
-  cite_paths:
-    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/50-programs.mdc"
-    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/programs/TEMPLATE-program.md"
-    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/05_МЕТОДИКА_И_ПРАКТИКА/EG_CLIENT_PROGRAMS_STYLE_SPEC.md"
-    - "/Users/egoshev/EG_ECOSYSTEM_MASTER/_PRESERVED/OLD_MASTER/06_RULES_AND_OPERATIONS/EG_PDF_PREMIUM_STYLE_SYSTEM.md"
-    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/10-voice-and-language.mdc"
-    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/20-products-prices.mdc"
-    - "90_ВХОДЯЩИЕ/atmosfera-os-from-claude/.cursor/rules/40-design-system.mdc"
-    - "03_РЕСУРСЫ/EG_ИМПЕРИЯ_ЗНАНИЙ/02_КЛИЕНТСКИЙ_ПУТЬ/HOME_AND_FREE_EQUIPMENT_FUNNEL.md"
-    - ".cursor/skills/eg-producer-studio/SKILL.md"
-    - ".cursor/commands/eg-producer.md"
-    - ".cursor/skills/eg-news-to-blog/SKILL.md"
-    - "90_ВХОДЯЩИЕ/CURSOR PROMPT ATMOSFERA 3D.md#§14"
+  api_route_shape:
+    path: "POST /api/anketaplan/submit"  # namespaced; avoid bare /api/submit collision
+    mirror: "app/api/strategy/lead/route.ts"
+    flow:
+      - "request.json() → normalize"
+      - "honeypot → pretend ok"
+      - "consent required"
+      - "size limit (app guard; nginx align)"
+      - "server validation (Zod)"
+      - "anti double-submit: client lock + optional Idempotency-Key"
+      - "sendTelegramMessage(short HTML summary)"
+      - "sendTelegramDocument(.txt Buffer/Blob + filename + caption)"
+      - "both fail → 502; not_configured → soft delivered:false like strategy"
+    telegram_extend:
+      file: "lib/notifications/telegram.ts"
+      add: "sendTelegramDocument via multipart FormData; MUST pass filename 3rd arg"
+      no: "grammY / node-telegram-bot-api dependency for one-shot notify"
+    client_ux: "sending | sent | error; retry without clearing LS until delivered"
+
+  port_method:
+    source: "90_ВХОДЯЩИЕ/anketaplan-source/master-client-intake.html"
+    preserve:
+      - "white neon glow / chips / scales / 12 chapters / progress"
+      - "conditional branches kids/women/men/sport"
+      - "pain zone cards; age/BMI/BMR/calories"
+      - "localStorage egoshev_master_intake_v3; passport summary"
+      - "hash #chapter-N deep-link"
+    technique: >
+      Extract CSS→module; rewrite vanilla JS→React client island; keep serialize/
+      validateChapter/branches/calculateBody/build passport semantics; wire FORM_CONFIG
+      endpoint → /api/anketaplan/submit. Do not iframe or dangerouslySetInnerHTML the
+      whole monolith if avoidable (hydration/security); controlled port preferred.
+
+  skill_boundary:
+    slug: eg-anketaplan
+    does: "HITL clarify, path citations, Dev handoff, deploy checklist, TG pattern cite"
+    does_not: "bake tokens; auto-post PII; touch /anketa; full production codegen; Vercel domain"
+
+  risks:
+    - "LS hydrate flash / chapter jump if read during SSR"
+    - "Partial TG success (msg ok, doc fail) — enforce both-or-502"
+    - "PII in localStorage drafts; no analytics on same key"
+    - "proxyClientMaxBodySize silent truncate (~10MB) on self-host"
+    - "FormData without filename → TG rejects/odd name"
+    - "Accidental edits to /anketa or components/anketa"
+    - "Scope creep: full RHF day-1 vs under-validation if Zod deferred"
+    - "site-next on 16.2.10; Jul 2026 patch line prefers 16.2.11+ for custom server"
+    - "Skill→prod without HITL / secrets in handoff"
+
+  open_questions:
+    - "ANKETAPLAN_TG_* overrides vs reuse STRATEGY_TG_*/TELEGRAM_* only?"
+    - "Controlled+Zod-only vs add react-hook-form day-1?"
+    - "In-place success UI vs /anketaplan/success?"
+    - "Server Idempotency-Key or client lock enough for v1?"
+    - "Hard-gate next@16.2.11+ before production enable?"
+    - "Explicit MB cap for nginx (recommend 1–2MB JSON passport)?"
+
+  recommended_artifact: skill
+  artifact_surface: cursor-workspace
+  artifact_note: "skill eg-anketaplan (HITL/handoff) + Dev implements pages in site-next — mix intent"
 
   sources:
-    - {id: "50-programs.mdc", family: local-vault, freshness: ok, accessed: "2026-08-05"}
-    - {id: "TEMPLATE-program.md", family: local-vault, freshness: ok, accessed: "2026-08-05"}
-    - {id: "EG_CLIENT_PROGRAMS_STYLE_SPEC.md", family: local-vault, freshness: ok, date: "2026-08-05", note: "draft HITL not SoT"}
-    - {id: "EG_PDF_PREMIUM_STYLE_SYSTEM.md", family: local-vault, freshness: ok, path: "EG_ECOSYSTEM_MASTER/.../OLD_MASTER/..."}
-    - {id: "eg-producer-studio+/eg-producer", family: local-precedent, freshness: ok}
-    - {id: "eg-news-to-blog HITL", family: local-precedent, freshness: ok}
-    - {id: "HOME_AND_FREE_EQUIPMENT_FUNNEL.md", family: local-vault, freshness: ok, date: "2026-07-29"}
-    - {id: "CURSOR PROMPT §14", family: local-vault, freshness: ok}
-    - {id: "10-voice + 20-products + 40-design", family: local-vault, freshness: ok}
-    - {url: "https://cursor.com/docs/skills", family: vendor, freshness: ok, accessed: "2026-08-05"}
-    - {url: "https://cursor.com/help/customization/skills", family: vendor, freshness: ok}
-    - {url: "https://cursor.com/docs/agent/prompting", family: vendor, freshness: ok}
-    - {url: "https://cursor.com/docs/cli/reference/slash-commands", family: vendor, freshness: ok}
-    - {url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices", family: vendor, freshness: ok}
-    - {url: "https://developers.openai.com/api/docs/guides/structured-outputs", family: vendor, freshness: ok}
-    - {url: "https://cookbook.openai.com/examples/structured_outputs_intro", family: vendor, freshness: warn}
-    - {url: "https://ai.google.dev/gemini-api/docs/prompting-strategies", family: vendor, freshness: ok}
-    - {url: "https://agentskills.io/specification", family: community, freshness: ok}
-    - {url: "https://forum.cursor.com/t/skills-vs-commands-vs-rules/148875", family: community, freshness: ok}
-    - {url: "https://clawhub.ai/olivermonneke/meeting-notes-pro", family: clawhub, freshness: warn}
-    - {url: "https://clawhub.ai/rotorstar/hitl-protocol", family: clawhub, freshness: warn}
-    - {url: "https://clawhub.ai/openauthority/human-approval", family: clawhub, freshness: warn}
+    - { id: 1, channel: docs, url: "Context7 /vercel/next.js Route Handlers + forms", date: "2026-08-08", freshness: ok }
+    - { id: 2, channel: docs, url: "https://nextjs.org/docs/app/guides/forms", date: "2026-07-28", freshness: ok }
+    - { id: 3, channel: docs, url: "https://nextjs.org/docs/app/guides/environment-variables", date: "2026-03-03", freshness: ok }
+    - { id: 4, channel: vendor, url: "https://core.telegram.org/bots/api", date: "2026-07-14", freshness: ok }
+    - { id: 5, channel: vendor, url: "https://core.telegram.org/bots/features", date: "2026-08-08", freshness: ok }
+    - { id: 6, channel: vendor, url: "https://cursor.com/docs/context/skills", date: "2026-08-08", freshness: ok }
+    - { id: 7, channel: vendor, url: "https://agentskills.io/specification", date: "2026-08-08", freshness: ok }
+    - { id: 8, channel: vendor, url: "https://vercel.com/docs/projects/environment-variables", date: "2026-06-16", freshness: ok, note: "adapt-only→Timeweb" }
+    - { id: 9, channel: github, url: "https://github.com/BBEDERRAR/social-support-app", date: "2026-06-25", freshness: ok }
+    - { id: 10, channel: github, url: "https://github.com/63r6o/shadcn-nextjs-multistep-form-example", date: "2024-11-05", freshness: warn }
+    - { id: 11, channel: github, url: "https://github.com/jilimb0/TGWrapper", date: "2026-07-20", freshness: ok }
+    - { id: 12, channel: github, url: "https://github.com/yagop/node-telegram-bot-api", date: "2026-07-14", freshness: ok }
+    - { id: 13, channel: community, url: "https://stackoverflow.com/questions/78223440", date: "2024-03-26", freshness: ok }
+    - { id: 14, channel: community, url: "https://stackoverflow.com/questions/77902231", date: "2024-01-29", freshness: ok }
+    - { id: 15, channel: community, url: "https://habr.com/ru/articles/879174/", date: "2025-02-04", freshness: ok }
+    - { id: 16, channel: community, url: "https://habr.com/ru/companies/yoomoney/articles/991712/", date: "2026-02-02", freshness: ok }
+    - { id: 17, channel: news, url: "https://nextjs.org/blog/july-2026-security-release", date: "2026-07-20", freshness: ok }
+    - { id: 18, channel: clawhub, url: "https://clawhub.ai/alirezarezvani/form-cro", date: "2026-08-08", freshness: ok }
 
-  github: null
-  repo_mines: null
-  community:
-    signal: "1+refs"
-    command_plus_skill: true
-    source_count: 6
-  clawhub:
-    cards_adapted: 6
-    rejected_verbatim: true
-    security_rejects: ["Personal Fitness Coach Dr theatre", "KrumpPhysio clinical", "auto-send", "disease intake"]
-  vendor_docs:
-    source_count: 10
-    lean: "option A 1 skill + 3 refs + slash router"
-  docs: null
-  news: null
+  github:
+    top_repos: [BBEDERRAR/social-support-app, 63r6o/shadcn-nextjs-multistep-form-example, jilimb0/TGWrapper, yagop/node-telegram-bot-api]
+  repo_mines:
+    count: 4
+    primary_client: BBEDERRAR/social-support-app
+    primary_tg_semantics: yagop/node-telegram-bot-api
+    primary_tg_formdata: jilimb0/TGWrapper
+  community: { findings: 6, pitfalls: [hydration, double-submit, body-limits, tg-multipart, long-wizard-ux] }
+  clawhub: { skill_slug_target: eg-anketaplan, rejected_verbatim: true, reject_token_bake: true }
+  vendor_docs: { telegram_sendDocument: required, cursor_skills: required, vercel: adapt_only }
+  docs: { next: "16.2.10", transport: "Route Handler + client fetch", client_island: true }
+  news: { patch_hint: "16.2.11+ custom-server SSRF Jul 2026", proxy_body: "silent truncate default 10MB" }
 
   coverage_matrix:
     strategist: pass
     synthesizer: pass
-    github_shallow: skip
-    repo_mines: skip
+    github_shallow: pass
+    repo_mines: pass  # 4 ≥ 2
     community: pass
     clawhub: pass
     vendor_docs: pass
-    context7_docs: skip
-    news: skip
-    local_vault: pass
-    sources_count: 22
-    min_sources_met: true
-    github_mines_required: false
-    clawhub_pass_required: true
-    clawhub_pass: true
-    vendor_or_context7: vendor-docs
+    context7_docs: pass
+    news: pass
+    sources_count: 18
+    dated_sources_ok: 17  # ≥8; 63r6o warn but counted with fresher BBEDERRAR
     verdict: pass
 
-  adaptation_plan: >
-    Factory CREATE: .cursor/skills/eg-client-programs/SKILL.md (thin router, Zero-Copy cite table,
-    HITL STOP, draft_path, disable-model-invocation true) + references/post-session.md |
-    monthly-plan.md | long-term.md | bans-checklist.md + .cursor/commands/eg-programma.md
-    (+ /программа alias if supported). Do NOT promote STYLE SPEC to SoT until Евгений
-    «утверждаю». Do NOT write client PDFs. Do NOT copy 50-programs essays into skill.
-    Type1/2 section maps from STYLE SPEC §5 + 50-programs/TEMPLATE; type3 skeleton.
-    Product boundary: post-session title and no sets/reps protocol. Services block from
-    20-products. Mirror eg-producer HITL phrasing lightly.
-
-  open_questions:
-    - "STYLE SPEC: allow draft-cited markdown until «утверждаю» vs hard-block (brain)"
-    - "Cyrillic /программа reliability in Agent chat (recommend ship; mirror /продюсер)"
-    - "When EG_КЛИЕНТЫ/ PARA lands — migrate draft_path (PII never in git)"
-    - "Type3 PDF visual canon — defer; keep long-term.md skeleton for v1"
-
-  stale_rejected:
-    - "Scout note 'STYLE SPEC not materialised' — superseded: file exists as draft HITL"
-    - "ClawHub Personal Fitness Coach / KrumpPhysio clinical voice"
-    - "3 thin skills architecture (B) as default"
-    - "Monolith skill (C)"
-    - "Optional agent EXTEND for v1"
-    - "Mass github / repo-miner"
-
+  stale_rejected: []
   confidence: high
-  handoff: "→ prompt-craft (optional) → brain-lead → factory CREATE .cursor/ only; NOT PDF"
+  explicit_vercel_note: >
+    User TZ may mention Vercel README — treat as pattern source only.
+    Production URL is https://eg.egoshev.ru/anketaplan on Timeweb inside site-next.
 ```
-
----
-
-## Progress line (parent)
-
-`Research ▸ strategist→4 specialists→synthesis` · coverage **pass** (22 src) · approach **A: eg-client-programs + 4 refs + /eg-programma**
-
----
-
-## Vault finds (confirmed)
-
-| Path | Status |
-|------|--------|
-| `50-programs.mdc` | ✅ cite |
-| `TEMPLATE-program.md` | ✅ cite (post-session-biased) |
-| `EG_CLIENT_PROGRAMS_STYLE_SPEC.md` | ✅ draft HITL (not SoT) |
-| `EG_PDF_PREMIUM_STYLE_SYSTEM.md` | ✅ outside repo, cite-only |
-| `EG_КЛИЕНТЫ/` | ❌ missing → use `program-drafts/` |
-
----
 
 ## Specialist fragments
 
 - `fragments/t-800-research-strategist.md`
+- `fragments/t-800-research-docs.md`
+- `fragments/t-800-research-github.md`
 - `fragments/t-800-research-vendor-docs.md`
+- `fragments/t-800-research-repo-miner.md`
+- `fragments/t-800-research-community.md`
 - `fragments/t-800-research-clawhub.md`
+- `fragments/t-800-research-news.md`
 - `fragments/t-800-research-synthesizer.md`
-- community: package in-session (on-disk community fragment may be prior-topic stale)

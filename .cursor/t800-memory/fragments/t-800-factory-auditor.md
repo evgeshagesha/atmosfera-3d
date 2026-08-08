@@ -1,14 +1,16 @@
-# t-800-factory-auditor — atmosfera-client-programs-mvp (RETRY closeout)
+# t-800-factory-auditor — eg-anketaplan
 
-**Date:** 2026-08-05  
+**Date:** 2026-08-08  
 **status:** ok  
-**pack_name:** `atmosfera-client-programs-mvp`  
+**verdict:** PASS  
+**pack_name:** `eg-anketaplan`  
+**mode:** CREATE  
 **role:** factory-auditor (readonly validation)  
 **memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
 **artifact_surface:** `cursor-workspace`  
-**plugin_root:** empty (registry/install SKIP expected)  
 **recommendation:** ship  
-**ralph_wiggum_risk:** false
+**ralph_wiggum_risk:** false  
+**repair_needed:** false
 
 ---
 
@@ -16,137 +18,114 @@
 
 ```yaml
 status: ok
-findings:
-  critical: []
-  warnings:
-    - id: W1
-      item: parallel_director_rule_present
-      note: >
-        .cursor/rules/eg-director-brand.mdc exists from separate pack.
-        This CREATE pack did not write it; brief skip_artifacts honored.
-    - id: W2
-      item: strict_create_without_brief_flag
-      note: >
-        t800_run_gate --strict-create alone → strict_create_brief: skipped_no_slug.
-        With --factory-brief <yaml> → brief ok. Prefer explicit --factory-brief on closeout.
-    - id: W3
-      item: verify_install_global_rule_warn
-      note: >
-        verify-install.sh PASS with WARN: global mandatory-routing rule missing
-        (plugin bootstrap concern; not pack blocker). Pack verify_install = skip.
-    - id: W4
-      item: cyrillic_slash_ux
-      note: >
-        /программа alias documents Latin /eg-programma as primary;
-        Cyrillic slash ID UX not vendor-verified (acceptable).
-passed:
-  - prompt-auditor   # Task 869ce7ba — status ok, 11/11 critical, ship_to_factory_auditor
-  - validate-agents  # 43 agents, exit 0
-  - audit-agent-graph # 43 entries, exit 0
-  - presence_8_8
-  - brief_alignment
-  - sha256_stable
+stage: auditor
+verdict: PASS
+repair_needed: false
+next_step: "Dev build /anketaplan (parent will launch)"
+```
+
+`critical` пуст. Machine evidence собрано (filesystem + grep + `t800_run_gate.py`).  
+Plugin `validate-agents` / `audit-agent-graph` = **skip/N/A** для workspace skill (нет agents-registry entry — ожидаемо).
+
+---
+
+## Artifacts verified (all exist)
+
+| Path | Result |
+|------|--------|
+| `.cursor/skills/eg-anketaplan/SKILL.md` | ok · name=`eg-anketaplan` · `disable-model-invocation: true` · 114 lines · no `tools:` |
+| `.cursor/skills/eg-anketaplan/references/cite-paths.md` | ok |
+| `.cursor/skills/eg-anketaplan/references/dev-handoff-checklist.md` | ok |
+| `.cursor/skills/eg-anketaplan/references/hitl-gates.md` | ok |
+| `.cursor/skills/eg-anketaplan/references/tone-bans.md` | ok |
+| `.cursor/commands/eg-anketaplan.md` | ok · thin companion slash |
+| `.cursor/t800-memory/factory-briefs/eg-anketaplan.yaml` | ok · `artifact_surface: cursor-workspace` · `registry_note: workspace skill` |
+| SoT HTML `90_ВХОДЯЩИЕ/anketaplan-source/master-client-intake.html` | ok (exists; cite target) |
+
+## Prior stages
+
+| Stage | Evidence |
+|-------|----------|
+| architect | `fragments/t-800-factory-architect.md` present |
+| builder | `fragments/t-800-factory-builder.md` present |
+| integrator | `fragments/t-800-factory-integrator.md` · `registry_patch: null` · surface cursor-workspace |
+| prompt-auditor | `fragments/t-800-prompt-auditor.md` · **status: ok** |
+
+## Checks
+
+| id | result | evidence |
+|----|--------|----------|
+| artifact_surface_workspace | pass | Files under workspace `.cursor/skills|commands`; brief `artifact_surface: cursor-workspace`; integrator `registry_patch: null` |
+| no_production_codegen | pass | `test ! -d` P01 `site-next/app/anketaplan` and `app/api/anketaplan`; find only skill + inbox source |
+| no_registry_pollution | pass | No `eg-anketaplan` in plugin `agents-registry.json`; no plugin `agents/*anketa*` |
+| skill_frontmatter | pass | name=folder; disable-model-invocation true; Use when / Do NOT; no tools |
+| command_companion | pass | `.cursor/commands/eg-anketaplan.md` thin router → skill |
+| constraint_anketa_untouched | pass | Explicit across SKILL, command, cite-paths, tone-bans, hitl-gates, checklist |
+| constraint_zero_copy | pass | Zero-Copy cite-only prices; no ₽ price tables in pack |
+| constraint_telegram_reuse | pass | `STRATEGY_TG_*` → `TELEGRAM_*`; ban `ANKETAPLAN_TG_*` day-1 |
+| constraint_locked_stack | pass | Zod day-1 · RHF SKIP · client_submit_lock · in_place · both_or_502 in skill YAML + checklist |
+| brand_bans | pass | `tone-bans.md` med/physician/PII/secrets |
+| factory_brief | pass | `factory-briefs/eg-anketaplan.yaml` |
+| prompt_auditor_ok | pass | fragment status ok |
+| t800_run_gate | pass | `ok: true` · STATE.md ok · strict_create false |
+| validate_agents | skip | N/A workspace skill (not plugin agent) |
+| audit_agent_graph | skip | N/A workspace skill |
+
+## Findings
+
+critical: []
+
+warnings (non-blocking):
+- Command algorithm mentions «Gates A–C» while skill/refs list A–E; STOP clarifies D–E post-Dev — same nit as prompt-auditor; intentional thin router.
+- Plugin `validate-agents.sh` / `audit-agent-graph.sh` not used as ship gate for this surface (correctly N/A).
+
+## Machine gates
+
+```yaml
 machine_gates:
-  validate_agents: pass
-  audit_agent_graph: pass
+  validate_agents: skip   # workspace skill — no registry entry expected
+  audit_agent_graph: skip
   verify_install: skip
   t800_run_gate: pass
-  t800_run_gate_strict_create: pass
-  t800_run_gate_with_brief: pass
-  t800_factory_bypass_gate: pass
-ralph_wiggum_risk: false
-recommendation: ship
+  no_app_anketaplan_dir: pass
+  no_api_anketaplan_dir: pass
+  disable_model_invocation: pass
 ```
 
----
+## Recommendation
 
-## Checklist (RETRY)
+`ship` — factory CREATE pack complete. Parent may launch Dev build of `/anketaplan` in site-next.
 
-| # | Check | Result |
-|---|--------|--------|
-| 1 | prompt-auditor gate | **PASS** — status ok · 11/11 critical · recommendation ship_to_factory_auditor |
-| 2 | create_artifacts 8/8 on disk | **PASS** |
-| 3 | Skill FM: name + description + `disable-model-invocation: true`; no `tools:` | **PASS** |
-| 4 | Commands thin + alias thin | **PASS** (56 / 26 lines) |
-| 5 | HITL STOP «Утверждаю черновик» | **PASS** |
-| 6 | Zero-Copy cite tables; STYLE SPEC draft-gated | **PASS** |
-| 7 | Type1 ≠ 30-day; no sets/reps overload; Type3 skeleton | **PASS** |
-| 8 | Brand bans checklist present | **PASS** |
-| 9 | Skip: agent / rule / hook / director-rule / site/VK | **PASS** (no pack agent/rule; no registry patch) |
-| 10 | AGENTS.md mentions `/eg-programma` | **PASS** |
-| 11 | Registry / docs/T-800-AGENTS.md pack entry | **SKIP** — workspace surface |
-| 12 | SHA256 unchanged vs prior auditor/builder | **PASS** (8/8 match) |
-| 13 | Prior closeout W1–W3 (factory.md / manifest / brief status) | **RESOLVED** |
-
----
-
-## Artifacts + SHA256 (re-verified)
-
-| path | sha256 |
-|------|--------|
-| `.cursor/skills/eg-client-programs/SKILL.md` | `a1b3fe246e18b5f7e854a0b50748dbddc6b0058f56e76c6e2aaaf1e7df8436d1` |
-| `.../references/post-session.md` | `b857989e8eb5dbc07c55878a5b7518599774e66afc0293cbc19640c49a13607c` |
-| `.../references/monthly-plan.md` | `25e3e2668dfc1569e17e1ee65556a05851673aaf4933a6e200c6c346294159ea` |
-| `.../references/long-term.md` | `4234e37d344e5fb5583ea710329bd958efd659adb82219339951d5a07d742626` |
-| `.../references/bans-checklist.md` | `fe1c46a58562e86bb2d6d878e43f50b51a135b0ebb7ac0dc0f102ef2ab0c3266` |
-| `.cursor/commands/eg-programma.md` | `89d87219f16f8eb8d91ef08869e50fbd659ac89d52b8f5bdc016ced7cc4768e0` |
-| `.cursor/commands/программа.md` | `58083d315bcc7ef0665f86c6c6bb6053e6417a8dc699f5d8313f0c03ded54429` |
-| `90_ВХОДЯЩИЕ/program-drafts/.gitkeep` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
-
----
-
-## Machine gates (executed this RETRY)
-
-| Gate | Result | Notes |
-|------|--------|-------|
-| `validate-agents.sh` | **pass** | plugin 43 agents; pack adds zero agents |
-| `audit-agent-graph.sh` | **pass** | 43 registry entries; no pack agent |
-| `verify-install.sh` | **skip** for pack; plugin script PASS+WARN global rule | empty plugin_root |
-| `t800_run_gate.py` | **pass** | STATE.md ok |
-| `t800_run_gate.py --strict-create` | **pass** | brief skipped_no_slug without flag |
-| `t800_run_gate.py --strict-create --factory-brief …mvp.yaml` | **pass** | brief `status: ok` |
-| `t800_factory_bypass_gate.py` | **pass** | factory_completed true; 3 scanned paths |
-
-**ralph_wiggum_risk:** false — scripts executed this turn.
-
----
-
-## Brief alignment
-
-- HITL draft → `90_ВХОДЯЩИЕ/program-drafts/` + STOP phrase ✓  
-- STYLE SPEC draft-gated (`style_spec_status: pending`) ✓  
-- Zero-Copy cite vault SoT ✓  
-- Type1 ≠ 30-day; Type3 skeleton; brand bans ✓  
-- NO director-rule in create list ✓  
-- NO site/VK/Remotion/PDF ✓  
-
----
-
-## Graph (workspace — no registry)
-
+```yaml
+status: ok
+stage: auditor
+verdict: PASS
+checks:
+  - id: artifact_surface_workspace
+    result: pass
+  - id: no_production_codegen
+    result: pass
+  - id: no_registry_pollution
+    result: pass
+  - id: skill_frontmatter
+    result: pass
+  - id: command_companion
+    result: pass
+  - id: constraints_locked
+    result: pass
+  - id: factory_brief
+    result: pass
+  - id: prompt_auditor
+    result: pass
+  - id: t800_run_gate
+    result: pass
+evidence:
+  - "All 6 factory artifacts + brief + SoT HTML present"
+  - "disable-model-invocation: true on SKILL.md"
+  - "No site-next app/anketaplan or api/anketaplan dirs"
+  - "No plugin registry pollution; registry_patch null"
+  - "prompt-auditor fragment status: ok"
+  - "t800_run_gate.py ok: true"
+repair_needed: false
+next_step: "Dev build /anketaplan (parent will launch)"
 ```
-user_slash:/eg-programma → skill:eg-client-programs → refs/{type}+bans
-user_slash:/программа → command:eg-programma → skill:eg-client-programs
-agents: []
-broken calls/calledBy: none
-subagent vs skill conflict: none
-```
-
----
-
-## Prior departments
-
-| Dept | status |
-|------|--------|
-| architect | ok |
-| builder | ok |
-| integrator | ok |
-| prompt-auditor | ok (RETRY Task 869ce7ba) |
-
----
-
-## Ship verdict
-
-**SHIP** — `status: ok`. Reload Window to discover skill/commands.
-
-Progress: `Auditor ▸ RETRY closeout PASS · 8/8 · gates evidence · ship`

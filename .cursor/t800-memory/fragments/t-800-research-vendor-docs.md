@@ -1,275 +1,228 @@
-# t-800-research-vendor-docs — EG client programs skill + `/eg-programma`
+# Vendor docs fragment — anketaplan (DEEP)
 
-**Date accessed:** 2026-08-05  
-**Topic:** Cursor skills/commands + HITL prompting for 3 program doc types  
-**Mode:** DEEP  
+**Когда:** 2026-08-08  
 **memory_path:** `/Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory`  
-**status:** ok
+**Задача:** TG `sendDocument` gap + Cursor skill boundaries + form/env patterns → Timeweb (`eg.egoshev.ru`)  
+**SKIP:** OpenAI / Claude / Gemini cookbooks (явный brief)
 
-> 💡 Official vendor pages only (plus Agent Skills standard hub). No invented publish dates — `date_or_accessed` = access day unless page exposes a date.
+> 💡 Нет production code. Нет секретов. Только факты + idea_seeds для factory / prompt-craft.
 
----
+## Context (локальный gap)
 
-## Machine YAML
+| Факт | Путь / значение |
+|------|-----------------|
+| Существует | `site-next/lib/notifications/telegram.ts` — только `sendMessage` (JSON + `parse_mode: HTML`) |
+| Gap | нет `sendDocument` / multipart upload |
+| Deploy | Timeweb VPS · PM2 `egoshev` · nginx · `eg.egoshev.ru` |
+| Env pattern уже | `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` (+ `STRATEGY_TG_*` overrides) — server-only |
 
 ```yaml
 status: ok
 vendor_docs_brief:
-  vendors: [cursor, anthropic, openai, gemini]
-  topic: "EG Atmosfera 3D client programs — skills + /eg-programma (post-session / monthly / long-term); HITL drafts; Zero-Copy vault SoT; no medical diagnoses"
-  fetched: "2026-08-05"
-  source_count: 10
-
-  sources:
-    - title: "Agent Skills (Cursor docs)"
-      url: "https://cursor.com/docs/skills"
-      date_or_accessed: "accessed 2026-08-05"
-      freshness: ok
+  vendors: [telegram, cursor, nextjs, vercel_patterns_adapt_only]
+  skipped_by_brief: [openai, anthropic, gemini]
+  rows:
+    - vendor: telegram
       kind: docs
-      key_takeaways:
-        - "SKILL.md frontmatter: name (must match folder), description (relevance), optional paths, disable-model-invocation, metadata"
-        - "Optional dirs: scripts/, references/, assets/ — progressive load; keep SKILL.md focused"
-        - "disable-model-invocation: true → slash-only (like classic command); no auto context inject"
-        - "paths / nested .cursor/skills/ scopes when agent works matching files"
-        - "/migrate-to-skills converts slash commands → skills with disable-model-invocation: true"
-
-    - title: "Skills help (customization)"
-      url: "https://cursor.com/help/customization/skills"
-      date_or_accessed: "accessed 2026-08-05"
+      url: "https://core.telegram.org/bots/api"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-07-14"
       freshness: ok
-      kind: docs
-      key_takeaways:
-        - "Skills = multi-step workflows; rules = short always/matching constraints"
-        - "Invoke via /skill-name or @skill-name"
-        - "Note: https://cursor.com/docs/agent/chat/commands resolves to this skills help — command UX converging on Skills"
+      takeaway: "Bot API 10.2. sendMessage text 1-4096; sendDocument upload ≤50MB multipart; caption 0-1024; parse_mode HTML; JSON нельзя для upload файлов."
 
-    - title: "Prompting agents"
+    - vendor: telegram
+      kind: docs
+      url: "https://core.telegram.org/bots/features"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "Official Bot API: max upload 50MB, max download 20MB. Local Bot API server: upload up to 2000MB — не нужен для anketaplan PDF."
+
+    - vendor: cursor
+      kind: docs
+      url: "https://cursor.com/docs/context/skills"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "SKILL.md: name+description required; paths / disable-model-invocation optional; dirs scripts|references|assets; progressive load; When/Do NOT use в description."
+
+    - vendor: cursor
+      kind: docs
       url: "https://cursor.com/docs/agent/prompting"
-      date_or_accessed: "accessed 2026-08-05"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-08-08"
       freshness: ok
+      takeaway: "Skills descriptions inject в system context; держать description узким — иначе noise в token budget."
+
+    - vendor: agentskills
       kind: docs
-      key_takeaways:
-        - "@ mentions for files/folders, terminals, past chats, git diffs, browser — prefer explicit SoT attach for vault cite"
-        - "Context ring: Skills descriptions live in system context; large bodies should stay in references/ (progressive)"
-        - "Switch models mid-chat; capable models for multi-doc structured drafts"
-
-    - title: "Agent Review"
-      url: "https://cursor.com/docs/agent/agent-review"
-      date_or_accessed: "accessed 2026-08-05"
+      url: "https://agentskills.io/specification"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-08-08"
       freshness: ok
+      takeaway: "name≤64 hyphen-lowercase; description≤1024; SKILL.md body <500 lines recommended; progressive disclosure; relative refs one level deep."
+
+    - vendor: nextjs
       kind: docs
-      key_takeaways:
-        - "Human-triggered review gate pattern: /agent-review on demand vs automatic"
-        - "Depth Quick vs Deep — map to HITL draft check vs deep brand/medical-ban audit (conceptual, not code-review copy)"
-
-    - title: "CLI slash commands reference"
-      url: "https://cursor.com/docs/cli/reference/slash-commands"
-      date_or_accessed: "accessed 2026-08-05"
+      url: "https://nextjs.org/docs/app/guides/forms"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-07-28"
       freshness: ok
+      takeaway: "Server Actions + FormData; Zod safeParse server-side; useActionState errors; secrets never in Client Components."
+
+    - vendor: nextjs
       kind: docs
-      key_takeaways:
-        - "Built-in slash cmds take optional args (/plan [prompt], /shell [command]) — precedent for /eg-programma [type]"
-        - "Aliases documented for several cmds (/clear≈/new; /shell≈/sh|/run) — optional /программа alias if product wants RU UX"
-
-    - title: "Claude prompting best practices"
-      url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices"
-      date_or_accessed: "accessed 2026-08-05"
+      url: "https://nextjs.org/docs/app/guides/environment-variables"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-03-03"
       freshness: ok
-      kind: cookbook
-      key_takeaways:
-        - "XML sections for mixed prompts: instructions / context / examples / documents — unambiguous parse"
-        - "Long docs (20k+): put longform at top; query/instructions after; nest <document> + source + content"
-        - "Ground with quotes from sources before drafting (cite vault SoT, don't invent clinical claims)"
-        - "Clear sequential steps; role in system; refusals — prefer clear user/system bans over prefills"
-        - "Autonomy vs safety: confirm before irreversible/shared actions — maps to no auto-send client docs"
+      takeaway: "NEXT_PUBLIC_ inlined at build; server-only vars runtime on server; .env* gitignore; load order process.env → .env.[mode].local → …"
 
-    - title: "Structured Outputs Intro (OpenAI Cookbook notebook)"
-      url: "https://cookbook.openai.com/examples/structured_outputs_intro"
-      date_or_accessed: "accessed 2026-08-05 (via github.com/openai/openai-cookbook raw notebook; cookbook.openai.com Cloudflare-blocked from this host)"
-      freshness: warn
-      kind: cookbook
-      key_takeaways:
-        - "strict schema → UI-ready steps / extracted fields; better than prose-only for gates"
-        - "refusal field when safety refuses — handle separately from schema parse"
-        - "Use cases: structured tutor steps, DB extract, entity→tools — adapt to draft metadata + section checklist"
-
-    - title: "Structured model outputs (OpenAI API)"
-      url: "https://developers.openai.com/api/docs/guides/structured-outputs"
-      date_or_accessed: "accessed 2026-08-05"
-      freshness: ok
+    - vendor: vercel
       kind: docs
-      key_takeaways:
-        - "Schema adherence ≠ JSON mode; prefer schema for typed drafts"
-        - "Explicit refusals programmatically detectable — pattern for diagnosis/medical-ban gate"
-        - "Simpler prompting when format is constrained; still need content bans in instructions"
-
-    - title: "Prompt design strategies (Gemini API)"
-      url: "https://ai.google.dev/gemini-api/docs/prompting-strategies"
-      date_or_accessed: "accessed 2026-08-05"
+      url: "https://vercel.com/docs/projects/environment-variables"
+      fetched: "2026-08-08"
+      published_or_updated: "2026-06-16"
       freshness: ok
-      kind: cookbook
-      key_takeaways:
-        - "Clear/specific instructions + constraints (do / don't)"
-        - "Response format + completion strategy (start section template, model completes)"
-        - "Examples + response prefix reduce JSON ambiguity; for complex schema use structured output feature"
-        - "og asset share-gemini-api-2026-07.png on page → content refreshed ~2026-07 (not a formal published_on)"
+      takeaway: "ADAPT ONLY: dashboard/CLI env → на Timeweb заменить на .env.local / PM2 env_file; НЕ создавать новый Vercel project."
 
-    - title: "Agent Skills Overview (agentskills.io)"
-      url: "https://agentskills.io/home"
-      date_or_accessed: "accessed 2026-08-05"
-      freshness: ok
-      kind: docs
-      key_takeaways:
-        - "Open standard Cursor implements; portable skill packages"
-        - "Cursor listed; progressive/context-efficient skills are first-class across agents"
-
-  cursor_skill_patterns:
-    frontmatter:
-      required: [name, description]
-      optional: [paths, disable-model-invocation, metadata]
-      notes:
-        - "name lowercase/hyphens; must match parent folder"
-        - "description drives Agent Decides relevance"
-        - "legacy globs accepted; new skills use paths"
-    references_progressive_disclosure:
-      - "Keep SKILL.md thin: when-to-use, workflow, bans, cite paths to vault SoT"
-      - "Put per-doc-type templates/checklists in references/ (loaded on demand)"
-      - "Context ring shows skill descriptions always; bodies via progressive load"
-    disable_model_invocation:
-      - "true for HITL clinical-ish docs → only when user types /eg-programma or /skill-name"
-      - "Matches /migrate-to-skills behavior for former slash commands"
-    paths_scoping:
-      - "Optional: paths on draft dirs (e.g. **/programs/**, 90_ВХОДЯЩИЕ/**) if auto-surface desired later"
-      - "Default for client programs: leave paths unset + disable-model-invocation true (explicit only)"
-
-  command_patterns:
-    slash_router:
-      - "Thin command.md: parse $ARGUMENTS → route to skill + load matching references/"
-      - "Local precedent: .cursor/commands/eg-producer.md (studio|reels|warmup|seo + HITL STOP)"
-      - "Suggested args: post-session | monthly | long-term | (empty → ask)"
-    args:
-      - "CLI docs show [prompt]/[command] optional args — same UX for /eg-programma monthly"
-    alias_notes:
-      - "Official CLI uses aliases (/clear=/new; /shell=/sh|/run)"
-      - "Product alias /программа possible as second command file or skill name search — confirm Cyrillic slash UX in Cursor UI (open_question)"
-    migration_note:
-      - "docs/agent/chat/commands → skills help; prefer Skills-first; keep thin command as router OR skill-only with disable-model-invocation"
-
-  hitl_prompt_patterns:
-    structured_sections:
-      - "Claude XML: <sot_docs>, <client_input>, <doc_type>, <bans>, <output_schema> — Zero-Copy cite vault, don't paste corpus into skill"
-      - "Gemini: constraints + response format + completion prefix for section headers from TEMPLATE"
-      - "OpenAI: optional YAML/JSON envelope {doc_type, hitl_status, sections[], citations[], refused_claims[]}"
-    review_gates:
-      - "STOP after draft path written — user phrases: Утверждаю черновик / Ready (mirror eg-producer)"
-      - "No auto-send / no publish; drafts only under inbox or client draft path"
-      - "Optional second gate: brand+bans checklist (Agent Review analogy: on-demand depth)"
-    safety:
-      - "Hard bans: diagnoses, вылечим/исцеление/избавим навсегда, physician-claim"
-      - "On borderline medical ask: refuse diagnosis; offer functional movement framing + human review"
-      - "Claude: confirm before irreversible/shared side effects"
-      - "OpenAI refusal field pattern → surface refusal distinctly; do not coerce into schema"
-
-  implications_for:
-    option_a_1_skill_3_refs:
-      shape: "eg-client-programs (or eg-programma) SKILL.md + references/{post-session,monthly,long-term}.md + thin /eg-programma"
-      pros:
-        - "Matches Cursor progressive disclosure (official)"
-        - "One shared HITL/bans/Zero-Copy cite block — less drift"
-        - "Args load only needed L3 ref → context efficient for long templates"
-        - "Aligns strategist hypothesis + Agent Skills standard"
-      cons:
-        - "Three doc types less visible as separate / menu items unless command args clear"
-    option_b_3_thin_skills_command:
-      shape: "eg-programma-post-session + eg-programma-monthly + eg-programma-long-term + router command"
-      pros:
-        - "Discoverable as three /skills; mirrors eg-producer craft split"
-        - "Independent description triggers if disable-model-invocation false (usually unwanted here)"
-      cons:
-        - "Shared bans/HITL duplicated unless also shared references/ — maintenance cost"
-        - "More factory artifacts for same domain"
-    recommendation_for_synthesizer:
-      preference: "option_a_1_skill_3_refs + /eg-programma $ARGUMENTS"
-      rationale: "Official Cursor skills docs push references/ progressive disclosure; HITL client docs should be slash-gated (disable-model-invocation); eg-producer already proves thin command router + HITL STOP; three refs = three doc types without skill sprawl"
-      hybrid_ok: "If discoverability needed: three thin skills each disable-model-invocation true that only point to shared references/ + same command router — still prefer single skill identity"
+  tg_contract_facts:
+    endpoint_base: "https://api.telegram.org/bot<token>/<METHOD>"
+    methods:
+      sendMessage:
+        content_type: "application/json | x-www-form-urlencoded | query"
+        required: [chat_id, text]
+        text_limit: "1-4096 characters after entities parsing"
+        parse_mode: "HTML | MarkdownV2 | Markdown (legacy)"
+        notes:
+          - "Существующий telegram.ts: JSON POST + parse_mode HTML + disable_web_page_preview — валидно."
+          - "link_preview_options — современная замена disable_web_page_preview (legacy ещё работает)."
+      sendDocument:
+        content_type_upload: "multipart/form-data (обязательно для нового файла)"
+        content_type_file_id_or_url: "application/json допустим если document = file_id или HTTP URL"
+        required: [chat_id, document]
+        caption_limit: "0-1024 characters after entities parsing"
+        parse_mode_caption: "HTML | MarkdownV2 | …"
+        upload_size_limit_official: "50 MB (bots; may change)"
+        url_send_limits:
+          photos: "5 MB"
+          other_via_url: "20 MB"
+          sendDocument_by_url: "currently only .PDF and .ZIP"
+        multipart_limits:
+          photos: "10 MB"
+          other_files: "50 MB"
+        download_getFile_official: "20 MB"
+        local_bot_api_upload: "2000 MB (не требуется для anketaplan)"
+    html_parse_mode:
+      pass: "parse_mode=HTML"
+      escape_required:
+        "<": "&lt;"
+        ">": "&gt;"
+        "&": "&amp;"
+      named_entities_supported: ["&lt;", "&gt;", "&amp;", "&quot;"]
+      note: "Только поддерживаемые теги; сырой user input в caption/text — escape обязателен иначе 400 Bad Request."
+    anketaplan_implication:
+      - "Короткий summary → sendMessage (≤4096)."
+      - "PDF / HTML-план вложение → sendDocument multipart; caption ≤1024 (не весь план в caption)."
+      - "Если caption не вмещает summary — sendDocument + отдельный sendMessage (2 запроса)."
+      - "JSON Content-Type на upload файла → FAIL; нужен FormData/Blob multipart."
+      - "Не класть token в клиент; только Route Handler / Server Action на Timeweb."
 
   idea_seeds:
-    - source: "Cursor docs/skills — progressive + disable-model-invocation"
-      pattern: "Thin SKILL + references/ + slash-only invocation"
-      adapt_for_cursor: "eg-programma skill: frontmatter disable-model-invocation true; references for 3 doc types; cite vault 50-programs + TEMPLATE paths, never copy essay"
+    - source: "Cursor docs / Agent Skills + agentskills.io"
+      pattern: "Progressive disclosure: short description for discovery; body workflow; heavy TG/HTML tables → references/"
+      adapt_for_cursor: |
+        eg-anketaplan SKILL.md: description с When + Do NOT use (как eg-bot-manager-flow).
+        references/telegram-contract.md — лимиты 4096/1024/50MB.
+        references/timeweb-deploy.md — PM2 restart checklist.
+        Не дублировать полный Bot API в body.
 
-    - source: "eg-producer command + Cursor prompting @"
-      pattern: "Router parses args → craft skill; STOP gates; @attach SoT"
-      adapt_for_cursor: "/eg-programma post-session|monthly|long-term; require @TEMPLATE or Read SoT first; drafts to 90_ВХОДЯЩИЕ/ (or future client path)"
+    - source: "Cursor docs / skills boundaries"
+      pattern: "disable-model-invocation + explicit /skill; paths glob для route scope"
+      adapt_for_cursor: |
+        paths: site-next/app/**/anketaplan/**, site-next/lib/notifications/**
+        Do NOT: Vercel new project; правка /anketa; bot.py P02; publish secrets.
+        Handoff code → factory / engineer; skill = wrapper workflow + cite paths.
 
-    - source: "Claude XML + long context"
-      pattern: "Documents top, XML wrap, quote-ground then draft"
-      adapt_for_cursor: "Skill instructs: Read SoT → quote section headers → draft; bans in <bans>; output markdown draft only"
+    - source: "Telegram Bot API Sending files"
+      pattern: "Three send modes: file_id / URL / multipart; JSON except uploads"
+      adapt_for_cursor: |
+        Расширить telegram.ts: sendTelegramDocument({ buffer|Blob, filename, caption?, parse_mode }).
+        FormData.append('document', blob, filename); append chat_id, caption, parse_mode.
+        Не ставить Content-Type вручную (boundary).
+        Fallback: если !token → { ok:false, reason:'not_configured' } как sendMessage.
 
-    - source: "OpenAI Structured Outputs + refusal"
-      pattern: "Schema for metadata + detectable refusal"
-      adapt_for_cursor: "Optional YAML frontmatter on draft: doc_type, hitl: draft, citations[]; if user asks diagnosis → refuse block, no fake schema fill"
+    - source: "Next.js forms guide"
+      pattern: "Server Action receives FormData; Zod safeParse; typed errors; no secrets client-side"
+      adapt_for_cursor: |
+        /anketaplan submit → server action/route: validate → build PDF/HTML → sendDocument.
+        Client: pending via useActionState; generic error UI (no stack / no token leak).
+        Rate-limit / honeypot — operational note в skill references.
 
-    - source: "Gemini constraints + completion strategy"
-      pattern: "Start template sections; model completes under constraints"
-      adapt_for_cursor: "Prefill section outline from TEMPLATE-program.md; constrain: no diagnoses, services block per 50-programs"
+    - source: "Next.js env + Vercel env (adapt)"
+      pattern: "Server-only secrets; NEXT_PUBLIC_ build-time bake; env per environment"
+      adapt_for_cursor: |
+        Timeweb: TELEGRAM_* только в site-next/.env.local или PM2 env — НЕ NEXT_PUBLIC_.
+        После смены env: next build + pm2 restart (не vercel env pull).
+        .env.example ключи без значений; README: cp .env.example .env.local.
+
+  timeweb_adaptation_checklist:
+    title: "Vercel README form/env patterns → Timeweb self-host (eg.egoshev.ru)"
+    do_not:
+      - "Создавать новый Vercel project / vercel env add / vercel --prod"
+      - "Класть TELEGRAM_BOT_TOKEN / CHAT_ID под NEXT_PUBLIC_"
+      - "Коммитить .env / .env.local"
+    map_from_vercel_pattern:
+      - vercel_pattern: "Dashboard Environment Variables (Production/Preview/Development)"
+        timeweb: "Один prod на VPS: site-next/.env.local или ecosystem.config.js env_file; secrets только на сервере"
+      - vercel_pattern: "vercel env pull → .env.local"
+        timeweb: "scp/ssh edit .env.local на VPS; локально — свой .env.local из .env.example"
+      - vercel_pattern: "Server Actions keep secrets on server"
+        timeweb: "То же: Route Handler / Server Action в site-next; PM2 Node process читает process.env"
+      - vercel_pattern: "NEXT_PUBLIC_ baked at build"
+        timeweb: "После смены публичных vars — полный next build на VPS; server-only TG vars можно менять + pm2 restart без rebuild (если не инлайнятся)"
+      - vercel_pattern: "Form progressive enhancement + Zod"
+        timeweb: "Сохранить паттерн; nginx client_max_body_size ≥ ожидаемого PDF (типично 10–20m) если upload через сайт"
+      - vercel_pattern: "Preview vs Production env split"
+        timeweb: "Нет preview env Vercel; staging опционально отдельный PM2 app — иначе один prod chat_id"
+    deploy_smoke:
+      - "curl /anketaplan 200 на eg.egoshev.ru"
+      - "submit test lead → TG message OK"
+      - "если PDF: TG document + caption ≤1024"
+      - "pm2 logs egoshev — нет token в логах"
+      - "nginx 413 → поднять client_max_body_size"
 
   open_questions:
-    - "Cyrillic slash alias /программа — does Cursor Agent chat reliably register non-ASCII command/skill names?"
-    - "Final draft path SoT: 90_ВХОДЯЩИЕ/ vs future EG_КЛИЕНТЫ/ (strategist: folder not found)"
-    - "EG_CLIENT_PROGRAMS_STYLE_SPEC.md not in vault yet — cite placeholder until Dev lands?"
-    - "Prefer skill name eg-programma vs eg-client-programs for / discoverability?"
-    - "Keep .cursor/commands/eg-programma.md long-term, or migrate fully to skill-only (Cursor commands→skills trend)?"
+    - "PDF генерится на сервере (Buffer) или клиент шлёт файл? Влияет на multipart vs URL."
+    - "Один chat_id (как contact) или отдельный STRATEGY_TG_* / anketaplan chat?"
+    - "Нужен ли sendMessage+sendDocument pair или только document с коротким caption?"
+    - "Skill name: eg-anketaplan vs eg-anketaplan-intake — factory resolve."
 
-  rows:
-    - vendor: cursor
-      kind: docs
-      url: "https://cursor.com/docs/skills"
-      fetched: "2026-08-05"
-      takeaway: "Frontmatter + references/ progressive + disable-model-invocation for slash-gated HITL skills"
-    - vendor: cursor
-      kind: docs
-      url: "https://cursor.com/docs/agent/prompting"
-      fetched: "2026-08-05"
-      takeaway: "@ context + skills descriptions in context ring → keep bodies in references/"
-    - vendor: cursor
-      kind: docs
-      url: "https://cursor.com/help/customization/skills"
-      fetched: "2026-08-05"
-      takeaway: "Commands help redirects here; skills preferred for multi-step workflows"
-    - vendor: anthropic
-      kind: cookbook
-      url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices"
-      fetched: "2026-08-05"
-      takeaway: "XML sections, long-doc order, quote-grounding, safety confirmations"
-    - vendor: openai
-      kind: cookbook
-      url: "https://cookbook.openai.com/examples/structured_outputs_intro"
-      fetched: "2026-08-05"
-      takeaway: "Strict schemas + refusal handling for HITL-safe structured drafts (warn: primary site CF-blocked; GH raw used)"
-    - vendor: openai
-      kind: docs
-      url: "https://developers.openai.com/api/docs/guides/structured-outputs"
-      fetched: "2026-08-05"
-      takeaway: "Schema adherence + explicit refusals"
-    - vendor: gemini
-      kind: cookbook
-      url: "https://ai.google.dev/gemini-api/docs/prompting-strategies"
-      fetched: "2026-08-05"
-      takeaway: "Constraints, format, completion strategy, examples for structured program sections"
+  sources_count: 8
+  freshness_verdict: pass
 ```
 
----
+## Quick reference — HTML escape (для caption/text)
 
-## Access notes
+Перед `parse_mode=HTML` экранировать пользовательский ввод:
 
-| Hub | Result |
-|-----|--------|
-| cursor.com/docs/skills | OK (WebFetch + `.md`) |
-| cursor.com/docs/agent/prompting | OK via `.md` (HTML CSR timeout) |
-| cursor.com/docs/agent/chat/commands | Redirects → help/customization/skills |
-| Claude prompting | OK (docs.anthropic.com) |
-| OpenAI cookbook HTML | Cloudflare blocked — used GH raw notebook + developers.openai.com |
-| Gemini prompting-strategies | OK (HTML extract) |
+| Символ | Entity |
+|--------|--------|
+| `&` | `&amp;` |
+| `<` | `&lt;` |
+| `>` | `&gt;` |
 
-**Local cross-check (not counted in vendor source_count):** `.cursor/commands/eg-producer.md` HITL router precedent.
+## Связи
+
+| Дальше | Кто |
+|--------|-----|
+| synthesis / adaptation_plan | `t-800-research-synthesizer` / research-lead |
+| prompt_spec SKILL.md | `t-800-prompt-craft` (не этот агент) |
+| factory code | `t-800-factory` — только после handoff |
+
+## Запреты (этот прогон)
+
+- Не писать production `telegram.ts` / route code здесь  
+- Не рекомендовать Vercel deploy  
+- Не копировать Bot API / cookbooks целиком  
+- Не звать Context7 / prompt-craft

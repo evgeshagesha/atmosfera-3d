@@ -1,233 +1,146 @@
-# t-800-research-docs — rss-parser + feedsmith + Next Route Handlers
+# t-800-research-docs — anketaplan port (Next.js)
 
-**status:** blocked (Context7 MCP unavailable)  
-**budget_mode:** deep  
-**query_count:** 0  
-**context7:** NOT CONNECTED — servers present: cursor-app-control, cursor-ide-browser, user-memory-bank, user-notion, user-semgrep, user-telegram, user-telegram-account. Missing: `user-context7` / `plugin-context7-plugin-context7`  
-**fallback:** known npm README / TypeScript API surface (training + package conventions) — all citations tagged `known_npm_docs_fallback`  
-**out of scope:** Contentlayer (workspace = `data/blog.json` + TipTap)  
-**workspace outbound RSS:** already exists — `app/rss.xml/route.ts` + `lib/content/blog-rss.ts`
+> 💡 Context7 DEEP · library `/vercel/next.js` · site-next `next@16.2.10` · 2026-08-08  
+> Роль: `docs_brief` для research-lead. Без production code.
+
+## Свойства
+
+| Поле | Значение |
+|------|----------|
+| status | ok |
+| libraryId | `/vercel/next.js` |
+| project_next | `16.2.10` (`01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/package.json`) |
+| Context7 versions nearest | `v16.2.9` listed; queried unversioned `/vercel/next.js` (canary docs) |
+| budget_mode | deep |
+| query_count | 5 |
+| research_date | 2026-08-08 |
 
 ---
 
 ```yaml
-status: blocked
+status: ok
 docs_brief:
-  context7_available: false
-  context7_error: "MCP server user-context7 / plugin-context7-plugin-context7 not found"
-  libraryId: "/rbren/rss-parser"
-  secondary_attempts:
-    - name: feedsmith
-      context7: unavailable_server
-      note: "Could not resolve-library-id; treat as Context7-miss; use README patterns below"
-    - name: next.js
-      libraryId_expected: "/vercel/next.js"
-      note: "Skipped full query — workspace already ships outbound RSS Route Handler"
-  queries: []
+  libraryId: "/vercel/next.js"
+  project_package:
+    path: "01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next/package.json"
+    next: "16.2.10"
+    react: "19.2.4"
+  queries:
+    - "App Router Route Handlers POST method request.json() request.formData() reading body Response"
+    - "forms Client Components useActionState Server Actions vs fetch calling Route Handler API"
+    - "body size limits serverActions bodySizeLimit route handlers Node.js runtime proxyClientMaxBodySize"
+    - "dynamic ssr false Client Component localStorage browser-only window next/dynamic"
+    - "NextResponse.json status codes error responses 400 413 429 502 Route Handler"
   citations:
-    - topic: "rss-parser parseURL / parseString"
-      quote: "new Parser(options); await parser.parseURL(url) | await parser.parseString(xml) → feed with .items[]"
-      libraryId: "/rbren/rss-parser"
-      source: "known_npm_docs_fallback (rbren/rss-parser README)"
-      freshness: unverified_no_context7
-    - topic: "item fields guid link content"
-      quote: "items expose title, link, pubDate, creator, content, contentSnippet, guid, categories, isoDate, enclosure"
-      libraryId: "/rbren/rss-parser"
-      source: "known_npm_docs_fallback"
-      freshness: unverified_no_context7
-    - topic: "customFields for content:encoded"
-      quote: "Parser({ customFields: { item: [['content:encoded', 'contentEncoded']] } }) maps namespaced fields"
-      libraryId: "/rbren/rss-parser"
-      source: "known_npm_docs_fallback"
-      freshness: unverified_no_context7
-    - topic: "Next.js Route Handler Response"
-      quote: "export async function GET() { return new Response(body, { headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' } }) }"
+    - topic: "Route Handler POST + request.json / formData"
+      quote: "To access the request body, use Request instance methods such as .json(), .formData(), or .text()."
       libraryId: "/vercel/next.js"
-      source: "known_npm_docs_fallback + workspace app/rss.xml/route.ts"
-      freshness: ok_workspace_verified
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/02-guides/backend-for-frontend.mdx"
+    - topic: "Route Handler formData example"
+      quote: "Extract form data from the request body using request.formData(). Individual fields can be accessed with formData.get('fieldName')."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/03-api-reference/03-file-conventions/route.mdx"
+    - topic: "useActionState + Server Action forms"
+      quote: "This client component uses React's useActionState hook to invoke a server action and access its returned state."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/01-getting-started/10-error-handling.mdx"
+    - topic: "Client fetch → Route Handler"
+      quote: "Call the API Route from the client with an event handler… POST request to the API endpoint."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/02-pages/02-guides/forms.mdx"
+    - topic: "Server Actions sequential; Route Handler for parallel/non-mutation BFF"
+      quote: "do not rely on Promise.all to parallelize Server Actions from the client… or use a Route Handler for non-mutation requests."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/02-guides/server-actions.mdx"
+    - topic: "serverActions.bodySizeLimit default 1MB"
+      quote: "Configure bodySizeLimit to control the maximum size of the request body sent to a Server Action. The default limit is 1MB…"
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/03-api-reference/05-config/01-next-config-js/serverActions.mdx"
+    - topic: "App Route formData no Next size cap"
+      quote: "await request.formData() in a Route Handler will read the entire body into memory without any cap."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/packages/next/src/server/route-modules/app-route/module.ts"
+    - topic: "Pages bodyParser.sizeLimit ≠ App Router"
+      quote: "Pages Router API Routes default to a 1mb body size limit… This configuration does not apply to App Router Route Handlers."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/packages/next/src/server/api-utils/node/api-resolver.ts"
+    - topic: "next/dynamic ssr:false browser-only"
+      quote: "Use the ssr: false option with next/dynamic to prevent a Client Component from being prerendered on the server."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/02-guides/lazy-loading.mdx"
+    - topic: "localStorage / window not on server"
+      quote: "Web APIs like window, localStorage, and navigator are not available on the server, these APIs must be safely accessed only when the component is executing in the browser."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/02-guides/static-exports.mdx"
+    - topic: "NextResponse.json + status"
+      quote: "Create a response with a JSON body and an optional status code. Commonly used in API routes. Example: NextResponse.json({ error: '…' }, { status: 500 })."
+      libraryId: "/vercel/next.js"
+      source: "https://github.com/vercel/next.js/blob/canary/docs/01-app/03-api-reference/04-functions/next-response.mdx"
   unverified:
-    - "ALL Context7 citations — MCP offline this pass; re-run after enabling Context7"
-    - "feedsmith exact export names / version on Context7 — not resolved; README patterns below are best-effort"
-    - "rss-parser request timeout / charset decoding edge cases — depend on version and xml2js; confirm on install"
-    - "Whether feedsmith auto-resolves relative enclosure/link URLs — confirm in package README after npm install"
-  query_count: 0
+    - "Exact HTTP semantics for 413/429/502 are not prescribed by NextResponse docs — app must choose status; 413 appears in image-optimizer internals, not as Route Handler helper."
+    - "Self-host nginx/caddy client_max_body_size and Telegram Bot API multipart limits are outside Next.js Context7 corpus (vendor/ops)."
+    - "Whether experimental.serverActions stays under experimental in next@16.2.10 config types — verify against installed next/types at implement time."
+  query_count: 5
   budget_mode: deep
-  synthesizer_note: "Prefer rss-parser for inbound scrape v1; feedsmith optional TS-native alternative if install proves cleaner; outbound RSS already done without Contentlayer"
+  recommendation:
+    transport: "Route Handler (App Router) + client fetch"
+    not_preferred: "Server Action + useActionState as primary path for Telegram sendDocument + JSON BFF"
+    rationale:
+      - "Explicit JSON contract via request.json() and NextResponse.json(..., { status }) for 400/413/429/502 mapping from validation / TG upstream."
+      - "BFF / external API (Telegram sendDocument) fits Route Handler guide; Server Actions optimized for form mutations + sequential per-client dispatch."
+      - "Multipart outbound to Telegram is easier to assemble in a Node Route Handler (runtime = 'nodejs') from JSON or FormData inbound."
+      - "Server Actions default bodySizeLimit 1MB; raising requires next.config experimental.serverActions — still weaker status/API ergonomics for proxy errors."
+    client_island:
+      - "'use client' island for draft persistence: read/write localStorage only in useEffect / event handlers (never during SSR render)."
+      - "For heavy browser-only modules: next/dynamic(() => import(...), { ssr: false }) from a Client Component parent."
+      - "Optional: Suspense + loading fallback when using dynamic."
+    body_limits:
+      server_actions: "default 1MB; configure experimental.serverActions.bodySizeLimit ('2mb' etc.)."
+      app_route_handlers: "no Pages-style bodyParser.sizeLimit; request.formData()/json() can consume full body — enforce app-level max + reverse-proxy limit on self-host Node."
+      proxy: "experimental.proxyClientMaxBodySize (e.g. '1mb') when proxying."
+      self_host_node: "export const runtime = 'nodejs'; Edge deprecated for routes needing Node APIs; set nginx/caddy max body independently of Next."
+  sources:
+    - url: "https://github.com/vercel/next.js/blob/canary/docs/01-app/03-api-reference/03-file-conventions/route.mdx"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "POST Route Handler: request.json / formData Web API."
+      note: "Context7 canary snapshot at research time; continuous docs."
+    - url: "https://github.com/vercel/next.js/blob/canary/docs/01-app/02-guides/backend-for-frontend.mdx"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "BFF pattern; consume payloads with .json/.formData/.text."
+    - url: "https://github.com/vercel/next.js/blob/canary/docs/01-app/03-api-reference/05-config/01-next-config-js/serverActions.mdx"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "serverActions.bodySizeLimit default 1MB."
+    - url: "https://github.com/vercel/next.js/blob/canary/docs/01-app/02-guides/lazy-loading.mdx"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "next/dynamic { ssr: false } for client-only islands."
+    - url: "https://github.com/vercel/next.js/blob/canary/docs/01-app/03-api-reference/04-functions/next-response.mdx"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "NextResponse.json(body, { status }) for API error codes."
+    - url: "https://github.com/vercel/next.js/blob/canary/docs/01-app/02-guides/server-actions.mdx"
+      published_or_updated: "2026-08-08"
+      freshness: ok
+      takeaway: "Prefer Route Handler when BFF/parallel/non-mutation API shape needed."
+  research_brief:
+    docs: "<this docs_brief>"
 ```
 
 ---
 
-## docs_findings (for synthesizer)
+## Вердикт для anketaplan (кратко)
 
-### 1. rss-parser (npm: `rss-parser`, GitHub rbren/rss-parser) — PRIMARY inbound
+1. **Transport:** App Router **Route Handler** (`POST`) + Client **`fetch`** с JSON (и при необходимости FormData).  
+2. **Не как основной путь:** Server Action + `useActionState` — ок для простых form-мутаций UI, слабо для Telegram BFF + кастомных 400/413/429/502.  
+3. **localStorage:** Client island (`'use client'` + post-mount access) и/или `dynamic(..., { ssr: false })`.  
+4. **Лимиты:** SA ≈ **1MB** по умолчанию; App RH **без** Pages `bodyParser` — лимит на **self-host proxy + app guard**. Runtime: **`nodejs`**.  
+5. **Ответы:** `NextResponse.json({ error, code }, { status: 400 | 413 | 429 | 502 })` — статус выбирает приложение.
 
-**Parse API (known README surface):**
+## Запреты соблюдены
 
-```ts
-import Parser from "rss-parser";
-
-type CustomItem = { contentEncoded?: string };
-
-const parser = new Parser<Record<string, unknown>, CustomItem>({
-  timeout: 10000,
-  headers: { "User-Agent": "EG-NewsBot/1.0 (+https://eg.egoshev.ru)" },
-  customFields: {
-    item: [["content:encoded", "contentEncoded"]],
-  },
-});
-
-const feed = await parser.parseURL("https://example.com/feed.xml");
-// alt: await parser.parseString(xmlText)
-
-for (const item of feed.items) {
-  const id = item.guid || item.link;          // dedupe key
-  const url = item.link;
-  const html = item.contentEncoded || item["content:encoded"] || item.content || item.description;
-  const text = item.contentSnippet;           // stripped-ish plain text
-  const published = item.isoDate || item.pubDate;
-}
-```
-
-| Need | Field | Notes |
-|------|--------|--------|
-| Stable id | `item.guid` \|\| `item.link` | guid may be opaque non-URL; not always permalink |
-| Canonical URL | `item.link` | required for fetch/open; may be missing on bad feeds |
-| Body HTML | `content` / `content:encoded` / `description` | often raw HTML |
-| Plain excerpt | `contentSnippet` | library-stripped; not perfect |
-| Date | `isoDate` (preferred) / `pubDate` | isoDate is parser-normalized |
-
-**Caveats (required for pipeline):**
-
-1. **Encoding**  
-   - Assumes well-formed XML; non-UTF-8 feeds / wrong `Content-Type` charset → mojibake or parse errors.  
-   - Mitigation: fetch bytes yourself → decode via `Content-Type` / XML declaration / `iconv-lite` → `parseString`.  
-   - Cyrillic Western→RU pipeline: verify UTF-8 on every source before TipTap/blog.json write.
-
-2. **Relative links**  
-   - `item.link` usually absolute; **HTML inside description/content** often has relative `href`/`src`.  
-   - Parser does **not** rewrite those. Absolutize against feed `link` / site origin before SEO publish or TG digest.  
-   - Same pattern as workspace outbound helper `absoluteUrl()` in `blog-rss.ts` — invert for inbound.
-
-3. **HTML in description**  
-   - `description` and `content` frequently contain HTML (not plain text).  
-   - Do not trust as safe TipTap JSON — sanitize / convert (strip scripts, resolve imgs).  
-   - Prefer `content:encoded` (via `customFields`) when present; fall back to `content` → `description`.  
-   - `contentSnippet` is convenience plain text for titles/digests, not full article body.
-
-4. **Other**  
-   - Atom vs RSS: field shapes differ; library normalizes to common item keys but not 100%.  
-   - Redirects / 403 without User-Agent: set `headers` / `requestOptions`.  
-   - Large feeds: no built-in incremental sync — dedupe by guid/link in your store.
-
-**Confidence:** medium-high on API shape (mature package); **low freshness** without Context7 live pull.
-
----
-
-### 2. feedsmith — Context7 miss / optional fallback
-
-**Status:** Could not resolve on Context7 (server absent). Treat as **unavailable via Context7**.
-
-**README-level pattern (best-effort, unverified):**
-
-```ts
-// typical modern API shape — CONFIRM after npm view feedsmith
-// import { parseFeed } from "feedsmith";
-// const feed = parseFeed(xmlString);
-// feed.title, feed.items[].id | .url | .content | .published
-```
-
-| vs rss-parser | Guidance for EG news v1 |
-|---------------|-------------------------|
-| TS-first / stricter types | Nice-to-have, not required for Cursor command MVP |
-| Parse string vs URL | May need separate `fetch` (good — you control encoding) |
-| Multi-format (RSS/Atom/JSON Feed) | Useful if sources mix formats |
-
-**Recommendation for synthesizer:**  
-- **v1 default = `rss-parser`** (widely used, parseURL one-liner).  
-- Evaluate `feedsmith` only if install + README confirm cleaner types and Atom/JSON Feed needs.  
-- Do not block factory on feedsmith Context7 miss.
-
----
-
-### 3. Next.js App Router Route Handlers — outbound only (brief)
-
-Workspace **already** publishes RSS:
-
-- `app/rss.xml/route.ts` — `GET` → `Response` with `application/rss+xml; charset=utf-8`, `dynamic = "force-dynamic"`, `revalidate = 300`
-- `lib/content/blog-rss.ts` — builds XML from blog posts (`data/blog.json` path), escapes XML, absolutizes URLs, CDATA for `content:encoded`
-
-**Inbound news scrape does not need a new Route Handler** for v1 (manual/Cursor command). If later HTTP webhook/cron:
-
-```ts
-// app/api/news-ingest/route.ts (future) — pattern only
-export async function POST(req: Request) {
-  // auth → parseURL sources → write draft → return JSON
-  return Response.json({ ok: true });
-}
-```
-
-**Do not** introduce Contentlayer for this pipeline.
-
----
-
-## recommended_api_patterns (synthesizer)
-
-### A. Inbound free RSS → draft (RECOMMENDED v1)
-
-```ts
-const parser = new Parser({
-  timeout: 15000,
-  headers: { Accept: "application/rss+xml, application/xml, text/xml" },
-  customFields: { item: [["content:encoded", "contentEncoded"]] },
-});
-
-const feed = await parser.parseURL(sourceUrl);
-const candidates = feed.items.map((item) => ({
-  dedupeKey: String(item.guid || item.link),
-  url: item.link,
-  title: item.title,
-  publishedAt: item.isoDate || item.pubDate,
-  htmlBody: item.contentEncoded || item.content || item.description || "",
-  excerpt: item.contentSnippet || "",
-}));
-// then: brand filter → human approve → TipTap/blog.json + optional TG
-```
-
-### B. Encoding-safe variant
-
-```ts
-const res = await fetch(sourceUrl, { headers: { "User-Agent": "EG-NewsBot/1.0" } });
-const buf = Buffer.from(await res.arrayBuffer());
-// detect charset from res.headers / <?xml encoding=...?> → decode to utf8 string
-const feed = await parser.parseString(utf8Xml);
-```
-
-### C. Outbound (already shipped — do not re-architect)
-
-Keep `buildBlogRssXml` + `/rss.xml`; ensure new blog posts from news pipeline land in same `getBlogPosts()` source so SEO RSS stays one feed.
-
----
-
-## sources / versions
-
-| Library | Context7 | Fallback | Role |
-|---------|----------|----------|------|
-| rss-parser | **blocked** (no MCP) | npm README known surface | inbound parse |
-| feedsmith | **blocked** + unresolved | README patterns only | optional alt |
-| next.js Route Handlers | not queried | workspace `app/rss.xml/route.ts` | outbound only |
-
-**Re-run trigger:** enable Context7 MCP → `resolve-library-id` for `rss-parser`, `feedsmith`, optionally `/vercel/next.js` → ≤5 `query-docs` (parseURL, customFields, encoding, feedsmith parse API, Route Handler Response).
-
----
-
-## confidence
-
-| Area | Level | Why |
-|------|-------|-----|
-| rss-parser parseURL / items / guid / link | **medium** | Stable public API; not live-verified |
-| Encoding / relative links / HTML description caveats | **high** (domain knowledge) | Universal RSS pitfalls; align with blog-rss absoluteUrl |
-| feedsmith API | **low** | Context7 miss; README not fetched (contract: no WebFetch substitute) |
-| Next outbound RSS | **high** | Verified in workspace source |
-| Contentlayer | **n/a** | Explicit skip |
-
-**Overall:** usable blocked brief for synthesizer — ship inbound on **rss-parser** + caveats; revisit feedsmith after Context7 or local `npm view`.
+- Нет WebSearch/WebFetch вместо Context7  
+- Нет factory-артефактов / production code  
+- Budget: 5 `query-docs` (DEEP max)

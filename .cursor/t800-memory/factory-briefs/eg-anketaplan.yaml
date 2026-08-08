@@ -1,0 +1,74 @@
+# factory-brief — eg-anketaplan CREATE
+# Generated: 2026-08-08 · stage: factory
+
+pack_name: eg-anketaplan
+mode: CREATE
+status: pass
+auditor_verdict: PASS
+completed_at: "2026-08-08"
+pipeline: architect→builder→integrator→prompt-auditor→auditor
+
+target_context:
+  workspace: /Users/egoshev/Projects/atmosfera-3d
+  memory_path: /Users/egoshev/Projects/atmosfera-3d/.cursor/t800-memory
+  artifact_surface: cursor-workspace
+  target_plugin: null
+  profile: workspace-cursor
+  ui_language: ru
+  site_root: 01_ПРОЕКТЫ/P01_сайт_и_сервер/site-next
+
+research_brief:
+  ref: fragments/t-800-research-lead.md
+  synthesis_ref: fragments/t-800-research-synthesizer.md
+  coverage_verdict: pass
+  confidence: high
+
+prompt_craft:
+  ref: fragments/t-800-prompt-craft.md
+
+brain:
+  ref: fragments/t-800-brain-lead.md
+
+architect:
+  status: ok
+  agent_ref: 8ccf4c18-184f-44a0-91f6-9fbaa98471a8
+
+recommended_artifact: skill
+companion_artifacts:
+  - type: command
+    path: .cursor/commands/eg-anketaplan.md
+
+factory_creates:
+  - .cursor/skills/eg-anketaplan/SKILL.md
+  - .cursor/skills/eg-anketaplan/references/dev-handoff-checklist.md
+  - .cursor/skills/eg-anketaplan/references/cite-paths.md
+  - .cursor/skills/eg-anketaplan/references/hitl-gates.md
+  - .cursor/skills/eg-anketaplan/references/tone-bans.md
+  - .cursor/commands/eg-anketaplan.md
+
+factory_does_not_create:
+  - site-next/app/anketaplan/**
+  - site-next/app/api/anketaplan/**
+  - production edits to telegram.ts
+
+decisions_locked:
+  telegram_env: reuse_STRATEGY_TG_then_TELEGRAM
+  anketaplan_tg_isolation: deferred
+  rhf_day1: skip
+  zod_day1: required
+  idempotency: client_lock_day1
+  success_ux: in_place
+  disable_model_invocation: true
+  handoff_primary: Dev_main_Agent_site-next
+  route: eg.egoshev.ru/anketaplan
+  source_html: 90_ВХОДЯЩИЕ/anketaplan-source/master-client-intake.html
+
+registry_note: workspace skill — no agents-registry entry
+
+constraints:
+  - Factory CREATE skill (+ thin command + references) ONLY
+  - Do NOT touch /anketa
+  - Zero-Copy prices
+  - Brand bans
+  - No secrets in skill
+  - HITL STOP before deploy / TG enable
