@@ -5,20 +5,22 @@
 
 export const STRATEGY_PRODUCT = {
   code: "personal_body_strategy",
-  name: "Система тела 30",
+  name: "Персональная стратегия тела",
   priceRub: 30_000,
   priceLabel: "30 000 ₽",
+  pricePerDayLabel: "1 000 ₽",
   currency: "RUB" as const,
   formats: ["online", "moscow_in_person"] as const,
   pagePath: "/strategy",
   canonicalUrl: "https://eg.egoshev.ru/strategy",
   policyUrl: "/policy",
   personalConsentUrl: "/personal",
+  anketaplanUrl: "https://eg.egoshev.ru/anketaplan",
   telegramPublicUrl: "https://t.me/EvgeniiGoshev",
   leadEndpoint: "/api/strategy/lead",
   sourcePage: "personal-body-strategy-landing",
-  heroImage: "/strategy/hero-evgeny-v2.webp",
-  heroImageFallback: "/strategy/hero-evgeny-v2.jpg",
+  heroImage: "/strategy/hero-evgeny-v3.webp",
+  heroImageFallback: "/strategy/hero-evgeny-v3.jpg",
 } as const;
 
 export type FormFieldOption = { value: string; label: string };
@@ -66,42 +68,68 @@ export type FormStep = {
 
 export const STRATEGY_CONTENT = {
   brand: {
-    name: "ЕВГЕНИЙ ГОШЕВ",
+    name: "EG.",
     pillars: "Движение. Дыхание. Дисциплина.",
     brandPhrase: "Тебе нужен только ты",
     studio: "Атмосфера 3D",
   },
 
   seo: {
-    title: "Система тела 30 — Евгений Гошев",
+    title: "Персональная стратегия тела — Евгений Гошев",
     description:
-      "Функциональная оценка, двухчасовая сессия и персональный план движения, силовых, дыхания, восстановления и питания на 30 дней. Онлайн или очно в Москве.",
+      "Персональный план на 30 дней: движение, восстановление, питание и дисциплина. Диагностика, разбор и система под ваш график и цели. Онлайн или очно в Москве.",
   },
 
   header: {
-    cta: "Подать заявку",
+    cta: "Начать",
+    menuLabel: "Меню",
   },
 
   hero: {
-    eyebrow: "Функциональная оценка и персональный план на 30 дней",
-    titleLine1: "Вашему телу нужна не ещё одна случайная тренировка.",
-    titleLine2: "Ему нужна система.",
-    body: "За одну глубокую сессию и 30 дней я выстрою персональный план движения, силовых тренировок, дыхания, восстановления и базового питания — под ваш график, состояние и доступный инвентарь.",
-    bodyAccent:
-      "«СИСТЕМА ТЕЛА 30» — это функциональная оценка, двухчасовая работа со мной и персональный календарь на каждый день месяца.",
-    insights: [
-      { text: "что сейчас происходит с вашим телом", icon: "scan" as const },
-      { text: "какие зоны требуют внимания", icon: "focus" as const },
-      { text: "с чего начать", icon: "start" as const },
-      { text: "как сохранять дисциплину", icon: "discipline" as const },
+    eyebrow: "Персональная стратегия тела",
+    titleLine1: "30 дней,",
+    titleLine2: "которые изменят вашу жизнь",
+    body: "Я составлю ваш персональный план на каждый день — движение, восстановление, питание и дисциплина, подстроенные под вас, ваш график и ваши цели.",
+    features: [
+      {
+        title: "План на 30 дней",
+        text: "готовая система на каждый день",
+        icon: "calendar30" as const,
+      },
+      {
+        title: "Индивидуальный подход",
+        text: "под ваши цели и возможности",
+        icon: "person" as const,
+      },
+      {
+        title: "Диагностика и разбор",
+        text: "2 часа со мной, ответы на вопросы",
+        icon: "target" as const,
+      },
+      {
+        title: "Реальный результат",
+        text: "больше энергии, силы и контроля",
+        icon: "chart" as const,
+      },
     ],
-    primaryCta: "Подать заявку на персональную систему",
+    priceLabel: "Стоимость",
+    pricePerDaySuffix: "в день",
+    primaryCta: "Начать свои 30 дней",
+    trustBefore: "После оплаты вы получите доступ к ",
+    trustLink: "анкете",
+    trustAfter: " для подготовки к личной сессии.",
+    badges: [
+      { text: "Онлайн / очно", icon: "monitor" as const },
+      { text: "Индивидуально", icon: "person" as const },
+      { text: "Конфиденциально", icon: "shield" as const },
+    ],
+    photoAlt: "Евгений Гошев — специалист по комплексной работе с телом",
+    /** Kept for lower placeholder CTAs */
     secondaryCta: "Получить план на 30 дней",
     priceLine: "30 000 ₽ · Онлайн или очно в Москве",
-    photoAlt: "Евгений Гошев — специалист по комплексной работе с телом",
   },
 
-  /** Bottom glass bar under hero */
+  /** Legacy benefits — reserved for later blocks; not rendered in hero v3 */
   benefits: [
     {
       title: "Глубокая анкета",

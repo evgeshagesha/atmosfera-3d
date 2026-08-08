@@ -35,85 +35,104 @@ export default function StrategyLanding() {
 
       <header className="st-header">
         <div className="st-container st-header__inner">
-          <div className="st-brand">
-            <span className="st-brand__name">{c.brand.name}</span>
-            <span className="st-brand__pillars">{c.brand.pillars}</span>
-          </div>
+          <Link href="/" className="st-brand" aria-label="Евгений Гошев — на главную">
+            <span className="st-brand__logo">{c.brand.name}</span>
+          </Link>
           <button
             type="button"
-            className="st-btn st-btn--ghost st-btn--sm"
-            onClick={() => openForm("strategy_header_cta")}
+            className="st-menu-btn"
+            aria-label={c.header.menuLabel}
+            onClick={() => openForm("strategy_header_menu")}
           >
-            {c.header.cta}
+            <span className="st-menu-btn__bar" />
+            <span className="st-menu-btn__bar" />
+            <span className="st-menu-btn__bar" />
           </button>
         </div>
       </header>
 
       <main id="main">
         <section className="st-hero" aria-labelledby="st-hero-title">
-          <div className="st-container st-hero__grid">
-            <div className="st-hero__copy">
-              <p className="st-eyebrow">{c.hero.eyebrow}</p>
-              <h1 id="st-hero-title" className="st-hero__title">
-                <span className="st-hero__title-line">{c.hero.titleLine1}</span>
-                <span className="st-hero__title-accent">{c.hero.titleLine2}</span>
-              </h1>
-              <p className="st-hero__body">{c.hero.body}</p>
-              <p className="st-hero__body-accent">{c.hero.bodyAccent}</p>
+          <div className="st-hero__media">
+            <div className="st-hero__frame">
+              <Image
+                className="st-hero__photo"
+                src={p.heroImage}
+                alt={c.hero.photoAlt}
+                width={819}
+                height={1024}
+                priority
+                sizes="(max-width: 900px) 100vw, 52vw"
+              />
+              <div className="st-hero__fade st-hero__fade--bottom" aria-hidden="true" />
+              <div className="st-hero__fade st-hero__fade--left" aria-hidden="true" />
+            </div>
+          </div>
 
-              <ul className="st-hero__insights" aria-label="Что станет понятно">
-                {c.hero.insights.map((item) => (
-                  <li key={item.text} className="st-hero__insight">
-                    <StrategyIcon name={item.icon} />
+          <div className="st-container st-hero__copy">
+            <p className="st-eyebrow">
+              <span className="st-eyebrow__bar" aria-hidden="true" />
+              <span>{c.hero.eyebrow}</span>
+            </p>
+
+            <h1 id="st-hero-title" className="st-hero__title">
+              <span className="st-hero__title-line">{c.hero.titleLine1}</span>
+              <span className="st-hero__title-accent">{c.hero.titleLine2}</span>
+            </h1>
+
+            <p className="st-hero__body">{c.hero.body}</p>
+
+            <ul className="st-features" aria-label="Что входит">
+              {c.hero.features.map((item) => (
+                <li key={item.title} className="st-features__item">
+                  <StrategyIcon name={item.icon} />
+                  <div className="st-features__text">
+                    <strong>{item.title}</strong>
                     <span>{item.text}</span>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                </li>
+              ))}
+            </ul>
 
-              <div className="st-hero__actions">
+            <div className="st-hero__offer">
+              <div className="st-price">
+                <span className="st-price__label">{c.hero.priceLabel}</span>
+                <div className="st-price__row">
+                  <span className="st-price__main">{p.priceLabel}</span>
+                  <span className="st-price__divider" aria-hidden="true" />
+                  <span className="st-price__day">
+                    <span className="st-price__day-value">{p.pricePerDayLabel}</span>
+                    <span className="st-price__day-suffix">{c.hero.pricePerDaySuffix}</span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="st-hero__cta-row">
                 <button
                   type="button"
-                  className="st-btn st-btn--primary"
+                  className="st-btn st-btn--primary st-btn--hero"
                   onClick={() => openForm("strategy_hero_cta")}
                 >
                   {c.hero.primaryCta}
                 </button>
-                <button
-                  type="button"
-                  className="st-text-link st-text-link--btn"
-                  onClick={() => openForm("strategy_hero_secondary")}
-                >
-                  {c.hero.secondaryCta}
-                </button>
-              </div>
-              <p className="st-price-line">{c.hero.priceLine}</p>
-            </div>
-
-            <div className="st-hero__media">
-              <div className="st-hero__frame">
-                <Image
-                  className="st-hero__photo"
-                  src={p.heroImage}
-                  alt={c.hero.photoAlt}
-                  width={819}
-                  height={1024}
-                  priority
-                  sizes="(max-width: 900px) 90vw, 420px"
-                />
-                <div className="st-hero__fade" aria-hidden="true" />
+                <p className="st-trust">
+                  <StrategyIcon name="lock" />
+                  <span>
+                    {c.hero.trustBefore}
+                    <a href={p.anketaplanUrl} className="st-trust__link">
+                      {c.hero.trustLink}
+                    </a>
+                    {c.hero.trustAfter}
+                  </span>
+                </p>
               </div>
             </div>
-          </div>
 
-          <div className="st-container">
-            <ul className="st-glass" aria-label="Что входит в систему">
-              {c.benefits.map((item) => (
-                <li key={item.title} className="st-glass__item">
-                  <StrategyIcon name={item.icon} />
-                  <div>
-                    <strong>{item.title}</strong>
-                    <span>{item.text}</span>
-                  </div>
+            <ul className="st-badges" aria-label="Формат работы">
+              {c.hero.badges.map((badge) => (
+                <li key={badge.text} className="st-badges__item">
+                  <StrategyIcon name={badge.icon} />
+                  <span>{badge.text}</span>
                 </li>
               ))}
             </ul>
