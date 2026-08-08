@@ -47,3 +47,15 @@ https://eg.egoshev.ru/anketa
 3. «Главный стимул — механическое напряжение»
 4. «Крепатура не обязательна. Отказ — не обязателен»
 5. CTA: статья в блоге → eg.egoshev.ru/blog/myshtsy-rastut-ne-ot-mikrotravm
+
+
+---
+
+## ✅ Статус публикации
+
+| | |
+|---|---|
+| **VK клуб** | ✅ https://vk.ru/wall-230430425_175 |
+| **VK личная egoshev1** | ❌ нет `VK_USER_ACCESS_TOKEN` на VPS — нужен user-токен с `wall` |
+| **Yandex Business** | HITL из текста выше |
+| **Stories** | HITL 5 кадров выше |
