@@ -280,22 +280,15 @@ export const HERO_V2_CSS = `
 }
 .egmain-btn-gift,
 #egmain-hero a.egmain-btn-gift {
-  border-color: rgba(120, 210, 230, 0.72) !important;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(28, 42, 52, 0.96) 0%,
-      rgba(18, 28, 36, 0.94) 45%,
-      rgba(36, 30, 24, 0.92) 100%
-    ) !important;
-  color: #f4fbff !important;
+  border-color: rgba(220, 228, 238, 0.5) !important;
+  background: rgba(14, 16, 20, 0.9) !important;
+  color: #fff !important;
   box-shadow:
-    0 0 0 1px rgba(110, 200, 220, 0.28),
-    0 0 18px rgba(80, 190, 210, 0.34),
-    0 0 36px rgba(180, 140, 90, 0.16),
-    inset 0 1px 0 rgba(190, 240, 255, 0.22),
-    inset 0 -1px 0 rgba(180, 130, 70, 0.12);
-  animation: egGiftPulse 2.2s ease-in-out infinite;
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 0 14px rgba(255, 255, 255, 0.16),
+    0 0 32px rgba(230, 236, 245, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  animation: egGiftPulse 2.8s ease-in-out infinite;
 }
 .egmain-btn-gift::before,
 #egmain-hero a.egmain-btn-gift::before {
@@ -306,25 +299,25 @@ export const HERO_V2_CSS = `
   pointer-events: none;
   background: linear-gradient(
     110deg,
-    transparent 18%,
-    rgba(160, 230, 245, 0.14) 42%,
-    rgba(210, 170, 110, 0.12) 52%,
-    transparent 72%
+    transparent 20%,
+    rgba(255, 255, 255, 0.1) 46%,
+    rgba(236, 242, 250, 0.08) 54%,
+    transparent 74%
   );
   background-size: 220% 100%;
-  animation: egGiftShimmer 2.4s ease-in-out infinite;
-  opacity: 0.85;
+  animation: egGiftShimmer 2.8s ease-in-out infinite;
+  opacity: 0.7;
 }
 .egmain-btn-gift:hover,
 #egmain-hero a.egmain-btn-gift:hover {
   transform: translateY(-2px);
-  border-color: rgba(150, 230, 245, 0.9) !important;
-  filter: brightness(1.06);
+  border-color: rgba(236, 242, 250, 0.72) !important;
+  filter: brightness(1.05);
   box-shadow:
-    0 0 0 1px rgba(130, 220, 240, 0.4),
-    0 0 26px rgba(90, 205, 225, 0.48),
-    0 0 48px rgba(190, 150, 95, 0.22),
-    inset 0 1px 0 rgba(210, 245, 255, 0.3);
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 0 20px rgba(255, 255, 255, 0.24),
+    0 0 42px rgba(230, 236, 245, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 .egmain-btn-gift:active,
 #egmain-hero a.egmain-btn-gift:active {
@@ -337,22 +330,18 @@ export const HERO_V2_CSS = `
   justify-content: center;
   margin-top: 1px;
   padding: 4px 11px;
-  border: 1px solid rgba(150, 225, 240, 0.55);
+  border: 1px solid rgba(230, 236, 245, 0.32);
   border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    rgba(90, 200, 220, 0.34) 0%,
-    rgba(170, 130, 75, 0.28) 100%
-  );
-  color: #eefbff;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(246, 248, 252, 0.94);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.14em;
   line-height: 1;
   text-transform: uppercase;
   box-shadow:
-    0 0 12px rgba(80, 190, 210, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    0 0 10px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
   white-space: nowrap;
 }
 .egmain-btn-neon:not(.egmain-btn-gift),
@@ -439,19 +428,17 @@ export const HERO_V2_CSS = `
   0%,
   100% {
     box-shadow:
-      0 0 0 1px rgba(110, 200, 220, 0.28),
-      0 0 16px rgba(80, 190, 210, 0.3),
-      0 0 32px rgba(180, 140, 90, 0.12),
-      inset 0 1px 0 rgba(190, 240, 255, 0.2),
-      inset 0 -1px 0 rgba(180, 130, 70, 0.1);
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 0 12px rgba(255, 255, 255, 0.14),
+      0 0 28px rgba(230, 236, 245, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
   }
   50% {
     box-shadow:
-      0 0 0 1px rgba(130, 215, 235, 0.4),
-      0 0 22px rgba(90, 205, 225, 0.42),
-      0 0 40px rgba(190, 150, 95, 0.2),
-      inset 0 1px 0 rgba(210, 245, 255, 0.28),
-      inset 0 -1px 0 rgba(190, 140, 80, 0.16);
+      0 0 0 1px rgba(255, 255, 255, 0.2),
+      0 0 18px rgba(255, 255, 255, 0.22),
+      0 0 36px rgba(236, 242, 250, 0.26),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 }
 @keyframes egGiftShimmer {

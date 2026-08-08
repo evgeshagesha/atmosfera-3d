@@ -166,7 +166,7 @@ export default function HeroSection() {
                           >
                             <span className="egmain-btn-copy">
                               <span className="egmain-btn-label">
-                                Функциональная тренировка · 10 минут
+                                🎁 Функциональная тренировка · 10 минут
                               </span>
                               <span className="egmain-btn-gift-badge">Подарок</span>
                             </span>
