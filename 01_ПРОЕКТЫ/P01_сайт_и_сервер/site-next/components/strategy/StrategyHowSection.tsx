@@ -41,9 +41,9 @@ export default function StrategyHowSection() {
                 <Image
                   src={images[step.imageKey]}
                   alt={step.imageAlt}
-                  width={720}
-                  height={1080}
+                  fill
                   sizes="(max-width: 900px) 88vw, 28vw"
+                  style={{ objectFit: "cover", objectPosition: "center" }}
                 />
               </div>
             </li>
