@@ -176,6 +176,21 @@ const PATHS: Record<StrategyIconName, ReactNode> = {
       <path d="M8.5 12.2l2.4 2.4 4.6-4.8" />
     </>
   ),
+  medal: (
+    <>
+      <circle cx="12" cy="9" r="5" />
+      <path d="M9.2 13.2L8 20.5l4-2.2 4 2.2-1.2-7.3" />
+      <circle cx="12" cy="9" r="2" />
+    </>
+  ),
+  users: (
+    <>
+      <circle cx="9" cy="8" r="2.8" />
+      <path d="M3.8 18.5c.9-2.8 2.6-4.2 5.2-4.2s4.3 1.4 5.2 4.2" />
+      <circle cx="16.5" cy="8.5" r="2.3" />
+      <path d="M14.2 14.2c1.7-.2 3.2.6 4 2.3" />
+    </>
+  ),
 };
 
 export default function StrategyIcon({

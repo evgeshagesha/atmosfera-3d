@@ -28,8 +28,11 @@ export type StrategyIconName =
   | "heart"
   | "utensils"
   | "star"
-  | "check";
+  | "check"
+  | "medal"
+  | "users";
 
+/** Zero-Copy from 03_РЕСУРСЫ/config/products.yaml → personal_body_strategy.price_rub */
 export const STRATEGY_PRODUCT = {
   code: "personal_body_strategy",
   name: "Персональная стратегия тела",
@@ -51,6 +54,8 @@ export const STRATEGY_PRODUCT = {
   logoImage: "/strategy/logo-eg.webp",
   logoImagePng: "/strategy/logo-eg.png",
   notebookImage: "/strategy/plan-notebook.webp",
+  offerPortrait: "/strategy/step4-evgeny.webp",
+  offerPortraitFallback: "/strategy/step4-evgeny.jpg",
 } as const;
 
 export const STRATEGY_CONTENT = {
@@ -102,7 +107,7 @@ export const STRATEGY_CONTENT = {
     priceLabel: "Стоимость",
     pricePerDaySuffix: "в день",
     primaryCta: "Начать свои 30 дней",
-    trustBefore: "Оставьте контакты ниже — я или моя команда свяжется с вами и расскажет, как начать.",
+    trustBefore: "Оставьте контакты — я или моя команда свяжется с вами и расскажет, как начать.",
     trustLink: "",
     trustAfter: "",
     badges: [
@@ -113,6 +118,83 @@ export const STRATEGY_CONTENT = {
     photoAlt: "Евгений Гошев — специалист по комплексной работе с телом",
     secondaryCta: "Получить свои 30 дней",
     priceLine: "30 000 ₽ · Онлайн или очно в Москве",
+  },
+
+  offer: {
+    id: "offer",
+    eyebrow: "ШАГ 4",
+    title: "ВАШИ 30 ДНЕЙ МОГУТ ИЗМЕНИТЬ ВАШУ ЖИЗНЬ",
+    body: "Вы получаете не просто план. Вы получаете систему, которая перестроит ваше тело, привычки и состояние на новый уровень.",
+    benefits: [
+      {
+        title: "ПОЛНЫЙ ФОКУС",
+        text: "только на вашем теле и задачах.",
+        icon: "target" as const,
+      },
+      {
+        title: "ПОДДЕРЖКА ЭКСПЕРТА",
+        text: "я с вами на связи на каждом этапе.",
+        icon: "person" as const,
+      },
+      {
+        title: "РАБОТАЕТ В РЕАЛЬНОЙ ЖИЗНИ",
+        text: "без жестких ограничений и срывов.",
+        icon: "shield" as const,
+      },
+      {
+        title: "РЕЗУЛЬТАТ, КОТОРЫЙ ОЩУЩАЕТСЯ",
+        text: "больше энергии, силы и уверенности.",
+        icon: "chart" as const,
+      },
+    ],
+    cardTitle: "ПЕРСОНАЛЬНАЯ СТРАТЕГИЯ ТЕЛА",
+    perDayBox: "1 000 ₽ В ДЕНЬ",
+    perDayNote: "за вашу персональную систему и новые результаты",
+    checklist: [
+      {
+        title: "Анкета из 11 блоков",
+        text: "полная картина о вас и вашем теле",
+      },
+      {
+        title: "2 часа персональной сессии",
+        text: "диагностика, разбор, ответы на вопросы",
+      },
+      {
+        title: "Персональная стратегия",
+        text: "под ваши цели, тело и образ жизни",
+      },
+      {
+        title: "План на каждый день на 30 дней",
+        text: "движение, восстановление, питание, сон, привычки и контроль прогресса",
+      },
+      {
+        title: "Поддержка и ответы на вопросы",
+        text: "на протяжении всего месяца",
+      },
+    ],
+    cta: "ПОЛУЧИТЬ СВОИ 30 ДНЕЙ",
+    trust: "Оставьте заявку — я или моя команда свяжемся с вами и расскажем, как начать.",
+    quote: "Я ДАМ ВАМ СИСТЕМУ. ВАША ЗАДАЧА — ВЫПОЛНЯТЬ ЕЁ КАЖДЫЙ ДЕНЬ.",
+    quoteSub:
+      "Дайте мне 30 дней, чтобы изменить ваше отношение к телу и показать, на что вы действительно способны.",
+    portraitAlt: "Евгений Гошев — руки скрещены, уверенный портрет",
+    bio: [
+      { text: "ПРОФЕССИОНАЛЬНЫЙ СПОРТСМЕН", icon: "walk" as const },
+      {
+        text: "ФИЗИЧЕСКИЙ ТЕРАПЕВТ И СПЕЦИАЛИСТ ПО БИОМЕХАНИКЕ",
+        icon: "person" as const,
+      },
+      { text: "БОЛЕЕ 20 ЛЕТ В СПОРТЕ", icon: "medal" as const },
+      {
+        text: "500+ КЛИЕНТОВ ИЗМЕНИЛИ СВОЕ ТЕЛО И ЖИЗНЬ",
+        icon: "users" as const,
+      },
+    ],
+    bioMobile: [
+      { text: "20+ лет в спорте", icon: "medal" as const },
+      { text: "500+ клиентов", icon: "users" as const },
+    ],
+    footerLine: "30 ДНЕЙ МОГУТ СТАТЬ ЛУЧШИМ МЕСЯЦЕМ ВАШЕЙ ЖИЗНИ. НАЧНИТЕ ПРЯМО СЕЙЧАС.",
   },
 
   plan: {
@@ -300,8 +382,6 @@ export const STRATEGY_CONTENT = {
   placeholders: [
     { id: "result", title: "Результат", note: "Секция будет наполнена позже" },
     { id: "process", title: "Как проходит работа", note: "Секция будет наполнена позже" },
-    { id: "inside", title: "Что внутри", note: "Секция будет наполнена позже" },
-    { id: "expert", title: "Эксперт", note: "Секция будет наполнена позже" },
     { id: "faq", title: "Вопросы", note: "Секция будет наполнена позже" },
   ],
 

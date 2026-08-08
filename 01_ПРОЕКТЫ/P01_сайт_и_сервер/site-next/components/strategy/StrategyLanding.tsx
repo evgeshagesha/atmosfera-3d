@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
+import StrategyFormModal from "@/components/strategy/StrategyFormModal";
 import StrategyIcon from "@/components/strategy/StrategyIcon";
-import StrategyLeadSection from "@/components/strategy/StrategyLeadSection";
+import StrategyOfferSection from "@/components/strategy/StrategyOfferSection";
 import StrategyPlanSection from "@/components/strategy/StrategyPlanSection";
 import { STRATEGY_CONTENT, STRATEGY_PRODUCT } from "@/lib/strategy/content";
 
@@ -22,17 +23,13 @@ export default function StrategyLanding() {
   const c = STRATEGY_CONTENT;
   const p = STRATEGY_PRODUCT;
   const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const scrollToLead = useCallback((source: string) => {
+  const openLeadModal = useCallback((source: string) => {
     track(source);
     setMenuOpen(false);
-    const el = document.getElementById(c.lead.id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-    window.location.hash = c.lead.id;
-  }, [c.lead.id]);
+    setModalOpen(true);
+  }, []);
 
   return (
     <div className="st-page">
@@ -41,7 +38,7 @@ export default function StrategyLanding() {
       </a>
 
       <header className="st-header">
-        <div className="st-container st-header__inner">
+        <div className="st-bleed st-header__inner">
           <Link href="/" className="st-brand" aria-label="Евгений Гошев — на главную">
             <Image
               className="st-brand__img"
@@ -67,12 +64,27 @@ export default function StrategyLanding() {
         </div>
         {menuOpen ? (
           <nav id="st-mobile-menu" className="st-mobile-menu" aria-label="Меню">
-            <div className="st-container st-mobile-menu__inner">
-              <button type="button" className="st-mobile-menu__link" onClick={() => scrollToLead("strategy_menu_lead")}>
+            <div className="st-bleed st-mobile-menu__inner">
+              <button
+                type="button"
+                className="st-mobile-menu__link"
+                onClick={() => openLeadModal("strategy_menu_lead")}
+              >
                 {c.hero.primaryCta}
               </button>
-              <a className="st-mobile-menu__link" href={`#${c.plan.id}`} onClick={() => setMenuOpen(false)}>
+              <a
+                className="st-mobile-menu__link"
+                href={`#${c.plan.id}`}
+                onClick={() => setMenuOpen(false)}
+              >
                 План на 30 дней
+              </a>
+              <a
+                className="st-mobile-menu__link"
+                href={`#${c.offer.id}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                Шаг 4
               </a>
               <Link className="st-mobile-menu__link" href="/" onClick={() => setMenuOpen(false)}>
                 Главная
@@ -100,7 +112,7 @@ export default function StrategyLanding() {
             </div>
           </div>
 
-          <div className="st-container st-hero__copy">
+          <div className="st-bleed st-hero__copy">
             <p className="st-eyebrow">
               <span className="st-eyebrow__bar" aria-hidden="true" />
               <span>{c.hero.eyebrow}</span>
@@ -142,7 +154,7 @@ export default function StrategyLanding() {
                 <button
                   type="button"
                   className="st-btn st-btn--primary st-btn--hero"
-                  onClick={() => scrollToLead("strategy_hero_cta")}
+                  onClick={() => openLeadModal("strategy_hero_cta")}
                 >
                   {c.hero.primaryCta}
                 </button>
@@ -164,7 +176,8 @@ export default function StrategyLanding() {
           </div>
         </section>
 
-        <StrategyPlanSection onCta={scrollToLead} />
+        <StrategyPlanSection onCta={openLeadModal} />
+        <StrategyOfferSection onCta={openLeadModal} />
 
         {c.placeholders.map((section) => (
           <section
@@ -178,25 +191,9 @@ export default function StrategyLanding() {
                 {section.title}
               </h2>
               <p className="st-muted">{section.note}</p>
-              {section.id === "expert" ? (
-                <ul className="st-expert-list">
-                  {c.expertBrief.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              ) : null}
-              {section.id === "inside" ? (
-                <ul className="st-includes">
-                  {c.productIncludes.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              ) : null}
             </div>
           </section>
         ))}
-
-        <StrategyLeadSection />
       </main>
 
       <footer className="st-footer">
@@ -212,6 +209,8 @@ export default function StrategyLanding() {
           </p>
         </div>
       </footer>
+
+      <StrategyFormModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 }

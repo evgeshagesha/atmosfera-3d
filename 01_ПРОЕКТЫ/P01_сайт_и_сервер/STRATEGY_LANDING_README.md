@@ -31,6 +31,9 @@
 | Hero photo | `site-next/public/strategy/hero-evgeny-v3.webp` |
 | Logo EG | `site-next/public/strategy/logo-eg.webp` |
 | Notebook | `site-next/public/strategy/plan-notebook.webp` |
+| Offer portrait (ШАГ 4) | `site-next/public/strategy/step4-evgeny.webp` |
+| Modal | `site-next/components/strategy/StrategyFormModal.tsx` |
+| ШАГ 4 | `site-next/components/strategy/StrategyOfferSection.tsx` |
 
 > 💡 Менять название, цену, CTA и вопросы формы — **только** в `lib/strategy/content.ts` (+ синхрон в `products.yaml`).
 
@@ -89,7 +92,7 @@ ssh egoshev-timeweb 'cd /var/www/egoshev.ru && npm run build && pm2 restart egos
 
 ```bash
 curl -sI https://eg.egoshev.ru/strategy | head -5   # 200
-# В браузере: CTA скроллит к #lead; success — полноэкранный экран
+# В браузере: CTA hero / ШАГ 4 открывают модалку; success — полный экран в модалке
 # API: POST /api/strategy/lead { name, contact, contactMethod, consent }```
 
 ---
