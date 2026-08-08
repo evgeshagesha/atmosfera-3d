@@ -2,22 +2,9 @@
 
 import type { ReactNode } from "react";
 
-export type StrategyIconName =
-  | "person"
-  | "calendar"
-  | "calendar30"
-  | "chat"
-  | "doc"
-  | "support"
-  | "scan"
-  | "focus"
-  | "start"
-  | "discipline"
-  | "target"
-  | "chart"
-  | "lock"
-  | "monitor"
-  | "shield";
+import type { StrategyIconName } from "@/lib/strategy/content";
+
+export type { StrategyIconName };
 
 const PATHS: Record<StrategyIconName, ReactNode> = {
   person: (
@@ -126,12 +113,81 @@ const PATHS: Record<StrategyIconName, ReactNode> = {
       <path d="M9.5 12.2l1.8 1.8 3.4-3.6" />
     </>
   ),
+  cycle: (
+    <>
+      <path d="M4.5 12a7.5 7.5 0 0 1 12.4-5.7L19 4.5v5h-5" />
+      <path d="M19.5 12a7.5 7.5 0 0 1-12.4 5.7L5 19.5v-5h5" />
+    </>
+  ),
+  bolt: (
+    <>
+      <path d="M13 2.5L6.5 13h5l-1 8.5L18.5 11h-5l-.5-8.5z" />
+    </>
+  ),
+  walk: (
+    <>
+      <circle cx="13.5" cy="5" r="2" />
+      <path d="M8 21l2.5-6 2 2 2.5 4M10.5 15l-2-4 4-2.5 3 2.5" />
+    </>
+  ),
+  dumbbell: (
+    <>
+      <path d="M6 9.5v5M18 9.5v5M8.5 12h7" />
+      <rect x="3.5" y="8" width="3" height="8" rx="1" />
+      <rect x="17.5" y="8" width="3" height="8" rx="1" />
+    </>
+  ),
+  wave: (
+    <>
+      <path d="M3.5 14c2-3 3.5-3 5.5 0s3.5 3 5.5 0 3.5-3 5.5 0" />
+      <path d="M3.5 9.5c2-3 3.5-3 5.5 0s3.5 3 5.5 0 3.5-3 5.5 0" />
+    </>
+  ),
+  lungs: (
+    <>
+      <path d="M12 20.5V11" />
+      <path d="M12 12c-2-.5-4.5-1-5.5-3.5C5.2 5.8 7 3.5 9.2 4.2c1.2.4 2 1.6 2.8 3.3" />
+      <path d="M12 12c2-.5 4.5-1 5.5-3.5C18.8 5.8 17 3.5 14.8 4.2c-1.2.4-2 1.6-2.8 3.3" />
+      <path d="M6.5 10.5c-1.8 1-2.8 3.2-2.3 5.3.6 2.4 2.8 3.7 4.8 3.2" />
+      <path d="M17.5 10.5c1.8 1 2.8 3.2 2.3 5.3-.6 2.4-2.8 3.7-4.8 3.2" />
+    </>
+  ),
+  heart: (
+    <>
+      <path d="M12 19.5s-7-4.2-7-9.2A3.8 3.8 0 0 1 12 7.5a3.8 3.8 0 0 1 7 2.8c0 5-7 9.2-7 9.2z" />
+    </>
+  ),
+  utensils: (
+    <>
+      <path d="M8 3.5v7a2 2 0 0 0 2 2V20.5" />
+      <path d="M6 3.5v4M10 3.5v4" />
+      <path d="M16 3.5c2.2 0 3.5 1.4 3.5 3.5S18 11 16 11v9.5" />
+    </>
+  ),
+  star: (
+    <>
+      <path d="M12 3.5l1.1 5.2L18.5 10l-4.2 3.1 1.4 5.4L12 15.6 8.3 18.5l1.4-5.4L5.5 10l5.4-1.3z" />
+      <path d="M12 1.5v21M3 12h18" opacity="0.35" />
+    </>
+  ),
+  check: (
+    <>
+      <circle cx="12" cy="12" r="7.5" />
+      <path d="M8.5 12.2l2.4 2.4 4.6-4.8" />
+    </>
+  ),
 };
 
-export default function StrategyIcon({ name }: { name: StrategyIconName }) {
+export default function StrategyIcon({
+  name,
+  className,
+}: {
+  name: StrategyIconName;
+  className?: string;
+}) {
   return (
     <svg
-      className="st-icon"
+      className={className ? `st-icon ${className}` : "st-icon"}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

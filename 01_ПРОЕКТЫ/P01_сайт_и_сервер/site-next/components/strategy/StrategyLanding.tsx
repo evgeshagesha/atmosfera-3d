@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
-import StrategyFormModal from "@/components/strategy/StrategyFormModal";
 import StrategyIcon from "@/components/strategy/StrategyIcon";
+import StrategyLeadSection from "@/components/strategy/StrategyLeadSection";
+import StrategyPlanSection from "@/components/strategy/StrategyPlanSection";
 import { STRATEGY_CONTENT, STRATEGY_PRODUCT } from "@/lib/strategy/content";
 
 function track(event: string) {
@@ -20,12 +21,18 @@ function track(event: string) {
 export default function StrategyLanding() {
   const c = STRATEGY_CONTENT;
   const p = STRATEGY_PRODUCT;
-  const [formOpen, setFormOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const openForm = useCallback((source: string) => {
+  const scrollToLead = useCallback((source: string) => {
     track(source);
-    setFormOpen(true);
-  }, []);
+    setMenuOpen(false);
+    const el = document.getElementById(c.lead.id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    window.location.hash = c.lead.id;
+  }, [c.lead.id]);
 
   return (
     <div className="st-page">
@@ -36,19 +43,43 @@ export default function StrategyLanding() {
       <header className="st-header">
         <div className="st-container st-header__inner">
           <Link href="/" className="st-brand" aria-label="Евгений Гошев — на главную">
-            <span className="st-brand__logo">{c.brand.name}</span>
+            <Image
+              className="st-brand__img"
+              src={p.logoImage}
+              alt={c.brand.name}
+              width={120}
+              height={60}
+              priority
+            />
           </Link>
           <button
             type="button"
             className="st-menu-btn"
             aria-label={c.header.menuLabel}
-            onClick={() => openForm("strategy_header_menu")}
+            aria-expanded={menuOpen}
+            aria-controls="st-mobile-menu"
+            onClick={() => setMenuOpen((v) => !v)}
           >
             <span className="st-menu-btn__bar" />
             <span className="st-menu-btn__bar" />
             <span className="st-menu-btn__bar" />
           </button>
         </div>
+        {menuOpen ? (
+          <nav id="st-mobile-menu" className="st-mobile-menu" aria-label="Меню">
+            <div className="st-container st-mobile-menu__inner">
+              <button type="button" className="st-mobile-menu__link" onClick={() => scrollToLead("strategy_menu_lead")}>
+                {c.hero.primaryCta}
+              </button>
+              <a className="st-mobile-menu__link" href={`#${c.plan.id}`} onClick={() => setMenuOpen(false)}>
+                План на 30 дней
+              </a>
+              <Link className="st-mobile-menu__link" href="/" onClick={() => setMenuOpen(false)}>
+                Главная
+              </Link>
+            </div>
+          </nav>
+        ) : null}
       </header>
 
       <main id="main">
@@ -111,19 +142,13 @@ export default function StrategyLanding() {
                 <button
                   type="button"
                   className="st-btn st-btn--primary st-btn--hero"
-                  onClick={() => openForm("strategy_hero_cta")}
+                  onClick={() => scrollToLead("strategy_hero_cta")}
                 >
                   {c.hero.primaryCta}
                 </button>
                 <p className="st-trust">
                   <StrategyIcon name="lock" />
-                  <span>
-                    {c.hero.trustBefore}
-                    <a href={p.anketaplanUrl} className="st-trust__link">
-                      {c.hero.trustLink}
-                    </a>
-                    {c.hero.trustAfter}
-                  </span>
+                  <span>{c.hero.trustBefore}</span>
                 </p>
               </div>
             </div>
@@ -138,6 +163,8 @@ export default function StrategyLanding() {
             </ul>
           </div>
         </section>
+
+        <StrategyPlanSection onCta={scrollToLead} />
 
         {c.placeholders.map((section) => (
           <section
@@ -165,22 +192,11 @@ export default function StrategyLanding() {
                   ))}
                 </ul>
               ) : null}
-              {section.id === "price" ? (
-                <div className="st-price-card">
-                  <p className="st-price-card__value">{p.priceLabel}</p>
-                  <p className="st-muted">Онлайн или очно в Москве · заявка, не мгновенная оплата</p>
-                  <button
-                    type="button"
-                    className="st-btn st-btn--primary"
-                    onClick={() => openForm("strategy_price_cta")}
-                  >
-                    {c.hero.primaryCta}
-                  </button>
-                </div>
-              ) : null}
             </div>
           </section>
         ))}
+
+        <StrategyLeadSection />
       </main>
 
       <footer className="st-footer">
@@ -196,8 +212,6 @@ export default function StrategyLanding() {
           </p>
         </div>
       </footer>
-
-      <StrategyFormModal open={formOpen} onClose={() => setFormOpen(false)} />
     </div>
   );
 }

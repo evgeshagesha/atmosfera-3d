@@ -13,7 +13,7 @@
 | **Продукт** | Персональная стратегия тела (временное название) |
 | **Цена** | **30 000 ₽** |
 | **Формат** | онлайн или очно Москва |
-| **CTA** | короткая заявка (модалка 12 шагов), не мгновенная оплата |
+| **CTA** | скролл к короткой заявке (`#lead`), без оплаты и без длинной анкеты |
 | **SoT цена** | `03_РЕСУРСЫ/config/products.yaml` → `personal_body_strategy` |
 
 ---
@@ -28,7 +28,9 @@
 | Валидация + TG message | `site-next/lib/strategy/lead.ts` |
 | UI | `site-next/components/strategy/*` |
 | API lead | `site-next/app/api/strategy/lead/route.ts` |
-| Hero photo | `site-next/public/strategy/hero-evgeny.webp` (+ `.jpg` fallback) |
+| Hero photo | `site-next/public/strategy/hero-evgeny-v3.webp` |
+| Logo EG | `site-next/public/strategy/logo-eg.webp` |
+| Notebook | `site-next/public/strategy/plan-notebook.webp` |
 
 > 💡 Менять название, цену, CTA и вопросы формы — **только** в `lib/strategy/content.ts` (+ синхрон в `products.yaml`).
 
@@ -87,8 +89,8 @@ ssh egoshev-timeweb 'cd /var/www/egoshev.ru && npm run build && pm2 restart egos
 
 ```bash
 curl -sI https://eg.egoshev.ru/strategy | head -5   # 200
-# В браузере: CTA открывает модалку, consent → /policy
-```
+# В браузере: CTA скроллит к #lead; success — полноэкранный экран
+# API: POST /api/strategy/lead { name, contact, contactMethod, consent }```
 
 ---
 
