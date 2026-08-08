@@ -17,6 +17,10 @@ type Props = {
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://eg.egoshev.ru";
 const AUTHOR_NAME = "Евгений Гошев";
 
+/** Schedule via publishedAt: hide until slot without full redeploy. */
+export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
 export async function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({ slug }));
 }

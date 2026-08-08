@@ -6,6 +6,10 @@ import { buildPageMetadata } from "@/lib/seo/build-metadata";
 
 import "./blog-index.css";
 
+/** Schedule via publishedAt: re-check date without full redeploy. */
+export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
 export const metadata = buildPageMetadata("blog", {
   title: "Блог о движении, дыхании и восстановлении — Евгений Гошев",
   description:

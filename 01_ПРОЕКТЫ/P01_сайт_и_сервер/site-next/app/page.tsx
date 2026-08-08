@@ -5,6 +5,9 @@ import { HOME_ROUTE } from "@/lib/home";
 import { getPageData } from "@/lib/pages";
 import { buildPageMetadata } from "@/lib/seo/build-metadata";
 
+/** Blog strip on home respects publishedAt schedule. */
+export const revalidate = 300;
+
 export async function generateMetadata(): Promise<Metadata> {
   const { meta } = getPageData(HOME_ROUTE);
   return buildPageMetadata(HOME_ROUTE, meta);

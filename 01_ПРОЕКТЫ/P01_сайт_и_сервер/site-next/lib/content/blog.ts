@@ -83,9 +83,17 @@ function loadPosts(): BlogPost[] {
   return assignUniqueSlugs(posts);
 }
 
+/** Public surface: published flag + publishedAt not in the future (schedule via date). */
+function isPubliclyVisible(post: BlogPost, nowMs = Date.now()): boolean {
+  if (!post.published) return false;
+  const at = Date.parse(post.publishedAt);
+  if (Number.isNaN(at)) return true;
+  return at <= nowMs;
+}
+
 export function getBlogPosts(): BlogPost[] {
   return loadPosts()
-    .filter((post) => post.published)
+    .filter((post) => isPubliclyVisible(post))
     .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
 }
 
@@ -98,11 +106,15 @@ export function getBlogPostById(id: string): BlogPost | undefined {
 }
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return loadPosts().find((post) => post.slug === slug);
+  const post = loadPosts().find((item) => item.slug === slug);
+  if (!post || !isPubliclyVisible(post)) return undefined;
+  return post;
 }
 
 export function getAllBlogSlugs(): string[] {
-  return loadPosts().filter((post) => post.published).map((post) => post.slug);
+  return loadPosts()
+    .filter((post) => isPubliclyVisible(post))
+    .map((post) => post.slug);
 }
 
 export function saveBlogPost(post: BlogPost): BlogPost {
