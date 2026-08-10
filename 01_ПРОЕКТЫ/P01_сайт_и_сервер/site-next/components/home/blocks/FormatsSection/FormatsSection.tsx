@@ -11,6 +11,8 @@ type FormatCard = {
   image: string;
   /** Emphasized bestseller frame. */
   featured?: boolean;
+  /** Keep title on one line (club card). */
+  titleNowrap?: boolean;
   badges?: string[];
 };
 
@@ -30,17 +32,18 @@ const FORMAT_CARDS: FormatCard[] = [
     href: "https://eg.egoshev.ru/strategy",
     image: "/assets/eg/format-strategy-plan.webp",
     featured: true,
-    badges: ["Bestseller", "Топ выбор клиентов"],
+    badges: ["Bestseller", "Выбор клиентов"],
   },
   {
     id: "club",
     step: "2",
-    title: "Онлайн-клуб «Атмосфера 3D»",
+    title: "Клуб «Атмосфера 3D»",
     description:
       "Регулярные тренировки, программы и поддержка для системного результата",
     cta: "Вступить | от 1 758 ₽/мес",
     href: "https://eg.egoshev.ru/club",
     image: "/assets/eg/method-pravilo.jpg",
+    titleNowrap: true,
   },
   {
     id: "breath",
@@ -110,7 +113,13 @@ export default function FormatsSection() {
                 </div>
               ) : null}
               <div className="eg-formats__card-body">
-                <h3 className="eg-formats__card-title">
+                <h3
+                  className={
+                    card.titleNowrap
+                      ? "eg-formats__card-title eg-formats__card-title--nowrap"
+                      : "eg-formats__card-title"
+                  }
+                >
                   <span className="eg-formats__step">{card.step}.</span>{" "}
                   {card.title}
                 </h3>
