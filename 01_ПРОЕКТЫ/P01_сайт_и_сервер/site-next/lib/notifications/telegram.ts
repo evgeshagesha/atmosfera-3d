@@ -42,27 +42,32 @@ export async function sendTelegramMessage({
     return { ok: false as const, reason: "not_configured" as const };
   }
 
-  const response = await fetch(
-    `https://api.telegram.org/bot${creds.token}/sendMessage`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: creds.chatId,
-        text,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-      }),
-    },
-  );
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${creds.token}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: creds.chatId,
+          text,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      },
+    );
 
-  if (!response.ok) {
-    const error = await response.text().catch(() => "unknown error");
-    console.error("[telegram] sendMessage", error);
+    if (!response.ok) {
+      const error = await response.text().catch(() => "unknown error");
+      console.error("[telegram] sendMessage", error);
+      return { ok: false as const, reason: "api_error" as const };
+    }
+
+    return { ok: true as const };
+  } catch (error) {
+    console.error("[telegram] sendMessage fetch failed", error);
     return { ok: false as const, reason: "api_error" as const };
   }
-
-  return { ok: true as const };
 }
 
 type SendTelegramDocumentOptions = {
@@ -102,19 +107,24 @@ export async function sendTelegramDocument({
     form.append("caption", caption.slice(0, 1024));
   }
 
-  const response = await fetch(
-    `https://api.telegram.org/bot${creds.token}/sendDocument`,
-    {
-      method: "POST",
-      body: form,
-    },
-  );
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${creds.token}/sendDocument`,
+      {
+        method: "POST",
+        body: form,
+      },
+    );
 
-  if (!response.ok) {
-    const error = await response.text().catch(() => "unknown error");
-    console.error("[telegram] sendDocument", error);
+    if (!response.ok) {
+      const error = await response.text().catch(() => "unknown error");
+      console.error("[telegram] sendDocument", error);
+      return { ok: false as const, reason: "api_error" as const };
+    }
+
+    return { ok: true as const };
+  } catch (error) {
+    console.error("[telegram] sendDocument fetch failed", error);
     return { ok: false as const, reason: "api_error" as const };
   }
-
-  return { ok: true as const };
 }
