@@ -60,7 +60,15 @@ export default function IntroScreen({
           <p className={styles.heroText}>
             Я прошёл путь от профессионального спорта и Высшей лиги до
             медицинского образования и работы с биомеханикой, восстановлением и
-            людьми у себя в студии.
+            людьми у себя в студии.{" "}
+            <a
+              className={styles.wikiLink}
+              href="https://ru.wikipedia.org/wiki/%D0%93%D0%BE%D1%88%D0%B5%D0%B2%2C_%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D0%B9_%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%B5%D0%B2%D0%B8%D1%87"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              (Обо мне на Википедии)
+            </a>
           </p>
           <p className={styles.heroText}>
             Но сейчас мне безумно важно услышать Ваше мнение.
@@ -69,10 +77,6 @@ export default function IntroScreen({
             Что вас беспокоит? Что вы уже пробовали? Какого результата хотите
             достичь? Что вам действительно нужно? И почему, как вам кажется,
             пока не получилось прийти к этому результату?
-          </p>
-          <p className={styles.heroText}>
-            Ваши ответы помогут мне лучше понять вашу ситуацию и то, какой
-            подход будет действительно полезен именно вам.
           </p>
           <p className={styles.heroText}>Анкета займёт около 7 минут.</p>
           <p className={styles.heroText}>
