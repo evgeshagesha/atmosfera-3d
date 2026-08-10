@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import AnketaEgApp from "./components/AnketaEgApp";
 
-const TITLE = "Исследование тела | Евгений Гошев";
+const TITLE = "Персональная анкета | Евгений Гошев";
 const DESCRIPTION =
-  "Персональное исследование состояния тела, движения, образа жизни и целей от Евгения Гошева.";
+  "Расскажите о себе и результате, к которому хотите прийти. Персональная анкета Евгения Гошева — около 7 минут, после заполнения доступ к функциональному тестированию тела.";
 const CANONICAL = "https://eg.egoshev.ru/anketaeg";
 
 export const metadata: Metadata = {

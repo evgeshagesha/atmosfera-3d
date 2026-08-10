@@ -40,33 +40,45 @@ export default function IntroScreen({
           className={styles.headerLogo}
           priority
         />
-        <span>ИССЛЕДОВАНИЕ · 2026</span>
+        <span>ПЕРСОНАЛЬНАЯ АНКЕТА · 2026</span>
       </header>
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
           <div className={styles.eyebrow}>
-            <span /> EG · ТЕЛО / ДВИЖЕНИЕ / ЖИЗНЬ
+            <span /> ЕВГЕНИЙ ГОШЕВ · ПРОФЕССИОНАЛЬНЫЙ СПОРТСМЕН · ФИЗИЧЕСКИЙ ТЕРАПЕВТ
           </div>
           <h1>
-            Исследование тела
+            Родненькие,
             <br />
-            <em>и образа жизни</em>
+            <em>хочу понять, что нужно именно вам</em>
           </h1>
           <p className={styles.heroLead}>
-            Мне важно понять, с чем вы реально сталкиваетесь в работе со своим
-            телом.
+            Расскажите немного о себе, и о том результате, к которому хотите
+            прийти.
           </p>
           <p className={styles.heroText}>
             Я прошёл путь от профессионального спорта и Высшей лиги до
-            медицинского образования и работы с движением, биомеханикой и
-            восстановлением. Но здесь мне важно услышать не только мнение
-            специалиста — мне важно услышать вас.
+            медицинского образования и работы с биомеханикой, восстановлением и
+            людьми у себя в студии.
           </p>
           <p className={styles.heroText}>
-            Что беспокоит. Что уже пробовали. Какого результата хотите. Почему
-            пока не получилось. Анкета займёт около 7 минут. После заполнения я
-            бесплатно открою доступ к функциональному тесту тела.
+            Но сейчас мне безумно важно услышать Ваше мнение.
+          </p>
+          <p className={styles.heroText}>
+            Что вас беспокоит? Что вы уже пробовали? Какого результата хотите
+            достичь? Что вам действительно нужно? И почему, как вам кажется,
+            пока не получилось прийти к этому результату?
+          </p>
+          <p className={styles.heroText}>
+            Ваши ответы помогут мне лучше понять вашу ситуацию и то, какой
+            подход будет действительно полезен именно вам.
+          </p>
+          <p className={styles.heroText}>Анкета займёт около 7 минут.</p>
+          <p className={styles.heroText}>
+            После заполнения я бесплатно открою доступ к моему специальному
+            функциональному тестированию тела, после которого вы получите
+            персональный результат и понятный план дальнейших действий.
           </p>
 
           <div className={styles.heroMeta}>
@@ -87,7 +99,7 @@ export default function IntroScreen({
           {hasSaved ? (
             <div className={styles.heroActions}>
               <p className={styles.disclaimer} style={{ marginBottom: 0 }}>
-                Вы уже начали исследование
+                Вы уже начали анкету
               </p>
               <button type="button" className={styles.primaryButton} onClick={onResume}>
                 Продолжить <ArrowIcon />
@@ -99,7 +111,7 @@ export default function IntroScreen({
           ) : (
             <div className={styles.heroActions}>
               <button type="button" className={styles.primaryButton} onClick={onStart}>
-                Начать исследование <ArrowIcon />
+                Начать <ArrowIcon />
               </button>
             </div>
           )}
@@ -123,7 +135,7 @@ export default function IntroScreen({
             <div className={styles.portraitShade} />
             <div className={styles.portraitTag}>
               <span>ЕВГЕНИЙ ГОШЕВ</span>
-              <small>спорт · медицинское образование · движение</small>
+              <small>профессиональный спортсмен · физический терапевт</small>
             </div>
           </div>
           <div className={styles.orbitOne} />
