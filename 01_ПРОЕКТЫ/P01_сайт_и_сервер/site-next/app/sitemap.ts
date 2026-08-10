@@ -15,15 +15,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "osanka",
     "strategy",
   ];
-  const pageRoutes = ["", "blog", "kids", ...moneyRoutes, ...getAllRoutes()];
+  // Legal App Router pages — ensure indexing even if manifest lags.
+  const legalRoutes = ["oferta-consult"];
+  const pageRoutes = [
+    "",
+    "blog",
+    "kids",
+    ...moneyRoutes,
+    ...legalRoutes,
+    ...getAllRoutes(),
+  ];
   const blogSlugs = getAllBlogSlugs();
   const posts = getBlogPosts();
   const postDates = Object.fromEntries(
     posts.map((post) => [post.slug, new Date(post.updatedAt || post.publishedAt)]),
   );
   const moneySet = new Set(moneyRoutes);
+  const legalSet = new Set(["oferta", "oferta-consult", "policy", "personal", ...legalRoutes]);
 
-  const pages: MetadataRoute.Sitemap = pageRoutes.map((route) => ({
+  // Deduplicate (manifest may already include oferta/policy/personal).
+  const seen = new Set<string>();
+  const uniqueRoutes = pageRoutes.filter((route) => {
+    if (seen.has(route)) return false;
+    seen.add(route);
+    return true;
+  });
+
+  const pages: MetadataRoute.Sitemap = uniqueRoutes.map((route) => ({
     url: route === "" ? base : `${base}/${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" || route === "blog" ? "weekly" : "monthly",
@@ -34,7 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
           ? 0.85
           : moneySet.has(route)
             ? 0.9
-            : 0.7,
+            : legalSet.has(route)
+              ? 0.4
+              : 0.7,
   }));
 
   const articles: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({

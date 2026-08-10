@@ -11,7 +11,7 @@ export const LEGAL_OPERATOR = {
   form: "https://egoshev.ru/anketaplan",
   studioMaps: "https://yandex.ru/maps/-/CTu240~o",
   city: "Москва",
-  updated: "04.08.2026",
+  updated: "10.08.2026",
 } as const;
 
 /** Актуальные публичные цены (синхрон с products.yaml / Mini App). */
@@ -40,6 +40,11 @@ export const LEGAL_PRODUCTS = [
     name: "Онлайн-клуб «Атмосфера 3D» (подписка)",
     price: "от 1 758 ₽ / месяц",
     url: "https://egoshev.ru/club",
+  },
+  {
+    name: "Персональная стратегия тела (30 дней)",
+    price: "30 000 ₽",
+    url: "https://eg.egoshev.ru/strategy",
   },
   {
     name: "Личная онлайн-консультация (2 часа)",

@@ -50,6 +50,7 @@ export const STRATEGY_PRODUCT = {
   homeUrl: "https://eg.egoshev.ru",
   policyUrl: "/policy",
   ofertaUrl: "/oferta",
+  ofertaConsultUrl: "/oferta-consult",
   personalConsentUrl: "/personal",
   anketaplanUrl: "https://eg.egoshev.ru/anketaplan",
   telegramPublicUrl: "https://t.me/EvgeniiGoshev",
@@ -435,11 +436,17 @@ export const STRATEGY_CONTENT = {
     consentPrefix: "Я даю согласие на обработку персональных данных и принимаю",
     consentPolicy: "Политику конфиденциальности",
     consentPersonal: "Согласие на ПДн",
+    acuteCheckbox:
+      "Подтверждаю, что у меня нет острых состояний и назначенного лечения, требующих врача",
+    acuteHint:
+      "Это фильтр формата работы, а не диагноз. Без подтверждения заявка не отправится.",
+    acuteOfertaLink: "Оферта на консультацию / стратегию",
     errors: {
       name: "Укажите имя",
       contact: "Укажите телефон или Telegram",
       contactMethod: "Выберите удобный способ связи",
       consent: "Нужно согласие на обработку данных",
+      acute: "Нужно подтверждение об отсутствии острых состояний",
       network: "Не удалось отправить. Проверьте соединение и попробуйте ещё раз.",
     },
     success: {
@@ -458,6 +465,7 @@ export const STRATEGY_CONTENT = {
     links: [
       { href: "/policy", label: "Политика конфиденциальности" },
       { href: "/oferta", label: "Оферта" },
+      { href: "/oferta-consult", label: "Оферта консультации" },
       { href: "/personal", label: "Согласие на обработку ПДн" },
     ],
   },

@@ -16,6 +16,19 @@
 | JSON-LD | Person + LocalBusiness + WebSite, `knowsAbout` с якорными темами |
 | sameAs | Telegram, VK, YouTube, Wikipedia |
 
+## Патч 10.08.2026 (практический SEO/GEO, без выдуманных Wordstat)
+
+| Что | Факт |
+|-----|------|
+| `/strategy` | Title/description/OG/Twitter + BreadcrumbList + Service JSON-LD; OG image hero |
+| `/oferta-consult` | Новая юр. страница в sitemap (priority 0.4) |
+| `/anketaplan` | Absolute canonical + OG url; `noindex` сохранён (не в sitemap) |
+| Home formats | Внутренняя ссылка на `/strategy` как bestseller-карточка |
+| Instagram WebView | root viewport + safe-area; strategy `overflow-x: clip`; modal `dvh` + tap-friendly checkbox |
+| Sitemap | dedupe + `oferta-consult`; money `/strategy` уже был |
+
+> 💡 Частоты Wordstat **не выдуманы** — только технические и структурные правки.
+
 ## Когда соберём бот + Kie.ai (контент)
 
 Каждая статья / страница должна:

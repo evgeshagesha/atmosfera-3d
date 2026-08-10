@@ -655,12 +655,14 @@ html:has(.st-page) body {
   position: relative;
   z-index: 1;
   width: min(100%, 560px);
-  max-height: min(92vh, 860px);
+  max-width: calc(100vw - 1.5rem);
+  max-height: min(92dvh, 860px);
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   background: #121212;
   border: 1px solid rgba(197, 164, 126, 0.28);
   border-radius: 18px;
-  padding: 1.65rem 1.45rem 1.45rem;
+  padding: 1.65rem 1.45rem max(1.45rem, env(safe-area-inset-bottom, 0px));
   box-shadow:
     0 24px 80px rgba(0, 0, 0, 0.55),
     0 0 0 1px rgba(197, 164, 126, 0.08);
@@ -877,6 +879,32 @@ html:has(.st-page) body {
 .st-consent input {
   margin-top: 0.2rem;
   accent-color: var(--st-bronze);
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.st-consent--acute {
+  margin-top: 1rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(197, 164, 126, 0.28);
+  background: rgba(142, 110, 77, 0.08);
+}
+
+.st-consent-hint {
+  margin: 0.4rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: rgba(232, 180, 160, 0.9);
+}
+
+.st-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: none;
 }
 
 .st-form-error {
@@ -1343,6 +1371,7 @@ html:has(.st-page) body {
 .st-week__scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  max-width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
   background: #0a0a0a;

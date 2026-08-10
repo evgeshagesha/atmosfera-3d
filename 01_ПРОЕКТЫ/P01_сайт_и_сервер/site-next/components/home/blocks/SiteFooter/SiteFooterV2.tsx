@@ -15,6 +15,7 @@ const LEGAL_LINKS = [
   { href: "/policy", label: "Политика конфиденциальности" },
   { href: "/personal", label: "Согласие на обработку данных" },
   { href: "/oferta", label: "Публичная оферта" },
+  { href: "/oferta-consult", label: "Оферта консультации" },
 ] as const;
 
 export default function SiteFooterV2() {

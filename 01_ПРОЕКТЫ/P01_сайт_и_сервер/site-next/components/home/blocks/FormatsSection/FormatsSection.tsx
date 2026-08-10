@@ -9,45 +9,32 @@ type FormatCard = {
   cta: string;
   href: string;
   image: string;
-  /** Stronger gray glow on the CTA — entry product. */
+  /** Emphasized bestseller frame. */
   featured?: boolean;
+  badges?: string[];
 };
 
-/** Photos from «для кого» / method set — square cards. */
+/**
+ * Home formats — exactly 4 cards, 2×2.
+ * Prices Zero-Copy from 03_РЕСУРСЫ/config/products.yaml (where shown).
+ * Card 1 (strategy) — no price on CTA.
+ */
 const FORMAT_CARDS: FormatCard[] = [
   {
-    id: "test",
+    id: "strategy",
     step: "1",
-    title: "Начни отсюда",
-    description: "Пройди тест и получи персональный план",
-    cta: "Пройти тест | 684 ₽",
-    href: "https://egoshev.ru/testik",
-    image: "/assets/eg/method-deep.jpg",
+    title: "Получить персональный план на 30 дней",
+    description:
+      "Персональная стратегия: разбор, сессия и система на каждый день под ваши цели",
+    cta: "Получить план",
+    href: "https://eg.egoshev.ru/strategy",
+    image: "/assets/eg/format-strategy-plan.webp",
     featured: true,
-  },
-  {
-    id: "breath",
-    step: "2",
-    title: "Дыхание и осанка",
-    description:
-      "Мини-курс для свободного дыхания, грудной клетки и устойчивой осанки",
-    cta: "Начать | 1 990 ₽",
-    href: "https://egoshev.ru/dyhanieosanka",
-    image: "/assets/eg/method-posture.jpg",
-  },
-  {
-    id: "baza",
-    step: "3",
-    title: "Базовая настройка тела",
-    description:
-      "Программа, чтобы снять напряжение, вернуть подвижность и уверенность в движении",
-    cta: "К программе | 9 990 ₽",
-    href: "https://egoshev.ru/baza",
-    image: "/assets/eg/method-training.jpg",
+    badges: ["Bestseller", "Топ выбор клиентов"],
   },
   {
     id: "club",
-    step: "4",
+    step: "2",
     title: "Онлайн-клуб «Атмосфера 3D»",
     description:
       "Регулярные тренировки, программы и поддержка для системного результата",
@@ -56,24 +43,24 @@ const FORMAT_CARDS: FormatCard[] = [
     image: "/assets/eg/method-pravilo.jpg",
   },
   {
-    id: "kids",
-    step: "5",
-    title: "Атмосфера 3D Kids Camp",
+    id: "breath",
+    step: "3",
+    title: "Мини-курс «Дыхание / осанка»",
     description:
-      "Закрытые занятия и программы выходного дня для детей в мини-группе до четырёх человек",
-    cta: "О программе",
-    href: "https://eg.egoshev.ru/kids",
-    image: "/assets/eg/method-mobility.jpg",
+      "Свободное дыхание, подвижность грудной клетки и более устойчивое положение тела",
+    cta: "Начать | 1 990 ₽",
+    href: "https://egoshev.ru/dyhanieosanka",
+    image: "/assets/eg/method-posture.jpg",
   },
   {
-    id: "consultation",
-    step: "6",
-    title: "Онлайн-консультация",
+    id: "baza",
+    step: "4",
+    title: "Курс «Базовая настройка тела»",
     description:
-      "Разберём ваш запрос и определим оптимальный маршрут работы",
-    cta: "2 часа | 20 000 ₽",
-    href: "https://egoshev.ru/anketaplan",
-    image: "/assets/eg/online-consultation.png",
+      "Фундамент: снять скованность, вернуть подвижность и контроль в движении",
+    cta: "К программе | 9 990 ₽",
+    href: "https://egoshev.ru/baza",
+    image: "/assets/eg/method-training.jpg",
   },
 ];
 
@@ -113,6 +100,15 @@ export default function FormatsSection() {
               data-reveal
             >
               <div className="eg-formats__card-overlay" />
+              {card.badges?.length ? (
+                <div className="eg-formats__badges" aria-label="Метки">
+                  {card.badges.map((badge) => (
+                    <span key={badge} className="eg-formats__badge">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
               <div className="eg-formats__card-body">
                 <h3 className="eg-formats__card-title">
                   <span className="eg-formats__step">{card.step}.</span>{" "}

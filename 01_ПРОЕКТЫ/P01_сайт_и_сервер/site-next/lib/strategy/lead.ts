@@ -19,6 +19,8 @@ export type StrategyLeadPayload = {
   /** Optional goal / what to change */
   goal?: string;
   consent?: boolean;
+  /** Liability filter: no acute conditions requiring a physician */
+  acuteConfirm?: boolean;
 };
 
 function trimStr(value: unknown, max = 500): string {
@@ -37,6 +39,7 @@ export function normalizeLeadPayload(raw: unknown): StrategyLeadPayload | null {
     contactMethod: trimStr(data.contactMethod, 40).toLowerCase(),
     goal: trimStr(data.goal, 500),
     consent: data.consent === true,
+    acuteConfirm: data.acuteConfirm === true,
   };
 }
 
@@ -50,6 +53,7 @@ export function validateLeadPayload(data: StrategyLeadPayload): string | null {
     return lead.errors.contactMethod;
   }
   if (!data.consent) return lead.errors.consent;
+  if (!data.acuteConfirm) return lead.errors.acute;
 
   return null;
 }
@@ -89,6 +93,7 @@ export function formatStrategyLeadMessage(data: StrategyLeadPayload): string {
     `Контакт: ${escapeHtml(data.contact ?? "")}`,
     `Связаться: ${escapeHtml(method)}`,
     `Цель: ${escapeHtml(goal)}`,
+    `Острые состояния: подтверждено отсутствие`,
     `Дата: ${moscowDateStamp()}`,
     "",
     "Статус: НОВЫЙ ЛИД",

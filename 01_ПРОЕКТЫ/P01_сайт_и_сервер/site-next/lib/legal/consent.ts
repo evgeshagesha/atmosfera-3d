@@ -3,6 +3,7 @@ export const LEGAL_ROUTES = {
   policy: "/policy",
   consent: "/personal",
   oferta: "/oferta",
+  ofertaConsult: "/oferta-consult",
 } as const;
 
 export const COOKIE_CONSENT_KEY = "eg_cookie_consent_v1";

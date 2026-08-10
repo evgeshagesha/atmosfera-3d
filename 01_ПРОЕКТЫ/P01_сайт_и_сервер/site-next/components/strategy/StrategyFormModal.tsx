@@ -43,6 +43,7 @@ export default function StrategyFormModal({
   const [contactMethod, setContactMethod] = useState("");
   const [goal, setGoal] = useState("");
   const [consent, setConsent] = useState(false);
+  const [acuteConfirm, setAcuteConfirm] = useState(false);
   const [honeypot, setHoneypot] = useState("");
 
   const reset = useCallback(() => {
@@ -53,6 +54,7 @@ export default function StrategyFormModal({
     setContactMethod("");
     setGoal("");
     setConsent(false);
+    setAcuteConfirm(false);
     setHoneypot("");
     submittingRef.current = false;
   }, []);
@@ -99,6 +101,10 @@ export default function StrategyFormModal({
         setError(lead.errors.consent);
         return;
       }
+      if (!acuteConfirm) {
+        setError(lead.errors.acute);
+        return;
+      }
 
       submittingRef.current = true;
       setStatus("sending");
@@ -115,6 +121,7 @@ export default function StrategyFormModal({
             contactMethod,
             goal: goal.trim(),
             consent: true,
+            acuteConfirm: true,
           }),
         });
 
@@ -139,7 +146,17 @@ export default function StrategyFormModal({
         track("strategy_lead_error");
       }
     },
-    [name, contact, contactMethod, goal, consent, honeypot, lead.errors, status],
+    [
+      name,
+      contact,
+      contactMethod,
+      goal,
+      consent,
+      acuteConfirm,
+      honeypot,
+      lead.errors,
+      status,
+    ],
   );
 
   if (!open) return null;
@@ -282,6 +299,30 @@ export default function StrategyFormModal({
                 />
               </div>
 
+              <label className="st-consent st-consent--acute">
+                <input
+                  type="checkbox"
+                  checked={acuteConfirm}
+                  onChange={(e) => setAcuteConfirm(e.target.checked)}
+                  disabled={status === "sending"}
+                  required
+                />
+                <span>
+                  {lead.acuteCheckbox}
+                  {" · "}
+                  <Link
+                    href={STRATEGY_PRODUCT.ofertaConsultUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {lead.acuteOfertaLink}
+                  </Link>
+                </span>
+              </label>
+              {!acuteConfirm ? (
+                <p className="st-consent-hint">{lead.acuteHint}</p>
+              ) : null}
+
               <label className="st-consent">
                 <input
                   type="checkbox"
@@ -302,6 +343,14 @@ export default function StrategyFormModal({
                   >
                     {lead.consentPersonal}
                   </Link>
+                  {" · "}
+                  <Link
+                    href={STRATEGY_PRODUCT.ofertaConsultUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {lead.acuteOfertaLink}
+                  </Link>
                 </span>
               </label>
 
@@ -314,7 +363,7 @@ export default function StrategyFormModal({
               <button
                 type="submit"
                 className="st-btn st-btn--primary st-btn--hero"
-                disabled={status === "sending"}
+                disabled={status === "sending" || !consent || !acuteConfirm}
               >
                 {status === "sending" ? lead.sending : lead.submit}
               </button>

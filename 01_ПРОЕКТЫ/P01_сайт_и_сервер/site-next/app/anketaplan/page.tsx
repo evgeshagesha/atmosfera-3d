@@ -7,15 +7,16 @@ import "./anketaplan.css";
 const TITLE = "Анкета для полноценного месячного плана";
 const DESCRIPTION =
   "Конфиденциальная анкета клиента для персональной стратегии тела: здоровье, движение, сон, питание и реальные условия плана.";
+const CANONICAL = "https://eg.egoshev.ru/anketaplan";
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: "/anketaplan" },
+  alternates: { canonical: CANONICAL },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: "/anketaplan",
+    url: CANONICAL,
     type: "website",
     locale: "ru_RU",
     siteName: "Евгений Гошев | Атмосфера 3D",

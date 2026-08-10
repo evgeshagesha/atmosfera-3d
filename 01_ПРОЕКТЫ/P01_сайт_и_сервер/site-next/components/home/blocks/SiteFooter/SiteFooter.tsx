@@ -12,6 +12,7 @@ const FOOTER_LINKS = [
   { href: "/policy", label: "Политика конфиденциальности" },
   { href: "/personal", label: "Согласие на обработку персональных данных" },
   { href: "/oferta", label: "Публичная оферта" },
+  { href: "/oferta-consult", label: "Оферта консультации / стратегии" },
 ] as const;
 
 function StyleTag({ css }: { css: string }) {

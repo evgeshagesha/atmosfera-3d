@@ -53,9 +53,9 @@ export const FORMATS_SECTION_CSS = `
 }
 .eg-formats__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 280px));
+  grid-template-columns: repeat(2, minmax(0, 420px));
   justify-content: center;
-  gap: 20px;
+  gap: 22px;
   width: 100%;
 }
 .eg-formats__card {
@@ -173,51 +173,80 @@ export const FORMATS_SECTION_CSS = `
   transform: translateY(-1px);
   color: #000 !important;
 }
-/* Entry card «Начни отсюда» — brighter gray glow on the CTA */
+/* Featured strategy card — bronze premium frame (not neon) */
 .eg-formats__card--featured {
+  transform: scale(1.015);
+  z-index: 1;
   box-shadow:
-    0 0 0 1px rgba(220, 224, 230, 0.42),
-    0 0 42px rgba(200, 210, 220, 0.22),
-    0 18px 36px -22px rgba(0, 0, 0, 0.85);
+    0 0 0 1.5px rgba(197, 164, 126, 0.55),
+    0 0 36px rgba(142, 110, 77, 0.28),
+    0 0 64px rgba(142, 110, 77, 0.12),
+    0 20px 40px -22px rgba(0, 0, 0, 0.9);
 }
 .eg-formats__card--featured:hover {
+  transform: translateY(-3px) scale(1.02);
   box-shadow:
-    0 0 0 1px rgba(235, 240, 245, 0.55),
-    0 0 56px rgba(210, 220, 230, 0.32),
-    0 22px 44px -20px rgba(0, 0, 0, 0.9);
+    0 0 0 1.5px rgba(212, 180, 140, 0.7),
+    0 0 48px rgba(166, 130, 90, 0.36),
+    0 0 72px rgba(142, 110, 77, 0.18),
+    0 24px 48px -20px rgba(0, 0, 0, 0.92);
+}
+.eg-formats__badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: none;
+}
+.eg-formats__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1a140f;
+  background: linear-gradient(135deg, #c5a47e 0%, #e0c49a 50%, #b89268 100%);
+  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.7);
 }
 .eg-formats__cta--glow {
-  background: linear-gradient(180deg, #f4f6f8 0%, #d8dde4 100%);
-  color: #0a0c0f !important;
+  background: linear-gradient(180deg, #e8d4b8 0%, #c5a47e 100%);
+  color: #1a140f !important;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.55),
-    0 0 22px rgba(210, 220, 230, 0.75),
-    0 0 48px rgba(180, 195, 210, 0.45),
+    0 0 0 1px rgba(232, 212, 184, 0.55),
+    0 0 22px rgba(197, 164, 126, 0.45),
+    0 0 40px rgba(142, 110, 77, 0.25),
     0 10px 24px -10px rgba(0, 0, 0, 0.75);
-  animation: eg-formats-cta-pulse 2.6s ease-in-out infinite;
+  animation: eg-formats-cta-pulse 2.8s ease-in-out infinite;
 }
 .eg-formats__cta--glow:hover {
-  color: #000 !important;
+  color: #0a0806 !important;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.7),
-    0 0 28px rgba(230, 235, 240, 0.9),
-    0 0 60px rgba(200, 210, 220, 0.55),
+    0 0 0 1px rgba(240, 220, 190, 0.7),
+    0 0 28px rgba(212, 180, 140, 0.6),
+    0 0 52px rgba(166, 130, 90, 0.35),
     0 12px 28px -10px rgba(0, 0, 0, 0.8);
 }
 @keyframes eg-formats-cta-pulse {
   0%,
   100% {
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.5),
-      0 0 18px rgba(200, 210, 220, 0.55),
-      0 0 40px rgba(170, 185, 200, 0.35),
+      0 0 0 1px rgba(232, 212, 184, 0.45),
+      0 0 18px rgba(197, 164, 126, 0.35),
+      0 0 36px rgba(142, 110, 77, 0.18),
       0 10px 24px -10px rgba(0, 0, 0, 0.75);
   }
   50% {
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.75),
-      0 0 28px rgba(230, 235, 240, 0.85),
-      0 0 58px rgba(200, 210, 220, 0.55),
+      0 0 0 1px rgba(240, 220, 190, 0.7),
+      0 0 26px rgba(212, 180, 140, 0.55),
+      0 0 48px rgba(166, 130, 90, 0.3),
       0 10px 24px -10px rgba(0, 0, 0, 0.75);
   }
 }
@@ -231,7 +260,7 @@ export const FORMATS_SECTION_CSS = `
 }
 @media (min-width: 641px) and (max-width: 899px) {
   .eg-formats__grid {
-    grid-template-columns: repeat(2, minmax(0, 280px));
+    grid-template-columns: repeat(2, minmax(0, 320px));
   }
 }
 @media (max-width: 640px) {
@@ -303,7 +332,11 @@ export const FORMATS_SECTION_CSS = `
     animation: none !important;
   }
   .eg-formats__card:hover,
+  .eg-formats__card--featured:hover,
   .eg-formats__cta:hover {
+    transform: none !important;
+  }
+  .eg-formats__card--featured {
     transform: none !important;
   }
   .eg-formats__card:hover::after {
