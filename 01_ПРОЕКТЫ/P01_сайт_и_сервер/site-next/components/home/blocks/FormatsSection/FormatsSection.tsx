@@ -9,8 +9,10 @@ type FormatCard = {
   cta: string;
   href: string;
   image: string;
-  /** Emphasized bestseller frame. */
+  /** Emphasized bestseller frame (gold / bronze). */
   featured?: boolean;
+  /** Club accent (cyan / blue). */
+  club?: boolean;
   /** Keep title on one line (club card). */
   titleNowrap?: boolean;
   badges?: string[];
@@ -18,8 +20,7 @@ type FormatCard = {
 
 /**
  * Home formats — exactly 4 cards, 2×2.
- * Prices Zero-Copy from 03_РЕСУРСЫ/config/products.yaml (where shown).
- * Card 1 (strategy) — no price on CTA.
+ * Prices are not shown in this section (copy only).
  */
 const FORMAT_CARDS: FormatCard[] = [
   {
@@ -37,12 +38,13 @@ const FORMAT_CARDS: FormatCard[] = [
   {
     id: "club",
     step: "2",
-    title: "Клуб «Атмосфера 3D»",
+    title: "Онлайн-клуб «Атмосфера 3D»",
     description:
       "Регулярные тренировки, программы и поддержка для системного результата",
-    cta: "Вступить | от 1 758 ₽/мес",
+    cta: "Вступить",
     href: "https://eg.egoshev.ru/club",
     image: "/assets/eg/method-pravilo.jpg",
+    club: true,
     titleNowrap: true,
   },
   {
@@ -51,7 +53,7 @@ const FORMAT_CARDS: FormatCard[] = [
     title: "Мини-курс «Дыхание / осанка»",
     description:
       "Свободное дыхание, подвижность грудной клетки и более устойчивое положение тела",
-    cta: "Начать | 1 990 ₽",
+    cta: "Начать",
     href: "https://egoshev.ru/dyhanieosanka",
     image: "/assets/eg/method-posture.jpg",
   },
@@ -61,11 +63,24 @@ const FORMAT_CARDS: FormatCard[] = [
     title: "Курс «Базовая настройка тела»",
     description:
       "Фундамент: снять скованность, вернуть подвижность и контроль в движении",
-    cta: "К программе | 9 990 ₽",
+    cta: "К программе",
     href: "https://egoshev.ru/baza",
     image: "/assets/eg/method-training.jpg",
   },
 ];
+
+function cardClassName(card: FormatCard): string {
+  const classes = ["eg-formats__card"];
+  if (card.featured) classes.push("eg-formats__card--featured");
+  if (card.club) classes.push("eg-formats__card--club");
+  return classes.join(" ");
+}
+
+function ctaClassName(card: FormatCard): string {
+  if (card.featured) return "eg-formats__cta eg-formats__cta--glow";
+  if (card.club) return "eg-formats__cta eg-formats__cta--club";
+  return "eg-formats__cta";
+}
 
 function StyleTag({ css }: { css: string }) {
   return <style dangerouslySetInnerHTML={{ __html: css }} />;
@@ -91,11 +106,7 @@ export default function FormatsSection() {
           {FORMAT_CARDS.map((card, index) => (
             <article
               key={card.id}
-              className={
-                card.featured
-                  ? "eg-formats__card eg-formats__card--featured"
-                  : "eg-formats__card"
-              }
+              className={cardClassName(card)}
               style={{
                 backgroundImage: `url('${card.image}')`,
                 ["--reveal-delay" as string]: `${index * 70}ms`,
@@ -124,14 +135,7 @@ export default function FormatsSection() {
                   {card.title}
                 </h3>
                 <p className="eg-formats__card-text">{card.description}</p>
-                <a
-                  href={card.href}
-                  className={
-                    card.featured
-                      ? "eg-formats__cta eg-formats__cta--glow"
-                      : "eg-formats__cta"
-                  }
-                >
+                <a href={card.href} className={ctaClassName(card)}>
                   {card.cta}
                 </a>
               </div>

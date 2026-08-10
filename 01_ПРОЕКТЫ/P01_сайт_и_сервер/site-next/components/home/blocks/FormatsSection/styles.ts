@@ -11,14 +11,11 @@ export const FORMATS_SECTION_CSS = `
   box-sizing: border-box;
 }
 .eg-formats {
-  /* Club cyan system (aligned with /club + ClubHero) */
+  /* Club cyan — used only by --club modifiers */
   --fmt-cyan: #59c3ff;
   --fmt-cyan-mid: #3db4ff;
   --fmt-blue: #2f6bff;
   --fmt-blue-strong: #1a56ff;
-  --fmt-cyan-soft: rgba(89, 195, 255, 0.14);
-  --fmt-cyan-glow: rgba(89, 195, 255, 0.35);
-  --fmt-blue-glow: rgba(47, 107, 255, 0.4);
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
@@ -49,7 +46,7 @@ export const FORMATS_SECTION_CSS = `
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(89, 195, 255, 0.72);
+  color: rgba(255, 255, 255, 0.66);
 }
 .eg-formats__title {
   margin: 0;
@@ -79,8 +76,8 @@ export const FORMATS_SECTION_CSS = `
   display: flex;
   align-items: flex-end;
   box-shadow:
-    0 0 0 1px rgba(89, 195, 255, 0.22),
-    0 0 28px rgba(47, 107, 255, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 0 28px rgba(255, 255, 255, 0.08),
     0 18px 36px -22px rgba(0, 0, 0, 0.85);
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease;
 }
@@ -99,8 +96,8 @@ export const FORMATS_SECTION_CSS = `
 .eg-formats__card:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 0 0 1px rgba(89, 195, 255, 0.4),
-    0 0 36px rgba(61, 180, 255, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.28),
+    0 0 36px rgba(255, 255, 255, 0.14),
     0 22px 44px -20px rgba(0, 0, 0, 0.9);
 }
 .eg-formats__card:hover::after {
@@ -177,8 +174,8 @@ export const FORMATS_SECTION_CSS = `
   width: 100%;
   padding: 11px 14px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--fmt-blue-strong), var(--fmt-blue));
-  color: #fff !important;
+  background: #fff;
+  color: #111 !important;
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -186,29 +183,21 @@ export const FORMATS_SECTION_CSS = `
   text-decoration: none !important;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  box-shadow:
-    0 0 0 1px rgba(89, 195, 255, 0.35),
-    0 0 18px rgba(47, 107, 255, 0.28),
-    0 8px 20px -10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.7);
 }
 .eg-formats__cta:hover {
   transform: translateY(-1px);
-  filter: brightness(1.08);
-  color: #fff !important;
-  box-shadow:
-    0 0 0 1px rgba(89, 195, 255, 0.55),
-    0 0 26px rgba(61, 180, 255, 0.4),
-    0 10px 24px -10px rgba(0, 0, 0, 0.75);
+  color: #000 !important;
 }
-/* Featured strategy card — cyan premium frame (club blue system) */
+/* Featured strategy card — bronze / gold premium frame */
 .eg-formats__card--featured {
   transform: scale(1.015);
   z-index: 1;
   background-position: 42% 12%;
   box-shadow:
-    0 0 0 1.5px rgba(89, 195, 255, 0.55),
-    0 0 36px rgba(61, 180, 255, 0.28),
-    0 0 64px rgba(47, 107, 255, 0.16),
+    0 0 0 1.5px rgba(197, 164, 126, 0.55),
+    0 0 36px rgba(142, 110, 77, 0.28),
+    0 0 64px rgba(142, 110, 77, 0.12),
     0 20px 40px -22px rgba(0, 0, 0, 0.9);
 }
 .eg-formats__card--featured::after {
@@ -217,10 +206,23 @@ export const FORMATS_SECTION_CSS = `
 .eg-formats__card--featured:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow:
-    0 0 0 1.5px rgba(122, 212, 255, 0.7),
-    0 0 48px rgba(89, 195, 255, 0.36),
-    0 0 72px rgba(47, 107, 255, 0.22),
+    0 0 0 1.5px rgba(212, 180, 140, 0.7),
+    0 0 48px rgba(166, 130, 90, 0.36),
+    0 0 72px rgba(142, 110, 77, 0.18),
     0 24px 48px -20px rgba(0, 0, 0, 0.92);
+}
+/* Club card — cyan / blue accent only */
+.eg-formats__card--club {
+  box-shadow:
+    0 0 0 1px rgba(89, 195, 255, 0.32),
+    0 0 28px rgba(47, 107, 255, 0.14),
+    0 18px 36px -22px rgba(0, 0, 0, 0.85);
+}
+.eg-formats__card--club:hover {
+  box-shadow:
+    0 0 0 1px rgba(89, 195, 255, 0.5),
+    0 0 36px rgba(61, 180, 255, 0.24),
+    0 22px 44px -20px rgba(0, 0, 0, 0.9);
 }
 .eg-formats__badges {
   position: absolute;
@@ -247,18 +249,35 @@ export const FORMATS_SECTION_CSS = `
   line-height: 1.2;
   text-transform: uppercase;
   white-space: nowrap;
-  color: #041018;
+  color: #1a140f;
   background: linear-gradient(
     135deg,
-    rgba(122, 212, 255, 0.95) 0%,
-    rgba(89, 195, 255, 0.95) 45%,
-    rgba(61, 180, 255, 0.92) 100%
+    rgba(197, 164, 126, 0.92) 0%,
+    rgba(224, 196, 154, 0.95) 50%,
+    rgba(184, 146, 104, 0.9) 100%
   );
-  box-shadow:
-    0 0 0 1px rgba(89, 195, 255, 0.35),
-    0 3px 10px -6px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 3px 10px -6px rgba(0, 0, 0, 0.65);
 }
 .eg-formats__cta--glow {
+  background: linear-gradient(180deg, #e8d4b8 0%, #c5a47e 100%);
+  color: #1a140f !important;
+  box-shadow:
+    0 0 0 1px rgba(232, 212, 184, 0.55),
+    0 0 22px rgba(197, 164, 126, 0.45),
+    0 0 40px rgba(142, 110, 77, 0.25),
+    0 10px 24px -10px rgba(0, 0, 0, 0.75);
+  animation: eg-formats-cta-pulse 2.8s ease-in-out infinite;
+}
+.eg-formats__cta--glow:hover {
+  color: #0a0806 !important;
+  filter: none;
+  box-shadow:
+    0 0 0 1px rgba(240, 220, 190, 0.7),
+    0 0 28px rgba(212, 180, 140, 0.6),
+    0 0 52px rgba(166, 130, 90, 0.35),
+    0 12px 28px -10px rgba(0, 0, 0, 0.8);
+}
+.eg-formats__cta--club {
   background: linear-gradient(135deg, var(--fmt-blue-strong) 0%, var(--fmt-blue) 45%, var(--fmt-cyan-mid) 100%);
   color: #fff !important;
   box-shadow:
@@ -266,9 +285,8 @@ export const FORMATS_SECTION_CSS = `
     0 0 22px rgba(89, 195, 255, 0.45),
     0 0 40px rgba(47, 107, 255, 0.3),
     0 10px 24px -10px rgba(0, 0, 0, 0.75);
-  animation: eg-formats-cta-pulse 2.8s ease-in-out infinite;
 }
-.eg-formats__cta--glow:hover {
+.eg-formats__cta--club:hover {
   color: #fff !important;
   filter: brightness(1.1);
   box-shadow:
@@ -281,16 +299,16 @@ export const FORMATS_SECTION_CSS = `
   0%,
   100% {
     box-shadow:
-      0 0 0 1px rgba(89, 195, 255, 0.45),
-      0 0 18px rgba(61, 180, 255, 0.35),
-      0 0 36px rgba(47, 107, 255, 0.2),
+      0 0 0 1px rgba(232, 212, 184, 0.45),
+      0 0 18px rgba(197, 164, 126, 0.35),
+      0 0 36px rgba(142, 110, 77, 0.18),
       0 10px 24px -10px rgba(0, 0, 0, 0.75);
   }
   50% {
     box-shadow:
-      0 0 0 1px rgba(122, 212, 255, 0.7),
-      0 0 26px rgba(89, 195, 255, 0.55),
-      0 0 48px rgba(47, 107, 255, 0.35),
+      0 0 0 1px rgba(240, 220, 190, 0.7),
+      0 0 26px rgba(212, 180, 140, 0.55),
+      0 0 48px rgba(166, 130, 90, 0.3),
       0 10px 24px -10px rgba(0, 0, 0, 0.75);
   }
 }
@@ -371,8 +389,11 @@ export const FORMATS_SECTION_CSS = `
   }
 }
 .eg-formats__cta:focus-visible {
-  outline: 2px solid var(--fmt-cyan);
+  outline: 2px solid #fff;
   outline-offset: 3px;
+}
+.eg-formats__cta--club:focus-visible {
+  outline-color: var(--fmt-cyan);
 }
 @media (max-width: 360px) {
   .eg-formats__title {
@@ -403,6 +424,7 @@ export const FORMATS_SECTION_CSS = `
   }
   .eg-formats__card:hover,
   .eg-formats__card--featured:hover,
+  .eg-formats__card--club:hover,
   .eg-formats__cta:hover {
     transform: none !important;
   }
