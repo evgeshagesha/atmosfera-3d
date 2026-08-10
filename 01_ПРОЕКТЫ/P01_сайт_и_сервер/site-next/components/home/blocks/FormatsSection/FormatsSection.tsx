@@ -1,7 +1,4 @@
-import {
-  CLUB_SALES_CLOSED_LABEL,
-  CLUB_SALES_OPEN,
-} from "@/lib/club/landing-content";
+import { CLUB_SALES_OPEN } from "@/lib/club/landing-content";
 
 import FormatsReveal from "./FormatsReveal";
 import { FORMATS_SECTION_CSS } from "./styles";
@@ -147,7 +144,7 @@ export default function FormatsSection() {
                     aria-disabled="true"
                     title="Набор временно закрыт"
                   >
-                    {CLUB_SALES_CLOSED_LABEL}
+                    {card.cta}
                   </span>
                 ) : (
                   <a href={card.href} className={ctaClassName(card)}>

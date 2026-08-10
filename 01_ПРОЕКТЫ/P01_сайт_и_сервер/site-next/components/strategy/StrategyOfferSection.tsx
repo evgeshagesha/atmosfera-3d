@@ -17,7 +17,7 @@ export default function StrategyOfferSection({ onCta }: Props) {
     <section id={offer.id} className="st-offer" aria-labelledby="st-offer-title">
       <div className="st-bleed st-offer__shell">
         <header className="st-offer__intro">
-          <p className="st-offer__eyebrow">{offer.eyebrow}</p>
+          {offer.eyebrow ? <p className="st-offer__eyebrow">{offer.eyebrow}</p> : null}
           <h2 id="st-offer-title" className="st-offer__title">
             <span className="st-offer__title-line">{offer.titleLine1}</span>
             <span className="st-offer__title-accent">{offer.titleLine2}</span>
@@ -102,8 +102,18 @@ export default function StrategyOfferSection({ onCta }: Props) {
         </aside>
 
         <p className="st-offer__footer">
-          <span>{offer.footerLine}</span>
-          <strong>{offer.footerAccent}</strong>
+          <span className="st-offer__footer-line">
+            <span>{offer.footerLine}</span>
+            <Image
+              className="st-offer__footer-mark"
+              src={p.logoImage}
+              alt=""
+              width={28}
+              height={28}
+              aria-hidden="true"
+            />
+            <strong>{offer.footerAccent}</strong>
+          </span>
         </p>
       </div>
     </section>

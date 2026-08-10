@@ -8,7 +8,6 @@ import StrategyFormModal from "@/components/strategy/StrategyFormModal";
 import StrategyHowSection from "@/components/strategy/StrategyHowSection";
 import StrategyIcon from "@/components/strategy/StrategyIcon";
 import StrategyOfferSection from "@/components/strategy/StrategyOfferSection";
-import StrategyPlanSection from "@/components/strategy/StrategyPlanSection";
 import { STRATEGY_CONTENT, STRATEGY_PRODUCT } from "@/lib/strategy/content";
 
 function track(event: string) {
@@ -18,6 +17,19 @@ function track(event: string) {
   } catch {
     /* noop */
   }
+}
+
+function EgMark({ className }: { className?: string }) {
+  return (
+    <Image
+      className={className}
+      src={STRATEGY_PRODUCT.logoImage}
+      alt=""
+      width={28}
+      height={28}
+      aria-hidden="true"
+    />
+  );
 }
 
 export default function StrategyLanding() {
@@ -32,7 +44,7 @@ export default function StrategyLanding() {
     setModalOpen(true);
   }, []);
 
-  const scrollToStep4 = useCallback(() => {
+  const scrollToOffer = useCallback(() => {
     track("strategy_hero_cta_scroll");
     setMenuOpen(false);
     const el = document.getElementById(c.offer.id);
@@ -75,29 +87,22 @@ export default function StrategyLanding() {
         {menuOpen ? (
           <nav id="st-mobile-menu" className="st-mobile-menu" aria-label="Меню">
             <div className="st-bleed st-mobile-menu__inner">
-              <button type="button" className="st-mobile-menu__link" onClick={scrollToStep4}>
+              <button type="button" className="st-mobile-menu__link" onClick={scrollToOffer}>
                 {c.hero.primaryCta}
               </button>
-              <a
-                className="st-mobile-menu__link"
-                href={`#${c.plan.id}`}
-                onClick={() => setMenuOpen(false)}
-              >
-                Шаг 2
-              </a>
               <a
                 className="st-mobile-menu__link"
                 href={`#${c.how.id}`}
                 onClick={() => setMenuOpen(false)}
               >
-                Шаг 3
+                Как это проходит
               </a>
               <a
                 className="st-mobile-menu__link"
                 href={`#${c.offer.id}`}
                 onClick={() => setMenuOpen(false)}
               >
-                Шаг 4
+                Начать путь
               </a>
               <Link className="st-mobile-menu__link" href="/" onClick={() => setMenuOpen(false)}>
                 Главная
@@ -135,24 +140,12 @@ export default function StrategyLanding() {
                 ))}
               </ul>
 
-              <div className="st-hero__offer">
-                <div className="st-price">
-                  <span className="st-price__label">{c.hero.priceLabel}</span>
-                  <div className="st-price__row">
-                    <span className="st-price__main">{p.priceLabel}</span>
-                    <span className="st-price__divider" aria-hidden="true" />
-                    <span className="st-price__day">
-                      <span className="st-price__day-value">{p.pricePerDayLabel}</span>
-                      <span className="st-price__day-suffix">{c.hero.pricePerDaySuffix}</span>
-                    </span>
-                  </div>
-                </div>
-
+              <div className="st-hero__offer st-hero__offer--cta-only">
                 <div className="st-hero__cta-row">
                   <button
                     type="button"
                     className="st-btn st-btn--primary st-btn--hero"
-                    onClick={scrollToStep4}
+                    onClick={scrollToOffer}
                   >
                     {c.hero.primaryCta}
                   </button>
@@ -191,14 +184,19 @@ export default function StrategyLanding() {
           </div>
         </section>
 
-        <StrategyPlanSection />
         <StrategyHowSection />
         <StrategyOfferSection onCta={openLeadModal} />
       </main>
 
       <footer className="st-footer">
         <div className="st-container st-footer__inner">
-          <p>{c.footer.note}</p>
+          <p className="st-footer__pillars" aria-label={c.footer.note}>
+            <span>Движение</span>
+            <EgMark className="st-footer__mark" />
+            <span>Дыхание</span>
+            <EgMark className="st-footer__mark" />
+            <span>Долголетие</span>
+          </p>
           <p className="st-footer__phrase">{c.footer.brandPhrase}</p>
           <nav className="st-footer__legal" aria-label="Юридическая информация">
             {c.footer.links.map((link, i) => (

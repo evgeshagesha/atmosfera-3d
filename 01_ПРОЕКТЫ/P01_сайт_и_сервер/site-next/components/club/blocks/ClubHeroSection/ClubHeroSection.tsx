@@ -207,7 +207,8 @@ export default function ClubHeroSection() {
                   aria-disabled="true"
                   title="Набор временно закрыт"
                 >
-                  Набор закрыт
+                  Войти в клуб
+                  <span aria-hidden="true">→</span>
                 </span>
               )}
               <a className="club-hero__btn club-hero__btn--ghost" href="#about">

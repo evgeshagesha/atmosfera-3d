@@ -175,10 +175,7 @@ export default function ClubForYouSection() {
                 />
               </div>
 
-              <ClubSalesLink
-                className="club-foryou__cta"
-                keepChildrenWhenClosed
-              >
+              <ClubSalesLink className="club-foryou__cta">
                 <span className="club-foryou__num">07</span>
                 <strong>Это про меня</strong>
                 <span className="club-foryou__cta-arrow" aria-hidden="true">
@@ -208,7 +205,6 @@ export default function ClubForYouSection() {
               ))}
               <ClubSalesLink
                 className="club-foryou__square club-foryou__square--cta"
-                keepChildrenWhenClosed
                 data-foryou-card=""
               >
                 <span className="club-foryou__num">07</span>

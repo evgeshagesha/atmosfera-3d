@@ -17,7 +17,7 @@ export default function StrategyHowSection() {
           <h2 id="st-how-title" className="st-how__title">
             {how.title}
           </h2>
-          <p className="st-how__subtitle">{how.subtitle}</p>
+          {how.subtitle ? <p className="st-how__subtitle">{how.subtitle}</p> : null}
         </header>
 
         <ol className="st-how-steps">

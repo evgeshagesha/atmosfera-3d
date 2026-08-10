@@ -73,7 +73,7 @@ export const STRATEGY_PRODUCT = {
 export const STRATEGY_CONTENT = {
   brand: {
     name: "EG",
-    pillars: "Движение. Дыхание. Дисциплина.",
+    pillars: "Движение · Дыхание · Долголетие.",
     brandPhrase: "Тебе нужен только ты",
     studio: "Атмосфера 3D",
   },
@@ -292,10 +292,10 @@ export const STRATEGY_CONTENT = {
   },
 
   how: {
-    id: "step3",
-    eyebrow: "ШАГ 3",
-    title: "КАК ЭТО ПРОХОДИТ",
-    subtitle: "ВСЕГО 3 ШАГА ОТ АНКЕТЫ ДО ВАШЕГО ПЛАНА НА 30 ДНЕЙ",
+    id: "how",
+    eyebrow: "КАК ЭТО ПРОХОДИТ",
+    title: "ОТ АНКЕТЫ ДО ВАШЕГО ПЛАНА",
+    subtitle: "ВСЕГО 3 ШАГА ДО СИСТЕМЫ НА 30 ДНЕЙ",
     steps: [
       {
         num: "01",
@@ -332,8 +332,8 @@ export const STRATEGY_CONTENT = {
   },
 
   offer: {
-    id: "step4",
-    eyebrow: "ШАГ 4",
+    id: "start",
+    eyebrow: "",
     titleLine1: "Начни менять",
     titleLine2: "свою жизнь прямо сейчас",
     body: "Вы получаете не просто план. Вы получаете систему, которая перестроит ваше тело, привычки и состояние на новый уровень.",
@@ -460,7 +460,7 @@ export const STRATEGY_CONTENT = {
   },
 
   footer: {
-    note: "Движение. Дыхание. Дисциплина.",
+    note: "Движение · Дыхание · Долголетие",
     brandPhrase: "Тебе нужен только ты",
     links: [
       { href: "/policy", label: "Политика конфиденциальности" },

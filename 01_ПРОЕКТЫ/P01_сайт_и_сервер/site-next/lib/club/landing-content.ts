@@ -7,7 +7,7 @@
  */
 export const CLUB_SALES_OPEN = false;
 
-/** Label shown on disabled join/pay CTAs while sales are closed. */
+/** Optional label if a surface needs an explicit closed state copy. Default CTAs keep their usual labels. */
 export const CLUB_SALES_CLOSED_LABEL = "Набор закрыт";
 
 export const CLUB_TRIBUTE_TG =

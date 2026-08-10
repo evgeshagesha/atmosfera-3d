@@ -13,7 +13,6 @@ import {
   CLUB_PILLARS,
   CLUB_PRICE_FROM,
   CLUB_ROADBLOCKS,
-  CLUB_SALES_CLOSED_LABEL,
   CLUB_SALES_OPEN,
   CLUB_STATS,
   CLUB_STEPS,
@@ -66,7 +65,7 @@ function CtaLink({
         aria-disabled="true"
         title="Набор временно закрыт"
       >
-        <span>{CLUB_SALES_CLOSED_LABEL}</span>
+        <span>{children}</span>
       </span>
     );
   }

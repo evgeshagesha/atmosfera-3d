@@ -2,33 +2,23 @@
 
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 
-import {
-  CLUB_SALES_CLOSED_LABEL,
-  CLUB_SALES_OPEN,
-  CLUB_TRIBUTE_TG,
-} from "@/lib/club/landing-content";
+import { CLUB_SALES_OPEN, CLUB_TRIBUTE_TG } from "@/lib/club/landing-content";
 
 type Props = {
   className?: string;
   children: ReactNode;
   /** Payment URL when sales are open. Defaults to Tribute TG. */
   href?: string;
-  /** Label when sales are closed. Defaults to CLUB_SALES_CLOSED_LABEL. */
-  closedLabel?: ReactNode;
-  /** Keep children as-is when closed (layout-heavy CTAs). */
-  keepChildrenWhenClosed?: boolean;
 } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children" | "className">;
 
 /**
  * Club join / pay CTA. Honours CLUB_SALES_OPEN from landing-content.
- * When closed: non-navigating, visually disabled, no Tribute / checkout.
+ * When closed: keeps the usual label, non-navigating, visually muted.
  */
 export default function ClubSalesLink({
   className,
   children,
   href = CLUB_TRIBUTE_TG,
-  closedLabel = CLUB_SALES_CLOSED_LABEL,
-  keepChildrenWhenClosed = false,
   ...rest
 }: Props) {
   if (CLUB_SALES_OPEN) {
@@ -55,7 +45,7 @@ export default function ClubSalesLink({
       title="Набор временно закрыт"
       {...closedRest}
     >
-      {keepChildrenWhenClosed ? children : closedLabel}
+      {children}
     </span>
   );
 }
