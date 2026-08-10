@@ -2,11 +2,18 @@
 
 import { useEffect } from "react";
 
-const TELEGRAM_URL = "https://t.me/EGoshev";
+const SUBMIT_ENDPOINT = "/api/anketa/submit";
+const LS_KEY = "eg_anketa_intake_v1";
+const SITE_URL = "https://eg.egoshev.ru";
 
 function value(id: string) {
   const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
   return el?.value.trim() ?? "";
+}
+
+function setValue(id: string, next: string) {
+  const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+  if (el) el.value = next;
 }
 
 function groupRadio(name: string) {
@@ -20,6 +27,31 @@ function groupChecked(dataName: string) {
   ).map((el) => el.value);
 }
 
+function setCheckedByValues(dataName: string, values: string[]) {
+  const set = new Set(values);
+  document.querySelectorAll<HTMLInputElement>(`input[data-name="${dataName}"]`).forEach((el) => {
+    el.checked = set.has(el.value);
+    el.closest(".pl")?.classList.toggle("ck", el.checked);
+    el.closest(".rcd")?.classList.toggle("ck", el.checked);
+  });
+}
+
+function setRadio(name: string, next: string) {
+  document.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`).forEach((el) => {
+    el.checked = el.value === next;
+    el.closest(".pl")?.classList.toggle("ck", el.checked);
+    el.closest(".rcd")?.classList.toggle("ck", el.checked);
+  });
+}
+
+type StoredDraft = {
+  fields?: Record<string, string>;
+  radios?: Record<string, string>;
+  checks?: Record<string, string[]>;
+  zones?: string[];
+  consents?: Record<string, boolean>;
+};
+
 export default function AnketaFormClient() {
   useEffect(() => {
     const form = document.getElementById("bf") as HTMLFormElement | null;
@@ -27,6 +59,22 @@ export default function AnketaFormClient() {
 
     const zones = new Set<string>();
     const cleanups: Array<() => void> = [];
+    let submitLocked = false;
+    let saveTimer: ReturnType<typeof setTimeout> | null = null;
+
+    // Honeypot (not in exported HTML)
+    if (!form.querySelector('[name="company_website"]')) {
+      const hp = document.createElement("input");
+      hp.type = "text";
+      hp.name = "company_website";
+      hp.id = "company_website";
+      hp.tabIndex = -1;
+      hp.autocomplete = "off";
+      hp.setAttribute("aria-hidden", "true");
+      hp.style.cssText =
+        "position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none";
+      form.prepend(hp);
+    }
 
     const onScroll = () => {
       const el = document.documentElement;
@@ -50,6 +98,7 @@ export default function AnketaFormClient() {
         });
         input.checked = true;
         card.classList.add("ck");
+        schedulePersist();
       };
       card.addEventListener("click", onClick);
       cleanups.push(() => card.removeEventListener("click", onClick));
@@ -74,9 +123,13 @@ export default function AnketaFormClient() {
           input.checked = !input.checked;
           pill.classList.toggle("ck", input.checked);
         }
+        schedulePersist();
       };
 
-      const onChange = () => pill.classList.toggle("ck", input.checked);
+      const onChange = () => {
+        pill.classList.toggle("ck", input.checked);
+        schedulePersist();
+      };
 
       pill.addEventListener("click", onClick);
       input.addEventListener("change", onChange);
@@ -110,6 +163,7 @@ export default function AnketaFormClient() {
           zone.classList.add("sel");
         }
         updateZones();
+        schedulePersist();
       };
       zone.addEventListener("click", onClick);
       cleanups.push(() => zone.removeEventListener("click", onClick));
@@ -122,10 +176,44 @@ export default function AnketaFormClient() {
 
       const onInput = () => {
         display.textContent = input.value;
+        schedulePersist();
       };
       input.addEventListener("input", onInput);
       cleanups.push(() => input.removeEventListener("input", onInput));
     }
+
+    const textFieldIds = [
+      "name",
+      "age",
+      "height",
+      "weight",
+      "city",
+      "phone",
+      "email",
+      "request",
+      "pdesc",
+      "inj",
+      "surg",
+      "chr",
+      "med",
+      "trd",
+      "post",
+      "act",
+      "prof",
+      "hab",
+      "bl",
+      "g3",
+      "g12",
+      "ex",
+      "qm",
+      "pl",
+      "st",
+      "cm",
+    ] as const;
+
+    const radioNames = ["format", "da", "ps", "br", "sit", "sl", "slh", "et", "wt", "wh", "bg", "wn"] as const;
+    const checkNames = ["msg", "src", "spec", "tr", "ft", "sp"] as const;
+    const requiredConsentIds = ["l1", "l2", "l3", "l4"] as const;
 
     const buildText = () => {
       const lines: string[] = [];
@@ -195,6 +283,104 @@ export default function AnketaFormClient() {
       return lines.join("\n");
     };
 
+    const serializeDraft = (): StoredDraft => {
+      const fields: Record<string, string> = {};
+      for (const id of textFieldIds) {
+        const v = value(id);
+        if (v) fields[id] = v;
+      }
+      const radios: Record<string, string> = {};
+      for (const name of radioNames) {
+        const v = groupRadio(name);
+        if (v) radios[name] = v;
+      }
+      const checks: Record<string, string[]> = {};
+      for (const name of checkNames) {
+        const v = groupChecked(name);
+        if (v.length) checks[name] = v;
+      }
+      const consents: Record<string, boolean> = {};
+      for (const id of [...requiredConsentIds, "l5"] as const) {
+        consents[id] = Boolean(
+          (document.getElementById(id) as HTMLInputElement | null)?.checked
+        );
+      }
+      return {
+        fields,
+        radios,
+        checks,
+        zones: Array.from(zones),
+        consents,
+      };
+    };
+
+    const persist = () => {
+      try {
+        localStorage.setItem(LS_KEY, JSON.stringify(serializeDraft()));
+      } catch {
+        // quota / private mode
+      }
+    };
+
+    const schedulePersist = () => {
+      if (saveTimer) clearTimeout(saveTimer);
+      saveTimer = setTimeout(persist, 400);
+    };
+
+    const restoreDraft = () => {
+      try {
+        const raw = localStorage.getItem(LS_KEY);
+        if (!raw) return;
+        const draft = JSON.parse(raw) as StoredDraft;
+        if (draft.fields) {
+          for (const [id, v] of Object.entries(draft.fields)) {
+            setValue(id, v);
+            const display = document.getElementById(`${id}v`);
+            if (display && (id === "pl" || id === "st" || id === "cm")) {
+              display.textContent = v;
+            }
+          }
+        }
+        if (draft.radios) {
+          for (const [name, v] of Object.entries(draft.radios)) {
+            setRadio(name, v);
+          }
+        }
+        if (draft.checks) {
+          for (const [name, values] of Object.entries(draft.checks)) {
+            setCheckedByValues(name, values);
+          }
+        }
+        if (draft.zones?.length) {
+          zones.clear();
+          form.querySelectorAll<SVGElement>(".bz").forEach((zone) => {
+            const name = zone.getAttribute("data-zone");
+            if (name && draft.zones!.includes(name)) {
+              zones.add(name);
+              zone.classList.add("sel");
+            }
+          });
+          updateZones();
+        }
+        if (draft.consents) {
+          for (const [id, checked] of Object.entries(draft.consents)) {
+            const el = document.getElementById(id) as HTMLInputElement | null;
+            if (el) el.checked = checked;
+          }
+        }
+      } catch {
+        // ignore corrupt draft
+      }
+    };
+
+    const clearDraft = () => {
+      try {
+        localStorage.removeItem(LS_KEY);
+      } catch {
+        // ignore
+      }
+    };
+
     const validate = () => {
       const required = [
         { id: "name", label: "Имя" },
@@ -213,7 +399,7 @@ export default function AnketaFormClient() {
       }
       if (!groupRadio("format")) errors.push("Формат работы");
       if (!groupChecked("msg").length) errors.push("Мессенджер");
-      for (const id of ["l1", "l2", "l3", "l4"]) {
+      for (const id of requiredConsentIds) {
         if (!(document.getElementById(id) as HTMLInputElement | null)?.checked) {
           if (!errors.includes("Согласия в конце")) errors.push("Согласия в конце");
         }
@@ -249,8 +435,39 @@ export default function AnketaFormClient() {
     const copyMsg = document.getElementById("cmsg");
     const submitMsg = document.getElementById("smsg");
     const hiddenText = document.getElementById("bft") as HTMLInputElement | null;
+    const subs = form.querySelector<HTMLElement>(".subs");
 
-    const requiredConsentIds = ["l1", "l2", "l3", "l4"] as const;
+    // Normalize CTA copy to «Отправить»
+    if (submitBtn) {
+      submitBtn.textContent = "Отправить";
+      submitBtn.removeAttribute("href");
+      submitBtn.removeAttribute("target");
+      submitBtn.setAttribute("role", "button");
+      if (submitBtn.tagName === "A") {
+        (submitBtn as HTMLAnchorElement).href = "#";
+      }
+    }
+    if (subs) {
+      const lead = subs.querySelector<HTMLElement>(".subd");
+      if (lead) {
+        lead.textContent =
+          "Нажмите «Отправить» — анкета уйдёт в систему записи. Мы свяжемся и пригласим на приём.";
+      }
+    }
+
+    const setSubmitBusy = (busy: boolean) => {
+      if (!submitBtn) return;
+      if (busy) {
+        submitBtn.setAttribute("aria-busy", "true");
+        submitBtn.style.pointerEvents = "none";
+        submitBtn.style.opacity = "0.55";
+        submitBtn.textContent = "Отправляю…";
+      } else {
+        submitBtn.removeAttribute("aria-busy");
+        submitBtn.textContent = "Отправить";
+        syncSubmitEnabled();
+      }
+    };
 
     const syncSubmitEnabled = () => {
       const ok = requiredConsentIds.every(
@@ -258,8 +475,10 @@ export default function AnketaFormClient() {
       );
       if (!submitBtn) return;
       submitBtn.setAttribute("aria-disabled", ok ? "false" : "true");
-      submitBtn.style.pointerEvents = ok ? "" : "none";
-      submitBtn.style.opacity = ok ? "" : "0.45";
+      if (!submitLocked) {
+        submitBtn.style.pointerEvents = ok ? "" : "none";
+        submitBtn.style.opacity = ok ? "" : "0.45";
+      }
       if (!ok) {
         submitBtn.setAttribute("title", "Отметьте обязательные согласия");
       } else {
@@ -270,10 +489,129 @@ export default function AnketaFormClient() {
     for (const id of requiredConsentIds) {
       const el = document.getElementById(id);
       if (!el) continue;
-      el.addEventListener("change", syncSubmitEnabled);
-      cleanups.push(() => el.removeEventListener("change", syncSubmitEnabled));
+      const onChange = () => {
+        syncSubmitEnabled();
+        schedulePersist();
+      };
+      el.addEventListener("change", onChange);
+      cleanups.push(() => el.removeEventListener("change", onChange));
     }
+
+    const onFormInput = () => schedulePersist();
+    form.addEventListener("input", onFormInput);
+    cleanups.push(() => form.removeEventListener("input", onFormInput));
+
+    restoreDraft();
     syncSubmitEnabled();
+
+    const showError = (message: string) => {
+      if (!submitMsg) return;
+      submitMsg.className = "sm vs";
+      submitMsg.style.color = "#fca5a5";
+      submitMsg.style.background = "rgba(248,113,113,0.08)";
+      submitMsg.style.border = "1px solid rgba(248,113,113,0.28)";
+      submitMsg.innerHTML = `${message}<br><br><button type="button" class="bsec" id="anketaRetryBtn" style="margin-top:8px">Повторить отправку</button>`;
+      copyMsg?.classList.remove("vs");
+      window.setTimeout(() => submitMsg.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
+      const retry = document.getElementById("anketaRetryBtn");
+      retry?.addEventListener("click", () => {
+        void doSubmit();
+      });
+    };
+
+    const showSuccessScreen = () => {
+      const host =
+        form.closest<HTMLElement>(".cnt") ||
+        form.parentElement ||
+        document.body;
+
+      form.style.display = "none";
+      document.getElementById("anketaSuccess")?.remove();
+
+      const panel = document.createElement("div");
+      panel.id = "anketaSuccess";
+      panel.className = "subs";
+      panel.setAttribute("role", "status");
+      panel.innerHTML = `
+        <h3 style="margin-bottom:16px">Благодарю</h3>
+        <p class="subd" style="margin:0 auto 28px">Скоро мы с вами свяжемся и пригласим на приём!</p>
+        <div class="sb">
+          <a href="${SITE_URL}" class="bp" id="anketaGoSite">Перейти на сайт</a>
+        </div>
+      `;
+      host.appendChild(panel);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.setTimeout(() => panel.scrollIntoView({ behavior: "smooth", block: "center" }), 80);
+    };
+
+    const doSubmit = async () => {
+      if (submitLocked) return;
+
+      const errors = validate();
+      if (errors.length) {
+        window.alert(`Заполните обязательные поля (*):\n\n— ${errors.join("\n— ")}`);
+        return;
+      }
+      if (submitBtn?.getAttribute("aria-disabled") === "true") return;
+
+      const text = buildText();
+      if (hiddenText) hiddenText.value = text;
+
+      const honeypot =
+        (form.querySelector('[name="company_website"]') as HTMLInputElement | null)
+          ?.value?.trim() || "";
+
+      submitLocked = true;
+      setSubmitBusy(true);
+      if (submitMsg) {
+        submitMsg.className = "sm vs inf";
+        submitMsg.style.cssText = "";
+        submitMsg.textContent = "Отправляю анкету…";
+      }
+      copyMsg?.classList.remove("vs");
+      persist();
+
+      try {
+        const res = await fetch(SUBMIT_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            version: 1,
+            submittedAt: new Date().toISOString(),
+            company_website: honeypot,
+            consent: true,
+            name: value("name"),
+            phone: value("phone"),
+            email: value("email"),
+            city: value("city"),
+            format: groupRadio("format"),
+            request: value("request"),
+            contactMethods: groupChecked("msg"),
+            zones: zones.size ? Array.from(zones).join(", ") : "не отмечено",
+            whenStart: groupRadio("wn"),
+            commitment: value("cm") ? `${value("cm")}/10` : "",
+            summary: text,
+          }),
+        });
+
+        const data = (await res.json().catch(() => null)) as
+          | { ok?: boolean; error?: string; delivered?: boolean }
+          | null;
+
+        if (!res.ok || !data?.ok) {
+          throw new Error(data?.error || "delivery_failed");
+        }
+
+        clearDraft();
+        showSuccessScreen();
+      } catch {
+        showError(
+          "Не удалось отправить. Данные сохранены на этом устройстве — нажмите «Повторить отправку»."
+        );
+        submitLocked = false;
+        setSubmitBusy(false);
+      }
+    };
 
     const onCopy = async () => {
       const text = buildText();
@@ -288,28 +626,10 @@ export default function AnketaFormClient() {
       }
     };
 
-    const onSubmit = async (event: Event) => {
-      const errors = validate();
-      if (errors.length) {
-        event.preventDefault();
-        window.alert(`Заполните обязательные поля (*):\n\n— ${errors.join("\n— ")}`);
-        return;
-      }
-
+    const onSubmit = (event: Event) => {
       event.preventDefault();
-      if (submitBtn?.getAttribute("aria-disabled") === "true") return;
-      const text = buildText();
-      if (hiddenText) hiddenText.value = text;
-      await copyText(text);
-
-      if (submitMsg) {
-        submitMsg.innerHTML =
-          '✓ Анкета скопирована в буфер обмена. Открывается чат с Евгением — <strong>вставьте текст и отправьте</strong>.<br><br>Если чат не открылся автоматически — нажмите: <a href="https://t.me/EGoshev" target="_blank">→ Открыть @EGoshev</a>';
-        submitMsg.classList.add("vs");
-      }
-      copyMsg?.classList.remove("vs");
-      window.setTimeout(() => submitMsg?.scrollIntoView({ behavior: "smooth", block: "center" }), 200);
-      window.open(TELEGRAM_URL, "_blank", "noopener");
+      event.stopPropagation();
+      void doSubmit();
     };
 
     copyBtn?.addEventListener("click", onCopy);
@@ -317,6 +637,7 @@ export default function AnketaFormClient() {
     cleanups.push(() => {
       copyBtn?.removeEventListener("click", onCopy);
       submitBtn?.removeEventListener("click", onSubmit);
+      if (saveTimer) clearTimeout(saveTimer);
     });
 
     return () => {
