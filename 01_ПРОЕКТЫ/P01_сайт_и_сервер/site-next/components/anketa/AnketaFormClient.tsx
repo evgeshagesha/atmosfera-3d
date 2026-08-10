@@ -381,30 +381,142 @@ export default function AnketaFormClient() {
       }
     };
 
-    const validate = () => {
-      const required = [
-        { id: "name", label: "Имя" },
-        { id: "age", label: "Возраст" },
-        { id: "city", label: "Город" },
-        { id: "phone", label: "Телефон" },
-        { id: "request", label: "Запрос" },
-        { id: "inj", label: "Травмы" },
-        { id: "surg", label: "Операции" },
-        { id: "act", label: "Активность" },
-        { id: "g3", label: "Цель на 3 мес" },
-      ];
-      const errors: string[] = [];
-      for (const field of required) {
-        if (!value(field.id)) errors.push(field.label);
-      }
-      if (!groupRadio("format")) errors.push("Формат работы");
-      if (!groupChecked("msg").length) errors.push("Мессенджер");
-      for (const id of requiredConsentIds) {
-        if (!(document.getElementById(id) as HTMLInputElement | null)?.checked) {
-          if (!errors.includes("Согласия в конце")) errors.push("Согласия в конце");
+    type ValidationIssue = {
+      label: string;
+      kind: "field" | "group" | "consent";
+      target: HTMLElement | null;
+    };
+
+    const requiredFields = [
+      { id: "name", label: "Имя" },
+      { id: "age", label: "Возраст" },
+      { id: "city", label: "Город" },
+      { id: "phone", label: "Телефон" },
+      { id: "request", label: "Запрос" },
+      { id: "inj", label: "Травмы" },
+      { id: "surg", label: "Операции" },
+      { id: "act", label: "Активность" },
+      { id: "g3", label: "Цель на 3 мес" },
+    ] as const;
+
+    const collectIssues = (): ValidationIssue[] => {
+      const issues: ValidationIssue[] = [];
+      for (const field of requiredFields) {
+        if (!value(field.id)) {
+          const el = document.getElementById(field.id);
+          issues.push({
+            label: field.label,
+            kind: "field",
+            target: (el?.closest(".f") as HTMLElement | null) || el,
+          });
         }
       }
-      return errors;
+      if (!groupRadio("format")) {
+        const first = document.querySelector<HTMLElement>('input[name="format"]');
+        issues.push({
+          label: "Формат работы",
+          kind: "group",
+          target:
+            (first?.closest(".rc") as HTMLElement | null) ||
+            (first?.closest(".f") as HTMLElement | null) ||
+            first,
+        });
+      }
+      if (!groupChecked("msg").length) {
+        const first = document.querySelector<HTMLElement>('input[data-name="msg"]');
+        issues.push({
+          label: "Мессенджер",
+          kind: "group",
+          target:
+            (first?.closest(".cp") as HTMLElement | null) ||
+            (first?.closest(".f") as HTMLElement | null) ||
+            first,
+        });
+      }
+      for (const id of requiredConsentIds) {
+        if (!(document.getElementById(id) as HTMLInputElement | null)?.checked) {
+          const el = document.getElementById(id);
+          issues.push({
+            label: "Согласия",
+            kind: "consent",
+            target: (el?.closest(".lc") as HTMLElement | null) || el,
+          });
+          break;
+        }
+      }
+      return issues;
+    };
+
+    const clearInvalidHighlights = () => {
+      form
+        .querySelectorAll(".eg-anketa-invalid, .eg-anketa-invalid-group")
+        .forEach((el) => {
+          el.classList.remove("eg-anketa-invalid", "eg-anketa-invalid-group");
+        });
+    };
+
+    const buildValidationMessage = (issues: ValidationIssue[]) => {
+      const hasFields = issues.some((i) => i.kind !== "consent");
+      const hasConsent = issues.some((i) => i.kind === "consent");
+      if (hasFields && hasConsent) {
+        return "Заполните все обязательные поля, отмеченные звёздочкой, и отметьте обязательные согласия";
+      }
+      if (hasConsent) {
+        return "Отметьте обязательные согласия в конце анкеты";
+      }
+      return "Заполните все обязательные поля, отмеченные звёздочкой";
+    };
+
+    const showValidationFeedback = (issues: ValidationIssue[]) => {
+      clearInvalidHighlights();
+      for (const issue of issues) {
+        if (!issue.target) continue;
+        if (issue.kind === "field") {
+          const input = issue.target.matches("input, textarea")
+            ? issue.target
+            : issue.target.querySelector("input, textarea");
+          (input || issue.target).classList.add("eg-anketa-invalid");
+          issue.target.classList.add("eg-anketa-invalid-group");
+        } else {
+          issue.target.classList.add("eg-anketa-invalid-group");
+        }
+      }
+
+      const message = buildValidationMessage(issues);
+      if (submitMsg) {
+        submitMsg.className = "sm vs eg-anketa-warn";
+        submitMsg.style.cssText = "";
+        submitMsg.textContent = message;
+      }
+      copyMsg?.classList.remove("vs");
+
+      document.getElementById("eg-anketa-toast")?.remove();
+      const toast = document.createElement("div");
+      toast.id = "eg-anketa-toast";
+      toast.setAttribute("role", "alert");
+      toast.textContent = message;
+      toast.style.cssText =
+        "position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:9999;max-width:min(920px,calc(100% - 24px));padding:14px 18px;border-radius:12px;background:rgba(12,14,18,0.96);color:#fde68a;border:1px solid rgba(251,191,36,0.32);box-shadow:0 16px 40px rgba(0,0,0,0.45);font:500 14px/1.45 Manrope,sans-serif;text-align:center";
+      document.body.appendChild(toast);
+      window.setTimeout(() => toast.remove(), 5200);
+
+      const first = issues.find((i) => i.target)?.target;
+      if (first) {
+        window.setTimeout(() => {
+          first.scrollIntoView({ behavior: "smooth", block: "center" });
+          const focusable = first.matches("input, textarea")
+            ? (first as HTMLInputElement)
+            : first.querySelector<HTMLInputElement | HTMLTextAreaElement>(
+                "input, textarea"
+              );
+          focusable?.focus({ preventScroll: true });
+        }, 80);
+      } else if (submitMsg) {
+        window.setTimeout(
+          () => submitMsg.scrollIntoView({ behavior: "smooth", block: "center" }),
+          80
+        );
+      }
     };
 
     const copyText = async (text: string) => {
@@ -470,26 +582,54 @@ export default function AnketaFormClient() {
     };
 
     const syncSubmitEnabled = () => {
-      const ok = requiredConsentIds.every(
-        (id) => (document.getElementById(id) as HTMLInputElement | null)?.checked
-      );
+      const ok = collectIssues().length === 0;
       if (!submitBtn) return;
+      // Always clickable — incomplete form shows guidance on click (not a dead grey button).
       submitBtn.setAttribute("aria-disabled", ok ? "false" : "true");
       if (!submitLocked) {
-        submitBtn.style.pointerEvents = ok ? "" : "none";
-        submitBtn.style.opacity = ok ? "" : "0.45";
+        submitBtn.style.pointerEvents = "";
+        submitBtn.style.cursor = "pointer";
+        submitBtn.style.opacity = ok ? "" : "0.78";
       }
       if (!ok) {
-        submitBtn.setAttribute("title", "Отметьте обязательные согласия");
+        submitBtn.setAttribute(
+          "title",
+          "Заполните обязательные поля (*) и согласия — затем отправьте"
+        );
       } else {
         submitBtn.removeAttribute("title");
       }
     };
 
+    // Inject compact validation styles once (anketa HTML is a static Tilda block).
+    if (!document.getElementById("eg-anketa-validation-css")) {
+      const style = document.createElement("style");
+      style.id = "eg-anketa-validation-css";
+      style.textContent = `
+        .eg-anketa-invalid {
+          border-color: rgba(252, 165, 165, 0.75) !important;
+          box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.14) !important;
+        }
+        .eg-anketa-invalid-group {
+          outline: 1px solid rgba(252, 165, 165, 0.4);
+          outline-offset: 4px;
+          border-radius: 12px;
+        }
+        .sm.eg-anketa-warn {
+          display: block;
+          color: #fde68a;
+          background: rgba(251, 191, 36, 0.08);
+          border: 1px solid rgba(251, 191, 36, 0.28);
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
     for (const id of requiredConsentIds) {
       const el = document.getElementById(id);
       if (!el) continue;
       const onChange = () => {
+        clearInvalidHighlights();
         syncSubmitEnabled();
         schedulePersist();
       };
@@ -497,9 +637,17 @@ export default function AnketaFormClient() {
       cleanups.push(() => el.removeEventListener("change", onChange));
     }
 
-    const onFormInput = () => schedulePersist();
+    const onFormInput = () => {
+      clearInvalidHighlights();
+      syncSubmitEnabled();
+      schedulePersist();
+    };
     form.addEventListener("input", onFormInput);
-    cleanups.push(() => form.removeEventListener("input", onFormInput));
+    form.addEventListener("change", onFormInput);
+    cleanups.push(() => {
+      form.removeEventListener("input", onFormInput);
+      form.removeEventListener("change", onFormInput);
+    });
 
     restoreDraft();
     syncSubmitEnabled();
@@ -547,12 +695,11 @@ export default function AnketaFormClient() {
     const doSubmit = async () => {
       if (submitLocked) return;
 
-      const errors = validate();
-      if (errors.length) {
-        window.alert(`Заполните обязательные поля (*):\n\n— ${errors.join("\n— ")}`);
+      const issues = collectIssues();
+      if (issues.length) {
+        showValidationFeedback(issues);
         return;
       }
-      if (submitBtn?.getAttribute("aria-disabled") === "true") return;
 
       const text = buildText();
       if (hiddenText) hiddenText.value = text;
@@ -569,6 +716,7 @@ export default function AnketaFormClient() {
         submitMsg.textContent = "Отправляю анкету…";
       }
       copyMsg?.classList.remove("vs");
+      clearInvalidHighlights();
       persist();
 
       try {

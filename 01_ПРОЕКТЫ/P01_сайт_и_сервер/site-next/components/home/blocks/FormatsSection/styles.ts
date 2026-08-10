@@ -193,27 +193,37 @@ export const FORMATS_SECTION_CSS = `
 }
 .eg-formats__badges {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
+  left: auto;
   z-index: 3;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: 4px;
+  max-width: 48%;
   pointer-events: none;
 }
 .eg-formats__badge {
   display: inline-flex;
   align-items: center;
-  padding: 5px 10px;
+  padding: 3px 7px;
   border-radius: 999px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
   text-transform: uppercase;
+  white-space: nowrap;
   color: #1a140f;
-  background: linear-gradient(135deg, #c5a47e 0%, #e0c49a 50%, #b89268 100%);
-  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(
+    135deg,
+    rgba(197, 164, 126, 0.92) 0%,
+    rgba(224, 196, 154, 0.95) 50%,
+    rgba(184, 146, 104, 0.9) 100%
+  );
+  box-shadow: 0 3px 10px -6px rgba(0, 0, 0, 0.65);
 }
 .eg-formats__cta--glow {
   background: linear-gradient(180deg, #e8d4b8 0%, #c5a47e 100%);
