@@ -1,5 +1,15 @@
 /** Content for /club landing. Prices from products.yaml — do not invent. */
 
+/**
+ * Club sales / enrollment gate (home formats CTA + /club pay CTAs).
+ * `false` = temporarily closed (buttons disabled, no Tribute / checkout).
+ * Включить: `true`, когда Евгений скажет открыть набор снова.
+ */
+export const CLUB_SALES_OPEN = false;
+
+/** Label shown on disabled join/pay CTAs while sales are closed. */
+export const CLUB_SALES_CLOSED_LABEL = "Набор закрыт";
+
 export const CLUB_TRIBUTE_TG =
   "https://t.me/tribute/app?startapp=s11vY";
 export const CLUB_TRIBUTE_WEB = "https://web.tribute.tg/s/11vY";

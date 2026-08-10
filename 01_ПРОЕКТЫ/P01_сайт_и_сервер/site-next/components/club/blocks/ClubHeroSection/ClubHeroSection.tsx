@@ -3,9 +3,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import {
-  CLUB_TRIBUTE_TG,
-} from "@/lib/club/landing-content";
+import ClubSalesLink from "@/components/club/ClubSalesLink";
+import { CLUB_SALES_OPEN } from "@/lib/club/landing-content";
 
 import { CLUB_HERO_CSS } from "./styles";
 
@@ -141,15 +140,10 @@ export default function ClubHeroSection() {
               <a className="club-hero__site-link" href="/">
                 На главный сайт
               </a>
-              <a
-                className="club-hero__header-cta"
-                href={CLUB_TRIBUTE_TG}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ClubSalesLink className="club-hero__header-cta">
                 Присоединиться
                 <i aria-hidden="true">→</i>
-              </a>
+              </ClubSalesLink>
             </div>
 
             <button
@@ -179,14 +173,9 @@ export default function ClubHeroSection() {
               <a href="/" onClick={() => setMenuOpen(false)}>
                 На главный сайт
               </a>
-              <a
-                href={CLUB_TRIBUTE_TG}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
-              >
+              <ClubSalesLink onClick={() => setMenuOpen(false)}>
                 Присоединиться
-              </a>
+              </ClubSalesLink>
             </div>
           ) : null}
         </header>
@@ -203,13 +192,24 @@ export default function ClubHeroSection() {
               <span>Дисциплина</span>
             </p>
             <div className="club-hero__actions">
-              <a
-                className="club-hero__btn club-hero__btn--primary"
-                href="#tariff"
-              >
-                Войти в клуб
-                <span aria-hidden="true">→</span>
-              </a>
+              {CLUB_SALES_OPEN ? (
+                <a
+                  className="club-hero__btn club-hero__btn--primary"
+                  href="#tariff"
+                >
+                  Войти в клуб
+                  <span aria-hidden="true">→</span>
+                </a>
+              ) : (
+                <span
+                  className="club-hero__btn club-hero__btn--primary club-sales-cta--closed"
+                  role="link"
+                  aria-disabled="true"
+                  title="Набор временно закрыт"
+                >
+                  Набор закрыт
+                </span>
+              )}
               <a className="club-hero__btn club-hero__btn--ghost" href="#about">
                 Узнать подробнее
               </a>

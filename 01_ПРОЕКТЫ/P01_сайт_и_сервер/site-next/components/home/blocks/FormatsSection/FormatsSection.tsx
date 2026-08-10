@@ -1,3 +1,8 @@
+import {
+  CLUB_SALES_CLOSED_LABEL,
+  CLUB_SALES_OPEN,
+} from "@/lib/club/landing-content";
+
 import FormatsReveal from "./FormatsReveal";
 import { FORMATS_SECTION_CSS } from "./styles";
 
@@ -135,9 +140,20 @@ export default function FormatsSection() {
                   {card.title}
                 </h3>
                 <p className="eg-formats__card-text">{card.description}</p>
-                <a href={card.href} className={ctaClassName(card)}>
-                  {card.cta}
-                </a>
+                {card.club && !CLUB_SALES_OPEN ? (
+                  <span
+                    className={`${ctaClassName(card)} eg-formats__cta--disabled`}
+                    role="link"
+                    aria-disabled="true"
+                    title="Набор временно закрыт"
+                  >
+                    {CLUB_SALES_CLOSED_LABEL}
+                  </span>
+                ) : (
+                  <a href={card.href} className={ctaClassName(card)}>
+                    {card.cta}
+                  </a>
+                )}
               </div>
             </article>
           ))}

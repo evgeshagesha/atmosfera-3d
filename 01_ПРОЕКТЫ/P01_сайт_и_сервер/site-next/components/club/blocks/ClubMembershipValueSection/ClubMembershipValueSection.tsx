@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-import { CLUB_PRICE_FROM, CLUB_TRIBUTE_TG } from "@/lib/club/landing-content";
+import ClubSalesLink from "@/components/club/ClubSalesLink";
+import { CLUB_PRICE_FROM } from "@/lib/club/landing-content";
 
 import { CLUB_MEMBERSHIP_VALUE_CSS } from "./styles";
 
@@ -204,17 +205,12 @@ export default function ClubMembershipValueSection() {
               </em>
             </div>
 
-            <a
-              href={CLUB_TRIBUTE_TG}
-              target="_blank"
-              rel="noreferrer"
-              className="club-value__cta"
-            >
+            <ClubSalesLink className="club-value__cta">
               Вступить в клуб
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h13M14 7l5 5-5 5" />
               </svg>
-            </a>
+            </ClubSalesLink>
           </div>
 
           <div className="club-value__features" aria-label="Преимущества клуба">

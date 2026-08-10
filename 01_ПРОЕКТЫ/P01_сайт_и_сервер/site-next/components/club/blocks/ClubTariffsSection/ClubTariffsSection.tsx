@@ -1,4 +1,5 @@
-import { CLUB_PRICE_FROM, CLUB_TRIBUTE_TG } from "@/lib/club/landing-content";
+import ClubSalesLink from "@/components/club/ClubSalesLink";
+import { CLUB_PRICE_FROM } from "@/lib/club/landing-content";
 
 import { CLUB_TARIFFS_CSS } from "./styles";
 
@@ -182,18 +183,15 @@ export default function ClubTariffsSection() {
                   ))}
                 </ul>
 
-                <a
+                <ClubSalesLink
                   className={
                     plan.featured
                       ? "club-tariffs__cta club-tariffs__cta--primary"
                       : "club-tariffs__cta"
                   }
-                  href={CLUB_TRIBUTE_TG}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Выбрать
-                </a>
+                </ClubSalesLink>
               </article>
             ))}
           </div>

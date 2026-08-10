@@ -13,6 +13,8 @@ import {
   CLUB_PILLARS,
   CLUB_PRICE_FROM,
   CLUB_ROADBLOCKS,
+  CLUB_SALES_CLOSED_LABEL,
+  CLUB_SALES_OPEN,
   CLUB_STATS,
   CLUB_STEPS,
   CLUB_SUPPORT_TG,
@@ -48,15 +50,30 @@ function CtaLink({
   secondary?: boolean;
   compact?: boolean;
 }) {
+  const className = [
+    "club-btn",
+    secondary ? "club-btn--ghost" : "",
+    compact ? "club-btn--compact" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  if (!CLUB_SALES_OPEN) {
+    return (
+      <span
+        className={`${className} club-sales-cta--closed`}
+        role="link"
+        aria-disabled="true"
+        title="Набор временно закрыт"
+      >
+        <span>{CLUB_SALES_CLOSED_LABEL}</span>
+      </span>
+    );
+  }
+
   return (
     <a
-      className={[
-        "club-btn",
-        secondary ? "club-btn--ghost" : "",
-        compact ? "club-btn--compact" : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={className}
       href={secondary ? CLUB_TRIBUTE_WEB : CLUB_TRIBUTE_TG}
       target="_blank"
       rel="noopener noreferrer"

@@ -5,6 +5,17 @@
   min-height: 100vh;
 }
 
+/* Sales closed — join/pay CTAs (ClubSalesLink when CLUB_SALES_OPEN=false) */
+.club-page-shell .club-sales-cta--closed,
+.club-sales-cta--closed {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(0.15);
+  text-decoration: none;
+  user-select: none;
+}
+
 .club-page-shell #allrecords {
   background: var(--eg-bg, #0c0e12) !important;
 }

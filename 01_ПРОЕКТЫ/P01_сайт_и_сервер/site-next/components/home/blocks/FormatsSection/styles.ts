@@ -295,6 +295,17 @@ export const FORMATS_SECTION_CSS = `
     0 0 52px rgba(47, 107, 255, 0.4),
     0 12px 28px -10px rgba(0, 0, 0, 0.8);
 }
+/* Club sales closed (CLUB_SALES_OPEN=false) */
+.eg-formats__cta--disabled,
+.eg-formats__cta--disabled:hover {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(0.15);
+  box-shadow:
+    0 0 0 1px rgba(122, 212, 255, 0.25),
+    0 8px 18px -10px rgba(0, 0, 0, 0.55);
+}
 @keyframes eg-formats-cta-pulse {
   0%,
   100% {

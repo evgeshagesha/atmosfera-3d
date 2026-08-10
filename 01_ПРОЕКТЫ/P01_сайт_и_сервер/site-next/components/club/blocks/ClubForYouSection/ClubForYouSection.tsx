@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useRef } from "react";
 
-import { CLUB_TRIBUTE_TG } from "@/lib/club/landing-content";
+import ClubSalesLink from "@/components/club/ClubSalesLink";
 
 import { CLUB_FOR_YOU_CSS } from "./styles";
 
@@ -175,11 +175,9 @@ export default function ClubForYouSection() {
                 />
               </div>
 
-              <a
+              <ClubSalesLink
                 className="club-foryou__cta"
-                href={CLUB_TRIBUTE_TG}
-                target="_blank"
-                rel="noopener noreferrer"
+                keepChildrenWhenClosed
               >
                 <span className="club-foryou__num">07</span>
                 <strong>Это про меня</strong>
@@ -188,7 +186,7 @@ export default function ClubForYouSection() {
                     <path d="M5 12h12M13 6l6 6-6 6" />
                   </svg>
                 </span>
-              </a>
+              </ClubSalesLink>
             </div>
           </div>
 
@@ -208,12 +206,10 @@ export default function ClubForYouSection() {
                   <p>{item.text}</p>
                 </article>
               ))}
-              <a
+              <ClubSalesLink
                 className="club-foryou__square club-foryou__square--cta"
-                href={CLUB_TRIBUTE_TG}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-foryou-card
+                keepChildrenWhenClosed
+                data-foryou-card=""
               >
                 <span className="club-foryou__num">07</span>
                 <strong>Это про меня</strong>
@@ -222,7 +218,7 @@ export default function ClubForYouSection() {
                     <path d="M5 12h12M13 6l6 6-6 6" />
                   </svg>
                 </span>
-              </a>
+              </ClubSalesLink>
             </div>
           </div>
 

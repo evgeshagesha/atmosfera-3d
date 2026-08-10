@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 
-import { CLUB_TRIBUTE_TG } from "@/lib/club/landing-content";
+import ClubSalesLink from "@/components/club/ClubSalesLink";
 
 import { CLUB_FAQ_CSS } from "./styles";
 
@@ -194,15 +194,10 @@ export default function ClubFaqSection() {
                 <span>к результату</span>
               </h3>
             </div>
-            <a
-              className="club-faq-acc__cta"
-              href={CLUB_TRIBUTE_TG}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ClubSalesLink className="club-faq-acc__cta">
               Присоединиться к клубу
               <span aria-hidden="true">→</span>
-            </a>
+            </ClubSalesLink>
           </div>
         </div>
       </section>
