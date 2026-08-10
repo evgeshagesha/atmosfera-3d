@@ -1,6 +1,6 @@
 import type { AnketaAnswers, AnketaUtm } from "../types";
 
-export const STORAGE_KEY = "eg_anketaeg_v1";
+export const STORAGE_KEY = "eg_anketaeg_v2";
 
 export type AnketaDraft = {
   answers: AnketaAnswers;

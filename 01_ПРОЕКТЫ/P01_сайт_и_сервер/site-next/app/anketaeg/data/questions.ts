@@ -44,9 +44,8 @@ export const QUESTIONS: Question[] = [
     type: "single",
     required: true,
     options: [
-      { label: "Мужчина", value: "male" },
-      { label: "Женщина", value: "female" },
-      { label: "Предпочитаю не указывать", value: "prefer_not" },
+      { label: "Мужской", value: "male" },
+      { label: "Женский", value: "female" },
     ],
   },
   {
@@ -70,7 +69,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "body_concern",
     section: "Тело сейчас",
-    kicker: "Без правильных ответов",
+    kicker: "Расскажите как есть",
     title: "Что сейчас больше всего не устраивает вас в состоянии вашего тела?",
     description: "Можно написать так, как вы сказали бы близкому человеку. Именно живые формулировки для меня ценнее всего.",
     type: "textarea",
@@ -467,20 +466,21 @@ export const QUESTIONS: Question[] = [
   {
     id: "readiness",
     section: "Готовность",
-    kicker: "Не про идеальную дисциплину",
-    title: "Если бы вы точно понимали, что делать именно вашему телу — насколько вы готовы заниматься регулярно?",
+    kicker: "Ваша реальная готовность",
+    title:
+      "Если бы вы точно знали, что и как делать для своего результата — насколько вы готовы заниматься регулярно?",
     type: "scale",
     required: true,
     min: 0,
     max: 10,
-    minLabel: "Пока не готов(а)",
-    maxLabel: "Готов(а) действовать",
+    minLabel: "0 — пока не готов(а)",
+    maxLabel: "10 — готов(а) действовать",
     autoAdvance: false,
   },
   {
     id: "time_available",
     section: "Готовность",
-    title: "Сколько времени в день вы реально готовы уделять телу?",
+    title: "Сколько времени в обычный день вы реально готовы выделять на себя и занятия?",
     type: "single",
     required: true,
     options: [
@@ -494,7 +494,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "barriers",
     section: "Готовность",
-    title: "Что чаще всего мешает заниматься телом регулярно?",
+    title: "Что чаще всего мешает заниматься регулярно?",
     description: "Выберите максимум 3 главных барьера.",
     type: "multi",
     required: true,
@@ -583,7 +583,7 @@ export const QUESTIONS: Question[] = [
   {
     id: "ideal_specialist",
     section: "Формат работы",
-    title: "Какой специалист по работе с телом был бы для вас идеальным?",
+    title: "Какой специалист был бы для Вас идеальным",
     description: "Что он должен понимать, как общаться, что делать — и чего точно не делать?",
     type: "textarea",
     optionalLabel: "по желанию",
@@ -684,7 +684,8 @@ export const QUESTIONS: Question[] = [
     id: "life_change",
     section: "Финал",
     kicker: "Последний содержательный вопрос",
-    title: "Представьте: завтра ваше тело стало именно таким, каким вы хотите. Что изменилось бы в вашей жизни?",
+    title:
+      "Представьте: Завтра Вы стали таким, каким мечтали быть! Что изменилось бы в Вашей жизни?",
     description: "Не про килограммы и градусы подвижности — про жизнь. Что стало бы возможным?",
     type: "textarea",
     required: true,
