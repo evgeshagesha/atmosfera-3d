@@ -9,6 +9,21 @@ const nextConfig: NextConfig = {
       { source: "/soglasie", destination: "/personal", permanent: true },
     ];
   },
+  async headers() {
+    // Path-scoped CSP so Kinescope embeds on /testeg stay allowed if a broader CSP is added later.
+    const kinescopeFrames =
+      "frame-src 'self' https://kinescope.io https://*.kinescope.io; child-src 'self' https://kinescope.io https://*.kinescope.io";
+    return [
+      {
+        source: "/testeg",
+        headers: [{ key: "Content-Security-Policy", value: kinescopeFrames }],
+      },
+      {
+        source: "/testeg/:path*",
+        headers: [{ key: "Content-Security-Policy", value: kinescopeFrames }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

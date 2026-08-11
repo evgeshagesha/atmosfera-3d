@@ -45,6 +45,7 @@ export default function AnketaEgApp() {
   const [startedAt, setStartedAt] = useState<string | null>(null);
   const [landingUrl, setLandingUrl] = useState("");
   const [referrer, setReferrer] = useState<string | null>(null);
+  const [questionnaireId, setQuestionnaireId] = useState<string | undefined>();
 
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
   const submittingRef = useRef(false);
@@ -252,11 +253,16 @@ export default function AnketaEgApp() {
 
       if (!response.ok) throw new Error("submit_failed");
 
+      const nextQuestionnaireId =
+        globalThis.crypto?.randomUUID?.() ??
+        `anketa-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      setQuestionnaireId(nextQuestionnaireId);
       clearDraft();
       setSubmitted(true);
       trackAnketa(ANKETA_EVENTS.complete, {
         score: lead.score,
         segment: lead.segment,
+        questionnaire_id: nextQuestionnaireId,
       });
     } catch {
       setError(
@@ -282,7 +288,7 @@ export default function AnketaEgApp() {
   };
 
   if (submitted) {
-    return <FinalScreen />;
+    return <FinalScreen questionnaireId={questionnaireId} utm={utm} />;
   }
 
   if (!started) {
