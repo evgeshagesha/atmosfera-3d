@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Атмосфера 3D · Mini App",
-  description: "Евгений Гошев — о методе и программах Атмосфера 3D в Telegram",
+  title: "Атмосфера 3D · Навигация",
+  description: "С чего начать: анкета, очная практика в Москве, отзывы.",
   robots: { index: false, follow: false },
 };
 

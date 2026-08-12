@@ -379,7 +379,7 @@ async def cmd_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         buttons.append(
             [
                 InlineKeyboardButton(
-                    "Открыть каталог",
+                    "Открыть навигацию",
                     web_app=WebAppInfo(url=mini),
                 )
             ]

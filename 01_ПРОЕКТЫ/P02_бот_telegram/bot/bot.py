@@ -565,7 +565,7 @@ def main() -> None:
         try:
             await application.bot.set_chat_menu_button(
                 menu_button=MenuButtonWebApp(
-                    text="Каталог",
+                    text="Навигация",
                     web_app=WebAppInfo(url=url),
                 )
             )
