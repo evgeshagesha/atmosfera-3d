@@ -3,6 +3,10 @@ import type { MetadataRoute } from "next";
 import { getAllBlogSlugs, getBlogPosts } from "@/lib/content/blog";
 import { getAllRoutes } from "@/lib/pages";
 
+/** Match blog schedule: include posts as publishedAt becomes current. */
+export const dynamic = "force-dynamic";
+export const revalidate = 300;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Live Next host until apex DNS cutover. Override via NEXT_PUBLIC_SITE_URL.
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://eg.egoshev.ru";
