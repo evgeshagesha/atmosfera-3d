@@ -256,6 +256,8 @@ async def _job_followup(context: ContextTypes.DEFAULT_TYPE) -> None:
                 track("bot_final_nudge_sent", user_id=user_id)
         else:
             logger.warning("unknown lead drip kind=%s", kind)
+            if user_id:
+                _mark_done(int(user_id), str(kind))
             return
     except Exception as exc:
         logger.warning("followup %s failed chat=%s: %s", kind, chat_id, exc)
