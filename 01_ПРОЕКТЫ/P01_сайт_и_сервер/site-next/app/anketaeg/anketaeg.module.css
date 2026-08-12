@@ -160,6 +160,72 @@
   animation: rise .8s cubic-bezier(.2,.8,.2,1) both;
 }
 
+.heroLead {
+  margin: 0 0 10px;
+  max-width: 690px;
+  font-size: clamp(18px, 1.8vw, 25px);
+  line-height: 1.42;
+  color: rgba(255,255,255,.88);
+  letter-spacing: -.02em;
+}
+
+.heroText {
+  margin: 0;
+  max-width: 640px;
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+.heroText + .heroText {
+  margin-top: 8px;
+}
+
+.heroText strong {
+  color: #f4f4f2;
+  font-weight: 650;
+}
+
+.heroEmphasis {
+  color: rgba(244, 244, 242, 0.92) !important;
+  font-size: 16px;
+  font-weight: 560;
+}
+
+.heroQuestions {
+  margin: 14px 0 12px;
+  padding: 14px 18px 14px 22px;
+  max-width: 640px;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255,255,255,.03);
+}
+
+.heroQuestions li {
+  position: relative;
+  padding-left: 16px;
+  color: rgba(244, 244, 242, 0.78);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.heroQuestions li + li {
+  margin-top: 8px;
+}
+
+.heroQuestions li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(231, 231, 229, 0.72);
+  box-shadow: 0 0 10px rgba(231, 231, 229, 0.35);
+}
+
 .eyebrow,
 .questionKicker,
 .unlockBadge {
@@ -193,27 +259,6 @@
   color: rgba(255,255,255,.48);
   font-weight: 420;
   font-style: normal;
-}
-
-.heroLead {
-  margin: 0 0 10px;
-  max-width: 690px;
-  font-size: clamp(18px, 1.8vw, 25px);
-  line-height: 1.42;
-  color: rgba(255,255,255,.88);
-  letter-spacing: -.02em;
-}
-
-.heroText {
-  margin: 0;
-  max-width: 640px;
-  color: var(--muted);
-  line-height: 1.55;
-  font-size: 15px;
-}
-
-.heroText + .heroText {
-  margin-top: 8px;
 }
 
 .wikiLink {
@@ -871,7 +916,35 @@
     order: 2;
     aspect-ratio: .92;
   }
-  .heroCopy { max-width: none; }
+  .heroCopy {
+    max-width: none;
+    text-align: center;
+  }
+  .heroCopy .eyebrow {
+    justify-content: center;
+  }
+  .heroCopy .eyebrow span {
+    display: none;
+  }
+  .heroLead,
+  .heroText,
+  .heroQuestions {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .heroQuestions {
+    text-align: left;
+    max-width: 520px;
+  }
+  .heroMeta {
+    justify-content: center;
+  }
+  .heroActions {
+    justify-content: center;
+  }
+  .disclaimer {
+    text-align: center;
+  }
 }
 
 @media (max-width: 680px) {
@@ -915,6 +988,11 @@
     line-height: 1.48;
   }
   .heroText + .heroText { margin-top: 6px; }
+  .heroQuestions {
+    margin: 10px auto 10px;
+    padding: 12px 14px 12px 18px;
+  }
+  .heroQuestions li { font-size: 13.5px; }
   .heroMeta {
     margin: 14px 0 12px;
     display: grid;

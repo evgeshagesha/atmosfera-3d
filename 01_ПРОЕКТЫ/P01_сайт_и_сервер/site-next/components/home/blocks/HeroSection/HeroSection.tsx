@@ -158,22 +158,22 @@ export default function HeroSection() {
                               →
                             </span>
                           </Link>
-                          <a
-                            href="https://t.me/EGoshev_bot"
+                          <Link
+                            href="/anketaeg?utm_source=site&utm_medium=hero&utm_campaign=gift_test"
                             className="egmain-btn egmain-btn-gift egmain-btn-neon egmain-btn-stack"
-                            target="_blank"
-                            rel="noopener noreferrer"
                           >
                             <span className="egmain-btn-copy">
                               <span className="egmain-btn-label">
-                                🎁 Функциональная тренировка · 10 минут
+                                Подарок · функциональный тест
                               </span>
-                              <span className="egmain-btn-gift-badge">Подарок</span>
+                              <span className="egmain-btn-sub">
+                                Персональный план · 10 минут
+                              </span>
                             </span>
                             <span className="egmain-btn-arrow" aria-hidden="true">
                               →
                             </span>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <div className="egmain-tags">

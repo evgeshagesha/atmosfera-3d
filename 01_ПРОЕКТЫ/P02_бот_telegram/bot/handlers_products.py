@@ -367,11 +367,11 @@ async def cmd_anketa(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
 
 async def cmd_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Menu: Mini App catalog + direct product links."""
+    """Menu: Mini App navigation + direct product links."""
     lines = [
-        "Каталог Атмосфера 3D.",
+        "Навигация Атмосфера 3D.",
         "",
-        "Откройте Mini App или выберите ссылку ниже.",
+        "Откройте навигацию или выберите ссылку ниже.",
     ]
     buttons: list[list[InlineKeyboardButton]] = []
     mini = (getattr(config, "MINI_APP_URL", "") or "").strip()
