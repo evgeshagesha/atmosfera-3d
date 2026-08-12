@@ -8,6 +8,7 @@ import { ZONES } from "../config";
 import { loadResult } from "../storage";
 import type { LevelId, TestResult, ZoneId } from "../types";
 import { INTEGRATION_ZONE_ACTIONS, PROGRESSION_ZONE_ACTIONS, RESULT_GUIDES, ZONE_ACTIONS } from "./content";
+import { PersonalContactCard } from "./PersonalContactCard";
 import { RESULT_LINKS } from "./result-config";
 import styles from "./result-guide.module.css";
 
@@ -77,7 +78,7 @@ function progressionZoneInsight(zoneId: ZoneId, zoneScore: number, priorityZone:
     return priorityCopy[zoneId];
   }
   const copy: Record<ZoneId, string> = {
-    breath: "Сильная зона. Используй дыхание для устойчивости и быстрого восстановления между подходами.",
+    breath: "Используй дыхание для устойчивости и быстрого восстановления между подходами.",
     posture: "Хорошая подвижность и контроль. Сохраняй их при жимах, переносах и ротации.",
     pelvis: "Таз и корпус работают согласованно. Развивай передачу усилия в мощностных движениях.",
     movement: "Качество движения высокое. Усложняй скорость и координацию небольшими шагами.",
@@ -173,7 +174,10 @@ export function ResultGuidePage({ level }: { level: LevelId }) {
           {zones.map((zone) => (
             <div className={zone.id === priorityZone ? styles.priorityRow : ""} key={zone.id}>
               <div className={styles.zoneCopy}>
-                <span>{zone.label}{zone.id === priorityZone && <small>ГЛАВНЫЙ ПРИОРИТЕТ</small>}</span>
+                <span className={styles.zoneTitle}>
+                  {zone.label}
+                  {zone.id === priorityZone && <small className={styles.zoneBadge}>ГЛАВНЫЙ ПРИОРИТЕТ</small>}
+                </span>
                 {isBase && <p>{baseZoneInsight(zone.id, zone.score, priorityZone)}</p>}
                 {isIntegration && <p>{integrationZoneInsight(zone.id, zone.score, priorityZone)}</p>}
                 {isProgression && <p>{progressionZoneInsight(zone.id, zone.score, priorityZone)}</p>}
@@ -359,6 +363,14 @@ export function ResultGuidePage({ level }: { level: LevelId }) {
             <p>{guide.youtubeLead}</p>
             <a href={RESULT_LINKS.youtube} target="_blank" rel="noreferrer" onClick={() => track("result_youtube_click", { level, score, priority_zone: priorityZone, session_id: stored?.sessionId, ...(stored?.attribution ?? {}) })}>{isCompact ? "СМОТРЕТЬ БЕСПЛАТНО" : "СМОТРЕТЬ НА YOUTUBE"} <b>↗</b></a>
           </article>
+
+          <PersonalContactCard
+            level={level}
+            score={score}
+            priorityZone={priorityZone}
+            sessionId={stored?.sessionId}
+            attribution={stored?.attribution}
+          />
 
           <article className={styles.consultCard}>
             <span>ПЕРСОНАЛЬНО · 30 ДНЕЙ</span>

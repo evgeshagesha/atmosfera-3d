@@ -9,7 +9,8 @@ export type AnalyticsEvent =
   | "test_result_click"
   | "result_page_view"
   | "result_youtube_click"
-  | "result_consultation_click";
+  | "result_consultation_click"
+  | "test_result_personal_contact_click";
 
 declare global {
   interface Window {
