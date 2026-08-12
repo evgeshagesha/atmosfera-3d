@@ -28,6 +28,10 @@ export interface ResultGuide {
   sessionsPerWeek: string;
   weeks: PlanWeek[];
   rules: string[];
+  workout?: Array<{ time: string; title: string; text: string }>;
+  weeklyRhythm?: Array<{ day: string; title: string }>;
+  supportNotes?: GuideSection[];
+  readinessCriteria?: string[];
   youtubeLead: string;
   consultationLead: string;
 }

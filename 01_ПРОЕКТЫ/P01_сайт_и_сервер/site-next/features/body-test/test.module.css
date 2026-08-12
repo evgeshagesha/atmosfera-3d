@@ -16,7 +16,7 @@
 
 .header { position: relative; z-index: 5; max-width: 1180px; height: 92px; margin: 0 auto; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 12px; }
-.monogram { font-size: 21px; font-weight: 800; letter-spacing: -.07em; }
+.brandSymbol { width: 58px; height: 31px; display: block; flex: 0 0 auto; background: url("/eg-symbol.png") center / contain no-repeat; mix-blend-mode: screen; }
 .brandLine { height: 20px; width: 1px; background: #6f716e; }
 .brandText { font-size: 9px; letter-spacing: .22em; font-weight: 700; color: #a8aaa7; }
 .closeButton { border: 1px solid #303331; background: rgba(16,18,18,.65); color: #b8bbb7; border-radius: 50%; width: 42px; height: 42px; font-size: 25px; line-height: 1; cursor: pointer; transition: .2s; }
