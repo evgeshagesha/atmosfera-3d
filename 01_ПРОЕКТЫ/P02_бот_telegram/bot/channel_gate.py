@@ -1,4 +1,4 @@
-"""Gate: channel subscription required before lead workout."""
+"""Gate: channel subscription required before the /start funnel."""
 from __future__ import annotations
 
 import html
@@ -8,30 +8,12 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
 
 import config
+import funnel_copy as copy
+from funnel_config import CHANNEL_URL
 
 logger = logging.getLogger(__name__)
 
-CHANNEL_URL = "https://t.me/EvgeniiGoshev"
 _MEMBER_OK = frozenset({"member", "administrator", "creator", "restricted"})
-
-WORKOUT_SUBSCRIBE_TEXT = (
-    "💪 <b>Отличное решение!</b>\n\n"
-    "Ты сделал первый шаг к здоровому и сильному телу.\n\n"
-    "Теперь осталось открыть бесплатную тренировку, "
-    "которую можно выполнять каждый день.\n\n"
-    "Всего 8–10 минут в день помогут:\n"
-    "• снять напряжение;\n"
-    "• улучшить подвижность суставов;\n"
-    "• почувствовать лёгкость во всём теле;\n"
-    "• зарядиться энергией на весь день.\n\n"
-    "👇\n"
-    "Чтобы получить тренировку:\n"
-    "1. Нажмите «Подписаться на канал».\n"
-    "2. Подпишитесь.\n"
-    "3. Вернитесь сюда.\n"
-    "4. Нажмите кнопку\n"
-    "«Забрать тренировку»."
-)
 
 
 def require_channel_sub() -> bool:
@@ -60,17 +42,8 @@ async def is_channel_subscriber(
 
 
 def subscribe_keyboard(callback_data: str) -> InlineKeyboardMarkup:
-    """Lead workout gate: subscribe URL + claim callback."""
-    return InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("Подписаться на канал", url=CHANNEL_URL)],
-            [
-                InlineKeyboardButton(
-                    "Забрать тренировку", callback_data=callback_data
-                )
-            ],
-        ]
-    )
+    """Lead gate: subscribe URL + «Я подписался» callback."""
+    return copy.start_subscribe_keyboard(callback_data)
 
 
 def subscribe_level_keyboard(callback_data: str) -> InlineKeyboardMarkup:
@@ -83,7 +56,7 @@ def subscribe_level_keyboard(callback_data: str) -> InlineKeyboardMarkup:
 
 
 def subscribe_workout_text() -> str:
-    return WORKOUT_SUBSCRIBE_TEXT
+    return copy.start_subscribe_text()
 
 
 def subscribe_guide_text(what: str = "тренировку") -> str:

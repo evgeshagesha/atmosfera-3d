@@ -1,11 +1,17 @@
-"""Lead drip after free daily workout (job-queue + JSON persist for VPS restarts).
+"""Lead drip after channel subscribe (job-queue + JSON persist for VPS restarts).
 
-Timeline after workout delivery:
-  T+25s  — soft ask «Сделал»
-  T+24h  — Day 1 (repeat workout)
-  T+48h  — Day 2 (breath) + T+45s tip
-  T+72h  — Day 3 (EG 3D) + T+45s tip
-  T+96h  — Day 4 (body test / final step)
+Timeline after successful subscribe:
+  T+20s   — save-the-bot reminder
+  T+24h   — Day 1 workout
+  T+28h   — Day 1 nudge
+  T+48h   — Day 2 breath + short tip
+  T+72h   — Day 3 EG 3D + short tip
+  T+96h   — Day 4 start-post reminder
+  T+100h  — Day 4 nudge
+  T+120h  — Day 5
+  T+132h  — final nudge, then STOP
+
+Click-based 3–5h nudge is NOT scheduled: Telegram URL buttons do not fire callbacks.
 """
 from __future__ import annotations
 
@@ -15,49 +21,52 @@ import time
 from pathlib import Path
 from typing import Any
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, ContextTypes
 
-from products import get_page_url
+import funnel_copy as copy
+import onboarding_state
+from bot_analytics import track
 
 logger = logging.getLogger(__name__)
 
-WORKOUT_URL = "https://t.me/EvgeniiGoshev/1326"
-BREATH_URL = "https://t.me/EvgeniiGoshev/760"
-EG3D_URL = "https://t.me/EvgeniiGoshev/1299"
-TEST_URL_FALLBACK = "https://egoshev.ru/testik"
-
-# seconds after workout delivery
-FOLLOWUP_DELAYS = (
-    (25, "fu_ask"),
-    (24 * 3600, "fu_day1"),
-    (48 * 3600, "fu_day2"),
-    (72 * 3600, "fu_day3"),
-    (96 * 3600, "fu_day4"),
-)
-
-# secondary tips after day video messages (seconds after that day job fires)
+HOUR = 3600
 DAY_TIP_DELAY = 45
 
+FOLLOWUP_DELAYS = (
+    (20, "fu_save_bot"),
+    (24 * HOUR, "fu_day1"),
+    (28 * HOUR, "fu_day1_nudge"),
+    (48 * HOUR, "fu_day2"),
+    (72 * HOUR, "fu_day3"),
+    (96 * HOUR, "fu_day4"),
+    (100 * HOUR, "fu_day4_nudge"),
+    (120 * HOUR, "fu_day5"),
+    (132 * HOUR, "fu_final"),
+)
+
 _JOBS_PATH = Path(__file__).resolve().parent / "data" / "lead_drip_jobs.json"
-_KIND_ORDER = ("fu_ask", "fu_day1", "fu_day2", "fu_day2_tip", "fu_day3", "fu_day3_tip", "fu_day4")
+_KIND_ORDER = (
+    "fu_save_bot",
+    "fu_day1",
+    "fu_day1_nudge",
+    "fu_day2",
+    "fu_day2_tip",
+    "fu_day3",
+    "fu_day3_tip",
+    "fu_day4",
+    "fu_day4_nudge",
+    "fu_day5",
+    "fu_final",
+)
 
-
-def _test_url() -> str:
-    return get_page_url("body_test") or TEST_URL_FALLBACK
-
-
-def _workout_url() -> str:
-    return get_page_url("lead_telo") or WORKOUT_URL
-
-
-def _progress_line(kind: str) -> str:
-    return {
-        "fu_day1": "✅ День 1 из 4",
-        "fu_day2": "✅ День 2 из 4",
-        "fu_day3": "✅ День 3 из 4",
-        "fu_day4": "✅ Финальный шаг",
-    }.get(kind, "")
+_DAY_FLAGS = {
+    "fu_day1": "day1_sent",
+    "fu_day2": "day2_sent",
+    "fu_day3": "day3_sent",
+    "fu_day4": "day4_sent",
+    "fu_day5": "day5_sent",
+    "fu_final": "final_nudge_sent",
+}
 
 
 def _load_jobs() -> list[dict[str, Any]]:
@@ -116,6 +125,11 @@ def _job_name(kind: str, user_id: int) -> str:
     return f"lead_{kind}_{user_id}"
 
 
+def user_has_pending_jobs(user_id: int) -> bool:
+    uid = int(user_id)
+    return any(int(j.get("user_id") or 0) == uid for j in _load_jobs())
+
+
 def _schedule_once(
     jq,
     *,
@@ -147,6 +161,16 @@ def _schedule_once(
     )
 
 
+async def _send(context: ContextTypes.DEFAULT_TYPE, chat_id: int, text: str, markup=None) -> None:
+    await context.bot.send_message(
+        chat_id,
+        text,
+        reply_markup=markup,
+        parse_mode=copy.PARSE_MODE,
+        disable_web_page_preview=True,
+    )
+
+
 async def _job_followup(context: ContextTypes.DEFAULT_TYPE) -> None:
     data = context.job.data or {}
     chat_id = data.get("chat_id")
@@ -155,72 +179,21 @@ async def _job_followup(context: ContextTypes.DEFAULT_TYPE) -> None:
     if not chat_id or not kind:
         return
 
+    if user_id and onboarding_state.is_completed(int(user_id)):
+        _mark_done(int(user_id), str(kind))
+        return
+
     try:
-        if kind == "fu_ask":
-            await context.bot.send_message(
-                chat_id,
-                "🔥 Небольшая просьба.\n\n"
-                "Не откладывай.\n"
-                "Сделай тренировку сегодня.\n\n"
-                "Это займёт всего 8–10 минут, но именно первое выполненное "
-                "занятие станет началом изменений.\n\n"
-                "После выполнения напиши мне, пожалуйста:\n"
-                "«Сделал».\n\n"
-                "Мне будет интересно узнать твои ощущения.",
-            )
+        if kind == "fu_save_bot":
+            await _send(context, chat_id, copy.save_bot_text())
         elif kind == "fu_day1":
-            progress = _progress_line(kind)
-            workout = _workout_url()
-            await context.bot.send_message(
-                chat_id,
-                f"{progress}\n\n"
-                "💬 Как ощущения после первой тренировки?\n\n"
-                "Удалось выполнить её?\n\n"
-                "Даже если сделал только часть комплекса — это уже отличный "
-                "первый шаг.\n\n"
-                "Очень часто после первого занятия люди замечают:\n"
-                "✅ лёгкость в теле;\n"
-                "✅ уменьшение напряжения;\n"
-                "✅ больше подвижности;\n"
-                "✅ ощущение, что двигаться стало проще.\n\n"
-                "Если ещё не успел — ничего страшного.\n"
-                "Не откладывай.\n"
-                "Сегодня выдели всего 10 минут для себя.\n\n"
-                "🎥 Нажми кнопку ниже и выполни тренировку ещё раз.\n"
-                "Каждый повтор — это вклад в здоровье твоего тела.",
-                reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("▶️ Повторить тренировку", url=workout)]]
-                ),
+            await _send(context, chat_id, copy.day1_text(), copy.day1_keyboard())
+        elif kind == "fu_day1_nudge":
+            await _send(
+                context, chat_id, copy.day1_nudge_text(), copy.day1_nudge_keyboard()
             )
         elif kind == "fu_day2":
-            progress = _progress_line(kind)
-            await context.bot.send_message(
-                chat_id,
-                f"{progress}\n\n"
-                "🌬 Сегодня хочу подарить тебе ещё одну практику.\n\n"
-                "Большинство людей заботится только о мышцах.\n"
-                "Но забывает о самом главном — дыхании.\n\n"
-                "Именно дыхание помогает:\n"
-                "🧠 снизить уровень стресса;\n"
-                "❤️ успокоить нервную систему;\n"
-                "💨 улучшить насыщение тканей кислородом;\n"
-                "⚡ почувствовать больше энергии и ясности.\n\n"
-                "Я подготовил для тебя простую дыхательную практику.\n"
-                "Выполняй её спокойно, не торопясь и внимательно наблюдай "
-                "за ощущениями.\n\n"
-                "После выполнения обязательно напиши мне:\n"
-                "Что изменилось?",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                "🌬 Открыть дыхательную практику",
-                                url=BREATH_URL,
-                            )
-                        ]
-                    ]
-                ),
-            )
+            await _send(context, chat_id, copy.day2_text(), copy.day2_keyboard())
             jq = context.application.job_queue
             if jq is not None and user_id:
                 _schedule_once(
@@ -231,54 +204,9 @@ async def _job_followup(context: ContextTypes.DEFAULT_TYPE) -> None:
                     delay=DAY_TIP_DELAY,
                 )
         elif kind == "fu_day2_tip":
-            await context.bot.send_message(
-                chat_id,
-                "✨ Помни.\n\n"
-                "Движение и дыхание работают намного сильнее вместе, "
-                "чем по отдельности.\n\n"
-                "Попробуй сегодня совместить дыхательную практику "
-                "и первую тренировку.\n"
-                "Ты почувствуешь разницу.",
-            )
+            await _send(context, chat_id, copy.day2_tip_text())
         elif kind == "fu_day3":
-            progress = _progress_line(kind)
-            await context.bot.send_message(
-                chat_id,
-                f"{progress}\n\n"
-                "🔥 Хочу подарить тебе ещё один инструмент.\n\n"
-                "Это не просто зарядка.\n"
-                "Это моя авторская EG 3D функциональная зарядка.\n\n"
-                "Она одновременно работает как:\n"
-                "✅ тест тела;\n"
-                "✅ качественная разминка;\n"
-                "✅ полноценная тренировка.\n\n"
-                "Во время выполнения ты сразу заметишь:\n"
-                "• где тело двигается свободно;\n"
-                "• где есть ограничения;\n"
-                "• отличается ли правая сторона от левой;\n"
-                "• насколько хорошо работает баланс;\n"
-                "• где появляется лишнее напряжение.\n\n"
-                "Всего 7–10 минут.\n"
-                "Но именно такие ежедневные движения постепенно возвращают "
-                "телу мобильность, устойчивость и контроль.\n\n"
-                "Попробуй выполнить комплекс спокойно и ответь себе "
-                "на три вопроса:\n"
-                "1️⃣ Где движение ограничено?\n"
-                "2️⃣ Есть ли разница между сторонами?\n"
-                "3️⃣ Что изменилось после второго круга?\n\n"
-                "Тело всегда подсказывает, что ему необходимо.\n"
-                "Нужно только научиться его слышать.",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                "💪 Выполнить EG 3D зарядку",
-                                url=EG3D_URL,
-                            )
-                        ]
-                    ]
-                ),
-            )
+            await _send(context, chat_id, copy.day3_text(), copy.day3_keyboard())
             jq = context.application.job_queue
             if jq is not None and user_id:
                 _schedule_once(
@@ -289,42 +217,43 @@ async def _job_followup(context: ContextTypes.DEFAULT_TYPE) -> None:
                     delay=DAY_TIP_DELAY,
                 )
         elif kind == "fu_day3_tip":
-            await context.bot.send_message(
-                chat_id,
-                "✨ Сохрани эту зарядку.\n\n"
-                "Если выполнять её регулярно утром или после долгого сидения, "
-                "тело постепенно станет легче, подвижнее и устойчивее.",
-            )
+            await _send(context, chat_id, copy.day3_tip_text())
         elif kind == "fu_day4":
-            progress = _progress_line(kind)
-            test = _test_url()
-            await context.bot.send_message(
+            await _send(
+                context,
                 chat_id,
-                f"{progress}\n\n"
-                "🚀 Ты уже познакомился с моим подходом.\n\n"
-                "За несколько дней ты попробовал:\n"
-                "✅ ежедневную тренировку;\n"
-                "✅ дыхательную практику;\n"
-                "✅ EG 3D функциональную зарядку.\n\n"
-                "Теперь сделай следующий шаг.\n\n"
-                "Пройди мой тест «20 движений».\n\n"
-                "Он поможет определить, какие ограничения есть именно "
-                "у твоего тела, и понять, с чего лучше начать работу "
-                "с телом.\n\n"
-                "После прохождения ты получишь персональные рекомендации "
-                "и план дальнейшей работы.\n\n"
-                "👇",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                "📋 Пройти тест «20 движений»",
-                                url=test,
-                            )
-                        ]
-                    ]
-                ),
+                copy.day4_text(),
+                copy.open_start_keyboard("📌 Вернуться к точке старта"),
             )
+        elif kind == "fu_day4_nudge":
+            await _send(
+                context,
+                chat_id,
+                copy.day4_nudge_text(),
+                copy.open_start_keyboard("🎯 Определить свою точку старта"),
+            )
+        elif kind == "fu_day5":
+            await _send(
+                context,
+                chat_id,
+                copy.day5_text(),
+                copy.open_start_keyboard("🎯 Начать сейчас"),
+            )
+        elif kind == "fu_final":
+            await _send(
+                context,
+                chat_id,
+                copy.final_nudge_text(),
+                copy.open_start_keyboard("📌 Начать с главного"),
+            )
+            if user_id:
+                onboarding_state.update_state(
+                    int(user_id),
+                    final_nudge_sent=True,
+                    drip_active=False,
+                    onboarding_sequence_completed=True,
+                )
+                track("bot_final_nudge_sent", user_id=user_id)
         else:
             logger.warning("unknown lead drip kind=%s", kind)
             return
@@ -333,13 +262,23 @@ async def _job_followup(context: ContextTypes.DEFAULT_TYPE) -> None:
         return
 
     if user_id:
+        flag = _DAY_FLAGS.get(str(kind))
+        if flag and kind != "fu_final":
+            onboarding_state.update_state(int(user_id), **{flag: True})
         _mark_done(int(user_id), str(kind))
 
 
 def schedule_lead_followups(
     context: ContextTypes.DEFAULT_TYPE, *, chat_id: int, user_id: int
 ) -> None:
-    """Schedule workout drip. Requires job-queue extra; persists to JSON."""
+    """Schedule 5-day onboarding. No-op if already active or completed."""
+    if onboarding_state.is_completed(user_id):
+        logger.info("skip drip schedule — already completed user=%s", user_id)
+        return
+    if onboarding_state.is_drip_active(user_id) or user_has_pending_jobs(user_id):
+        logger.info("skip drip schedule — already active user=%s", user_id)
+        return
+
     jq = context.application.job_queue
     if jq is None:
         logger.warning("job_queue unavailable — follow-ups not scheduled")
@@ -361,6 +300,7 @@ def schedule_lead_followups(
             delay=delay,
             run_at=now + delay,
         )
+    onboarding_state.update_state(user_id, drip_active=True)
     logger.info(
         "Scheduled %s lead drip jobs for user=%s", len(FOLLOWUP_DELAYS), user_id
     )
@@ -385,8 +325,9 @@ async def restore_lead_followups(application: Application) -> None:
             run_at = float(entry["run_at"])
         except (KeyError, TypeError, ValueError):
             continue
+        if onboarding_state.is_completed(user_id):
+            continue
         delay = max(0.0, run_at - now)
-        # Skip jobs that are extremely overdue (>2 days) to avoid spam bursts
         if run_at < now - 2 * 24 * 3600:
             continue
         name = _job_name(kind, user_id)

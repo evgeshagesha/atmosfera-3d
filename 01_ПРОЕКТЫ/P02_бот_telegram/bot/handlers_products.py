@@ -5,12 +5,16 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, WebAppI
 from telegram.ext import ContextTypes
 
 import config
+import funnel_copy as copy
+import onboarding_state
+from bot_analytics import track
 from channel_gate import (
     ask_subscribe,
     is_channel_subscriber,
     require_channel_sub,
     send_subscribe_prompt,
 )
+from funnel_config import CHANNEL_URL, MAIN_START_POST_URL, main_start_post_url
 from orders import find_order, mark_order_used
 from products import (
     get_access_url,
@@ -26,11 +30,9 @@ from products import (
     resolve_local_file,
 )
 
-CHANNEL_URL = "https://t.me/EvgeniiGoshev"
 CHANNEL_NAV_URL = "https://t.me/EvgeniiGoshev/1123"
-# Lead magnet = free daily workout in channel (not PDF / egoshev.ru/gaid)
-GUIDE_URL = "https://t.me/EvgeniiGoshev/1326"
-WORKOUT_URL = GUIDE_URL
+GUIDE_URL = MAIN_START_POST_URL
+WORKOUT_URL = MAIN_START_POST_URL
 MENU_LINKS = [
     ("Тест тела · 684 ₽", "test"),
     ("Дыхание и осанка · 1 990 ₽", "breath"),
@@ -52,36 +54,17 @@ def _pay_or_page_button(label: str, product_id: str) -> InlineKeyboardButton | N
     return None
 
 
-def _lead_workout_delivery_copy(url: str) -> tuple[str, InlineKeyboardMarkup]:
-    text = (
-        "✅ <b>Отлично!</b>\n\n"
-        "Доступ открыт.\n"
-        "Поздравляю!\n\n"
-        "Теперь у тебя есть ежедневная функциональная тренировка, "
-        "которая поможет сделать тело более лёгким, подвижным и свободным.\n\n"
-        "Эту тренировку можно выполнять каждое утро.\n\n"
-        "Она особенно полезна, если:\n"
-        "• много сидишь;\n"
-        "• чувствуешь скованность;\n"
-        "• хочешь улучшить мобильность;\n"
-        "• хочешь начать заниматься правильно.\n\n"
-        "👇\n"
-        "Нажми кнопку ниже и открой тренировку."
-    )
-    keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("🎥 Забрать тренировку", url=url)]]
-    )
-    return text, keyboard
-
-
 async def send_guide_link(update: Update) -> None:
-    """Lead: URL button to channel workout post."""
+    """Lead: URL button to the channel start pin."""
     message = _msg(update)
     if not message:
         return
-    workout = get_page_url("lead_telo") or WORKOUT_URL
-    text, keyboard = _lead_workout_delivery_copy(workout)
-    await message.reply_text(text, reply_markup=keyboard, parse_mode="HTML")
+    await message.reply_text(
+        copy.after_subscribe_text(),
+        reply_markup=copy.open_start_keyboard(),
+        parse_mode=copy.PARSE_MODE,
+        disable_web_page_preview=True,
+    )
 
 
 async def send_channel_invite(update: Update) -> None:
@@ -145,7 +128,7 @@ async def send_body_test_offer(update: Update) -> None:
     p = get_product("body_test") or {}
     title = p.get("title", "Онлайн-тест тела")
     price = p.get("price_rub", 684)
-    desc = p.get("description", "20 движений · персональный план · разбор 24–48 ч")
+    desc = p.get("description", "функциональный тест · персональный план")
     pay_url = get_prodamus_url("body_test") or get_page_url("body_test")
     lines = [
         f"Следующий шаг — **{title}** ({price} ₽).",
@@ -174,10 +157,33 @@ def _msg(update: Update):
     return update.effective_message
 
 
+async def _send_html(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE | None,
+    chat_id: int,
+    text: str,
+    markup=None,
+) -> bool:
+    message = _msg(update)
+    kwargs = {
+        "text": text,
+        "reply_markup": markup,
+        "parse_mode": copy.PARSE_MODE,
+        "disable_web_page_preview": True,
+    }
+    if message is not None:
+        await message.reply_text(**kwargs)
+        return True
+    if context is not None:
+        await context.bot.send_message(chat_id=chat_id, **kwargs)
+        return True
+    return False
+
+
 async def deliver_lead_guide(
     update: Update, context: ContextTypes.DEFAULT_TYPE | None = None
 ) -> bool:
-    """Send free daily workout + schedule drip follow-ups."""
+    """After subscribe: pin 1326 + schedule 5-day drip (once)."""
     from followups import schedule_lead_followups
 
     message = _msg(update)
@@ -189,30 +195,49 @@ async def deliver_lead_guide(
         if message is not None
         else (update.effective_chat.id if update.effective_chat else user.id)
     )
-    workout = get_page_url("lead_telo") or WORKOUT_URL
-    text, markup = _lead_workout_delivery_copy(workout)
-    if message is not None:
-        await message.reply_text(text, reply_markup=markup, parse_mode="HTML")
-    elif context is not None:
-        await context.bot.send_message(
-            chat_id=chat_id, text=text, reply_markup=markup, parse_mode="HTML"
-        )
-    else:
+    onboarding_state.update_state(user.id, subscription_verified=True)
+    track(
+        "bot_subscription_verified",
+        user_id=user.id,
+        destination="telegram",
+        source="bot_start",
+    )
+    ok = await _send_html(
+        update,
+        context,
+        chat_id,
+        copy.after_subscribe_text(),
+        copy.open_start_keyboard(),
+    )
+    if not ok:
         return False
-    if context and user:
-        schedule_lead_followups(
-            context, chat_id=chat_id, user_id=user.id
-        )
+    track(
+        "bot_main_post_sent",
+        user_id=user.id,
+        url=main_start_post_url(),
+        source="bot_start",
+    )
+    if context:
+        schedule_lead_followups(context, chat_id=chat_id, user_id=user.id)
     return True
+
+
+async def _send_returning_start(
+    update: Update, context: ContextTypes.DEFAULT_TYPE, chat_id: int
+) -> None:
+    await _send_html(
+        update,
+        context,
+        chat_id,
+        copy.returning_user_text(),
+        copy.open_start_keyboard("📌 Открыть главный пост"),
+    )
 
 
 async def flow_telo(
     update: Update, context: ContextTypes.DEFAULT_TYPE | None = None
 ) -> None:
-    """Entry (/start, ТЕЛО): channel-subscribe screen when gate is on.
-
-    Unlock via callback «Забрать тренировку» → deliver_lead_guide.
-    """
+    """Entry (/start, ТЕЛО): subscribe → pin 1326 → 5-day practices."""
     message = _msg(update)
     user = update.effective_user
     if not user or context is None:
@@ -223,14 +248,22 @@ async def flow_telo(
         if message is not None
         else (update.effective_chat.id if update.effective_chat else user.id)
     )
+    track("bot_start", user_id=user.id, source="telegram")
 
-    # Always re-show subscribe screen on entry when REQUIRE_CHANNEL_SUB=1.
+    if onboarding_state.is_completed(user.id):
+        await _send_returning_start(update, context, chat_id)
+        return
+
     if require_channel_sub():
+        already = await is_channel_subscriber(context, user.id)
+        if already:
+            await deliver_lead_guide(update, context)
+            return
         await send_subscribe_prompt(
             context=context,
             chat_id=chat_id,
             callback_data="subok:telo",
-            what="тренировку",
+            what="маршрут",
             reply_to_message=message,
         )
         return
@@ -691,23 +724,25 @@ async def on_subscribe_check(
             if query.message
             else (update.effective_chat.id if update.effective_chat else user.id)
         )
-        # Re-send full subscribe screen so Start/callback never dead-ends.
-        await send_subscribe_prompt(
-            context=context,
-            chat_id=chat_id,
-            callback_data=data,
-            what="тренировку" if data == "subok:telo" else "PDF вашего уровня",
-            reply_to_message=query.message,
-        )
-        tip = (
-            "Пока не вижу подписку. Откройте канал, нажмите «Подписаться», "
-            "подождите пару секунд и снова нажмите «Я подписался»."
-        )
+        if data.startswith("subok:level:"):
+            await send_subscribe_prompt(
+                context=context,
+                chat_id=chat_id,
+                callback_data=data,
+                what="PDF вашего уровня",
+                reply_to_message=query.message,
+            )
+            return
+        tip = copy.not_subscribed_text()
         try:
             if query.message:
-                await query.message.reply_text(tip)
+                await query.message.reply_text(
+                    tip, parse_mode=copy.PARSE_MODE
+                )
             else:
-                await context.bot.send_message(chat_id=chat_id, text=tip)
+                await context.bot.send_message(
+                    chat_id=chat_id, text=tip, parse_mode=copy.PARSE_MODE
+                )
         except Exception:
             pass
         return

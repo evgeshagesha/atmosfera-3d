@@ -202,7 +202,7 @@ async def _funnel_ask_question(course_id: str, course_title: str, step: int, pre
 
 
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Instagram → Start: subscribe → workout + drip follow-ups."""
+    """Instagram → Start: subscribe → pin 1326 → 5-day practices."""
     from handlers_products import flow_telo
 
     if not update.effective_user:
@@ -249,7 +249,7 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             target = update.effective_message
             if target:
                 await target.reply_text(
-                    "Не удалось открыть старт. Напишите ТЕЛО или /start ещё раз — "
+                    "Не удалось открыть старт. Напишите /start ещё раз — "
                     "пришлю инструкцию по подписке на канал."
                 )
         except Exception:
@@ -274,7 +274,7 @@ async def cmd_zadanie(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 
 
 async def welcome_new_members(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Приветствие новых участников: привет, вопрос о состоянии, ссылка на тест 20."""
+    """Приветствие новых участников клуба (не /start-воронка)."""
     if not update.message or not update.message.new_chat_members:
         return
     if config.COMMUNITY_CHAT_ID and str(update.effective_chat.id) != str(config.COMMUNITY_CHAT_ID):
@@ -288,8 +288,8 @@ async def welcome_new_members(update: Update, context: ContextTypes.DEFAULT_TYPE
         welcome_text = (
             f"Привет, {name}! Рады видеть в сообществе 👋\n\n"
             "Как самочувствие? Напиши в чат пару слов о состоянии — сохраню и потом смогу подсказать по программе.\n\n"
-            "Обязательно пройди тест из закреплённого сообщения — он помогает понять, с чего начать:\n"
-            f"Тест 20 — {test_link}"
+            "Если ещё не проходили функциональный тест — начните с закреплённого сообщения:\n"
+            f"{test_link}"
         )
         await update.message.reply_text(welcome_text)
 
