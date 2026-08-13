@@ -164,7 +164,7 @@ export default function HeroSection() {
                           >
                             <span className="egmain-btn-copy">
                               <span className="egmain-btn-label">
-                                Подарок · функциональный тест
+                                🎁 Подарок · функциональный тест
                               </span>
                               <span className="egmain-btn-sub">
                                 Персональный план · 10 минут
