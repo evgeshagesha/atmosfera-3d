@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0c0e;
+  --surface: #141518;
+  --text: #f4f1ea;
+  --muted: #8b8680;
+  --gold: #c4a574;
+  --chrome-hi: #ffffff;
+  --chrome-mid: #d8d6d0;
+  --line: rgba(244, 241, 234, 0.14);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--text);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --font-display: var(--font-unbounded);
+  --font-sans: var(--font-onest);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-onest), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-unbounded), system-ui, sans-serif;
+}
+
+.chrome-text {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f2f0ea 28%,
+    #c8c6c0 48%,
+    #f7f5f0 62%,
+    #9a9791 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.18));
+}
+
+.btn-chrome {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f1ea 42%, #cfc9c0 100%);
+  color: #0b0c0e;
+  box-shadow:
+    0 0 36px rgba(255, 255, 255, 0.22),
+    0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.btn-chrome:active {
+  transform: translateY(1px);
+}
+
+.glass-card {
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.055) 0%,
+    rgba(20, 21, 24, 0.92) 38%
+  );
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.phone-shell {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100svh;
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
